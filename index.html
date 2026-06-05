@@ -759,15 +759,6 @@
   </div>
 </header>
 
-<!-- 상단 광고 배너 (AdSense 또는 증권사 제휴) -->
-<div class="top-ad-bar" id="topAdBar">
-  <!-- Google AdSense 코드 자리: 승인 후 아래 주석을 실제 코드로 교체 -->
-  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXX" crossorigin="anonymous"></script>
-  <ins class="adsbygoogle" style="display:inline-block;width:728px;height:60px" data-ad-client="ca-pub-XXXXXXXX" data-ad-slot="XXXXXXXX"></ins> -->
-
-  <!-- 임시: 증권사 제휴 배너 로테이션 -->
-  <div id="topBannerRotate" style="display:flex;align-items:center;gap:20px;width:100%;max-width:900px;justify-content:center"></div>
-</div>
 
 <!-- Ticker -->
 <div class="ticker-bar">
@@ -877,12 +868,6 @@
           <div class="premium-price">월 ₩4,900 예정 · 얼리버드 50% 할인</div>
         </div>
 
-        <!-- 증권사 제휴 배너 -->
-        <div class="sidebar-card">
-          <div class="sidebar-title">💼 증권계좌 개설</div>
-          <div id="brokerList" style="display:flex;flex-direction:column;gap:8px"></div>
-          <div class="broker-label">* 제휴 링크 포함 — 계좌 개설 시 사이트 운영에 도움이 됩니다</div>
-        </div>
 
         <div class="sidebar-card">
           <div class="sidebar-title">🔗 빠른 링크</div>
@@ -1118,14 +1103,7 @@ function renderNews(articles) {
   });
 
   // 10번째 카드마다 AdSense 슬롯 삽입
-  const AD_SLOT = `<div class="ad-slot">
-    <!-- Google AdSense: 승인 후 아래 코드로 교체하세요 -->
-    <!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXX" data-ad-slot="XXXXXXXX" data-ad-format="auto"></ins> -->
-    <span>광고 영역 (Google AdSense)</span>
-  </div>`;
-  const withAds = [];
-  cards.forEach((c, i) => { withAds.push(c); if ((i + 1) % 10 === 0) withAds.push(AD_SLOT); });
-  el.innerHTML = withAds.join('');
+  el.innerHTML = cards.join('');
 }
 
 function timeAgo(date) {
@@ -1581,72 +1559,7 @@ async function loadMarketData() {
   } catch(e) {}
 }
 
-// ─── 수익화: 증권사 제휴 배너 ──────────────────────────────────────────────────
-// 실제 제휴 링크는 각 증권사 제휴 마케팅 페이지에서 발급받아 href에 교체
-const BROKERS = [
-  {
-    icon: '🟠', name: '키움증권',
-    desc: '비대면 계좌개설 시 수수료 혜택',
-    cta: '계좌 개설',
-    // 실제 제휴 링크: https://www.kiwoom.com (제휴 파라미터 추가)
-    href: 'https://www.kiwoom.com/h/common/main',
-  },
-  {
-    icon: '🔵', name: '미래에셋증권',
-    desc: '신규 개설 고객 주식 1주 증정',
-    cta: '계좌 개설',
-    href: 'https://securities.miraeasset.com',
-  },
-  {
-    icon: '🟢', name: '토스증권',
-    desc: '1분 계좌개설·수수료 무료',
-    cta: '계좌 개설',
-    href: 'https://tossinvest.com',
-  },
-  {
-    icon: '🔴', name: 'NH투자증권',
-    desc: '나무(NAMUH) 앱 개설 혜택',
-    cta: '계좌 개설',
-    href: 'https://www.nhqv.com',
-  },
-];
-
 function renderBrokers() {
-  // 사이드바 배너
-  const sidebar = document.getElementById('brokerList');
-  if (sidebar) {
-    sidebar.innerHTML = BROKERS.map(b => `
-      <a class="broker-banner" href="${b.href}" target="_blank" rel="noopener">
-        <div class="broker-logo">${b.icon}</div>
-        <div class="broker-info">
-          <div class="broker-name">${b.name}</div>
-          <div class="broker-desc">${b.desc}</div>
-        </div>
-        <button class="broker-cta">${b.cta}</button>
-      </a>`).join('');
-  }
-
-  // 상단 배너 로테이션 (3초마다 교체)
-  const topBanner = document.getElementById('topBannerRotate');
-  if (!topBanner) return;
-  let idx = 0;
-  const showTopBanner = () => {
-    const b = BROKERS[idx % BROKERS.length];
-    topBanner.innerHTML = `
-      <a class="broker-banner" href="${b.href}" target="_blank" rel="noopener"
-         style="max-width:600px;width:100%">
-        <div class="broker-logo">${b.icon}</div>
-        <div class="broker-info">
-          <div class="broker-name">${b.name}</div>
-          <div class="broker-desc">${b.desc}</div>
-        </div>
-        <button class="broker-cta">${b.cta}</button>
-      </a>
-      <span style="font-size:0.65rem;color:var(--muted);flex-shrink:0">제휴 광고</span>`;
-    idx++;
-  };
-  showTopBanner();
-  setInterval(showTopBanner, 5000);
 }
 
 // ─── INIT ─────────────────────────────────────────────────────────────────────
