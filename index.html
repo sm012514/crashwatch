@@ -275,6 +275,9 @@
     .tag.impact-high { background: rgba(239,68,68,0.15); border-color: rgba(239,68,68,0.4); color: #fca5a5; }
     .tag.impact-med { background: rgba(249,115,22,0.15); border-color: rgba(249,115,22,0.4); color: #fdba74; }
     .tag.category { background: rgba(99,102,241,0.15); border-color: rgba(99,102,241,0.4); color: #a5b4fc; }
+    .tag.entity-company { background: rgba(20,184,166,0.12); border-color: rgba(20,184,166,0.35); color: #5eead4; }
+    .tag.entity-gov { background: rgba(234,179,8,0.12); border-color: rgba(234,179,8,0.35); color: #fde047; }
+    .tag.entity-person { background: rgba(168,85,247,0.12); border-color: rgba(168,85,247,0.35); color: #d8b4fe; }
 
     .impact-summary {
       margin-top: 8px;
@@ -1034,6 +1037,48 @@ function catLabel(cat) {
   return { macro:'거시경제', trade:'무역/관세', geo:'지정학', fed:'중앙은행' }[cat] || cat;
 }
 
+const ENTITIES = {
+  company: [
+    '삼성전자','삼성','SK하이닉스','하이닉스','LG전자','현대차','현대자동차','카카오','네이버','셀트리온',
+    'nvidia','엔비디아','apple','애플','microsoft','마이크로소프트','google','구글','alphabet',
+    'amazon','아마존','meta','메타','tesla','테슬라','openai','spacex','tsmc','intel','인텔',
+    'amd','qualcomm','퀄컴','arm','boeing','보잉','jpmorgan','jp모건','goldman sachs','골드만삭스',
+    'blackrock','블랙록','berkshire','버크셔',
+  ],
+  gov: [
+    'fed','fomc','연준','federal reserve','한국은행','한은','ecb','유럽중앙은행','boj','일본은행',
+    '기획재정부','재정부','금융위원회','금융위','금융감독원','금감원',
+    '백악관','white house','재무부','treasury','ustr','wto','imf','world bank','세계은행',
+    '국세청','공정위','공정거래위원회',
+  ],
+  person: [
+    '파월','powell','트럼프','trump','바이든','biden','옐런','yellen','머스크','musk',
+    '이창용','최상목','윤석열','시진핑','xi jinping','기시다','우에다',
+  ],
+};
+
+function getEntityTags(article) {
+  const text = ((article.title || '') + ' ' + (article.description || '')).toLowerCase();
+  const found = { company: new Set(), gov: new Set(), person: new Set() };
+
+  for (const name of ENTITIES.company) {
+    if (text.includes(name.toLowerCase())) found.company.add(name);
+  }
+  for (const name of ENTITIES.gov) {
+    if (text.includes(name.toLowerCase())) found.gov.add(name);
+  }
+  for (const name of ENTITIES.person) {
+    if (text.includes(name.toLowerCase())) found.person.add(name);
+  }
+
+  const tags = [];
+  // 회사는 최대 2개, 기관·인물은 최대 2개씩
+  [...found.company].slice(0, 2).forEach(n => tags.push(`<span class="tag entity-company">🏢 ${n}</span>`));
+  [...found.gov].slice(0, 2).forEach(n => tags.push(`<span class="tag entity-gov">🏛️ ${n.toUpperCase()}</span>`));
+  [...found.person].slice(0, 2).forEach(n => tags.push(`<span class="tag entity-person">👤 ${n}</span>`));
+  return tags;
+}
+
 function getImpactSummary(article) {
   if (article.impact === 'low') return null;
   const mh = (article.matchedHigh || []).map(k => k.toLowerCase());
@@ -1150,6 +1195,7 @@ function renderNews(articles) {
     else if (a.impact === 'medium') tags.push(`<span class="tag impact-med">🟠 중위험</span>`);
     a.cats.forEach(c => tags.push(`<span class="tag category">${catLabel(c)}</span>`));
     if (a.matchedHigh.length) tags.push(`<span class="tag" style="color:var(--muted)">${a.matchedHigh.slice(0,2).join(', ')}</span>`);
+    tags.push(...getEntityTags(a));
     const time = a.pubDate ? timeAgo(new Date(a.pubDate)) : '';
     const desc = (a.description || '').substring(0, 150);
     // 링크에 javascript: 등 위험한 scheme 차단
