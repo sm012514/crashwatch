@@ -1223,10 +1223,20 @@ async function loadAllNews() {
     if (!seen.has(key) && key.length > 10) { seen.add(key); unique.push(item); }
   }
 
-  // Score and sort — score 0(금융 키워드 전무)는 제외
+  const NEWS_TITLE_KW = [
+    '금리','관세','환율','증시','코스피','코스닥','나스닥','주가','주식','채권','달러','원화',
+    '연준','fomc','fed','한은','ecb','boj','금융','경제','물가','인플레','침체','recession',
+    '무역','수출','수입','tariff','전쟁','war','제재','sanction','gdp','cpi','실업','고용',
+    '급락','폭락','급등','폭등','하락','상승','위기','파산','디폴트','긴축','기준금리',
+    '반도체','엔비디아','삼성','하이닉스','애플','테슬라','openai','spacex',
+    'ipo','상장','실적','earnings','s&p','nasdaq','dow',
+  ];
   allArticles = unique
     .map(scoreArticle)
-    .filter(a => a.score > 0 || ['한국경제','매일경제','연합뉴스 경제'].includes(a.sourceName))
+    .filter(a => {
+      const title = (a.title || '').toLowerCase();
+      return NEWS_TITLE_KW.some(k => title.includes(k)) || a.score >= 5;
+    })
     .sort((a, b) => b.score - a.score || new Date(b.pubDate) - new Date(a.pubDate));
 
   document.getElementById('lastUpdated').textContent = '업데이트: ' + new Date().toLocaleTimeString('ko-KR');
