@@ -225,9 +225,10 @@
       .stat-card { padding: 12px; }
       .stat-value { font-size: 1.25rem; }
 
-      /* 탭바 */
-      .tab-bar { gap: 2px; margin-bottom: 14px; }
-      .tab-btn { padding: 8px 8px; font-size: 0.75rem; white-space: nowrap; }
+      /* 탭바 - 가로 슬라이드 */
+      .tab-bar { gap: 0; margin-bottom: 14px; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; scrollbar-width: none; flex-wrap: nowrap; }
+      .tab-bar::-webkit-scrollbar { display: none; }
+      .tab-btn { padding: 10px 16px; font-size: 0.82rem; white-space: nowrap; flex-shrink: 0; }
 
       /* 메인 패딩 */
       main { padding: 14px 12px; }
