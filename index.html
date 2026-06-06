@@ -994,9 +994,9 @@
       <div class="stat-sub">시장 충격 가능성 높음</div>
     </div>
     <div class="stat-card">
-      <div class="stat-label">주요 키워드</div>
-      <div class="stat-value orange" id="statKeyword">—</div>
-      <div class="stat-sub">가장 많이 언급됨</div>
+      <div class="stat-label">핵심 시장 요인</div>
+      <div class="stat-value orange" id="statKeyword" style="font-size:1.1rem;word-break:keep-all">—</div>
+      <div class="stat-sub" id="statKeywordSub">분석 중...</div>
     </div>
     <div class="stat-card">
       <div class="stat-label">뉴스 소스</div>
@@ -1537,15 +1537,7 @@ function updateStats() {
   const okSources = Object.values(sourceStatus).filter(s => s === 'ok').length;
   document.getElementById('statSources').textContent = okSources + '/' + Object.keys(sourceStatus).length;
 
-  // Top keyword
-  const kwCount = {};
-  for (const a of allArticles) {
-    for (const kw of [...a.matchedHigh, ...a.matchedMed]) {
-      kwCount[kw] = (kwCount[kw] || 0) + 1;
-    }
-  }
-  const topKw = Object.entries(kwCount).sort((a,b) => b[1]-a[1])[0];
-  document.getElementById('statKeyword').textContent = topKw ? topKw[0] : '—';
+  updateKeyFactor('news');
 }
 
 function updateCauses() {
@@ -1628,6 +1620,62 @@ function renderSourceStatus() {
 }
 
 // ─── TAB ──────────────────────────────────────────────────────────────────────
+function updateKeyFactor(tab) {
+  const valEl = document.getElementById('statKeyword');
+  const subEl = document.getElementById('statKeywordSub');
+  if (!valEl || !subEl) return;
+
+  if (tab === 'news') {
+    // 뉴스: causeMap TOP 1
+    const causeMap = {
+      '금리/통화정책': ['rate hike','rate hikes','fed raises','fomc','hawkish','tightening','금리인상','기준금리','연준'],
+      '무역전쟁/관세': ['tariff','tariffs','trade war','관세','무역전쟁','보복'],
+      '지정학적 위기': ['war','conflict','invasion','전쟁','분쟁','지정학'],
+      '경기침체 우려': ['recession','slowdown','contraction','침체','경기침체'],
+      '인플레이션': ['inflation','cpi','pce','물가','인플레이션'],
+      '신용/유동성': ['default','bankruptcy','liquidity','파산','디폴트'],
+    };
+    const scores = {};
+    for (const a of allArticles) {
+      const text = ((a.title||'')+(a.description||'')).toLowerCase();
+      for (const [cause, kws] of Object.entries(causeMap)) {
+        if (kws.some(k => text.includes(k))) scores[cause] = (scores[cause]||0) + a.score + 1;
+      }
+    }
+    const top = Object.entries(scores).sort((a,b)=>b[1]-a[1])[0];
+    valEl.textContent = top ? top[0] : '—';
+    subEl.textContent = top ? `뉴스 ${allArticles.filter(a => ((a.title||'')+(a.description||'')).toLowerCase().includes(Object.entries(causeMap).find(([k])=>k===top[0])?.[1]?.[0]||'')).length}건 언급` : '데이터 없음';
+
+  } else if (tab === 'realestate') {
+    // 부동산: reCauseMap TOP 1
+    const causeMap = {
+      '아파트값 상승': ['급등','폭등','신고가','최고가','상승'],
+      '아파트값 하락': ['급락','폭락','신저가','하락'],
+      '전세 불안': ['역전세','전세사기','깡통'],
+      '규제 변화': ['규제','완화','강화','LTV','DSR'],
+      '청약/공급': ['청약','분양','미분양','공급'],
+      '재건축/재개발': ['재건축','재개발'],
+      '금리 영향': ['금리','대출','이자'],
+    };
+    const scores = {};
+    for (const a of reAllArticles) {
+      const text = ((a.title||'')+(a.description||'')).toLowerCase();
+      for (const [cause, kws] of Object.entries(causeMap)) {
+        if (kws.some(k => text.includes(k))) scores[cause] = (scores[cause]||0) + a.score + 1;
+      }
+    }
+    const top = Object.entries(scores).sort((a,b)=>b[1]-a[1])[0];
+    valEl.textContent = top ? top[0] : '—';
+    subEl.textContent = top ? '부동산 주요 동향' : '데이터 없음';
+
+  } else if (tab === 'events') {
+    // 이벤트: 충격지수 1위
+    const top = [...MAJOR_EVENTS].sort((a,b) => b.magnitude - a.magnitude)[0];
+    valEl.textContent = top ? top.name.replace(' (상장)','').replace(' IPO','') : '—';
+    subEl.textContent = top ? `충격지수 ${top.magnitude}/100` : '';
+  }
+}
+
 let reLoaded = false;
 function switchTab(name, btn) {
   document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
@@ -1635,6 +1683,7 @@ function switchTab(name, btn) {
   document.getElementById('tab-' + name).classList.add('active');
   btn.classList.add('active');
   if (name === 'realestate' && !reLoaded) { reLoaded = true; loadReNews(); }
+  updateKeyFactor(name === 'realestate' ? 'realestate' : name === 'events' ? 'events' : 'news');
 }
 
 // ─── EVENTS DATA ──────────────────────────────────────────────────────────────
@@ -2077,6 +2126,7 @@ async function loadReNews() {
   reRenderSourceStatus();
   reUpdateSidebar();
   reFilterAndRender();
+  updateKeyFactor('realestate');
 }
 
 function reSetFilter(btn, filter) {
