@@ -832,6 +832,7 @@
   <div class="tab-bar">
     <button class="tab-btn active" onclick="switchTab('news', this)">📰 뉴스 분석</button>
     <button class="tab-btn" onclick="switchTab('events', this)">🚀 대형 이벤트</button>
+    <button class="tab-btn" onclick="switchTab('realestate', this)">🏠 부동산</button>
   </div>
 
   <!-- TAB: 뉴스 분석 -->
@@ -947,6 +948,58 @@
         <div class="sidebar-card">
           <div class="sidebar-title">🌏 영향 자산군</div>
           <div id="affectedAssets"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- TAB: 부동산 -->
+  <div id="tab-realestate" class="tab-pane">
+    <div class="search-bar">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="reSearchInput" placeholder="키워드로 검색... (예: 아파트, 강남, 청약, 금리)" oninput="reFilterAndRender()" />
+    </div>
+    <div class="filter-section">
+      <span class="filter-label">필터:</span>
+      <button class="filter-btn active" data-refilter="all"   onclick="reSetFilter(this,'all')">전체</button>
+      <button class="filter-btn" data-refilter="price"        onclick="reSetFilter(this,'price')">📈 가격동향</button>
+      <button class="filter-btn" data-refilter="policy"       onclick="reSetFilter(this,'policy')">🏛️ 정책/규제</button>
+      <button class="filter-btn" data-refilter="apt"          onclick="reSetFilter(this,'apt')">🏢 아파트</button>
+      <button class="filter-btn" data-refilter="jeonse"       onclick="reSetFilter(this,'jeonse')">🔑 전세/월세</button>
+      <button class="filter-btn" data-refilter="cheongak"     onclick="reSetFilter(this,'cheongak')">📋 청약/분양</button>
+      <button class="filter-btn" data-refilter="rebuild"      onclick="reSetFilter(this,'rebuild')">🔨 재건축/재개발</button>
+      <button class="filter-btn" data-refilter="seoul"        onclick="reSetFilter(this,'seoul')">🗺️ 서울/수도권</button>
+    </div>
+    <div class="content-grid">
+      <div>
+        <div id="reNewsList" class="news-list">
+          <div class="ddu-state loading">
+            <img src="/logo.png" alt="뚜" />
+            <div class="ddu-msg">뚜가 부동산 뉴스를 수집하고 있어요</div>
+            <div class="ddu-dots"><span></span><span></span><span></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-title">📊 주요 동향 TOP 5</div>
+          <div id="reCauseList"><div style="color:var(--muted);font-size:0.8rem">분석 중...</div></div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-title">🔑 주요 키워드</div>
+          <div class="keyword-cloud" id="reKeywordCloud"><div style="color:var(--muted);font-size:0.8rem">분석 중...</div></div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-title">📡 뉴스 소스 상태</div>
+          <div class="source-list" id="reSourceList"><div style="color:var(--muted);font-size:0.8rem">로딩 중...</div></div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-title">🔗 빠른 링크</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <a href="https://www.r114.com/" target="_blank" style="color:var(--muted);font-size:0.8rem;text-decoration:none">🏠 부동산114</a>
+            <a href="https://land.naver.com/" target="_blank" style="color:var(--muted);font-size:0.8rem;text-decoration:none">🏠 네이버 부동산</a>
+            <a href="https://www.zigbang.com/" target="_blank" style="color:var(--muted);font-size:0.8rem;text-decoration:none">🏠 직방</a>
+            <a href="https://www.molit.go.kr/" target="_blank" style="color:var(--muted);font-size:0.8rem;text-decoration:none">🏛️ 국토교통부</a>
+          </div>
         </div>
       </div>
     </div>
@@ -1356,11 +1409,13 @@ function renderSourceStatus() {
 }
 
 // ─── TAB ──────────────────────────────────────────────────────────────────────
+let reLoaded = false;
 function switchTab(name, btn) {
   document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('tab-' + name).classList.add('active');
   btn.classList.add('active');
+  if (name === 'realestate' && !reLoaded) { reLoaded = true; loadReNews(); }
 }
 
 // ─── EVENTS DATA ──────────────────────────────────────────────────────────────
@@ -1703,6 +1758,211 @@ async function loadMarketData() {
 }
 
 function renderBrokers() {
+}
+
+// ─── REAL ESTATE ──────────────────────────────────────────────────────────────
+const RE_HIGH_KW = [
+  '급등','급락','폭등','폭락','최고가','최저가','역대','신고가','신저가',
+  '버블','붕괴','폭발','폭삭','대폭','급변',
+];
+const RE_MED_KW = [
+  '상승','하락','오름','내림','강세','약세','회복','둔화','위축','과열',
+  '규제','완화','강화','금지','허용','대출','LTV','DSR','금리','이자',
+  '청약','분양','공급','수요','미분양','입주','착공','허가',
+  '전세','월세','보증금','역전세','전세사기','깡통',
+  '재건축','재개발','정비','리모델링','조합','이주',
+];
+const RE_CATS = {
+  price:    ['집값','아파트값','매매가','시세','가격','급등','급락','상승','하락','신고가'],
+  policy:   ['규제','완화','대출','LTV','DSR','금리','정책','법','세금','취득세','양도세','재산세','임대차'],
+  apt:      ['아파트','단지','평형','㎡','재건축','재개발','리모델링'],
+  jeonse:   ['전세','월세','보증금','역전세','전세사기','깡통전세','임대'],
+  cheongak: ['청약','분양','공급','미분양','입주','착공','허가','당첨'],
+  rebuild:  ['재건축','재개발','정비','조합','이주','철거'],
+  seoul:    ['서울','강남','강북','수도권','경기','인천','강동','송파','마포','용산','성동','노원'],
+};
+const RE_REGION_KW = ['서울','강남','강북','강동','강서','송파','마포','용산','성동','노원','분당','판교','수원','인천','경기','부산','대구','대전','광주','세종'];
+
+let reAllArticles = [];
+let reCurrentFilter = 'all';
+let reActiveKeyword = null;
+const reSourceStatus = {};
+
+function scoreReArticle(item) {
+  const text = ((item.title || '') + ' ' + (item.description || '')).toLowerCase();
+  let score = 0;
+  const matchedHigh = [], matchedMed = [];
+
+  for (const kw of RE_HIGH_KW) { if (text.includes(kw)) { score += 3; matchedHigh.push(kw); } }
+  for (const kw of RE_MED_KW)  { if (text.includes(kw)) { score += 1; matchedMed.push(kw); } }
+
+  const cats = [];
+  for (const [cat, kws] of Object.entries(RE_CATS)) {
+    if (kws.some(k => text.includes(k))) cats.push(cat);
+  }
+
+  const regions = RE_REGION_KW.filter(r => text.includes(r));
+  const impact = score >= 5 ? 'high' : score >= 2 ? 'medium' : 'low';
+  return { ...item, score, impact, cats, matchedHigh: [...new Set(matchedHigh)], matchedMed: [...new Set(matchedMed)], regions: [...new Set(regions)] };
+}
+
+function getReCatLabel(cat) {
+  return { price:'가격동향', policy:'정책/규제', apt:'아파트', jeonse:'전세/월세', cheongak:'청약/분양', rebuild:'재건축', seoul:'서울/수도권' }[cat] || cat;
+}
+
+function getRePointTag(a) {
+  const mh = a.matchedHigh || [];
+  const mm = a.matchedMed || [];
+  const text = ((a.title||'')+(a.description||'')).toLowerCase();
+  if (mh.some(k => ['급등','폭등','최고가','신고가'].includes(k))) return '가격 급등';
+  if (mh.some(k => ['급락','폭락','최저가','신저가','붕괴'].includes(k))) return '가격 급락';
+  if (mm.some(k => ['규제','강화','금지'].includes(k))) return '규제 강화';
+  if (mm.some(k => ['완화','허용'].includes(k))) return '규제 완화';
+  if (text.includes('금리') && (text.includes('대출') || text.includes('이자'))) return '금리 부담';
+  if (text.includes('역전세') || text.includes('전세사기') || text.includes('깡통')) return '전세 위험';
+  if (text.includes('미분양')) return '미분양 증가';
+  if (text.includes('청약') || text.includes('분양')) return '청약/분양';
+  if (text.includes('재건축') || text.includes('재개발')) return '재건축/재개발';
+  if (mm.some(k => ['상승','강세','회복'].includes(k))) return '시장 상승세';
+  if (mm.some(k => ['하락','약세','위축','둔화'].includes(k))) return '시장 둔화';
+  return null;
+}
+
+async function loadReNews() {
+  try {
+    const res = await fetch('/api/realestate', { signal: AbortSignal.timeout(20000) });
+    const data = await res.json();
+    let raw = [];
+    for (const src of data.sources) {
+      reSourceStatus[src.name] = src.ok ? 'ok' : 'fail';
+      raw = raw.concat(src.items);
+    }
+    const seen = new Set();
+    const unique = [];
+    for (const item of raw) {
+      const key = (item.title || '').substring(0, 60).toLowerCase().trim();
+      if (!seen.has(key) && key.length > 10) { seen.add(key); unique.push(item); }
+    }
+    reAllArticles = unique
+      .map(scoreReArticle)
+      .filter(a => a.score > 0)
+      .sort((a, b) => b.score - a.score || new Date(b.pubDate) - new Date(a.pubDate));
+  } catch(e) {
+    document.getElementById('reNewsList').innerHTML = `<div class="ddu-state"><img src="/logo.png" alt="뚜" style="filter:grayscale(0.5)"/><div class="ddu-msg">뚜가 연결에 실패했어요 😿</div></div>`;
+    return;
+  }
+  reRenderSourceStatus();
+  reUpdateSidebar();
+  reFilterAndRender();
+}
+
+function reSetFilter(btn, filter) {
+  reCurrentFilter = filter;
+  document.querySelectorAll('[data-refilter]').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  reFilterAndRender();
+}
+
+function reFilterAndRender() {
+  const q = document.getElementById('reSearchInput').value.toLowerCase().trim();
+  let articles = reAllArticles;
+  if (reCurrentFilter !== 'all') articles = articles.filter(a => a.cats.includes(reCurrentFilter));
+  if (q) articles = articles.filter(a => ((a.title||'')+(a.description||'')).toLowerCase().includes(q));
+  if (reActiveKeyword) articles = articles.filter(a => ((a.title||'')+(a.description||'')).toLowerCase().includes(reActiveKeyword));
+  renderReNews(articles);
+}
+
+function renderReNews(articles) {
+  const el = document.getElementById('reNewsList');
+  if (!articles.length) {
+    el.innerHTML = `<div class="ddu-state"><img src="/logo.png" alt="뚜"/><div class="ddu-msg">해당 조건의 기사가 없습니다</div></div>`;
+    return;
+  }
+  el.innerHTML = articles.slice(0, 50).map(a => {
+    const cls = a.impact === 'high' ? 'high-impact' : a.impact === 'medium' ? 'medium-impact' : '';
+    const tags = [];
+    if (a.impact === 'high') tags.push(`<span class="tag impact-high">🔴 급등락</span>`);
+    else if (a.impact === 'medium') tags.push(`<span class="tag impact-med">🟠 주목</span>`);
+    const pt = getRePointTag(a);
+    if (pt) tags.push(`<span class="tag point">💡 ${pt}</span>`);
+    a.cats.forEach(c => tags.push(`<span class="tag category">${getReCatLabel(c)}</span>`));
+    a.regions.slice(0,3).forEach(r => tags.push(`<span class="tag entity-gov">📍 ${r}</span>`));
+    const time = a.pubDate ? timeAgo(new Date(a.pubDate)) : '';
+    const safeLink = /^https?:\/\//.test(a.link) ? a.link : '#';
+    const desc = (a.description || '').substring(0, 150);
+    return `<div class="news-card ${cls}" onclick="window.open('${safeLink}','_blank')">
+      <div class="card-header">
+        <span class="card-source">${a.sourceName}</span>
+        <span class="card-time">${time}</span>
+      </div>
+      <a class="card-title" href="${safeLink}" target="_blank" onclick="event.stopPropagation()">${a.title || '제목 없음'}</a>
+      ${desc ? `<div class="card-summary">${desc}...</div>` : ''}
+      <div class="card-tags">${tags.join('')}</div>
+    </div>`;
+  }).join('');
+}
+
+function reUpdateSidebar() {
+  // 동향 TOP 5
+  const causeScore = {}, causeCounts = {};
+  const causeMap = {
+    '아파트값 상승': ['급등','폭등','신고가','최고가','상승'],
+    '아파트값 하락': ['급락','폭락','신저가','하락','붕괴'],
+    '전세 불안': ['역전세','전세사기','깡통','전세난'],
+    '규제 변화': ['규제','완화','강화','LTV','DSR'],
+    '청약/공급': ['청약','분양','미분양','공급'],
+    '재건축/재개발': ['재건축','재개발','정비'],
+    '금리 영향': ['금리','대출','이자'],
+  };
+  for (const a of reAllArticles) {
+    const text = ((a.title||'')+(a.description||'')).toLowerCase();
+    for (const [cause, kws] of Object.entries(causeMap)) {
+      if (kws.some(k => text.includes(k))) {
+        causeScore[cause] = (causeScore[cause]||0) + a.score + 1;
+        causeCounts[cause] = (causeCounts[cause]||0) + 1;
+      }
+    }
+  }
+  const sorted = Object.entries(causeScore).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  document.getElementById('reCauseList').innerHTML = sorted.length
+    ? sorted.map(([cause,],i) => `
+        <div class="cause-item">
+          <div class="cause-rank ${i===0?'':(i===1?'orange':'gray')}">${i+1}</div>
+          <div>
+            <div class="cause-text">${cause}</div>
+            <div class="cause-count">${causeCounts[cause]}건 언급</div>
+          </div>
+        </div>`).join('')
+    : '<div style="color:var(--muted);font-size:0.8rem">데이터 부족</div>';
+
+  // 키워드 클라우드
+  const kwCount = {};
+  for (const a of reAllArticles) {
+    for (const kw of [...a.matchedHigh, ...a.matchedMed, ...a.regions]) {
+      kwCount[kw] = (kwCount[kw]||0) + 1;
+    }
+  }
+  const sortedKw = Object.entries(kwCount).sort((a,b)=>b[1]-a[1]).slice(0,20);
+  document.getElementById('reKeywordCloud').innerHTML = sortedKw.length
+    ? sortedKw.map(([kw,cnt]) =>
+        `<span class="keyword-chip ${reActiveKeyword===kw?'active':''}" onclick="reToggleKeyword('${kw}')">${kw}<span class="kw-count">${cnt}</span></span>`
+      ).join('')
+    : '<div style="color:var(--muted);font-size:0.8rem">데이터 없음</div>';
+}
+
+function reToggleKeyword(kw) {
+  reActiveKeyword = reActiveKeyword === kw ? null : kw;
+  reUpdateSidebar();
+  reFilterAndRender();
+}
+
+function reRenderSourceStatus() {
+  document.getElementById('reSourceList').innerHTML = Object.entries(reSourceStatus).map(([name, st]) =>
+    `<div class="source-item">
+      <span class="source-name">${name}</span>
+      <span class="source-badge ${st}">${st==='ok'?'연결됨':'실패'}</span>
+    </div>`
+  ).join('');
 }
 
 // ─── INIT ─────────────────────────────────────────────────────────────────────

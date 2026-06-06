@@ -98,5 +98,22 @@ app.get('/api/news', async (req, res) => {
   res.json({ sources });
 });
 
+const RE_SOURCES = [
+  { name: '한국경제 부동산', url: 'https://www.hankyung.com/feed/realestate' },
+  { name: '매일경제 부동산', url: 'https://www.mk.co.kr/rss/50400012/' },
+  { name: '조선비즈 부동산', url: 'https://biz.chosun.com/arc/outboundfeeds/rss/category/real_estate/?outputType=xml' },
+  { name: '연합뉴스 부동산', url: 'https://www.yna.co.kr/rss/real-estate.xml' },
+  { name: '뉴스1 부동산',   url: 'https://www.news1.kr/rss/realestate' },
+];
+
+app.get('/api/realestate', async (req, res) => {
+  const results = await Promise.allSettled(RE_SOURCES.map(s =>
+    fetchFeed(s).then(items => ({ name: s.name, items, ok: true }))
+               .catch(() => ({ name: s.name, items: [], ok: false }))
+  ));
+  const sources = results.map(r => r.value || { name: '?', items: [], ok: false });
+  res.json({ sources });
+});
+
 const PORT = process.env.PORT || 3333;
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
