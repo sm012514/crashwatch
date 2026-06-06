@@ -1845,7 +1845,7 @@ async function loadReNews() {
     }
     reAllArticles = unique
       .map(scoreReArticle)
-      .filter(a => a.score > 0)
+      .filter(a => a.cats.length > 0 || a.score > 0)
       .sort((a, b) => b.score - a.score || new Date(b.pubDate) - new Date(a.pubDate));
   } catch(e) {
     document.getElementById('reNewsList').innerHTML = `<div class="ddu-state"><img src="/logo.png" alt="뚜" style="filter:grayscale(0.5)"/><div class="ddu-msg">뚜가 연결에 실패했어요 😿</div></div>`;

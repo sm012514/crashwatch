@@ -105,21 +105,10 @@ const RE_SOURCES = [
   { name: '조선비즈',     url: 'https://biz.chosun.com/arc/outboundfeeds/rss/?outputType=xml' },
 ];
 
-const RE_FILTER_KW = [
-  '아파트','집값','부동산','전세','월세','청약','분양','재건축','재개발','주택','매매',
-  '임대','보증금','역전세','미분양','입주','공급','토지','상가','오피스텔','빌라','다세대',
-  'LTV','DSR','주택담보','전월세','갭투자','리모델링','정비사업',
-];
-
 app.get('/api/realestate', async (req, res) => {
   const results = await Promise.allSettled(RE_SOURCES.map(s =>
-    fetchFeed(s).then(items => {
-      const filtered = items.filter(item => {
-        const text = ((item.title || '') + ' ' + (item.description || '')).toLowerCase();
-        return RE_FILTER_KW.some(kw => text.includes(kw));
-      });
-      return { name: s.name, items: filtered, ok: true };
-    }).catch(() => ({ name: s.name, items: [], ok: false }))
+    fetchFeed(s).then(items => ({ name: s.name, items, ok: true }))
+               .catch(() => ({ name: s.name, items: [], ok: false }))
   ));
   const sources = results.map(r => r.value || { name: '?', items: [], ok: false });
   res.json({ sources });
