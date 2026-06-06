@@ -1035,12 +1035,12 @@ const API_URL = '/api/news';
 
 // ─── KEYWORD SCORING ──────────────────────────────────────────────────────────
 const HIGH_IMPACT_KW = [
-  'crash','collapse','plunge','plunges','tumble','rout','selloff','sell-off','rout',
+  'crash','collapse','plunge','plunges','tumble','rout','selloff','sell-off',
   'recession','depression','default','bankruptcy','crisis','meltdown',
   'tariff','tariffs','sanction','war','conflict','invasion',
   'rate hike','rate hikes','tightening','hawkish','inflation spike',
   'bank failure','bank run','liquidity crisis','credit crunch',
-  '급락','폭락','붕괴','위기','침체','전쟁','제재','관세','금리인상','파산','디폴트',
+  '급락','폭락','붕괴','금융위기','경제위기','외환위기','침체','전쟁','제재','관세','금리인상','파산','디폴트',
   'fed raises','powell','rate decision','fomc',
 ];
 
@@ -1055,7 +1055,7 @@ const MEDIUM_IMPACT_KW = [
 const CATEGORIES = {
   macro: ['gdp','inflation','cpi','pce','employment','jobs','unemployment','growth','recession','경제성장','물가','고용','실업'],
   trade: ['tariff','trade war','export','import','wto','관세','무역','수출','수입','보복'],
-  geo: ['war','conflict','ukraine','russia','china','north korea','middle east','iran','전쟁','분쟁','지정학','북한','중국'],
+  geo: ['war','conflict','ukraine','russia','china sanctions','north korea','middle east','iran','전쟁','분쟁','지정학','북한','중국 제재','중국 관세','미중'],
   fed: ['fed','fomc','powell','rate hike','rate cut','ecb','boj','금리','연준','한은','중앙은행','기준금리'],
 };
 
