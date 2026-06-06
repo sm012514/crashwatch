@@ -7,10 +7,15 @@ const path = require('path');
 
 const app = express();
 
-// ── HTTP → HTTPS 리다이렉트 (Railway 프로덕션)
+// ── HTTPS + www 강제 리다이렉트
 app.use((req, res, next) => {
-  if (req.headers['x-forwarded-proto'] && req.headers['x-forwarded-proto'] !== 'https') {
-    return res.redirect(301, 'https://' + req.headers.host + req.url);
+  const host = req.headers.host || '';
+  const proto = req.headers['x-forwarded-proto'];
+  const needWww = host && !host.startsWith('www.');
+  const needHttps = proto && proto !== 'https';
+  if (needWww || needHttps) {
+    const target = 'https://www.' + host.replace(/^www\./, '') + req.url;
+    return res.redirect(301, target);
   }
   next();
 });
