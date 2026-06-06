@@ -1008,6 +1008,7 @@
   <!-- Tabs -->
   <div class="tab-bar">
     <button class="tab-btn active" onclick="switchTab('news', this)">📰 뉴스 분석</button>
+    <button class="tab-btn" onclick="switchTab('coin', this)">₿ 코인</button>
     <button class="tab-btn" onclick="switchTab('events', this)">🚀 대형 이벤트</button>
     <button class="tab-btn" onclick="switchTab('realestate', this)">🏠 부동산</button>
   </div>
@@ -1071,6 +1072,65 @@
             <a href="https://fred.stlouisfed.org/" target="_blank" style="color:var(--muted);font-size:0.8rem;text-decoration:none">🏦 FRED 경제 데이터</a>
             <hr style="border-color:var(--border);margin:4px 0"/>
             <a href="/privacy.html" style="color:var(--muted);font-size:0.75rem;text-decoration:none">📄 개인정보처리방침</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: 코인 -->
+  <div id="tab-coin" class="tab-pane">
+    <div class="search-bar">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="coinSearchInput" placeholder="키워드로 검색... (예: 비트코인, 이더리움, ETF, 반감기)" oninput="coinFilterAndRender()" />
+    </div>
+    <div class="filter-section">
+      <span class="filter-label">필터:</span>
+      <button class="filter-btn active" data-coinfilter="all"      onclick="coinSetFilter(this,'all')">전체</button>
+      <button class="filter-btn" data-coinfilter="btc"             onclick="coinSetFilter(this,'btc')">₿ 비트코인</button>
+      <button class="filter-btn" data-coinfilter="eth"             onclick="coinSetFilter(this,'eth')">Ξ 이더리움</button>
+      <button class="filter-btn" data-coinfilter="altcoin"         onclick="coinSetFilter(this,'altcoin')">🪙 알트코인</button>
+      <button class="filter-btn" data-coinfilter="regulation"      onclick="coinSetFilter(this,'regulation')">🏛️ 규제/정책</button>
+      <button class="filter-btn" data-coinfilter="etf"             onclick="coinSetFilter(this,'etf')">📊 ETF/기관</button>
+      <button class="filter-btn" data-coinfilter="defi"            onclick="coinSetFilter(this,'defi')">⚙️ DeFi/NFT</button>
+    </div>
+    <div class="content-grid">
+      <div>
+        <div id="coinNewsList" class="news-list">
+          <div class="ddu-state loading">
+            <img src="/logo.png" alt="뚜" />
+            <div class="ddu-msg">뚜가 코인 뉴스를 수집하고 있어요</div>
+            <div class="ddu-dots"><span></span><span></span><span></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-title">🚀 코인 빅이벤트</div>
+          <div id="coinEventList" style="display:flex;flex-direction:column;gap:10px">
+            <div style="color:var(--muted);font-size:0.8rem">로딩 중...</div>
+          </div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-title">📊 주요 동향 TOP 5</div>
+          <div id="coinCauseList"><div style="color:var(--muted);font-size:0.8rem">분석 중...</div></div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-title">🔑 주요 키워드</div>
+          <div class="keyword-cloud" id="coinKeywordCloud"><div style="color:var(--muted);font-size:0.8rem">분석 중...</div></div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-title">📡 뉴스 소스 상태</div>
+          <div class="source-list" id="coinSourceList"><div style="color:var(--muted);font-size:0.8rem">로딩 중...</div></div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-title">🔗 빠른 링크</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <a href="https://coinmarketcap.com/" target="_blank" style="color:var(--muted);font-size:0.8rem;text-decoration:none">₿ CoinMarketCap</a>
+            <a href="https://www.coingecko.com/" target="_blank" style="color:var(--muted);font-size:0.8rem;text-decoration:none">🦎 CoinGecko</a>
+            <a href="https://alternative.me/crypto/fear-and-greed-index/" target="_blank" style="color:var(--muted);font-size:0.8rem;text-decoration:none">😨 공포·탐욕 지수</a>
+            <a href="https://www.coindeskkorea.com/" target="_blank" style="color:var(--muted);font-size:0.8rem;text-decoration:none">🇰🇷 코인데스크 코리아</a>
+            <a href="https://www.blockmedia.co.kr/" target="_blank" style="color:var(--muted);font-size:0.8rem;text-decoration:none">🇰🇷 블록미디어</a>
           </div>
         </div>
       </div>
@@ -1189,7 +1249,7 @@
     <div class="katarina-header">
       <div>
         <div class="katarina-logo">⚡ KATARINA</div>
-        <div class="katarina-desc">뉴스·부동산·이벤트 통합 검색</div>
+        <div class="katarina-desc">뉴스·코인·부동산·이벤트 통합 검색</div>
       </div>
       <button class="katarina-close" onclick="kataClose()">✕</button>
     </div>
@@ -1668,22 +1728,44 @@ function updateKeyFactor(tab) {
     valEl.textContent = top ? top[0] : '—';
     subEl.textContent = top ? '부동산 주요 동향' : '데이터 없음';
 
+  } else if (tab === 'coin') {
+    const causeMap = {
+      '비트코인 급등': ['bitcoin surges','btc soars','비트코인 상승','btc rallies'],
+      '비트코인 급락': ['bitcoin falls','btc drops','비트코인 하락','crypto crash'],
+      '규제 리스크': ['regulation','ban','sec','규제','금지','단속'],
+      'ETF/기관': ['etf','institutional','blackrock','fidelity','기관'],
+      '반감기 효과': ['halving','반감기'],
+      '알트코인 시즌': ['altcoin','ethereum','solana','altseason'],
+    };
+    const scores = {};
+    for (const a of coinAllArticles) {
+      const text = ((a.title||'')+(a.description||'')).toLowerCase();
+      for (const [cause, kws] of Object.entries(causeMap)) {
+        if (kws.some(k => text.includes(k))) scores[cause] = (scores[cause]||0) + a.score + 1;
+      }
+    }
+    const top = Object.entries(scores).sort((a,b)=>b[1]-a[1])[0];
+    valEl.textContent = top ? top[0] : 'BTC 동향';
+    subEl.textContent = top ? '코인 주요 이슈' : '데이터 없음';
+
   } else if (tab === 'events') {
     // 이벤트: 충격지수 1위
-    const top = [...MAJOR_EVENTS].sort((a,b) => b.magnitude - a.magnitude)[0];
+    const top = [...MAJOR_EVENTS, ...COIN_EVENTS].sort((a,b) => b.magnitude - a.magnitude)[0];
     valEl.textContent = top ? top.name.replace(' (상장)','').replace(' IPO','') : '—';
     subEl.textContent = top ? `충격지수 ${top.magnitude}/100` : '';
   }
 }
 
 let reLoaded = false;
+let coinLoaded = false;
 function switchTab(name, btn) {
   document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('tab-' + name).classList.add('active');
   btn.classList.add('active');
   if (name === 'realestate' && !reLoaded) { reLoaded = true; loadReNews(); }
-  updateKeyFactor(name === 'realestate' ? 'realestate' : name === 'events' ? 'events' : 'news');
+  if (name === 'coin' && !coinLoaded) { coinLoaded = true; loadCoinNews(); }
+  updateKeyFactor(name);
 }
 
 // ─── EVENTS DATA ──────────────────────────────────────────────────────────────
@@ -2238,11 +2320,252 @@ function reRenderSourceStatus() {
   ).join('');
 }
 
+// ─── COIN TAB ─────────────────────────────────────────────────────────────────
+const COIN_HIGH_KW = [
+  'bitcoin','btc','비트코인','이더리움','ethereum','eth','halving','반감기',
+  'etf','sec','regulation','규제','crypto crash','급락','급등','ban','금지',
+  'blackrock','fidelity','strategic reserve','전략적 준비금','자산',
+];
+const COIN_MED_KW = [
+  'solana','sol','ripple','xrp','dogecoin','doge','cardano','ada','polygon','matic',
+  'altcoin','defi','nft','stablecoin','usdt','usdc','staking','mining','채굴',
+  '가상자산','암호화폐','crypto','blockchain','블록체인','wallet','거래소','exchange',
+  'coinbase','binance','upbit','bithumb','빗썸','업비트','가상화폐','디지털자산',
+  'layer2','web3','dao','airdrop','토큰','코인','pump','dump','bull','bear',
+];
+const COIN_CATS = {
+  btc:        ['bitcoin','btc','비트코인','satoshi','사토시'],
+  eth:        ['ethereum','eth','이더리움','vitalik','vitalik buterin'],
+  altcoin:    ['solana','ripple','xrp','dogecoin','cardano','polygon','altcoin','알트코인'],
+  regulation: ['regulation','sec','규제','ban','금지','법안','제도','irs','cftc','fsb'],
+  etf:        ['etf','blackrock','fidelity','vaneck','ark invest','기관'],
+  defi:       ['defi','staking','yield','liquidity','스테이킹','유동성','탈중앙'],
+};
+
+const COIN_EVENTS = [
+  { name: '비트코인 4차 반감기', date: '2024-04-20', magnitude: 92, statusLabel: '완료', type: 'past',
+    desc: '비트코인 블록 보상 6.25→3.125 BTC 감소. 역사적으로 반감기 후 12~18개월 강세장.',
+    mechanisms: ['공급 감소','채굴자 수익','장기 가격 상승 압력'] },
+  { name: '미국 비트코인 현물 ETF 승인', date: '2024-01-10', magnitude: 95, statusLabel: '완료', type: 'past',
+    desc: 'SEC가 블랙록·피델리티 등 11개 비트코인 현물 ETF 동시 승인. 기관 자금 유입 가속화.',
+    mechanisms: ['기관 수요 급증','유동성 확대','가격 상승 촉매'] },
+  { name: '미국 이더리움 현물 ETF 승인', date: '2024-05-23', magnitude: 80, statusLabel: '완료', type: 'past',
+    desc: 'SEC가 이더리움 현물 ETF 승인. ETH 가격과 DeFi 생태계 성장 기대.',
+    mechanisms: ['ETH 수요 증가','기관 진입','DeFi 성장'] },
+  { name: '미국 BTC 전략적 준비금 검토', date: '2025-03-06', magnitude: 85, statusLabel: '진행중', type: 'ongoing',
+    desc: '트럼프 행정부가 국가 전략 비트코인 준비금 설립 행정명령 서명. 각국 영향 주목.',
+    mechanisms: ['국가 보유 수요','글로벌 경쟁','가격 하방 지지'] },
+  { name: '이더리움 Pectra 업그레이드', date: '2025-05-07', magnitude: 70, statusLabel: '완료', type: 'past',
+    desc: '이더리움 Pectra 하드포크. 계정 추상화·스테이킹 한도 확대·L2 확장성 개선.',
+    mechanisms: ['확장성 향상','가스비 감소','UX 개선'] },
+  { name: '글로벌 크립토 규제 통합', date: '2025-12-31', magnitude: 75, statusLabel: '예정', type: 'upcoming',
+    desc: 'EU MiCA 전면 시행, 미국 FIT21 법안 등 주요국 규제 틀 완성. 제도화 가속.',
+    mechanisms: ['규제 명확성','기관 진입 허들 낮춤','스테이블코인 규제'] },
+  { name: '비트코인 5차 반감기 (예상)', date: '2028-03-01', magnitude: 88, statusLabel: '예정', type: 'upcoming',
+    desc: '비트코인 5차 반감기 예상. 블록 보상 3.125→1.5625 BTC로 감소.',
+    mechanisms: ['공급 추가 감소','채굴 난이도','장기 희소성'] },
+];
+
+let coinAllArticles = [];
+let coinCurrentFilter = 'all';
+let coinActiveKeyword = null;
+const coinSourceStatus = {};
+
+function scoreCoinArticle(item) {
+  const text = ((item.title || '') + ' ' + (item.description || '')).toLowerCase();
+  let score = 0;
+  const matchedHigh = [], matchedMed = [];
+  for (const kw of COIN_HIGH_KW) { if (text.includes(kw)) { score += 3; matchedHigh.push(kw); } }
+  for (const kw of COIN_MED_KW)  { if (text.includes(kw)) { score += 1; matchedMed.push(kw); } }
+  const cats = [];
+  for (const [cat, kws] of Object.entries(COIN_CATS)) {
+    if (kws.some(k => text.includes(k))) cats.push(cat);
+  }
+  const impact = score >= 6 ? 'high' : score >= 2 ? 'medium' : 'low';
+  return { ...item, score, impact, cats, matchedHigh: [...new Set(matchedHigh)], matchedMed: [...new Set(matchedMed)] };
+}
+
+function getCoinCatLabel(cat) {
+  return { btc:'비트코인', eth:'이더리움', altcoin:'알트코인', regulation:'규제', etf:'ETF/기관', defi:'DeFi' }[cat] || cat;
+}
+
+function getCoinPointTag(a) {
+  const text = ((a.title||'')+(a.description||'')).toLowerCase();
+  if (a.matchedHigh.some(k => ['halving','반감기'].includes(k))) return '반감기';
+  if (a.matchedHigh.some(k => ['etf'].includes(k))) return 'ETF 이슈';
+  if (a.matchedHigh.some(k => ['ban','금지','regulation','규제'].includes(k))) return '규제 리스크';
+  if (a.matchedHigh.some(k => ['sec'].includes(k))) return 'SEC 동향';
+  if (a.matchedHigh.some(k => ['strategic reserve','전략적 준비금'].includes(k))) return '국가 준비금';
+  if (text.includes('급등') || text.includes('surges') || text.includes('soars')) return '급등';
+  if (text.includes('급락') || text.includes('crash') || text.includes('drops')) return '급락';
+  if (a.matchedMed.some(k => ['defi','staking','스테이킹'].includes(k))) return 'DeFi/스테이킹';
+  if (a.matchedMed.some(k => ['nft'].includes(k))) return 'NFT';
+  return null;
+}
+
+async function loadCoinNews() {
+  try {
+    const res = await fetch('/api/coin', { signal: AbortSignal.timeout(20000) });
+    const data = await res.json();
+    let raw = [];
+    for (const src of data.sources) {
+      coinSourceStatus[src.name] = src.ok ? 'ok' : 'fail';
+      raw = raw.concat(src.items);
+    }
+    const seen = new Set();
+    const unique = [];
+    for (const item of raw) {
+      const key = (item.title || '').substring(0, 60).toLowerCase().trim();
+      if (!seen.has(key) && key.length > 5) { seen.add(key); unique.push(item); }
+    }
+    coinAllArticles = unique
+      .map(scoreCoinArticle)
+      .filter(a => a.score >= 1)
+      .sort((a, b) => b.score - a.score || new Date(b.pubDate) - new Date(a.pubDate));
+  } catch(e) {
+    document.getElementById('coinNewsList').innerHTML = `<div class="ddu-state"><img src="/logo.png" alt="뚜" style="filter:grayscale(0.5)"/><div class="ddu-msg">뚜가 연결에 실패했어요 😿</div></div>`;
+    return;
+  }
+  coinRenderSourceStatus();
+  coinUpdateSidebar();
+  coinFilterAndRender();
+  updateKeyFactor('coin');
+  renderCoinEvents();
+}
+
+function coinSetFilter(btn, filter) {
+  coinCurrentFilter = filter;
+  document.querySelectorAll('[data-coinfilter]').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  coinFilterAndRender();
+}
+
+function coinFilterAndRender() {
+  const q = document.getElementById('coinSearchInput').value.toLowerCase().trim();
+  let articles = coinAllArticles;
+  if (coinCurrentFilter !== 'all') articles = articles.filter(a => a.cats.includes(coinCurrentFilter));
+  if (q) articles = articles.filter(a => ((a.title||'')+(a.description||'')).toLowerCase().includes(q));
+  if (coinActiveKeyword) articles = articles.filter(a => ((a.title||'')+(a.description||'')).toLowerCase().includes(coinActiveKeyword));
+  renderCoinNews(articles);
+}
+
+function renderCoinNews(articles) {
+  const el = document.getElementById('coinNewsList');
+  if (!articles.length) {
+    el.innerHTML = `<div class="ddu-state"><img src="/logo.png" alt="뚜"/><div class="ddu-msg">해당 조건의 기사가 없습니다</div></div>`;
+    return;
+  }
+  el.innerHTML = articles.slice(0, 60).map(a => {
+    const cls = a.impact === 'high' ? 'high-impact' : a.impact === 'medium' ? 'medium-impact' : '';
+    const tags = [];
+    if (a.impact === 'high') tags.push(`<span class="tag impact-high">🔴 주요</span>`);
+    else if (a.impact === 'medium') tags.push(`<span class="tag impact-med">🟠 주목</span>`);
+    const pt = getCoinPointTag(a);
+    if (pt) tags.push(`<span class="tag point">💡 ${pt}</span>`);
+    a.cats.forEach(c => tags.push(`<span class="tag category">${getCoinCatLabel(c)}</span>`));
+    const time = a.pubDate ? timeAgo(new Date(a.pubDate)) : '';
+    const safeLink = /^https?:\/\//.test(a.link) ? a.link : '#';
+    const desc = (a.description || '').substring(0, 150);
+    return `<div class="news-card ${cls}" onclick="window.open('${safeLink}','_blank')">
+      <div class="card-header">
+        <span class="card-source">${a.sourceName}</span>
+        <span class="card-time">${time}</span>
+      </div>
+      <a class="card-title" href="${safeLink}" target="_blank" onclick="event.stopPropagation()">${a.title || '제목 없음'}</a>
+      ${desc ? `<div class="card-summary">${desc}...</div>` : ''}
+      <div class="card-tags">${tags.join('')}</div>
+    </div>`;
+  }).join('');
+}
+
+function coinUpdateSidebar() {
+  const causeScore = {}, causeCounts = {};
+  const causeMap = {
+    'BTC 강세': ['bitcoin surges','btc soars','비트코인 상승','bull'],
+    'BTC 약세': ['bitcoin falls','btc drops','비트코인 하락','crash','dump'],
+    '규제 이슈': ['regulation','sec','ban','규제','금지'],
+    'ETF/기관': ['etf','blackrock','fidelity','institutional','기관'],
+    '반감기 관련': ['halving','반감기'],
+    '알트코인': ['altcoin','solana','ethereum','알트','이더리움'],
+    'DeFi/NFT': ['defi','nft','staking','스테이킹'],
+  };
+  for (const a of coinAllArticles) {
+    const text = ((a.title||'')+(a.description||'')).toLowerCase();
+    for (const [cause, kws] of Object.entries(causeMap)) {
+      if (kws.some(k => text.includes(k))) {
+        causeScore[cause] = (causeScore[cause]||0) + a.score + 1;
+        causeCounts[cause] = (causeCounts[cause]||0) + 1;
+      }
+    }
+  }
+  const sorted = Object.entries(causeScore).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  document.getElementById('coinCauseList').innerHTML = sorted.length
+    ? sorted.map(([cause,],i) => `
+        <div class="cause-item">
+          <div class="cause-rank ${i===0?'':(i===1?'orange':'gray')}">${i+1}</div>
+          <div>
+            <div class="cause-text">${cause}</div>
+            <div class="cause-count">${causeCounts[cause]}건 언급</div>
+          </div>
+        </div>`).join('')
+    : '<div style="color:var(--muted);font-size:0.8rem">데이터 부족</div>';
+
+  const kwCount = {};
+  for (const a of coinAllArticles) {
+    for (const kw of [...a.matchedHigh, ...a.matchedMed]) {
+      kwCount[kw] = (kwCount[kw]||0) + 1;
+    }
+  }
+  const sortedKw = Object.entries(kwCount).sort((a,b)=>b[1]-a[1]).slice(0,20);
+  document.getElementById('coinKeywordCloud').innerHTML = sortedKw.length
+    ? sortedKw.map(([kw,cnt]) =>
+        `<span class="keyword-chip ${coinActiveKeyword===kw?'active':''}" onclick="coinToggleKeyword('${kw}')">${kw}<span class="kw-count">${cnt}</span></span>`
+      ).join('')
+    : '<div style="color:var(--muted);font-size:0.8rem">데이터 없음</div>';
+}
+
+function coinToggleKeyword(kw) {
+  coinActiveKeyword = coinActiveKeyword === kw ? null : kw;
+  coinUpdateSidebar();
+  coinFilterAndRender();
+}
+
+function coinRenderSourceStatus() {
+  document.getElementById('coinSourceList').innerHTML = Object.entries(coinSourceStatus).map(([name, st]) =>
+    `<div class="source-item">
+      <span class="source-name">${name}</span>
+      <span class="source-badge ${st}">${st==='ok'?'연결됨':'실패'}</span>
+    </div>`
+  ).join('');
+}
+
+function renderCoinEvents() {
+  const el = document.getElementById('coinEventList');
+  if (!el) return;
+  const sorted = [...COIN_EVENTS].sort((a,b) => b.magnitude - a.magnitude);
+  el.innerHTML = sorted.map(ev => {
+    const typeColor = ev.type === 'past' ? 'gray' : ev.type === 'ongoing' ? '' : 'orange';
+    const typeLabel = ev.type === 'past' ? '완료' : ev.type === 'ongoing' ? '진행중' : '예정';
+    return `<div class="event-mini-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+        <span style="font-weight:600;font-size:0.82rem">${ev.name}</span>
+        <span class="cause-rank ${typeColor}" style="font-size:0.7rem;min-width:40px;text-align:center">${typeLabel}</span>
+      </div>
+      <div style="color:var(--muted);font-size:0.75rem;margin-bottom:4px">${ev.desc.substring(0,80)}...</div>
+      <div style="display:flex;gap:4px;flex-wrap:wrap">
+        ${ev.mechanisms.map(m=>`<span class="tag category" style="font-size:0.68rem">${m}</span>`).join('')}
+        <span class="tag" style="font-size:0.68rem;color:var(--accent)">충격 ${ev.magnitude}/100</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
 // ─── KATARINA ─────────────────────────────────────────────────────────────────
 function kataOpen() {
   document.getElementById('kataOverlay').classList.add('open');
   setTimeout(() => document.getElementById('kataInput').focus(), 100);
   if (!reLoaded) { reLoaded = true; loadReNews(); }
+  if (!coinLoaded) { coinLoaded = true; loadCoinNews(); }
 }
 function kataClose() {
   document.getElementById('kataOverlay').classList.remove('open');
@@ -2273,17 +2596,22 @@ function kataSearch() {
     ((a.title||'')+(a.description||'')).toLowerCase().includes(q)
   ).slice(0, 8);
 
-  // 2. 부동산
+  // 2. 코인
+  const coinHits = coinAllArticles.filter(a =>
+    ((a.title||'')+(a.description||'')).toLowerCase().includes(q)
+  ).slice(0, 8);
+
+  // 3. 부동산
   const reHits = reAllArticles.filter(a =>
     ((a.title||'')+(a.description||'')).toLowerCase().includes(q)
   ).slice(0, 8);
 
-  // 3. 대형 이벤트
-  const eventHits = MAJOR_EVENTS.filter(e =>
+  // 4. 대형 이벤트
+  const eventHits = [...MAJOR_EVENTS, ...COIN_EVENTS].filter(e =>
     (e.name + e.desc + e.mechanisms.join(' ')).toLowerCase().includes(q)
   ).slice(0, 4);
 
-  const total = newsHits.length + reHits.length + eventHits.length;
+  const total = newsHits.length + coinHits.length + reHits.length + eventHits.length;
   if (total === 0) {
     el.innerHTML = `<div class="katarina-empty">「${q}」에 대한 결과가 없습니다.<br><span style="font-size:0.75rem">다른 키워드로 검색해보세요.</span></div>`;
     return;
@@ -2294,6 +2622,18 @@ function kataSearch() {
   if (newsHits.length) {
     html += `<div class="katarina-section-title">📰 뉴스 분석 <span class="katarina-count">${newsHits.length}</span></div>`;
     html += newsHits.map(a => {
+      const safeLink = /^https?:\/\//.test(a.link) ? a.link : '#';
+      const time = a.pubDate ? timeAgo(new Date(a.pubDate)) : '';
+      return `<a class="katarina-item" href="${safeLink}" target="_blank">
+        <div class="katarina-item-title">${highlight(a.title||'', q)}</div>
+        <div class="katarina-item-meta"><span>${a.sourceName}</span><span>${time}</span></div>
+      </a>`;
+    }).join('');
+  }
+
+  if (coinHits.length) {
+    html += `<div class="katarina-section-title">₿ 코인 <span class="katarina-count">${coinHits.length}</span></div>`;
+    html += coinHits.map(a => {
       const safeLink = /^https?:\/\//.test(a.link) ? a.link : '#';
       const time = a.pubDate ? timeAgo(new Date(a.pubDate)) : '';
       return `<a class="katarina-item" href="${safeLink}" target="_blank">

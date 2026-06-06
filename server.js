@@ -98,6 +98,23 @@ app.get('/api/news', async (req, res) => {
   res.json({ sources });
 });
 
+const COIN_SOURCES = [
+  { name: 'CoinDesk',        url: 'https://www.coindesk.com/arc/outboundfeeds/rss/' },
+  { name: 'CoinTelegraph',   url: 'https://cointelegraph.com/rss' },
+  { name: 'Decrypt',         url: 'https://decrypt.co/feed' },
+  { name: '코인데스크코리아', url: 'https://www.coindeskkorea.com/feed/' },
+  { name: '블록미디어',       url: 'https://www.blockmedia.co.kr/feed/' },
+];
+
+app.get('/api/coin', async (req, res) => {
+  const results = await Promise.allSettled(COIN_SOURCES.map(s =>
+    fetchFeedMore(s).then(items => ({ name: s.name, items, ok: true }))
+                   .catch(() => ({ name: s.name, items: [], ok: false }))
+  ));
+  const sources = results.map(r => r.value || { name: '?', items: [], ok: false });
+  res.json({ sources });
+});
+
 const RE_SOURCES = [
   { name: '한국경제',     url: 'https://www.hankyung.com/feed/all-news' },
   { name: '매일경제',     url: 'https://www.mk.co.kr/rss/30000001/' },
