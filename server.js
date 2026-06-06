@@ -106,10 +106,33 @@ const RE_SOURCES = [
   { name: '아시아경제',   url: 'https://www.asiae.co.kr/rss/all.htm' },
 ];
 
+async function fetchFeedMore(source) {
+  const ac = new AbortController();
+  const timer = setTimeout(() => ac.abort(), 10000);
+  const res = await fetch(source.url, {
+    signal: ac.signal,
+    headers: { 'User-Agent': 'Mozilla/5.0 (compatible; NewsBot/1.0)' }
+  });
+  clearTimeout(timer);
+  const xml = await res.text();
+  const parsed = await xml2js.parseStringPromise(xml, { trim: true, explicitArray: false });
+  const channel = parsed?.rss?.channel || parsed?.feed;
+  const items = channel?.item || channel?.entry || [];
+  const arr = Array.isArray(items) ? items : [items];
+  const stripHtml = s => String(s || '').replace(/<[^>]+>/g, '').replace(/&[a-z]+;/gi, ' ').trim();
+  return arr.slice(0, 50).map(item => ({
+    title: stripHtml(item.title?._ || item.title),
+    link: (item.link?.href || item.link || item.guid?._ || item.guid || '').trim(),
+    description: stripHtml(item.description || item.summary || item['content:encoded']).slice(0, 300),
+    pubDate: item.pubDate || item.updated || item.published || '',
+    sourceName: source.name,
+  }));
+}
+
 app.get('/api/realestate', async (req, res) => {
   const results = await Promise.allSettled(RE_SOURCES.map(s =>
-    fetchFeed(s).then(items => ({ name: s.name, items, ok: true }))
-               .catch(() => ({ name: s.name, items: [], ok: false }))
+    fetchFeedMore(s).then(items => ({ name: s.name, items, ok: true }))
+                   .catch(() => ({ name: s.name, items: [], ok: false }))
   ));
   const sources = results.map(r => r.value || { name: '?', items: [], ok: false });
   res.json({ sources });
