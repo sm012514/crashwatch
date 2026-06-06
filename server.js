@@ -103,6 +103,7 @@ const RE_SOURCES = [
   { name: '매일경제',     url: 'https://www.mk.co.kr/rss/30000001/' },
   { name: '연합뉴스 경제', url: 'https://www.yna.co.kr/rss/economy.xml' },
   { name: '조선비즈',     url: 'https://biz.chosun.com/arc/outboundfeeds/rss/?outputType=xml' },
+  { name: '아시아경제',   url: 'https://www.asiae.co.kr/rss/all.htm' },
 ];
 
 app.get('/api/realestate', async (req, res) => {
