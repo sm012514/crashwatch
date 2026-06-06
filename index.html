@@ -278,6 +278,7 @@
     .tag.entity-company { background: rgba(20,184,166,0.12); border-color: rgba(20,184,166,0.35); color: #5eead4; }
     .tag.entity-gov { background: rgba(234,179,8,0.12); border-color: rgba(234,179,8,0.35); color: #fde047; }
     .tag.entity-person { background: rgba(168,85,247,0.12); border-color: rgba(168,85,247,0.35); color: #d8b4fe; }
+    .tag.point { background: rgba(236,72,153,0.12); border-color: rgba(236,72,153,0.4); color: #f9a8d4; font-weight: 700; }
 
     .impact-summary {
       margin-top: 8px;
@@ -1057,6 +1058,35 @@ const ENTITIES = {
   ],
 };
 
+function getPointTag(article) {
+  const mh = (article.matchedHigh || []).map(k => k.toLowerCase());
+  const mm = (article.matchedMed || []).map(k => k.toLowerCase());
+  const text = ((article.title || '') + ' ' + (article.description || '')).toLowerCase();
+
+  if (mh.some(k => ['금리인상','rate hike','rate hikes','fed raises','hawkish','tightening'].includes(k))) return '금리인상 우려';
+  if (mh.some(k => ['전쟁','war','invasion'].includes(k))) return '지정학 긴장';
+  if (mh.some(k => ['conflict'].includes(k))) return '분쟁 리스크';
+  if (mh.some(k => ['관세','tariff','tariffs'].includes(k))) return '관세 갈등';
+  if (mh.some(k => ['trade war'].includes(k))) return '무역전쟁';
+  if (mh.some(k => ['폭락','crash','collapse'].includes(k))) return '시장 폭락';
+  if (mh.some(k => ['급락','plunge','plunges','selloff','sell-off','rout'].includes(k))) return '급락 충격';
+  if (mh.some(k => ['침체','recession','depression'].includes(k))) return '경기침체 우려';
+  if (mh.some(k => ['파산','bankruptcy'].includes(k))) return '파산 위험';
+  if (mh.some(k => ['디폴트','default'].includes(k))) return '디폴트 우려';
+  if (mh.some(k => ['위기','crisis','meltdown'].includes(k))) return '금융위기 우려';
+  if (mh.some(k => ['liquidity crisis','credit crunch'].includes(k))) return '유동성 위기';
+  if (mh.some(k => ['제재','sanction'].includes(k))) return '경제 제재';
+  if (mh.some(k => ['inflation spike'].includes(k))) return '인플레 급등';
+  if (text.includes('인플레') || text.includes('inflation') || text.includes('cpi')) return '인플레 우려';
+  if (mm.some(k => ['downgrade'].includes(k))) return '신용 강등';
+  if (mm.some(k => ['volatile','volatility','변동성'].includes(k))) return '변동성 확대';
+  if (mm.some(k => ['경고','warning'].includes(k))) return '시장 경고';
+  if (mm.some(k => ['부채','debt'].includes(k))) return '부채 우려';
+  if (mm.some(k => ['yield','inversion'].includes(k))) return '금리 역전';
+  if (mm.some(k => ['bear','correction'].includes(k))) return '조정 국면';
+  return null;
+}
+
 function getEntityTags(article) {
   const text = ((article.title || '') + ' ' + (article.description || '')).toLowerCase();
   const found = { company: new Set(), gov: new Set(), person: new Set() };
@@ -1193,8 +1223,9 @@ function renderNews(articles) {
     const tags = [];
     if (a.impact === 'high') tags.push(`<span class="tag impact-high">🔴 고위험</span>`);
     else if (a.impact === 'medium') tags.push(`<span class="tag impact-med">🟠 중위험</span>`);
+    const pt = getPointTag(a);
+    if (pt) tags.push(`<span class="tag point">💡 ${pt}</span>`);
     a.cats.forEach(c => tags.push(`<span class="tag category">${catLabel(c)}</span>`));
-    if (a.matchedHigh.length) tags.push(`<span class="tag" style="color:var(--muted)">${a.matchedHigh.slice(0,2).join(', ')}</span>`);
     tags.push(...getEntityTags(a));
     const time = a.pubDate ? timeAgo(new Date(a.pubDate)) : '';
     const desc = (a.description || '').substring(0, 150);
