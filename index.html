@@ -820,6 +820,8 @@
     <div class="filter-section">
       <span class="filter-label">필터:</span>
       <button class="filter-btn active" data-filter="all" onclick="setFilter(this,'all')">전체</button>
+      <button class="filter-btn" data-filter="kr" onclick="setFilter(this,'kr')">🇰🇷 국내</button>
+      <button class="filter-btn" data-filter="en" onclick="setFilter(this,'en')">🌐 해외</button>
       <button class="filter-btn" data-filter="high" onclick="setFilter(this,'high')">🔴 고위험</button>
       <button class="filter-btn" data-filter="medium" onclick="setFilter(this,'medium')">🟠 중위험</button>
       <button class="filter-btn" data-filter="macro" onclick="setFilter(this,'macro')">📊 거시경제</button>
@@ -1061,7 +1063,10 @@ function filterAndRender() {
   const q = document.getElementById('searchInput').value.toLowerCase().trim();
   let articles = allArticles;
 
-  if (currentFilter === 'high') articles = articles.filter(a => a.impact === 'high');
+  const KR_SOURCES = ['한국경제', '매일경제', '연합뉴스 경제', '조선비즈'];
+  if (currentFilter === 'kr') articles = articles.filter(a => KR_SOURCES.includes(a.sourceName));
+  else if (currentFilter === 'en') articles = articles.filter(a => !KR_SOURCES.includes(a.sourceName));
+  else if (currentFilter === 'high') articles = articles.filter(a => a.impact === 'high');
   else if (currentFilter === 'medium') articles = articles.filter(a => a.impact === 'medium');
   else if (['macro','trade','geo','fed'].includes(currentFilter)) articles = articles.filter(a => a.cats.includes(currentFilter));
 
