@@ -1170,9 +1170,10 @@ async function loadAllNews() {
     if (!seen.has(key) && key.length > 10) { seen.add(key); unique.push(item); }
   }
 
-  // Score and sort
+  // Score and sort — score 0(금융 키워드 전무)는 제외
   allArticles = unique
     .map(scoreArticle)
+    .filter(a => a.score > 0 || ['한국경제','매일경제','연합뉴스 경제'].includes(a.sourceName))
     .sort((a, b) => b.score - a.score || new Date(b.pubDate) - new Date(a.pubDate));
 
   document.getElementById('lastUpdated').textContent = '업데이트: ' + new Date().toLocaleTimeString('ko-KR');
