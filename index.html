@@ -208,6 +208,28 @@
     @media (max-width: 900px) {
       .content-grid { grid-template-columns: 1fr; }
     }
+    @media (max-width: 600px) {
+      /* 헤더 */
+      header { padding: 10px 14px; }
+      .logo img { width: 44px !important; height: 44px !important; }
+      .logo { font-size: 1rem; gap: 8px; }
+      .last-updated { display: none; }
+      .katarina-btn { padding: 6px 10px; font-size: 0.75rem; }
+      .katarina-btn span { display: none; }
+      .refresh-btn { padding: 6px 10px; font-size: 0.75rem; }
+
+      /* 통계 2x2 그리드 */
+      .stats-grid { grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
+      .stat-card { padding: 12px; }
+      .stat-value { font-size: 1.25rem; }
+
+      /* 탭바 */
+      .tab-bar { gap: 2px; margin-bottom: 14px; }
+      .tab-btn { padding: 8px 8px; font-size: 0.75rem; white-space: nowrap; }
+
+      /* 메인 패딩 */
+      main { padding: 14px 12px; }
+    }
 
     /* NEWS CARDS */
     .news-list { display: flex; flex-direction: column; gap: 12px; }
