@@ -267,6 +267,19 @@
     .tag.impact-med { background: rgba(249,115,22,0.15); border-color: rgba(249,115,22,0.4); color: #fdba74; }
     .tag.category { background: rgba(99,102,241,0.15); border-color: rgba(99,102,241,0.4); color: #a5b4fc; }
 
+    .impact-summary {
+      margin-top: 8px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 0.76rem;
+      line-height: 1.45;
+      background: rgba(255,255,255,0.04);
+      border-left: 3px solid rgba(249,115,22,0.5);
+      color: #cbd5e1;
+    }
+    .impact-summary .impact-icon { margin-right: 4px; }
+    .news-card.high-impact .impact-summary { border-left-color: rgba(239,68,68,0.6); }
+
     /* LOADING */
     .ddu-state {
       text-align: center;
@@ -927,6 +940,28 @@
   </div>
 </main>
 
+<footer style="
+  background: #0a0c14;
+  border-top: 1px solid var(--border);
+  padding: 24px;
+  margin-top: 40px;
+  text-align: center;
+">
+  <p style="font-size:0.78rem; color: var(--muted); line-height: 1.8; max-width: 700px; margin: 0 auto;">
+    ⚠️ <strong style="color:var(--text)">투자 유의사항</strong><br>
+    본 사이트는 공개된 뉴스 피드를 수집·분석하여 제공하는 <strong style="color:var(--text)">정보 제공 서비스</strong>입니다.
+    투자 권유 또는 종목 추천을 목적으로 하지 않으며, 제공되는 모든 정보는 참고용으로만 활용하시기 바랍니다.<br>
+    <strong style="color:var(--text)">투자의 최종 판단과 책임은 투자자 본인에게 있습니다.</strong>
+    금융투자상품은 원금 손실이 발생할 수 있습니다.
+  </p>
+  <p style="font-size:0.72rem; color: #4a5568; margin-top: 12px;">
+    © 2025 DDU Market News &nbsp;·&nbsp;
+    <a href="/about.html" style="color:#4a5568; text-decoration:none;">서비스 소개</a>
+    &nbsp;·&nbsp;
+    <a href="/privacy.html" style="color:#4a5568; text-decoration:none;">개인정보처리방침</a>
+  </p>
+</footer>
+
 <script>
 // ─── CONFIG ───────────────────────────────────────────────────────────────────
 const API_URL = '/api/news';
@@ -988,6 +1023,35 @@ function scoreArticle(item) {
 
 function catLabel(cat) {
   return { macro:'거시경제', trade:'무역/관세', geo:'지정학', fed:'중앙은행' }[cat] || cat;
+}
+
+function getImpactSummary(article) {
+  if (article.impact === 'low') return null;
+  const mh = (article.matchedHigh || []).map(k => k.toLowerCase());
+  const cats = article.cats || [];
+
+  if (mh.some(k => ['금리인상','rate hike','rate hikes','fed raises','hawkish','tightening','fomc'].includes(k)))
+    return { icon: '📈', text: '금리 인상 우려 → 채권 수익률↑, 성장주·주가 하락 압력' };
+  if (mh.some(k => ['전쟁','war','conflict','invasion'].includes(k)))
+    return { icon: '⚔️', text: '지정학 위기 → 안전자산(금·달러) 강세, 위험자산 전반 매도' };
+  if (mh.some(k => ['관세','tariff','tariffs','trade war'].includes(k)))
+    return { icon: '🌐', text: '관세·무역 갈등 → 수출주·코스피 직접 타격, 물가 상승 우려' };
+  if (mh.some(k => ['폭락','급락','crash','plunge','plunges','collapse','selloff','sell-off','rout'].includes(k)))
+    return { icon: '🔻', text: '급락 신호 → 투자심리 위축, 변동성 확대 주의' };
+  if (mh.some(k => ['침체','recession','depression'].includes(k)))
+    return { icon: '📉', text: '경기침체 우려 → 경기민감주 하락, 방어주·국채 상대적 강세' };
+  if (mh.some(k => ['파산','디폴트','default','bankruptcy'].includes(k)))
+    return { icon: '⚠️', text: '부도·파산 위험 → 신용시장 경색, 광범위 자산 하락 가능' };
+  if (mh.some(k => ['위기','crisis','meltdown','liquidity crisis','credit crunch'].includes(k)))
+    return { icon: '🚨', text: '금융위기 신호 → 전 자산 리스크 오프, 달러·금 급등 가능' };
+  if (mh.some(k => ['제재','sanction'].includes(k)))
+    return { icon: '🚫', text: '경제 제재 → 공급망 차질, 관련 산업주 직접 타격' };
+
+  if (cats.includes('fed'))   return { icon: '🏦', text: '중앙은행 정책 → 금리·유동성 변화로 전 자산에 영향' };
+  if (cats.includes('trade')) return { icon: '🌐', text: '무역·관세 이슈 → 수출 기업 실적 및 코스피 영향' };
+  if (cats.includes('geo'))   return { icon: '🌍', text: '지정학 이슈 → 에너지 가격·안전자산 선호도 변화' };
+  if (cats.includes('macro')) return { icon: '📊', text: '거시경제 지표 → 경기 방향성에 따른 시장 전반 영향' };
+  return null;
 }
 
 // ─── FETCH ────────────────────────────────────────────────────────────────────
@@ -1089,6 +1153,7 @@ function renderNews(articles) {
       <a class="card-title" href="${safeLink}" target="_blank" onclick="event.stopPropagation()">${a.title || '제목 없음'}</a>
       ${desc ? `<div class="card-summary">${desc}...</div>` : ''}
       <div class="card-tags">${tags.join('')}</div>
+      ${(() => { const s = getImpactSummary(a); return s ? `<div class="impact-summary"><span class="impact-icon">${s.icon}</span>${s.text}</div>` : ''; })()}
     </div>`;
   });
 
