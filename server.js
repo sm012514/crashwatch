@@ -168,5 +168,45 @@ app.get('/api/realestate', async (req, res) => {
   res.json({ sources });
 });
 
+// ── GEMINI 팩트체크 API
+app.use(express.json());
+app.post('/api/factcheck', async (req, res) => {
+  const { title, description } = req.body || {};
+  if (!title) return res.status(400).json({ error: 'title required' });
+
+  const apiKey = process.env.GEMINI;
+  if (!apiKey) return res.status(503).json({ error: 'Gemini API key not set' });
+
+  try {
+    const prompt = `다음 뉴스 기사의 신뢰도를 분석해줘. 응답은 반드시 JSON으로만 해줘.
+
+제목: ${title}
+내용: ${description || ''}
+
+응답 형식:
+{
+  "score": 0~100 (신뢰도 점수),
+  "verdict": "신뢰" | "주의" | "미확인",
+  "reason": "한 줄 이유 (50자 이내)"
+}`;
+
+    const geminiRes = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }),
+        signal: AbortSignal.timeout(10000),
+      }
+    );
+    const data = await geminiRes.json();
+    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    const json = text.match(/\{[\s\S]*\}/)?.[0];
+    res.json(json ? JSON.parse(json) : { score: 50, verdict: '미확인', reason: '분석 실패' });
+  } catch (e) {
+    res.status(500).json({ score: 50, verdict: '미확인', reason: '서버 오류' });
+  }
+});
+
 const PORT = process.env.PORT || 3333;
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
