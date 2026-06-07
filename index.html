@@ -81,6 +81,10 @@
       font-size: 0.75rem;
       color: var(--muted);
     }
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
     .refresh-btn {
       background: var(--accent);
       color: white;
@@ -91,7 +95,14 @@
       font-size: 1.25rem;
       font-weight: 900;
       line-height: 1;
+      transform: rotate(180deg);
       transition: opacity 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .refresh-btn.spinning {
+      animation: spin 0.7s linear infinite;
     }
     .refresh-btn:hover { opacity: 0.85; }
     .refresh-btn:disabled { opacity: 0.5; cursor: not-allowed; }
@@ -1741,8 +1752,7 @@ function applyNewsData(articles) {
 async function loadAllNews() {
   const btn = document.getElementById('refreshBtn');
   btn.disabled = true;
-  btn.setAttribute('data-orig-text', btn.textContent);
-  btn.textContent = '↻';
+  btn.classList.add('spinning');
 
   // 캐시된 뉴스 즉시 표시
   try {
@@ -1751,8 +1761,7 @@ async function loadAllNews() {
       applyNewsData(cached.articles);
       renderSourceStatus();
       btn.disabled = false;
-      btn.textContent = '↻';
-      btn.removeAttribute('data-orig-text');
+      btn.classList.remove('spinning');
       return; // 캐시 유효 → 끝
     }
   } catch(e) {}
@@ -1770,7 +1779,7 @@ async function loadAllNews() {
     }
   } catch (e) {
     document.getElementById('newsList').innerHTML = `<div class="ddu-state"><img src="/logo.png" alt="뚜" style="filter:grayscale(0.5)"/><div class="ddu-msg">뚜가 연결에 실패했어요 😿</div><div class="ddu-sub">잠시 후 새로고침을 눌러주세요</div></div>`;
-    btn.disabled = false; btn.textContent = '↻'; btn.removeAttribute('data-orig-text');
+    btn.disabled = false; btn.classList.remove('spinning');
     renderSourceStatus();
     return;
   }
@@ -1782,8 +1791,7 @@ async function loadAllNews() {
 
   applyNewsData(articles);
   btn.disabled = false;
-  btn.textContent = '↻';
-  btn.removeAttribute('data-orig-text');
+  btn.classList.remove('spinning');
 }
 
 // ─── RENDER ───────────────────────────────────────────────────────────────────
