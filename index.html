@@ -1777,17 +1777,8 @@ function processRawNews(raw) {
     .sort((a, b) => b.score - a.score || new Date(b.pubDate) - new Date(a.pubDate));
 }
 
-function renderPinned() {
-  const section = document.getElementById('pinnedSection');
-  const list = document.getElementById('pinnedList');
-  if (!section || !list) return;
-
-  // 전체 기사 중 점수 상위 5개 (시간 무관)
-  const top5 = [...allArticles].sort((a, b) => b.score - a.score).slice(0, 5);
-  if (!top5.length) { section.style.display = 'none'; return; }
-
-  section.style.display = 'block';
-  list.innerHTML = top5.map(a => {
+function makePinnedCards(articles) {
+  return articles.map(a => {
     const safeLink = /^https?:\/\//.test(a.link) ? a.link : '#';
     const time = a.pubDate ? timeAgo(new Date(a.pubDate)) : '';
     const tags = [];
@@ -1804,6 +1795,46 @@ function renderPinned() {
       <div class="card-tags">${tags.join('')}</div>
     </div>`;
   }).join('');
+}
+
+function renderPinned() {
+  const section = document.getElementById('pinnedSection');
+  const list = document.getElementById('pinnedList');
+  if (!section || !list || !allArticles.length) { if(section) section.style.display='none'; return; }
+
+  const isEn = currentLang === 'en';
+  const sorted = [...allArticles].sort((a, b) => b.score - a.score);
+  const krArticles = sorted.filter(a => KR_SOURCES.includes(a.sourceName));
+  const enArticles = sorted.filter(a => !KR_SOURCES.includes(a.sourceName));
+
+  let html = '';
+
+  if (currentFilter === 'kr') {
+    // 국내 필터: 한국 TOP 5만
+    const top = krArticles.slice(0, 5);
+    if (!top.length) { section.style.display = 'none'; return; }
+    html = makePinnedCards(top);
+  } else if (currentFilter === 'en') {
+    // 글로벌 필터: 해외 TOP 5만
+    const top = enArticles.slice(0, 5);
+    if (!top.length) { section.style.display = 'none'; return; }
+    html = makePinnedCards(top);
+  } else {
+    // 전체: 글로벌 5 + 국내 5
+    const topEn = enArticles.slice(0, 5);
+    const topKr = krArticles.slice(0, 5);
+    if (!topEn.length && !topKr.length) { section.style.display = 'none'; return; }
+    html = '';
+    if (topEn.length) html += `
+      <div style="font-size:0.75rem;color:#60a5fa;font-weight:600;margin-bottom:6px">🌐 ${isEn ? 'Global' : '글로벌'}</div>
+      ${makePinnedCards(topEn)}`;
+    if (topKr.length) html += `
+      <div style="font-size:0.75rem;color:#34d399;font-weight:600;margin:12px 0 6px">🇰🇷 ${isEn ? 'Korean' : '국내'}</div>
+      ${makePinnedCards(topKr)}`;
+  }
+
+  section.style.display = 'block';
+  list.innerHTML = html;
 }
 
 function applyNewsData(articles) {
@@ -1872,6 +1903,7 @@ function setFilter(btn, filter) {
 }
 
 function filterAndRender() {
+  renderPinned(); // 필터 바뀔 때 핀 섹션도 업데이트
   const q = document.getElementById('searchInput').value.toLowerCase().trim();
   let articles = allArticles;
 
