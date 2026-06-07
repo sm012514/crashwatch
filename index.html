@@ -1747,12 +1747,12 @@ async function loadAllNews() {
   const timeLabel = currentLang === 'en' ? 'Updated: ' : '업데이트: ';
   document.getElementById('lastUpdated').textContent = timeLabel + new Date().toLocaleTimeString(locale);
   btn.disabled = false;
-  btn.textContent = '새로고침';
+  btn.textContent = t('refresh');
 
   updateStats();
+  filterAndRender();
   updateCauses();
   updateKeywords();
-  filterAndRender();
 }
 
 // ─── RENDER ───────────────────────────────────────────────────────────────────
