@@ -1719,7 +1719,9 @@ async function loadAllNews() {
     })
     .sort((a, b) => b.score - a.score || new Date(b.pubDate) - new Date(a.pubDate));
 
-  document.getElementById('lastUpdated').textContent = '업데이트: ' + new Date().toLocaleTimeString('ko-KR');
+  const locale = currentLang === 'en' ? 'en-US' : 'ko-KR';
+  const timeLabel = currentLang === 'en' ? 'Updated: ' : '업데이트: ';
+  document.getElementById('lastUpdated').textContent = timeLabel + new Date().toLocaleTimeString(locale);
   btn.disabled = false;
   btn.textContent = '새로고침';
 
