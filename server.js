@@ -75,6 +75,9 @@ const MARKET_SYMBOLS = [
   { id: 'nasdaq', sym: '^IXIC',  name: 'NASDAQ' },
   { id: 'dow',    sym: '^DJI',   name: 'DOW' },
   { id: 'usdkrw', sym: 'KRW=X',  name: 'USD/KRW' },
+  { id: 'btc',    sym: 'BTC-USD', name: 'BTC' },
+  { id: 'gold',   sym: 'GC=F',   name: 'Gold' },
+  { id: 'silver', sym: 'SI=F',   name: 'Silver' },
 ];
 
 async function fetchQuote(sym) {

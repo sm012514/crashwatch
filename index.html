@@ -1014,11 +1014,17 @@
     <span class="ticker-item"><span class="ticker-name">NASDAQ</span> <span class="ticker-val" id="t-nasdaq">—</span> <span class="ticker-chg" id="t-nasdaq-chg">—</span></span>
     <span class="ticker-item"><span class="ticker-name">DOW</span> <span class="ticker-val" id="t-dow">—</span> <span class="ticker-chg" id="t-dow-chg">—</span></span>
     <span class="ticker-item"><span class="ticker-name">USD/KRW</span> <span class="ticker-val" id="t-usd">—</span> <span class="ticker-chg" id="t-usd-chg">—</span></span>
+    <span class="ticker-item"><span class="ticker-name" style="color:#f7931a">₿ BTC</span> <span class="ticker-val" id="t-btc">—</span> <span class="ticker-chg" id="t-btc-chg">—</span></span>
+    <span class="ticker-item"><span class="ticker-name" style="color:#ffd700">Gold</span> <span class="ticker-val" id="t-gold">—</span> <span class="ticker-chg" id="t-gold-chg">—</span></span>
+    <span class="ticker-item"><span class="ticker-name" style="color:#c0c0c0">Silver</span> <span class="ticker-val" id="t-silver">—</span> <span class="ticker-chg" id="t-silver-chg">—</span></span>
     <!-- duplicated for seamless loop -->
     <span class="ticker-item"><span class="ticker-name">KOSPI</span> <span class="ticker-val" id="t-kospi2">—</span></span>
     <span class="ticker-item"><span class="ticker-name">KOSDAQ</span> <span class="ticker-val" id="t-kosdaq2">—</span></span>
     <span class="ticker-item"><span class="ticker-name">S&amp;P500</span> <span class="ticker-val" id="t-sp5002">—</span></span>
     <span class="ticker-item"><span class="ticker-name">NASDAQ</span> <span class="ticker-val" id="t-nasdaq2">—</span></span>
+    <span class="ticker-item"><span class="ticker-name" style="color:#f7931a">₿ BTC</span> <span class="ticker-val" id="t-btc2">—</span></span>
+    <span class="ticker-item"><span class="ticker-name" style="color:#ffd700">Gold</span> <span class="ticker-val" id="t-gold2">—</span></span>
+    <span class="ticker-item"><span class="ticker-name" style="color:#c0c0c0">Silver</span> <span class="ticker-val" id="t-silver2">—</span></span>
   </div>
 </div>
 
@@ -2302,6 +2308,9 @@ const TICKER_IDS = {
   nasdaq: 't-nasdaq',
   dow:    't-dow',
   usdkrw: 't-usd',
+  btc:    't-btc',
+  gold:   't-gold',
+  silver: 't-silver',
 };
 const TICKER_CHG_IDS = {
   kospi:  't-kospi-chg',
@@ -2310,10 +2319,16 @@ const TICKER_CHG_IDS = {
   nasdaq: 't-nasdaq-chg',
   dow:    't-dow-chg',
   usdkrw: 't-usd-chg',
+  btc:    't-btc-chg',
+  gold:   't-gold-chg',
+  silver: 't-silver-chg',
 };
 
 function fmtPrice(id, price) {
   if (id === 'usdkrw') return price.toFixed(1);
+  if (id === 'btc') return '$' + price.toLocaleString('en-US', { maximumFractionDigits: 0 });
+  if (id === 'gold') return '$' + price.toFixed(1);
+  if (id === 'silver') return '$' + price.toFixed(2);
   if (price >= 1000) return price.toLocaleString('en-US', { maximumFractionDigits: 2 });
   return price.toFixed(2);
 }
