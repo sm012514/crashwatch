@@ -1880,6 +1880,42 @@ function renderNews(articles) {
   el.innerHTML = cards.join('');
 }
 
+async function runEventUpdate(eventId, name, desc) {
+  const resultEl = document.getElementById('fc-ev-' + eventId);
+  const btn = event.target;
+  if (!resultEl) return;
+  resultEl.style.display = 'block';
+  const isEn = currentLang === 'en';
+  resultEl.innerHTML = `<span style="color:var(--muted);font-size:0.78rem">🌐 ${isEn ? 'Searching latest info...' : '구글에서 최신 정보 검색 중...'}</span>`;
+  btn.disabled = true;
+  try {
+    const res = await fetch('/api/event-update', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, desc }),
+      signal: AbortSignal.timeout(25000),
+    });
+    const d = await res.json();
+    if (d.error) throw new Error(d.error);
+    const statusColors = { imminent: '#ef4444', ongoing: '#f97316', scheduled: '#3b82f6', completed: '#22c55e' };
+    const statusLabels = isEn
+      ? { imminent: '🔴 Imminent', ongoing: '🟠 Ongoing', scheduled: '🔵 Scheduled', completed: '🟢 Completed' }
+      : { imminent: '🔴 임박', ongoing: '🟠 진행 중', scheduled: '🔵 예정', completed: '🟢 완료' };
+    resultEl.innerHTML = `<div style="background:#0f172a;border:1px solid #334155;border-radius:8px;padding:12px;margin-top:8px;font-size:0.82rem">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+        <span style="color:#60a5fa;font-weight:700">🌐 ${isEn ? 'Live Update' : '실시간 업데이트'}</span>
+        ${d.status ? `<span style="color:${statusColors[d.status]||'#94a3b8'}">${statusLabels[d.status]||d.status}</span>` : ''}
+        ${d.date ? `<span style="color:#fbbf24">📅 ${d.date}</span>` : ''}
+      </div>
+      ${d.summary ? `<p style="color:#cbd5e1;margin:0 0 6px">${d.summary}</p>` : ''}
+      ${d.source ? `<span style="color:#475569;font-size:0.75rem">출처: ${d.source}</span>` : ''}
+    </div>`;
+  } catch(e) {
+    resultEl.innerHTML = `<span style="color:var(--muted);font-size:0.78rem">${isEn ? 'Update failed' : '업데이트 실패'}: ${e.message}</span>`;
+  }
+  btn.disabled = false;
+}
+
 async function runFactCheck(cardId, title, description) {
   const resultEl = document.getElementById('fc-' + cardId);
   const btn = document.querySelector('#' + cardId + ' .fc-btn');
@@ -2467,8 +2503,8 @@ function renderEvents() {
            style="font-size:0.75rem;color:var(--muted);text-decoration:none">
           ${searchLabel}
         </a>
-        <button class="fc-btn" onclick="runFactCheck('ev-${e.id}',${JSON.stringify(name)},${JSON.stringify(desc.substring(0,300))})" style="font-size:0.75rem;padding:3px 8px">
-          🤖 ${isEn ? 'AI Fact Check' : 'AI 팩트체크'}
+        <button class="fc-btn" onclick="runEventUpdate('${e.id}',${JSON.stringify(name)},${JSON.stringify(desc.substring(0,300))})" style="font-size:0.75rem;padding:3px 8px">
+          🌐 ${isEn ? 'Live Update' : '실시간 업데이트'}
         </button>
       </div>
       <div class="fc-result" id="fc-ev-${e.id}" style="display:none"></div>

@@ -215,6 +215,49 @@ app.get('/api/debug-gemini', async (req, res) => {
   }
 });
 
+// ── GEMINI 대형이벤트 실시간 업데이트 (Google Search Grounding)
+app.post('/api/event-update', async (req, res) => {
+  const { name, desc } = req.body || {};
+  if (!name) return res.status(400).json({ error: 'name required' });
+
+  const apiKey = process.env.GEMINI;
+  if (!apiKey) return res.status(503).json({ error: 'Gemini API key not set' });
+
+  try {
+    const prompt = `다음 금융 이벤트에 대해 구글 검색으로 최신 정보를 찾아서 JSON으로만 답해줘.
+
+이벤트: ${name}
+현재 설명: ${desc || ''}
+
+응답 형식 (JSON만, 마크다운 없이):
+{
+  "date": "최신 예정일 또는 진행 상황 (예: 2026년 6월 예정, 2025년 3월 완료)",
+  "status": "imminent" | "scheduled" | "ongoing" | "completed",
+  "summary": "최신 상황 2~3문장 요약",
+  "source": "참고한 주요 출처 (언론사명)"
+}`;
+
+    const geminiRes = await fetch(
+      `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }],
+          tools: [{ google_search: {} }],  // 실시간 구글 검색 활성화
+        }),
+        signal: AbortSignal.timeout(20000),
+      }
+    );
+    const data = await geminiRes.json();
+    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    const json = text.match(/\{[\s\S]*\}/)?.[0];
+    res.json(json ? JSON.parse(json) : { error: '파싱 실패', raw: text.substring(0, 200) });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 // ── GEMINI 팩트체크 API
 app.use(express.json());
 app.post('/api/factcheck', async (req, res) => {
