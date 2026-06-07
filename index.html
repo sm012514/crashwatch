@@ -1864,20 +1864,15 @@ function renderNews(articles) {
     const desc = (a.description || '').substring(0, 150);
     // 링크에 javascript: 등 위험한 scheme 차단
     const safeLink = /^https?:\/\//.test(a.link) ? a.link : '#';
-    const cardId = 'card-' + Math.random().toString(36).slice(2,8);
-    return `<div class="news-card ${cls}" id="${cardId}" onclick="window.open('${safeLink}','_blank')">
+    return `<div class="news-card ${cls}" onclick="window.open('${safeLink}','_blank')">
       <div class="card-header">
         <span class="card-source">${a.sourceName}</span>
-        <div style="display:flex;align-items:center;gap:8px">
-          <span class="card-time">${time}</span>
-          <button class="fc-btn" onclick="event.stopPropagation();runFactCheck('${cardId}',${JSON.stringify(a.title)},${JSON.stringify((a.description||'').substring(0,200))})" title="${currentLang==='en'?'AI Fact Check':'AI 팩트체크'}">🔍</button>
-        </div>
+        <span class="card-time">${time}</span>
       </div>
       <a class="card-title" href="${safeLink}" target="_blank" onclick="event.stopPropagation()">${a.title || '제목 없음'}</a>
       ${desc ? `<div class="card-summary">${desc}...</div>` : ''}
       <div class="card-tags">${tags.join('')}</div>
       ${(() => { const s = getImpactSummary(a); return s ? `<div class="impact-summary"><span class="impact-icon">${s.icon}</span>${s.text}</div>` : ''; })()}
-      <div class="fc-result" id="fc-${cardId}" style="display:none"></div>
     </div>`;
   });
 
@@ -2467,12 +2462,16 @@ function renderEvents() {
         <div class="magnitude-bar"><div class="magnitude-fill" style="width:${e.magnitude}%"></div></div>
         <span class="magnitude-val">${e.magnitude}/100</span>
       </div>
-      <div style="margin-top:10px">
+      <div style="margin-top:10px;display:flex;align-items:center;gap:12px">
         <a href="https://www.google.com/search?q=${encodeURIComponent(e.relatedSearch)}&tbm=nws" target="_blank"
            style="font-size:0.75rem;color:var(--muted);text-decoration:none">
           ${searchLabel}
         </a>
+        <button class="fc-btn" onclick="runFactCheck('ev-${e.id}',${JSON.stringify(name)},${JSON.stringify(desc.substring(0,300))})" style="font-size:0.75rem;padding:3px 8px">
+          🤖 ${isEn ? 'AI Fact Check' : 'AI 팩트체크'}
+        </button>
       </div>
+      <div class="fc-result" id="fc-ev-${e.id}" style="display:none"></div>
     </div>`;
   }).join('');
 
