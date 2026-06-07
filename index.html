@@ -86,10 +86,11 @@
       color: white;
       border: none;
       border-radius: 8px;
-      padding: 8px 16px;
+      padding: 8px 14px;
       cursor: pointer;
-      font-size: 0.875rem;
-      font-weight: 600;
+      font-size: 1.25rem;
+      font-weight: 900;
+      line-height: 1;
       transition: opacity 0.2s;
     }
     .refresh-btn:hover { opacity: 0.85; }
@@ -1000,7 +1001,7 @@
     <span class="last-updated" id="lastUpdated" data-i18n="updating">업데이트 중...</span>
     <button class="lang-btn" id="langBtn" onclick="toggleLang()">EN</button>
     <button class="katarina-btn" onclick="kataOpen()">⚡ KATARINA <span style="font-size:0.7rem;font-weight:400;opacity:0.8;margin-left:2px" data-i18n="unified_search">통합검색</span></button>
-    <button class="refresh-btn" id="refreshBtn" onclick="loadAllNews()">🔄</button>
+    <button class="refresh-btn" id="refreshBtn" onclick="loadAllNews()">↻</button>
   </div>
 </header>
 
@@ -1736,7 +1737,7 @@ async function loadAllNews() {
   const btn = document.getElementById('refreshBtn');
   btn.disabled = true;
   btn.setAttribute('data-orig-text', btn.textContent);
-  btn.textContent = '🔄';
+  btn.textContent = '↻';
 
   // 캐시된 뉴스 즉시 표시
   try {
@@ -1745,7 +1746,7 @@ async function loadAllNews() {
       applyNewsData(cached.articles);
       renderSourceStatus();
       btn.disabled = false;
-      btn.textContent = '🔄';
+      btn.textContent = '↻';
       btn.removeAttribute('data-orig-text');
       return; // 캐시 유효 → 끝
     }
@@ -1764,7 +1765,7 @@ async function loadAllNews() {
     }
   } catch (e) {
     document.getElementById('newsList').innerHTML = `<div class="ddu-state"><img src="/logo.png" alt="뚜" style="filter:grayscale(0.5)"/><div class="ddu-msg">뚜가 연결에 실패했어요 😿</div><div class="ddu-sub">잠시 후 새로고침을 눌러주세요</div></div>`;
-    btn.disabled = false; btn.textContent = '🔄'; btn.removeAttribute('data-orig-text');
+    btn.disabled = false; btn.textContent = '↻'; btn.removeAttribute('data-orig-text');
     renderSourceStatus();
     return;
   }
@@ -1776,7 +1777,7 @@ async function loadAllNews() {
 
   applyNewsData(articles);
   btn.disabled = false;
-  btn.textContent = '🔄';
+  btn.textContent = '↻';
   btn.removeAttribute('data-orig-text');
 }
 
