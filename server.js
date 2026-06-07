@@ -47,7 +47,7 @@ const SOURCES = [
 
 async function fetchFeed(source) {
   const ac = new AbortController();
-  const timer = setTimeout(() => ac.abort(), 10000);
+  const timer = setTimeout(() => ac.abort(), 5000);
   const res = await fetch(source.url, {
     signal: ac.signal,
     headers: { 'User-Agent': 'Mozilla/5.0 (compatible; NewsBot/1.0)' }
@@ -105,13 +105,23 @@ app.get('/api/market', async (req, res) => {
   res.json({ quotes: results.map(r => r.value) });
 });
 
+// ── 서버 캐시 (3분)
+const cache = {};
+function withCache(key, ttlMs, fn) {
+  const now = Date.now();
+  if (cache[key] && now - cache[key].ts < ttlMs) return Promise.resolve(cache[key].data);
+  return fn().then(data => { cache[key] = { ts: now, data }; return data; });
+}
+
 app.get('/api/news', async (req, res) => {
-  const results = await Promise.allSettled(SOURCES.map(s =>
-    fetchFeed(s).then(items => ({ name: s.name, items, ok: true }))
-               .catch(() => ({ name: s.name, items: [], ok: false }))
-  ));
-  const sources = results.map(r => r.value || { name: '?', items: [], ok: false });
-  res.json({ sources });
+  const data = await withCache('news', 3 * 60 * 1000, async () => {
+    const results = await Promise.allSettled(SOURCES.map(s =>
+      fetchFeed(s).then(items => ({ name: s.name, items, ok: true }))
+                 .catch(() => ({ name: s.name, items: [], ok: false }))
+    ));
+    return { sources: results.map(r => r.value || { name: '?', items: [], ok: false }) };
+  });
+  res.json(data);
 });
 
 const COIN_SOURCES = [
@@ -123,12 +133,14 @@ const COIN_SOURCES = [
 ];
 
 app.get('/api/coin', async (req, res) => {
-  const results = await Promise.allSettled(COIN_SOURCES.map(s =>
-    fetchFeedMore(s).then(items => ({ name: s.name, items, ok: true }))
-                   .catch(() => ({ name: s.name, items: [], ok: false }))
-  ));
-  const sources = results.map(r => r.value || { name: '?', items: [], ok: false });
-  res.json({ sources });
+  const data = await withCache('coin', 3 * 60 * 1000, async () => {
+    const results = await Promise.allSettled(COIN_SOURCES.map(s =>
+      fetchFeedMore(s).then(items => ({ name: s.name, items, ok: true }))
+                     .catch(() => ({ name: s.name, items: [], ok: false }))
+    ));
+    return { sources: results.map(r => r.value || { name: '?', items: [], ok: false }) };
+  });
+  res.json(data);
 });
 
 const RE_SOURCES = [
@@ -141,7 +153,7 @@ const RE_SOURCES = [
 
 async function fetchFeedMore(source) {
   const ac = new AbortController();
-  const timer = setTimeout(() => ac.abort(), 10000);
+  const timer = setTimeout(() => ac.abort(), 5000);
   const res = await fetch(source.url, {
     signal: ac.signal,
     headers: { 'User-Agent': 'Mozilla/5.0 (compatible; NewsBot/1.0)' }
@@ -163,12 +175,14 @@ async function fetchFeedMore(source) {
 }
 
 app.get('/api/realestate', async (req, res) => {
-  const results = await Promise.allSettled(RE_SOURCES.map(s =>
-    fetchFeedMore(s).then(items => ({ name: s.name, items, ok: true }))
-                   .catch(() => ({ name: s.name, items: [], ok: false }))
-  ));
-  const sources = results.map(r => r.value || { name: '?', items: [], ok: false });
-  res.json({ sources });
+  const data = await withCache('realestate', 3 * 60 * 1000, async () => {
+    const results = await Promise.allSettled(RE_SOURCES.map(s =>
+      fetchFeedMore(s).then(items => ({ name: s.name, items, ok: true }))
+                     .catch(() => ({ name: s.name, items: [], ok: false }))
+    ));
+    return { sources: results.map(r => r.value || { name: '?', items: [], ok: false }) };
+  });
+  res.json(data);
 });
 
 // ── 디버그: Gemini 직접 테스트
