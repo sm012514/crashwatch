@@ -104,6 +104,18 @@
     .refresh-btn.spinning {
       animation: spin 0.7s linear infinite;
     }
+    .fc-btn {
+      background: none; border: 1px solid var(--border); border-radius: 5px;
+      color: var(--muted); cursor: pointer; font-size: 0.75rem; padding: 2px 6px;
+      transition: all 0.15s;
+    }
+    .fc-btn:hover { border-color: var(--accent); color: white; }
+    .fc-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .fc-result { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); }
+    .fc-box { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 0.78rem; }
+    .fc-verdict { font-weight: 700; }
+    .fc-score { color: var(--muted); }
+    .fc-reason { color: #cbd5e1; flex: 1; min-width: 150px; }
     .refresh-btn:hover { opacity: 0.85; }
     .refresh-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
@@ -1852,20 +1864,55 @@ function renderNews(articles) {
     const desc = (a.description || '').substring(0, 150);
     // 링크에 javascript: 등 위험한 scheme 차단
     const safeLink = /^https?:\/\//.test(a.link) ? a.link : '#';
-    return `<div class="news-card ${cls}" onclick="window.open('${safeLink}','_blank')">
+    const cardId = 'card-' + Math.random().toString(36).slice(2,8);
+    return `<div class="news-card ${cls}" id="${cardId}" onclick="window.open('${safeLink}','_blank')">
       <div class="card-header">
         <span class="card-source">${a.sourceName}</span>
-        <span class="card-time">${time}</span>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span class="card-time">${time}</span>
+          <button class="fc-btn" onclick="event.stopPropagation();runFactCheck('${cardId}',${JSON.stringify(a.title)},${JSON.stringify((a.description||'').substring(0,200))})" title="${currentLang==='en'?'AI Fact Check':'AI 팩트체크'}">🔍</button>
+        </div>
       </div>
       <a class="card-title" href="${safeLink}" target="_blank" onclick="event.stopPropagation()">${a.title || '제목 없음'}</a>
       ${desc ? `<div class="card-summary">${desc}...</div>` : ''}
       <div class="card-tags">${tags.join('')}</div>
       ${(() => { const s = getImpactSummary(a); return s ? `<div class="impact-summary"><span class="impact-icon">${s.icon}</span>${s.text}</div>` : ''; })()}
+      <div class="fc-result" id="fc-${cardId}" style="display:none"></div>
     </div>`;
   });
 
   // 10번째 카드마다 AdSense 슬롯 삽입
   el.innerHTML = cards.join('');
+}
+
+async function runFactCheck(cardId, title, description) {
+  const resultEl = document.getElementById('fc-' + cardId);
+  const btn = document.querySelector('#' + cardId + ' .fc-btn');
+  if (!resultEl) return;
+  resultEl.style.display = 'block';
+  resultEl.innerHTML = `<span style="color:var(--muted);font-size:0.78rem">🔍 ${currentLang==='en'?'Analyzing...':'분석 중...'}</span>`;
+  if (btn) btn.disabled = true;
+  try {
+    const res = await fetch('/api/factcheck', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title, description }),
+      signal: AbortSignal.timeout(15000),
+    });
+    const d = await res.json();
+    const verdictColor = d.verdict === '신뢰' || d.verdict === 'Reliable' ? '#4ade80'
+      : d.verdict === '주의' || d.verdict === 'Caution' ? '#fb923c' : '#94a3b8';
+    const scoreBar = `<div style="background:#1e293b;border-radius:4px;height:4px;margin:4px 0;overflow:hidden"><div style="background:${verdictColor};height:100%;width:${d.score||50}%;transition:width 0.5s"></div></div>`;
+    resultEl.innerHTML = `<div class="fc-box">
+      <span class="fc-verdict" style="color:${verdictColor}">● ${d.verdict||'?'}</span>
+      <span class="fc-score">${d.score||'?'}/100</span>
+      <span class="fc-reason">${d.reason||''}</span>
+      ${scoreBar}
+    </div>`;
+  } catch(e) {
+    resultEl.innerHTML = `<span style="color:var(--muted);font-size:0.78rem">${currentLang==='en'?'Analysis failed':'분석 실패'}</span>`;
+  }
+  if (btn) btn.disabled = false;
 }
 
 function timeAgo(date) {
