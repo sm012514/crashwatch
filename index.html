@@ -1088,7 +1088,7 @@
         <div id="newsList" class="news-list">
           <div class="ddu-state loading">
             <img src="/logo.png" alt="뚜" />
-            <div class="ddu-msg">뚜가 뉴스를 수집하고 있어요</div>
+            <div class="ddu-msg" data-i18n="loading_news">뚜가 뉴스를 수집하고 있어요</div>
             <div class="ddu-dots"><span></span><span></span><span></span></div>
           </div>
         </div>
@@ -1133,50 +1133,50 @@
       <input type="text" id="coinSearchInput" placeholder="키워드로 검색... (예: 비트코인, 이더리움, ETF, 반감기)" oninput="coinFilterAndRender()" />
     </div>
     <div class="filter-section">
-      <span class="filter-label">필터:</span>
-      <button class="filter-btn active" data-coinfilter="all"      onclick="coinSetFilter(this,'all')">전체</button>
-      <button class="filter-btn" data-coinfilter="btc"             onclick="coinSetFilter(this,'btc')">₿ 비트코인</button>
-      <button class="filter-btn" data-coinfilter="eth"             onclick="coinSetFilter(this,'eth')">Ξ 이더리움</button>
-      <button class="filter-btn" data-coinfilter="altcoin"         onclick="coinSetFilter(this,'altcoin')">🪙 알트코인</button>
-      <button class="filter-btn" data-coinfilter="regulation"      onclick="coinSetFilter(this,'regulation')">🏛️ 규제/정책</button>
-      <button class="filter-btn" data-coinfilter="etf"             onclick="coinSetFilter(this,'etf')">📊 ETF/기관</button>
-      <button class="filter-btn" data-coinfilter="defi"            onclick="coinSetFilter(this,'defi')">⚙️ DeFi/NFT</button>
+      <span class="filter-label" data-i18n="filter_label">필터:</span>
+      <button class="filter-btn active" data-coinfilter="all"      onclick="coinSetFilter(this,'all')" data-i18n="filter_all">전체</button>
+      <button class="filter-btn" data-coinfilter="btc"             onclick="coinSetFilter(this,'btc')" data-i18n="coin_btc">₿ 비트코인</button>
+      <button class="filter-btn" data-coinfilter="eth"             onclick="coinSetFilter(this,'eth')" data-i18n="coin_eth">Ξ 이더리움</button>
+      <button class="filter-btn" data-coinfilter="altcoin"         onclick="coinSetFilter(this,'altcoin')" data-i18n="coin_alt">🪙 알트코인</button>
+      <button class="filter-btn" data-coinfilter="regulation"      onclick="coinSetFilter(this,'regulation')" data-i18n="coin_reg">🏛️ 규제/정책</button>
+      <button class="filter-btn" data-coinfilter="etf"             onclick="coinSetFilter(this,'etf')" data-i18n="coin_etf">📊 ETF/기관</button>
+      <button class="filter-btn" data-coinfilter="defi"            onclick="coinSetFilter(this,'defi')" data-i18n="coin_defi">⚙️ DeFi/NFT</button>
     </div>
     <div class="content-grid">
       <div>
         <div id="coinNewsList" class="news-list">
           <div class="ddu-state loading">
             <img src="/logo.png" alt="뚜" />
-            <div class="ddu-msg">뚜가 코인 뉴스를 수집하고 있어요</div>
+            <div class="ddu-msg" data-i18n="loading_coin">뚜가 코인 뉴스를 수집하고 있어요</div>
             <div class="ddu-dots"><span></span><span></span><span></span></div>
           </div>
         </div>
       </div>
       <div class="sidebar">
         <div class="sidebar-card">
-          <div class="sidebar-title">🚀 코인 빅이벤트</div>
+          <div class="sidebar-title" data-i18n="coin_bigevents">🚀 코인 빅이벤트</div>
           <div id="coinEventList" style="display:flex;flex-direction:column;gap:10px">
             <div style="color:var(--muted);font-size:0.8rem">로딩 중...</div>
           </div>
         </div>
         <div class="sidebar-card">
-          <div class="sidebar-title">📊 주요 동향 TOP 5</div>
-          <div id="coinCauseList"><div style="color:var(--muted);font-size:0.8rem">분석 중...</div></div>
+          <div class="sidebar-title" data-i18n="sidebar_trend_top5">📊 주요 동향 TOP 5</div>
+          <div id="coinCauseList"><div style="color:var(--muted);font-size:0.8rem" data-i18n="analyzing">분석 중...</div></div>
         </div>
         <div class="sidebar-card">
-          <div class="sidebar-title">🔑 주요 키워드</div>
-          <div class="keyword-cloud" id="coinKeywordCloud"><div style="color:var(--muted);font-size:0.8rem">분석 중...</div></div>
+          <div class="sidebar-title" data-i18n="sidebar_keywords">🔑 주요 키워드</div>
+          <div class="keyword-cloud" id="coinKeywordCloud"><div style="color:var(--muted);font-size:0.8rem" data-i18n="analyzing">분석 중...</div></div>
         </div>
         <div class="sidebar-card">
-          <div class="sidebar-title">📡 뉴스 소스 상태</div>
-          <div class="source-list" id="coinSourceList"><div style="color:var(--muted);font-size:0.8rem">로딩 중...</div></div>
+          <div class="sidebar-title" data-i18n="sidebar_sources">📡 뉴스 소스 상태</div>
+          <div class="source-list" id="coinSourceList"><div style="color:var(--muted);font-size:0.8rem" data-i18n="loading">로딩 중...</div></div>
         </div>
         <div class="sidebar-card">
-          <div class="sidebar-title">🔗 빠른 링크</div>
+          <div class="sidebar-title" data-i18n="sidebar_links">🔗 빠른 링크</div>
           <div style="display:flex;flex-direction:column;gap:8px">
             <a href="https://coinmarketcap.com/" target="_blank" style="color:var(--muted);font-size:0.8rem;text-decoration:none">₿ CoinMarketCap</a>
             <a href="https://www.coingecko.com/" target="_blank" style="color:var(--muted);font-size:0.8rem;text-decoration:none">🦎 CoinGecko</a>
-            <a href="https://alternative.me/crypto/fear-and-greed-index/" target="_blank" style="color:var(--muted);font-size:0.8rem;text-decoration:none">😨 공포·탐욕 지수</a>
+            <a href="https://alternative.me/crypto/fear-and-greed-index/" target="_blank" style="color:var(--muted);font-size:0.8rem;text-decoration:none" data-i18n="coin_feargreed">😨 공포·탐욕 지수</a>
             <a href="https://www.coindeskkorea.com/" target="_blank" style="color:var(--muted);font-size:0.8rem;text-decoration:none">🇰🇷 코인데스크 코리아</a>
             <a href="https://www.blockmedia.co.kr/" target="_blank" style="color:var(--muted);font-size:0.8rem;text-decoration:none">🇰🇷 블록미디어</a>
           </div>
@@ -1187,7 +1187,7 @@
 
   <!-- TAB: 대형 이벤트 -->
   <div id="tab-events" class="tab-pane active">
-    <div class="legend-box">
+    <div class="legend-box" id="eventsLegendBox">
       <strong>대형 이벤트란?</strong> — 단순 악재가 아니라 <strong>자금 이동</strong>을 유발하는 초대형 사건들입니다.
       초대형 IPO·M&A·정책 전환 등은 전 세계 투자자가 기존 포지션을 청산하거나 자금을 재배치하면서
       무관한 자산까지 동반 하락시킬 수 있습니다. 각 이벤트의 <strong>시장 충격 메커니즘</strong>을 분석합니다.
@@ -1207,31 +1207,15 @@
       <div id="eventList"></div>
       <div class="sidebar">
         <div class="sidebar-card">
-          <div class="sidebar-title">⚡ 시장 충격 지수</div>
+          <div class="sidebar-title" data-i18n="ev_shock_index">⚡ 시장 충격 지수</div>
           <div id="eventImpactSidebar"></div>
         </div>
         <div class="sidebar-card">
-          <div class="sidebar-title">💡 수익실현 패턴</div>
-          <div style="font-size:0.78rem;color:var(--muted);line-height:1.6">
-            <p style="margin-bottom:8px">초대형 이벤트 전후로 자주 나타나는 패턴:</p>
-            <div style="display:flex;flex-direction:column;gap:6px">
-              <div style="background:var(--surface2);border-radius:6px;padding:8px 10px">
-                <div style="color:var(--text);font-weight:600;font-size:0.75rem;margin-bottom:2px">📅 IPO D-2~D-1주</div>
-                <div>기관투자자 청약 자금 확보를 위해 기존 포지션 대량 청산</div>
-              </div>
-              <div style="background:var(--surface2);border-radius:6px;padding:8px 10px">
-                <div style="color:var(--text);font-weight:600;font-size:0.75rem;margin-bottom:2px">📅 상장 당일</div>
-                <div>유동성 쏠림 → 나스닥·코스피 동반 변동성 확대</div>
-              </div>
-              <div style="background:var(--surface2);border-radius:6px;padding:8px 10px">
-                <div style="color:var(--text);font-weight:600;font-size:0.75rem;margin-bottom:2px">📅 락업 해제일</div>
-                <div>내부자 보호예수 종료 → 대규모 매도 압력</div>
-              </div>
-            </div>
-          </div>
+          <div class="sidebar-title" data-i18n="ev_profit_pattern">💡 수익실현 패턴</div>
+          <div id="evProfitPatternBody" style="font-size:0.78rem;color:var(--muted);line-height:1.6"></div>
         </div>
         <div class="sidebar-card">
-          <div class="sidebar-title">🌏 영향 자산군</div>
+          <div class="sidebar-title" data-i18n="ev_affected_assets">🌏 영향 자산군</div>
           <div id="affectedAssets"></div>
         </div>
       </div>
@@ -1244,41 +1228,41 @@
       <input type="text" id="reSearchInput" placeholder="키워드로 검색... (예: 아파트, 강남, 청약, 금리)" oninput="reFilterAndRender()" />
     </div>
     <div class="filter-section">
-      <span class="filter-label">필터:</span>
-      <button class="filter-btn active" data-refilter="all"   onclick="reSetFilter(this,'all')">전체</button>
-      <button class="filter-btn" data-refilter="price"        onclick="reSetFilter(this,'price')">📈 가격동향</button>
-      <button class="filter-btn" data-refilter="policy"       onclick="reSetFilter(this,'policy')">🏛️ 정책/규제</button>
-      <button class="filter-btn" data-refilter="apt"          onclick="reSetFilter(this,'apt')">🏢 아파트</button>
-      <button class="filter-btn" data-refilter="jeonse"       onclick="reSetFilter(this,'jeonse')">🔑 전세/월세</button>
-      <button class="filter-btn" data-refilter="cheongak"     onclick="reSetFilter(this,'cheongak')">📋 청약/분양</button>
-      <button class="filter-btn" data-refilter="rebuild"      onclick="reSetFilter(this,'rebuild')">🔨 재건축/재개발</button>
-      <button class="filter-btn" data-refilter="seoul"        onclick="reSetFilter(this,'seoul')">🗺️ 서울/수도권</button>
+      <span class="filter-label" data-i18n="filter_label">필터:</span>
+      <button class="filter-btn active" data-refilter="all"   onclick="reSetFilter(this,'all')" data-i18n="filter_all">전체</button>
+      <button class="filter-btn" data-refilter="price"        onclick="reSetFilter(this,'price')" data-i18n="re_price">📈 가격동향</button>
+      <button class="filter-btn" data-refilter="policy"       onclick="reSetFilter(this,'policy')" data-i18n="re_policy">🏛️ 정책/규제</button>
+      <button class="filter-btn" data-refilter="apt"          onclick="reSetFilter(this,'apt')" data-i18n="re_apt">🏢 아파트</button>
+      <button class="filter-btn" data-refilter="jeonse"       onclick="reSetFilter(this,'jeonse')" data-i18n="re_jeonse">🔑 전세/월세</button>
+      <button class="filter-btn" data-refilter="cheongak"     onclick="reSetFilter(this,'cheongak')" data-i18n="re_cheongak">📋 청약/분양</button>
+      <button class="filter-btn" data-refilter="rebuild"      onclick="reSetFilter(this,'rebuild')" data-i18n="re_rebuild">🔨 재건축/재개발</button>
+      <button class="filter-btn" data-refilter="seoul"        onclick="reSetFilter(this,'seoul')" data-i18n="re_seoul">🗺️ 서울/수도권</button>
     </div>
     <div class="content-grid">
       <div>
         <div id="reNewsList" class="news-list">
           <div class="ddu-state loading">
             <img src="/logo.png" alt="뚜" />
-            <div class="ddu-msg">뚜가 부동산 뉴스를 수집하고 있어요</div>
+            <div class="ddu-msg" data-i18n="loading_re">뚜가 부동산 뉴스를 수집하고 있어요</div>
             <div class="ddu-dots"><span></span><span></span><span></span></div>
           </div>
         </div>
       </div>
       <div class="sidebar">
         <div class="sidebar-card">
-          <div class="sidebar-title">📊 주요 동향 TOP 5</div>
-          <div id="reCauseList"><div style="color:var(--muted);font-size:0.8rem">분석 중...</div></div>
+          <div class="sidebar-title" data-i18n="sidebar_trend_top5">📊 주요 동향 TOP 5</div>
+          <div id="reCauseList"><div style="color:var(--muted);font-size:0.8rem" data-i18n="analyzing">분석 중...</div></div>
         </div>
         <div class="sidebar-card">
-          <div class="sidebar-title">🔑 주요 키워드</div>
-          <div class="keyword-cloud" id="reKeywordCloud"><div style="color:var(--muted);font-size:0.8rem">분석 중...</div></div>
+          <div class="sidebar-title" data-i18n="sidebar_keywords">🔑 주요 키워드</div>
+          <div class="keyword-cloud" id="reKeywordCloud"><div style="color:var(--muted);font-size:0.8rem" data-i18n="analyzing">분석 중...</div></div>
         </div>
         <div class="sidebar-card">
-          <div class="sidebar-title">📡 뉴스 소스 상태</div>
-          <div class="source-list" id="reSourceList"><div style="color:var(--muted);font-size:0.8rem">로딩 중...</div></div>
+          <div class="sidebar-title" data-i18n="sidebar_sources">📡 뉴스 소스 상태</div>
+          <div class="source-list" id="reSourceList"><div style="color:var(--muted);font-size:0.8rem" data-i18n="loading">로딩 중...</div></div>
         </div>
         <div class="sidebar-card">
-          <div class="sidebar-title">🔗 빠른 링크</div>
+          <div class="sidebar-title" data-i18n="sidebar_links">🔗 빠른 링크</div>
           <div style="display:flex;flex-direction:column;gap:8px">
             <a href="https://www.r114.com/" target="_blank" style="color:var(--muted);font-size:0.8rem;text-decoration:none">🏠 부동산114</a>
             <a href="https://land.naver.com/" target="_blank" style="color:var(--muted);font-size:0.8rem;text-decoration:none">🏠 네이버 부동산</a>
@@ -1297,7 +1281,7 @@
     <div class="katarina-header">
       <div>
         <div class="katarina-logo">⚡ KATARINA</div>
-        <div class="katarina-desc">뉴스·코인·부동산·이벤트 통합 검색</div>
+        <div class="katarina-desc" data-i18n="kata_desc">뉴스·코인·부동산·이벤트 통합 검색</div>
       </div>
       <button class="katarina-close" onclick="kataClose()">✕</button>
     </div>
@@ -1305,6 +1289,7 @@
       <span class="katarina-search-icon">🔍</span>
       <input class="katarina-input" id="kataInput" type="text"
         placeholder="검색어를 입력하세요 (예: 금리인상, 강남 아파트, 엔비디아...)"
+        data-i18n-placeholder="kata_placeholder"
         oninput="kataSearch()" />
       <div class="katarina-hint" id="kataHint">
         <span class="katarina-chip" onclick="kataFill('금리인상')">금리인상</span>
@@ -1369,6 +1354,26 @@ const TRANSLATIONS = {
     loading_news: '뚜가 뉴스를 수집하고 있어요',
     loading_coin: '뚜가 코인 뉴스를 수집하고 있어요',
     loading_re: '뚜가 부동산 뉴스를 수집하고 있어요',
+    // events sidebar
+    ev_shock_index: '⚡ 시장 충격 지수', ev_profit_pattern: '💡 수익실현 패턴', ev_affected_assets: '🌏 영향 자산군',
+    sidebar_trend_top5: '📊 주요 동향 TOP 5', sidebar_links: '🔗 빠른 링크',
+    // realestate filters
+    re_price: '📈 가격동향', re_policy: '🏛️ 정책/규제', re_apt: '🏢 아파트',
+    re_jeonse: '🔑 전세/월세', re_cheongak: '📋 청약/분양', re_rebuild: '🔨 재건축/재개발', re_seoul: '🗺️ 서울/수도권',
+    // coin filters
+    coin_btc: '₿ 비트코인', coin_eth: 'Ξ 이더리움', coin_alt: '🪙 알트코인',
+    coin_reg: '🏛️ 규제/정책', coin_etf: '📊 ETF/기관', coin_defi: '⚙️ DeFi/NFT',
+    coin_bigevents: '🚀 코인 빅이벤트', coin_feargreed: '😨 공포·탐욕 지수',
+    // katarina
+    kata_desc: '뉴스·코인·부동산·이벤트 통합 검색',
+    kata_placeholder: '검색어를 입력하세요 (예: 금리인상, 강남 아파트, 엔비디아...)',
+    kata_empty: '검색어를 입력하면 모든 탭에서 결과를 찾아드립니다.',
+    // source status
+    source_ok: '연결됨', source_fail: '실패',
+    // news tab quick links
+    sidebar_quicklinks_finance: '📈 Yahoo Finance Markets',
+    // news card tags
+    tag_high: '🔴 주요', tag_med: '🟠 주목',
   },
   en: {
     updating: 'Updating...', refresh: 'Refresh', unified_search: 'Search All',
@@ -1386,10 +1391,28 @@ const TRANSLATIONS = {
     sidebar_sources: '📡 News Source Status',
     search_placeholder: 'Search news... (e.g. rate, tariff, war, Fed)',
     coin_search_placeholder: 'Search... (e.g. Bitcoin, Ethereum, ETF, halving)',
-    re_search_placeholder: 'Search... (e.g. apartment, Gangnam, subscription)',
+    re_search_placeholder: 'Search... (e.g. apartment, Gangnam, subscription, rate)',
     loading_news: 'Collecting news articles...',
     loading_coin: 'Collecting crypto news...',
     loading_re: 'Collecting real estate news...',
+    // events sidebar
+    ev_shock_index: '⚡ Market Shock Index', ev_profit_pattern: '💡 Profit-Taking Patterns', ev_affected_assets: '🌏 Affected Assets',
+    sidebar_trend_top5: '📊 Top 5 Trends', sidebar_links: '🔗 Quick Links',
+    // realestate filters
+    re_price: '📈 Price Trends', re_policy: '🏛️ Policy/Regulation', re_apt: '🏢 Apartments',
+    re_jeonse: '🔑 Jeonse/Monthly', re_cheongak: '📋 Pre-sale', re_rebuild: '🔨 Redevelopment', re_seoul: '🗺️ Seoul/Capital',
+    // coin filters
+    coin_btc: '₿ Bitcoin', coin_eth: 'Ξ Ethereum', coin_alt: '🪙 Altcoins',
+    coin_reg: '🏛️ Regulation', coin_etf: '📊 ETF/Institutional', coin_defi: '⚙️ DeFi/NFT',
+    coin_bigevents: '🚀 Crypto Big Events', coin_feargreed: '😨 Fear & Greed Index',
+    // katarina
+    kata_desc: 'Unified search: News · Crypto · Real Estate · Events',
+    kata_placeholder: 'Search anything (e.g. rate hike, Bitcoin, IPO...)',
+    kata_empty: 'Enter a keyword to search across all tabs.',
+    // source status
+    source_ok: 'Connected', source_fail: 'Failed',
+    // news card tags
+    tag_high: '🔴 High', tag_med: '🟠 Notable',
   }
 };
 
@@ -1398,6 +1421,7 @@ let currentLang = localStorage.getItem('lang') || 'ko';
 function t(key) { return (TRANSLATIONS[currentLang] || TRANSLATIONS.ko)[key] || key; }
 
 function applyLang() {
+  const isEn = currentLang === 'en';
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     el.textContent = t(key);
@@ -1405,8 +1429,52 @@ function applyLang() {
   document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
     el.placeholder = t(el.getAttribute('data-i18n-placeholder'));
   });
-  document.getElementById('langBtn').textContent = currentLang === 'ko' ? 'EN' : '한';
-  document.documentElement.lang = currentLang === 'ko' ? 'ko' : 'en';
+  document.getElementById('langBtn').textContent = isEn ? '한' : 'EN';
+  document.documentElement.lang = isEn ? 'en' : 'ko';
+
+  // Legend box
+  const lb = document.getElementById('eventsLegendBox');
+  if (lb) lb.innerHTML = isEn
+    ? '<strong>What are Major Events?</strong> — These are mega-events that trigger <strong>capital flows</strong>, not just bad news. Massive IPOs, M&As, and policy shifts cause investors worldwide to liquidate existing positions and reallocate funds, dragging down unrelated assets. We analyze the <strong>market shock mechanism</strong> of each event.'
+    : '<strong>대형 이벤트란?</strong> — 단순 악재가 아니라 <strong>자금 이동</strong>을 유발하는 초대형 사건들입니다. 초대형 IPO·M&A·정책 전환 등은 전 세계 투자자가 기존 포지션을 청산하거나 자금을 재배치하면서 무관한 자산까지 동반 하락시킬 수 있습니다. 각 이벤트의 <strong>시장 충격 메커니즘</strong>을 분석합니다.';
+
+  // Profit-taking patterns
+  const pp = document.getElementById('evProfitPatternBody');
+  if (pp) pp.innerHTML = isEn ? `
+    <p style="margin-bottom:8px">Common patterns around mega events:</p>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <div style="background:var(--surface2);border-radius:6px;padding:8px 10px">
+        <div style="color:var(--text);font-weight:600;font-size:0.75rem;margin-bottom:2px">📅 IPO D-2 ~ D-1 week</div>
+        <div>Institutions liquidate existing positions to fund IPO subscriptions</div>
+      </div>
+      <div style="background:var(--surface2);border-radius:6px;padding:8px 10px">
+        <div style="color:var(--text);font-weight:600;font-size:0.75rem;margin-bottom:2px">📅 Listing Day</div>
+        <div>Liquidity concentration → amplified volatility across Nasdaq & KOSPI</div>
+      </div>
+      <div style="background:var(--surface2);border-radius:6px;padding:8px 10px">
+        <div style="color:var(--text);font-weight:600;font-size:0.75rem;margin-bottom:2px">📅 Lock-up Expiry</div>
+        <div>Insider lock-up ends → large-scale selling pressure</div>
+      </div>
+    </div>` : `
+    <p style="margin-bottom:8px">초대형 이벤트 전후로 자주 나타나는 패턴:</p>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <div style="background:var(--surface2);border-radius:6px;padding:8px 10px">
+        <div style="color:var(--text);font-weight:600;font-size:0.75rem;margin-bottom:2px">📅 IPO D-2~D-1주</div>
+        <div>기관투자자 청약 자금 확보를 위해 기존 포지션 대량 청산</div>
+      </div>
+      <div style="background:var(--surface2);border-radius:6px;padding:8px 10px">
+        <div style="color:var(--text);font-weight:600;font-size:0.75rem;margin-bottom:2px">📅 상장 당일</div>
+        <div>유동성 쏠림 → 나스닥·코스피 동반 변동성 확대</div>
+      </div>
+      <div style="background:var(--surface2);border-radius:6px;padding:8px 10px">
+        <div style="color:var(--text);font-weight:600;font-size:0.75rem;margin-bottom:2px">📅 락업 해제일</div>
+        <div>내부자 보호예수 종료 → 대규모 매도 압력</div>
+      </div>
+    </div>`;
+
+  // KATARINA empty state
+  const ke = document.querySelector('.katarina-empty');
+  if (ke) ke.textContent = t('kata_empty');
 }
 
 function toggleLang() {
@@ -1414,6 +1482,7 @@ function toggleLang() {
   localStorage.setItem('lang', currentLang);
   applyLang();
   renderEvents();
+  renderCoinEvents();
 }
 
 // ─── CONFIG ───────────────────────────────────────────────────────────────────
@@ -1801,7 +1870,7 @@ function renderSourceStatus() {
     return;
   }
   document.getElementById('sourceList').innerHTML = entries.map(([name, st]) => {
-    const badge = st === 'ok' ? '연결됨' : st === 'fail' ? '실패' : '로딩...';
+    const badge = st === 'ok' ? t('source_ok') : st === 'fail' ? t('source_fail') : t('loading');
     return `<div class="source-item">
       <span class="source-name">${name}</span>
       <span class="source-badge ${st}">${badge}</span>
@@ -2590,27 +2659,48 @@ const COIN_CATS = {
 };
 
 const COIN_EVENTS = [
-  { name: '비트코인 4차 반감기', date: '2024-04-20', magnitude: 92, statusLabel: '완료', type: 'past',
+  { name: '비트코인 4차 반감기', name_en: 'Bitcoin 4th Halving', date: '2024-04-20', magnitude: 92,
+    statusLabel: '완료', statusLabel_en: 'Done', type: 'past',
     desc: '비트코인 블록 보상 6.25→3.125 BTC 감소. 역사적으로 반감기 후 12~18개월 강세장.',
-    mechanisms: ['공급 감소','채굴자 수익','장기 가격 상승 압력'] },
-  { name: '미국 비트코인 현물 ETF 승인', date: '2024-01-10', magnitude: 95, statusLabel: '완료', type: 'past',
+    desc_en: 'Block reward cut from 6.25→3.125 BTC. Historically, bull markets follow within 12–18 months.',
+    mechanisms: ['공급 감소','채굴자 수익','장기 가격 상승 압력'],
+    mechanisms_en: ['Supply reduction','Miner revenue impact','Long-term price pressure'] },
+  { name: '미국 비트코인 현물 ETF 승인', name_en: 'US Bitcoin Spot ETF Approved', date: '2024-01-10', magnitude: 95,
+    statusLabel: '완료', statusLabel_en: 'Done', type: 'past',
     desc: 'SEC가 블랙록·피델리티 등 11개 비트코인 현물 ETF 동시 승인. 기관 자금 유입 가속화.',
-    mechanisms: ['기관 수요 급증','유동성 확대','가격 상승 촉매'] },
-  { name: '미국 이더리움 현물 ETF 승인', date: '2024-05-23', magnitude: 80, statusLabel: '완료', type: 'past',
+    desc_en: 'SEC simultaneously approved 11 Bitcoin spot ETFs incl. BlackRock & Fidelity. Institutional inflows accelerated.',
+    mechanisms: ['기관 수요 급증','유동성 확대','가격 상승 촉매'],
+    mechanisms_en: ['Institutional demand surge','Liquidity expansion','Price catalyst'] },
+  { name: '미국 이더리움 현물 ETF 승인', name_en: 'US Ethereum Spot ETF Approved', date: '2024-05-23', magnitude: 80,
+    statusLabel: '완료', statusLabel_en: 'Done', type: 'past',
     desc: 'SEC가 이더리움 현물 ETF 승인. ETH 가격과 DeFi 생태계 성장 기대.',
-    mechanisms: ['ETH 수요 증가','기관 진입','DeFi 성장'] },
-  { name: '미국 BTC 전략적 준비금 검토', date: '2025-03-06', magnitude: 85, statusLabel: '진행중', type: 'ongoing',
+    desc_en: 'SEC approved Ethereum spot ETF. Expected to boost ETH price and DeFi ecosystem growth.',
+    mechanisms: ['ETH 수요 증가','기관 진입','DeFi 성장'],
+    mechanisms_en: ['ETH demand growth','Institutional entry','DeFi expansion'] },
+  { name: '미국 BTC 전략적 준비금 검토', name_en: 'US BTC Strategic Reserve', date: '2025-03-06', magnitude: 85,
+    statusLabel: '진행중', statusLabel_en: 'Ongoing', type: 'ongoing',
     desc: '트럼프 행정부가 국가 전략 비트코인 준비금 설립 행정명령 서명. 각국 영향 주목.',
-    mechanisms: ['국가 보유 수요','글로벌 경쟁','가격 하방 지지'] },
-  { name: '이더리움 Pectra 업그레이드', date: '2025-05-07', magnitude: 70, statusLabel: '완료', type: 'past',
+    desc_en: 'Trump administration signed executive order to establish a national Bitcoin strategic reserve. Global impact watched closely.',
+    mechanisms: ['국가 보유 수요','글로벌 경쟁','가격 하방 지지'],
+    mechanisms_en: ['Sovereign demand','Global competition','Price floor support'] },
+  { name: '이더리움 Pectra 업그레이드', name_en: 'Ethereum Pectra Upgrade', date: '2025-05-07', magnitude: 70,
+    statusLabel: '완료', statusLabel_en: 'Done', type: 'past',
     desc: '이더리움 Pectra 하드포크. 계정 추상화·스테이킹 한도 확대·L2 확장성 개선.',
-    mechanisms: ['확장성 향상','가스비 감소','UX 개선'] },
-  { name: '글로벌 크립토 규제 통합', date: '2025-12-31', magnitude: 75, statusLabel: '예정', type: 'upcoming',
+    desc_en: 'Ethereum Pectra hard fork. Account abstraction, expanded staking limits, improved L2 scalability.',
+    mechanisms: ['확장성 향상','가스비 감소','UX 개선'],
+    mechanisms_en: ['Scalability boost','Lower gas fees','UX improvement'] },
+  { name: '글로벌 크립토 규제 통합', name_en: 'Global Crypto Regulation Framework', date: '2025-12-31', magnitude: 75,
+    statusLabel: '예정', statusLabel_en: 'Upcoming', type: 'upcoming',
     desc: 'EU MiCA 전면 시행, 미국 FIT21 법안 등 주요국 규제 틀 완성. 제도화 가속.',
-    mechanisms: ['규제 명확성','기관 진입 허들 낮춤','스테이블코인 규제'] },
-  { name: '비트코인 5차 반감기 (예상)', date: '2028-03-01', magnitude: 88, statusLabel: '예정', type: 'upcoming',
+    desc_en: 'EU MiCA full enforcement, US FIT21 bill and other major-country frameworks finalize. Institutionalization accelerates.',
+    mechanisms: ['규제 명확성','기관 진입 허들 낮춤','스테이블코인 규제'],
+    mechanisms_en: ['Regulatory clarity','Lower institutional barriers','Stablecoin rules'] },
+  { name: '비트코인 5차 반감기 (예상)', name_en: 'Bitcoin 5th Halving (Expected)', date: '2028-03-01', magnitude: 88,
+    statusLabel: '예정', statusLabel_en: 'Upcoming', type: 'upcoming',
     desc: '비트코인 5차 반감기 예상. 블록 보상 3.125→1.5625 BTC로 감소.',
-    mechanisms: ['공급 추가 감소','채굴 난이도','장기 희소성'] },
+    desc_en: 'Expected 5th Bitcoin halving. Block reward drops from 3.125→1.5625 BTC.',
+    mechanisms: ['공급 추가 감소','채굴 난이도','장기 희소성'],
+    mechanisms_en: ['Further supply cut','Mining difficulty','Long-term scarcity'] },
 ];
 
 let coinAllArticles = [];
@@ -2781,7 +2871,7 @@ function coinRenderSourceStatus() {
   document.getElementById('coinSourceList').innerHTML = Object.entries(coinSourceStatus).map(([name, st]) =>
     `<div class="source-item">
       <span class="source-name">${name}</span>
-      <span class="source-badge ${st}">${st==='ok'?'연결됨':'실패'}</span>
+      <span class="source-badge ${st}">${st==='ok'?t('source_ok'):t('source_fail')}</span>
     </div>`
   ).join('');
 }
@@ -2789,19 +2879,24 @@ function coinRenderSourceStatus() {
 function renderCoinEvents() {
   const el = document.getElementById('coinEventList');
   if (!el) return;
+  const isEn = currentLang === 'en';
   const sorted = [...COIN_EVENTS].sort((a,b) => b.magnitude - a.magnitude);
   el.innerHTML = sorted.map(ev => {
     const typeColor = ev.type === 'past' ? 'gray' : ev.type === 'ongoing' ? '' : 'orange';
-    const typeLabel = ev.type === 'past' ? '완료' : ev.type === 'ongoing' ? '진행중' : '예정';
+    const statusLabel = isEn ? (ev.statusLabel_en || ev.statusLabel) : ev.statusLabel;
+    const name = isEn ? (ev.name_en || ev.name) : ev.name;
+    const desc = isEn ? (ev.desc_en || ev.desc) : ev.desc;
+    const mechs = isEn ? (ev.mechanisms_en || ev.mechanisms) : ev.mechanisms;
+    const shockLabel = isEn ? `Shock ${ev.magnitude}/100` : `충격 ${ev.magnitude}/100`;
     return `<div class="event-mini-card">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-        <span style="font-weight:600;font-size:0.82rem">${ev.name}</span>
-        <span class="cause-rank ${typeColor}" style="font-size:0.7rem;min-width:40px;text-align:center">${typeLabel}</span>
+        <span style="font-weight:600;font-size:0.82rem">${name}</span>
+        <span class="cause-rank ${typeColor}" style="font-size:0.7rem;min-width:40px;text-align:center">${statusLabel}</span>
       </div>
-      <div style="color:var(--muted);font-size:0.75rem;margin-bottom:4px">${ev.desc.substring(0,80)}...</div>
+      <div style="color:var(--muted);font-size:0.75rem;margin-bottom:4px">${desc.substring(0,90)}...</div>
       <div style="display:flex;gap:4px;flex-wrap:wrap">
-        ${ev.mechanisms.map(m=>`<span class="tag category" style="font-size:0.68rem">${m}</span>`).join('')}
-        <span class="tag" style="font-size:0.68rem;color:var(--accent)">충격 ${ev.magnitude}/100</span>
+        ${mechs.map(m=>`<span class="tag category" style="font-size:0.68rem">${m}</span>`).join('')}
+        <span class="tag" style="font-size:0.68rem;color:var(--accent)">${shockLabel}</span>
       </div>
     </div>`;
   }).join('');
