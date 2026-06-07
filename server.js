@@ -171,14 +171,22 @@ app.get('/api/realestate', async (req, res) => {
   res.json({ sources });
 });
 
-// ── 디버그: 환경변수 확인 (임시)
-app.get('/api/debug-env', (req, res) => {
-  res.json({
-    GEMINI_set: !!process.env.GEMINI,
-    GEMINI_KEY_set: !!process.env.GEMINI_KEY,
-    GEMINI_API_KEY_set: !!process.env.GEMINI_API_KEY,
-    envKeys: Object.keys(process.env).filter(k => k.includes('GEM') || k.includes('gem')),
-  });
+// ── 디버그: Gemini 직접 테스트
+app.get('/api/debug-gemini', async (req, res) => {
+  const apiKey = process.env.GEMINI;
+  if (!apiKey) return res.json({ error: 'key not set' });
+  try {
+    const r = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
+      { method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ contents: [{ parts: [{ text: 'Say hello in JSON: {"msg":"hello"}' }] }] }),
+        signal: AbortSignal.timeout(10000) }
+    );
+    const data = await r.json();
+    res.json({ status: r.status, data });
+  } catch(e) {
+    res.json({ error: e.message });
+  }
 });
 
 // ── GEMINI 팩트체크 API
