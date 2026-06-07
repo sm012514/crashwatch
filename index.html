@@ -1497,13 +1497,15 @@ function applyLang() {
   const fd = document.getElementById('footerDisclaimer');
   if (fd) fd.innerHTML = isEn
     ? `⚠️ <strong style="color:var(--text)">Investment Disclaimer</strong><br>
-       This site is an information service that collects and analyzes publicly available news feeds.<br>
-       It is not intended as investment advice or stock recommendations. All information is for reference only.<br>
-       Investment decisions and responsibility rest solely with the investor. Principal loss may occur.`
+       This site is a <strong style="color:var(--text)">news aggregation and reference service only</strong> — it does <u>not</u> provide investment advice, stock recommendations, or trading signals.<br>
+       AI-generated analysis (risk scores, market factor summaries) is for informational purposes only and may not be accurate.<br>
+       All investment decisions and any resulting gains or losses are the sole responsibility of the investor. Principal loss may occur.<br>
+       <span style="color:#475569">This service is not registered as a financial investment advisory business.</span>`
     : `⚠️ <strong style="color:var(--text)">투자 유의사항</strong><br>
-       본 사이트는 공개된 뉴스 피드를 수집·분석하여 제공하는 정보 제공 서비스입니다.<br>
-       투자 권유 또는 종목 추천을 목적으로 하지 않으며, 제공되는 모든 정보는 참고용으로만 활용하시기 바랍니다.<br>
-       투자의 최종 판단과 책임은 투자자 본인에게 있습니다. 금융투자상품은 원금 손실이 발생할 수 있습니다.`;
+       본 사이트는 <strong style="color:var(--text)">뉴스 수집·참고 정보 제공 서비스</strong>로, 투자 권유·종목 추천·매매 신호를 제공하지 않습니다.<br>
+       AI 분석(위험도 점수, 시장 요인 요약 등)은 참고용이며 정확성을 보장하지 않습니다.<br>
+       투자의 최종 판단과 손익에 대한 책임은 전적으로 투자자 본인에게 있습니다. 금융투자상품은 원금 손실이 발생할 수 있습니다.<br>
+       <span style="color:#475569">본 서비스는 자본시장법상 투자자문업·투자일임업 등록 사업자가 아닙니다.</span>`;
 
   const fl = document.getElementById('footerLinks');
   if (fl) fl.innerHTML = `© 2025 DDU Market News &nbsp;·&nbsp;
