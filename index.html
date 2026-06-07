@@ -104,6 +104,10 @@
     .refresh-btn.spinning {
       animation: spin 0.7s linear infinite;
     }
+    .pinned-card {
+      border-left: 3px solid #f59e0b !important;
+      background: rgba(245,158,11,0.05) !important;
+    }
     .fc-btn {
       background: none; border: 1px solid var(--border); border-radius: 5px;
       color: var(--muted); cursor: pointer; font-size: 0.75rem; padding: 2px 6px;
@@ -1108,6 +1112,14 @@
       <button class="filter-btn" data-filter="fed" onclick="setFilter(this,'fed')" data-i18n="filter_fed">🏦 중앙은행</button>
     </div>
 
+    <!-- 📌 핵심 뉴스 -->
+    <div id="pinnedSection" style="margin-bottom:16px;display:none">
+      <div style="font-size:0.8rem;font-weight:700;color:#f59e0b;margin-bottom:8px;letter-spacing:0.05em">
+        📌 <span data-i18n="pinned_label">핵심 뉴스</span>
+      </div>
+      <div id="pinnedList" class="news-list"></div>
+    </div>
+
     <div class="content-grid">
       <div>
         <div id="newsList" class="news-list">
@@ -1353,7 +1365,7 @@ const TRANSLATIONS = {
     stat_news_label: '수집된 뉴스', stat_news_sub: '전체 기사',
     stat_high_label: '고위험 기사', stat_high_sub: '시장 충격 가능성 높음',
     stat_keyword_label: '핵심 시장 요인', stat_sources_label: '뉴스 소스', stat_sources_sub: '활성 피드',
-    analyzing: '분석 중...', loading: '로딩 중...',
+    analyzing: '분석 중...', loading: '로딩 중...', pinned_label: '핵심 뉴스',
     filter_label: '필터:', event_filter_label: '분류:',
     filter_all: '전체', filter_kr: '🇰🇷 국내', filter_en: '🌐 해외',
     filter_high: '🔴 고위험', filter_medium: '🟠 중위험', filter_macro: '📊 거시경제',
@@ -1396,7 +1408,7 @@ const TRANSLATIONS = {
     stat_news_label: 'Articles', stat_news_sub: 'Total collected',
     stat_high_label: 'High Risk', stat_high_sub: 'Potential market shock',
     stat_keyword_label: 'Key Market Factor', stat_sources_label: 'News Sources', stat_sources_sub: 'Active feeds',
-    analyzing: 'Analyzing...', loading: 'Loading...',
+    analyzing: 'Analyzing...', loading: 'Loading...', pinned_label: 'Key News',
     filter_label: 'Filter:', event_filter_label: 'Category:',
     filter_all: 'All', filter_kr: '🇰🇷 Korean', filter_en: '🌐 Global',
     filter_high: '🔴 High Risk', filter_medium: '🟠 Medium Risk', filter_macro: '📊 Macro',
@@ -1765,12 +1777,42 @@ function processRawNews(raw) {
     .sort((a, b) => b.score - a.score || new Date(b.pubDate) - new Date(a.pubDate));
 }
 
+function renderPinned() {
+  const section = document.getElementById('pinnedSection');
+  const list = document.getElementById('pinnedList');
+  if (!section || !list) return;
+
+  // 전체 기사 중 점수 상위 5개 (시간 무관)
+  const top5 = [...allArticles].sort((a, b) => b.score - a.score).slice(0, 5);
+  if (!top5.length) { section.style.display = 'none'; return; }
+
+  section.style.display = 'block';
+  list.innerHTML = top5.map(a => {
+    const safeLink = /^https?:\/\//.test(a.link) ? a.link : '#';
+    const time = a.pubDate ? timeAgo(new Date(a.pubDate)) : '';
+    const tags = [];
+    if (a.impact === 'high') tags.push(`<span class="tag impact-high">${t('filter_high')}</span>`);
+    else if (a.impact === 'medium') tags.push(`<span class="tag impact-med">${t('filter_medium')}</span>`);
+    const pt = getPointTag(a);
+    if (pt) tags.push(`<span class="tag point">💡 ${pt}</span>`);
+    return `<div class="news-card pinned-card" onclick="window.open('${safeLink}','_blank')">
+      <div class="card-header">
+        <span class="card-source">${a.sourceName}</span>
+        <span class="card-time">${time}</span>
+      </div>
+      <a class="card-title" href="${safeLink}" target="_blank" onclick="event.stopPropagation()">${a.title || ''}</a>
+      <div class="card-tags">${tags.join('')}</div>
+    </div>`;
+  }).join('');
+}
+
 function applyNewsData(articles) {
   allArticles = articles;
   const locale = currentLang === 'en' ? 'en-US' : 'ko-KR';
   const timeLabel = currentLang === 'en' ? 'Updated: ' : '업데이트: ';
   document.getElementById('lastUpdated').textContent = timeLabel + new Date().toLocaleTimeString(locale);
   updateStats();
+  renderPinned();
   filterAndRender();
   updateCauses();
   updateKeywords();
