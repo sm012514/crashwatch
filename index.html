@@ -1663,7 +1663,7 @@ function getImpactSummary(article) {
 async function loadAllNews() {
   const btn = document.getElementById('refreshBtn');
   btn.disabled = true;
-  btn.textContent = '로딩 중...';
+  btn.textContent = t('loading');
   document.getElementById('newsList').innerHTML = `<div class="ddu-state loading"><img src="/logo.png" alt="뚜"/><div class="ddu-msg">뚜가 뉴스를 수집하고 있어요</div><div class="ddu-dots"><span></span><span></span><span></span></div></div>`;
 
   let raw = [];
@@ -1676,7 +1676,7 @@ async function loadAllNews() {
     }
   } catch (e) {
     document.getElementById('newsList').innerHTML = `<div class="ddu-state"><img src="/logo.png" alt="뚜" style="filter:grayscale(0.5)"/><div class="ddu-msg">뚜가 연결에 실패했어요 😿</div><div class="ddu-sub">잠시 후 새로고침을 눌러주세요</div></div>`;
-    btn.disabled = false; btn.textContent = '새로고침';
+    btn.disabled = false; btn.textContent = t('refresh');
     renderSourceStatus();
     return;
   }
