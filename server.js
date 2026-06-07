@@ -168,6 +168,16 @@ app.get('/api/realestate', async (req, res) => {
   res.json({ sources });
 });
 
+// ── 디버그: 환경변수 확인 (임시)
+app.get('/api/debug-env', (req, res) => {
+  res.json({
+    GEMINI_set: !!process.env.GEMINI,
+    GEMINI_KEY_set: !!process.env.GEMINI_KEY,
+    GEMINI_API_KEY_set: !!process.env.GEMINI_API_KEY,
+    envKeys: Object.keys(process.env).filter(k => k.includes('GEM') || k.includes('gem')),
+  });
+});
+
 // ── GEMINI 팩트체크 API
 app.use(express.json());
 app.post('/api/factcheck', async (req, res) => {
