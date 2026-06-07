@@ -219,6 +219,7 @@
       .logo { font-size: 1rem; gap: 8px; }
       .last-updated { display: none; }
       .katarina-btn { padding: 6px 10px; font-size: 0.75rem; }
+      .lang-btn { padding: 5px 9px; font-size: 0.72rem; }
       .katarina-btn span { display: none; }
       .refresh-btn { padding: 6px 10px; font-size: 0.75rem; }
 
@@ -962,6 +963,19 @@
       transition: background 0.15s;
     }
     .katarina-chip:hover { background: rgba(99,102,241,0.2); }
+    .lang-btn {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+      letter-spacing: 0.05em;
+    }
+    .lang-btn:hover { border-color: var(--accent); color: var(--text); }
     .katarina-count {
       display: inline-flex;
       align-items: center;
@@ -983,9 +997,10 @@
     <div><span>MARKET</span> NEWS</div>
   </div>
   <div class="header-right">
-    <span class="last-updated" id="lastUpdated">업데이트 중...</span>
-    <button class="katarina-btn" onclick="kataOpen()">⚡ KATARINA <span style="font-size:0.7rem;font-weight:400;opacity:0.8;margin-left:2px">통합검색</span></button>
-    <button class="refresh-btn" id="refreshBtn" onclick="loadAllNews()">새로고침</button>
+    <span class="last-updated" id="lastUpdated" data-i18n="updating">업데이트 중...</span>
+    <button class="lang-btn" id="langBtn" onclick="toggleLang()">EN</button>
+    <button class="katarina-btn" onclick="kataOpen()">⚡ KATARINA <span style="font-size:0.7rem;font-weight:400;opacity:0.8;margin-left:2px" data-i18n="unified_search">통합검색</span></button>
+    <button class="refresh-btn" id="refreshBtn" onclick="loadAllNews()" data-i18n="refresh">새로고침</button>
   </div>
 </header>
 
@@ -1011,33 +1026,33 @@
   <!-- Stats -->
   <div class="stats-grid">
     <div class="stat-card">
-      <div class="stat-label">수집된 뉴스</div>
+      <div class="stat-label" data-i18n="stat_news_label">수집된 뉴스</div>
       <div class="stat-value red" id="statTotal">—</div>
-      <div class="stat-sub">전체 기사</div>
+      <div class="stat-sub" data-i18n="stat_news_sub">전체 기사</div>
     </div>
     <div class="stat-card">
-      <div class="stat-label">고위험 기사</div>
+      <div class="stat-label" data-i18n="stat_high_label">고위험 기사</div>
       <div class="stat-value red" id="statHigh">—</div>
-      <div class="stat-sub">시장 충격 가능성 높음</div>
+      <div class="stat-sub" data-i18n="stat_high_sub">시장 충격 가능성 높음</div>
     </div>
     <div class="stat-card">
-      <div class="stat-label">핵심 시장 요인</div>
+      <div class="stat-label" data-i18n="stat_keyword_label">핵심 시장 요인</div>
       <div class="stat-value orange" id="statKeyword" style="font-size:1.1rem;word-break:keep-all">—</div>
-      <div class="stat-sub" id="statKeywordSub">분석 중...</div>
+      <div class="stat-sub" id="statKeywordSub" data-i18n="analyzing">분석 중...</div>
     </div>
     <div class="stat-card">
-      <div class="stat-label">뉴스 소스</div>
+      <div class="stat-label" data-i18n="stat_sources_label">뉴스 소스</div>
       <div class="stat-value" id="statSources">—</div>
-      <div class="stat-sub">활성 피드</div>
+      <div class="stat-sub" data-i18n="stat_sources_sub">활성 피드</div>
     </div>
   </div>
 
   <!-- Tabs -->
   <div class="tab-bar">
-    <button class="tab-btn active" onclick="switchTab('events', this)">🚀 대형 이벤트</button>
-    <button class="tab-btn" onclick="switchTab('news', this)">📰 뉴스 분석</button>
-    <button class="tab-btn" onclick="switchTab('realestate', this)">🏠 부동산</button>
-    <button class="tab-btn" onclick="switchTab('coin', this)">₿ 코인</button>
+    <button class="tab-btn active" onclick="switchTab('events', this)" data-i18n="tab_events">🚀 대형 이벤트</button>
+    <button class="tab-btn" onclick="switchTab('news', this)" data-i18n="tab_news">📰 뉴스 분석</button>
+    <button class="tab-btn" onclick="switchTab('realestate', this)" data-i18n="tab_realestate">🏠 부동산</button>
+    <button class="tab-btn" onclick="switchTab('coin', this)" data-i18n="tab_coin">₿ 코인</button>
   </div>
 
   <!-- TAB: 뉴스 분석 -->
@@ -1045,21 +1060,21 @@
     <!-- Search -->
     <div class="search-bar">
       <span class="search-icon">🔍</span>
-      <input type="text" id="searchInput" placeholder="키워드로 뉴스 검색... (예: 금리, 관세, 전쟁, Fed)" oninput="filterAndRender()" />
+      <input type="text" id="searchInput" placeholder="키워드로 뉴스 검색... (예: 금리, 관세, 전쟁, Fed)" oninput="filterAndRender()" data-i18n-placeholder="search_placeholder" />
     </div>
 
     <!-- Filters -->
     <div class="filter-section">
-      <span class="filter-label">필터:</span>
-      <button class="filter-btn active" data-filter="all" onclick="setFilter(this,'all')">전체</button>
-      <button class="filter-btn" data-filter="kr" onclick="setFilter(this,'kr')">🇰🇷 국내</button>
-      <button class="filter-btn" data-filter="en" onclick="setFilter(this,'en')">🌐 해외</button>
-      <button class="filter-btn" data-filter="high" onclick="setFilter(this,'high')">🔴 고위험</button>
-      <button class="filter-btn" data-filter="medium" onclick="setFilter(this,'medium')">🟠 중위험</button>
-      <button class="filter-btn" data-filter="macro" onclick="setFilter(this,'macro')">📊 거시경제</button>
-      <button class="filter-btn" data-filter="trade" onclick="setFilter(this,'trade')">🌐 무역/관세</button>
-      <button class="filter-btn" data-filter="geo" onclick="setFilter(this,'geo')">⚔️ 지정학</button>
-      <button class="filter-btn" data-filter="fed" onclick="setFilter(this,'fed')">🏦 중앙은행</button>
+      <span class="filter-label" data-i18n="filter_label">필터:</span>
+      <button class="filter-btn active" data-filter="all" onclick="setFilter(this,'all')" data-i18n="filter_all">전체</button>
+      <button class="filter-btn" data-filter="kr" onclick="setFilter(this,'kr')" data-i18n="filter_kr">🇰🇷 국내</button>
+      <button class="filter-btn" data-filter="en" onclick="setFilter(this,'en')" data-i18n="filter_en">🌐 해외</button>
+      <button class="filter-btn" data-filter="high" onclick="setFilter(this,'high')" data-i18n="filter_high">🔴 고위험</button>
+      <button class="filter-btn" data-filter="medium" onclick="setFilter(this,'medium')" data-i18n="filter_medium">🟠 중위험</button>
+      <button class="filter-btn" data-filter="macro" onclick="setFilter(this,'macro')" data-i18n="filter_macro">📊 거시경제</button>
+      <button class="filter-btn" data-filter="trade" onclick="setFilter(this,'trade')" data-i18n="filter_trade">🌐 무역/관세</button>
+      <button class="filter-btn" data-filter="geo" onclick="setFilter(this,'geo')" data-i18n="filter_geo">⚔️ 지정학</button>
+      <button class="filter-btn" data-filter="fed" onclick="setFilter(this,'fed')" data-i18n="filter_fed">🏦 중앙은행</button>
     </div>
 
     <div class="content-grid">
@@ -1074,16 +1089,16 @@
       </div>
       <div class="sidebar">
         <div class="sidebar-card">
-          <div class="sidebar-title">🎯 추정 급락 원인 TOP 5</div>
-          <div id="causeList"><div style="color:var(--muted);font-size:0.8rem">분석 중...</div></div>
+          <div class="sidebar-title" data-i18n="sidebar_causes">🎯 추정 급락 원인 TOP 5</div>
+          <div id="causeList"><div style="color:var(--muted);font-size:0.8rem" data-i18n="analyzing">분석 중...</div></div>
         </div>
         <div class="sidebar-card">
-          <div class="sidebar-title">🔑 주요 키워드</div>
-          <div class="keyword-cloud" id="keywordCloud"><div style="color:var(--muted);font-size:0.8rem">분석 중...</div></div>
+          <div class="sidebar-title" data-i18n="sidebar_keywords">🔑 주요 키워드</div>
+          <div class="keyword-cloud" id="keywordCloud"><div style="color:var(--muted);font-size:0.8rem" data-i18n="analyzing">분석 중...</div></div>
         </div>
         <div class="sidebar-card">
-          <div class="sidebar-title">📡 뉴스 소스 상태</div>
-          <div class="source-list" id="sourceList"><div style="color:var(--muted);font-size:0.8rem">로딩 중...</div></div>
+          <div class="sidebar-title" data-i18n="sidebar_sources">📡 뉴스 소스 상태</div>
+          <div class="source-list" id="sourceList"><div style="color:var(--muted);font-size:0.8rem" data-i18n="loading">로딩 중...</div></div>
         </div>
 
 
@@ -1173,13 +1188,13 @@
     </div>
 
     <div class="event-filter-bar">
-      <span class="filter-label">분류:</span>
-      <button class="filter-btn active" onclick="filterEvents('all', this)">전체</button>
-      <button class="filter-btn" onclick="filterEvents('ipo', this)">🚀 IPO/상장</button>
-      <button class="filter-btn" onclick="filterEvents('policy', this)">🏛️ 정책</button>
-      <button class="filter-btn" onclick="filterEvents('macro', this)">📊 거시경제</button>
-      <button class="filter-btn" onclick="filterEvents('geo', this)">⚔️ 지정학</button>
-      <button class="filter-btn" onclick="filterEvents('tech', this)">💻 테크</button>
+      <span class="filter-label" data-i18n="event_filter_label">분류:</span>
+      <button class="filter-btn active" onclick="filterEvents('all', this)" data-i18n="filter_all">전체</button>
+      <button class="filter-btn" onclick="filterEvents('ipo', this)" data-i18n="event_ipo">🚀 IPO/상장</button>
+      <button class="filter-btn" onclick="filterEvents('policy', this)" data-i18n="event_policy">🏛️ 정책</button>
+      <button class="filter-btn" onclick="filterEvents('macro', this)" data-i18n="filter_macro">📊 거시경제</button>
+      <button class="filter-btn" onclick="filterEvents('geo', this)" data-i18n="filter_geo">⚔️ 지정학</button>
+      <button class="filter-btn" onclick="filterEvents('tech', this)" data-i18n="event_tech">💻 테크</button>
     </div>
 
     <div class="content-grid">
@@ -1326,6 +1341,74 @@
 </footer>
 
 <script>
+// ─── i18n ─────────────────────────────────────────────────────────────────────
+const TRANSLATIONS = {
+  ko: {
+    updating: '업데이트 중...', refresh: '새로고침', unified_search: '통합검색',
+    tab_events: '🚀 대형 이벤트', tab_news: '📰 뉴스 분석', tab_realestate: '🏠 부동산', tab_coin: '₿ 코인',
+    stat_news_label: '수집된 뉴스', stat_news_sub: '전체 기사',
+    stat_high_label: '고위험 기사', stat_high_sub: '시장 충격 가능성 높음',
+    stat_keyword_label: '핵심 시장 요인', stat_sources_label: '뉴스 소스', stat_sources_sub: '활성 피드',
+    analyzing: '분석 중...', loading: '로딩 중...',
+    filter_label: '필터:', event_filter_label: '분류:',
+    filter_all: '전체', filter_kr: '🇰🇷 국내', filter_en: '🌐 해외',
+    filter_high: '🔴 고위험', filter_medium: '🟠 중위험', filter_macro: '📊 거시경제',
+    filter_trade: '🌐 무역/관세', filter_geo: '⚔️ 지정학', filter_fed: '🏦 중앙은행',
+    event_ipo: '🚀 IPO/상장', event_policy: '🏛️ 정책', event_tech: '💻 테크',
+    sidebar_causes: '🎯 추정 급락 원인 TOP 5', sidebar_keywords: '🔑 주요 키워드',
+    sidebar_sources: '📡 뉴스 소스 상태',
+    search_placeholder: '키워드로 뉴스 검색... (예: 금리, 관세, 전쟁, Fed)',
+    coin_search_placeholder: '키워드로 검색... (예: 비트코인, 이더리움, ETF, 반감기)',
+    re_search_placeholder: '키워드로 검색... (예: 아파트, 강남, 청약, 금리)',
+    loading_news: '뚜가 뉴스를 수집하고 있어요',
+    loading_coin: '뚜가 코인 뉴스를 수집하고 있어요',
+    loading_re: '뚜가 부동산 뉴스를 수집하고 있어요',
+  },
+  en: {
+    updating: 'Updating...', refresh: 'Refresh', unified_search: 'Search All',
+    tab_events: '🚀 Major Events', tab_news: '📰 News Analysis', tab_realestate: '🏠 Real Estate', tab_coin: '₿ Crypto',
+    stat_news_label: 'Articles', stat_news_sub: 'Total collected',
+    stat_high_label: 'High Risk', stat_high_sub: 'Potential market shock',
+    stat_keyword_label: 'Key Market Factor', stat_sources_label: 'News Sources', stat_sources_sub: 'Active feeds',
+    analyzing: 'Analyzing...', loading: 'Loading...',
+    filter_label: 'Filter:', event_filter_label: 'Category:',
+    filter_all: 'All', filter_kr: '🇰🇷 Korean', filter_en: '🌐 Global',
+    filter_high: '🔴 High Risk', filter_medium: '🟠 Medium Risk', filter_macro: '📊 Macro',
+    filter_trade: '🌐 Trade/Tariff', filter_geo: '⚔️ Geopolitics', filter_fed: '🏦 Central Bank',
+    event_ipo: '🚀 IPO/Listing', event_policy: '🏛️ Policy', event_tech: '💻 Tech',
+    sidebar_causes: '🎯 Est. Market Drop Causes', sidebar_keywords: '🔑 Key Keywords',
+    sidebar_sources: '📡 News Source Status',
+    search_placeholder: 'Search news... (e.g. rate, tariff, war, Fed)',
+    coin_search_placeholder: 'Search... (e.g. Bitcoin, Ethereum, ETF, halving)',
+    re_search_placeholder: 'Search... (e.g. apartment, Gangnam, subscription)',
+    loading_news: 'Collecting news articles...',
+    loading_coin: 'Collecting crypto news...',
+    loading_re: 'Collecting real estate news...',
+  }
+};
+
+let currentLang = localStorage.getItem('lang') || 'ko';
+
+function t(key) { return (TRANSLATIONS[currentLang] || TRANSLATIONS.ko)[key] || key; }
+
+function applyLang() {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    el.textContent = t(key);
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    el.placeholder = t(el.getAttribute('data-i18n-placeholder'));
+  });
+  document.getElementById('langBtn').textContent = currentLang === 'ko' ? 'EN' : '한';
+  document.documentElement.lang = currentLang === 'ko' ? 'ko' : 'en';
+}
+
+function toggleLang() {
+  currentLang = currentLang === 'ko' ? 'en' : 'ko';
+  localStorage.setItem('lang', currentLang);
+  applyLang();
+}
+
 // ─── CONFIG ───────────────────────────────────────────────────────────────────
 const API_URL = '/api/news';
 
@@ -2715,6 +2798,7 @@ function highlight(text, q) {
 }
 
 // ─── INIT ─────────────────────────────────────────────────────────────────────
+applyLang();
 renderSourceStatus();
 renderEvents();
 renderBrokers();
