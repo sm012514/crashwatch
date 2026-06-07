@@ -1580,7 +1580,11 @@ function scoreArticle(item) {
 }
 
 function catLabel(cat) {
-  return { macro:'거시경제', trade:'무역/관세', geo:'지정학', fed:'중앙은행' }[cat] || cat;
+  const isEn = currentLang === 'en';
+  const map = isEn
+    ? { macro:'Macro', trade:'Trade/Tariff', geo:'Geopolitics', fed:'Central Bank' }
+    : { macro:'거시경제', trade:'무역/관세', geo:'지정학', fed:'중앙은행' };
+  return map[cat] || cat;
 }
 
 const ENTITIES = {
@@ -1607,28 +1611,29 @@ function getPointTag(article) {
   const mh = (article.matchedHigh || []).map(k => k.toLowerCase());
   const mm = (article.matchedMed || []).map(k => k.toLowerCase());
   const text = ((article.title || '') + ' ' + (article.description || '')).toLowerCase();
+  const en = currentLang === 'en';
 
-  if (mh.some(k => ['금리인상','rate hike','rate hikes','fed raises','hawkish','tightening'].includes(k))) return '금리인상 우려';
-  if (mh.some(k => ['전쟁','war','invasion'].includes(k))) return '지정학 긴장';
-  if (mh.some(k => ['conflict'].includes(k))) return '분쟁 리스크';
-  if (mh.some(k => ['관세','tariff','tariffs'].includes(k))) return '관세 갈등';
-  if (mh.some(k => ['trade war'].includes(k))) return '무역전쟁';
-  if (mh.some(k => ['폭락','crash','collapse'].includes(k))) return '시장 폭락';
-  if (mh.some(k => ['급락','plunge','plunges','selloff','sell-off','rout'].includes(k))) return '급락 충격';
-  if (mh.some(k => ['침체','recession','depression'].includes(k))) return '경기침체 우려';
-  if (mh.some(k => ['파산','bankruptcy'].includes(k))) return '파산 위험';
-  if (mh.some(k => ['디폴트','default'].includes(k))) return '디폴트 우려';
-  if (mh.some(k => ['위기','crisis','meltdown'].includes(k))) return '금융위기 우려';
-  if (mh.some(k => ['liquidity crisis','credit crunch'].includes(k))) return '유동성 위기';
-  if (mh.some(k => ['제재','sanction'].includes(k))) return '경제 제재';
-  if (mh.some(k => ['inflation spike'].includes(k))) return '인플레 급등';
-  if (text.includes('인플레') || text.includes('inflation') || text.includes('cpi')) return '인플레 우려';
-  if (mm.some(k => ['downgrade'].includes(k))) return '신용 강등';
-  if (mm.some(k => ['volatile','volatility','변동성'].includes(k))) return '변동성 확대';
-  if (mm.some(k => ['경고','warning'].includes(k))) return '시장 경고';
-  if (mm.some(k => ['부채','debt'].includes(k))) return '부채 우려';
-  if (mm.some(k => ['yield','inversion'].includes(k))) return '금리 역전';
-  if (mm.some(k => ['bear','correction'].includes(k))) return '조정 국면';
+  if (mh.some(k => ['금리인상','rate hike','rate hikes','fed raises','hawkish','tightening'].includes(k))) return en ? 'Rate Hike Risk' : '금리인상 우려';
+  if (mh.some(k => ['전쟁','war','invasion'].includes(k))) return en ? 'Geopolitical Tension' : '지정학 긴장';
+  if (mh.some(k => ['conflict'].includes(k))) return en ? 'Conflict Risk' : '분쟁 리스크';
+  if (mh.some(k => ['관세','tariff','tariffs'].includes(k))) return en ? 'Tariff Conflict' : '관세 갈등';
+  if (mh.some(k => ['trade war'].includes(k))) return en ? 'Trade War' : '무역전쟁';
+  if (mh.some(k => ['폭락','crash','collapse'].includes(k))) return en ? 'Market Crash' : '시장 폭락';
+  if (mh.some(k => ['급락','plunge','plunges','selloff','sell-off','rout'].includes(k))) return en ? 'Sharp Drop' : '급락 충격';
+  if (mh.some(k => ['침체','recession','depression'].includes(k))) return en ? 'Recession Fear' : '경기침체 우려';
+  if (mh.some(k => ['파산','bankruptcy'].includes(k))) return en ? 'Bankruptcy Risk' : '파산 위험';
+  if (mh.some(k => ['디폴트','default'].includes(k))) return en ? 'Default Risk' : '디폴트 우려';
+  if (mh.some(k => ['위기','crisis','meltdown'].includes(k))) return en ? 'Financial Crisis' : '금융위기 우려';
+  if (mh.some(k => ['liquidity crisis','credit crunch'].includes(k))) return en ? 'Liquidity Crisis' : '유동성 위기';
+  if (mh.some(k => ['제재','sanction'].includes(k))) return en ? 'Sanctions' : '경제 제재';
+  if (mh.some(k => ['inflation spike'].includes(k))) return en ? 'Inflation Surge' : '인플레 급등';
+  if (text.includes('인플레') || text.includes('inflation') || text.includes('cpi')) return en ? 'Inflation Risk' : '인플레 우려';
+  if (mm.some(k => ['downgrade'].includes(k))) return en ? 'Credit Downgrade' : '신용 강등';
+  if (mm.some(k => ['volatile','volatility','변동성'].includes(k))) return en ? 'High Volatility' : '변동성 확대';
+  if (mm.some(k => ['경고','warning'].includes(k))) return en ? 'Market Warning' : '시장 경고';
+  if (mm.some(k => ['부채','debt'].includes(k))) return en ? 'Debt Concern' : '부채 우려';
+  if (mm.some(k => ['yield','inversion'].includes(k))) return en ? 'Yield Inversion' : '금리 역전';
+  if (mm.some(k => ['bear','correction'].includes(k))) return en ? 'Correction' : '조정 국면';
   return null;
 }
 
@@ -1909,8 +1914,13 @@ function updateCauses() {
 
 function updateKeywords() {
   const kwCount = {};
-  for (const a of allArticles) {
+  const isKorean = s => /[가-힣]/.test(s);
+  const articles = currentLang === 'en'
+    ? allArticles.filter(a => !KR_SOURCES.includes(a.sourceName))
+    : allArticles;
+  for (const a of articles) {
     for (const kw of [...a.matchedHigh, ...a.matchedMed]) {
+      if (currentLang === 'en' && isKorean(kw)) continue; // EN모드: 한국어 키워드 제외
       kwCount[kw] = (kwCount[kw] || 0) + 1;
     }
   }
