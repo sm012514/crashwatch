@@ -1409,6 +1409,7 @@ const TRANSLATIONS = {
 };
 
 let currentLang = localStorage.getItem('lang') || 'ko';
+const KR_SOURCES = ['한국경제', '매일경제', '연합뉴스 경제', '조선비즈'];
 
 function t(key) { return (TRANSLATIONS[currentLang] || TRANSLATIONS.ko)[key] || key; }
 
@@ -1791,7 +1792,6 @@ function filterAndRender() {
   const q = document.getElementById('searchInput').value.toLowerCase().trim();
   let articles = allArticles;
 
-  const KR_SOURCES = ['한국경제', '매일경제', '연합뉴스 경제', '조선비즈'];
   if (currentFilter === 'kr') articles = articles.filter(a => KR_SOURCES.includes(a.sourceName));
   else if (currentFilter === 'en') articles = articles.filter(a => !KR_SOURCES.includes(a.sourceName));
   else if (currentFilter === 'high') articles = articles.filter(a => a.impact === 'high');
