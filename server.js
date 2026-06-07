@@ -203,7 +203,7 @@ app.get('/api/debug-gemini', async (req, res) => {
   if (!apiKey) return res.json({ error: 'key not set' });
   try {
     const r = await fetch(
-      `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
+      `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
       { method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ contents: [{ parts: [{ text: 'Say hello in JSON: {"msg":"hello"}' }] }] }),
         signal: AbortSignal.timeout(10000) }
@@ -238,7 +238,7 @@ app.post('/api/factcheck', async (req, res) => {
 }`;
 
     const geminiRes = await fetch(
-      `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
+      `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
