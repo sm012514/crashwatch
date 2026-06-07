@@ -1683,12 +1683,75 @@ function getImpactSummary(article) {
 }
 
 // ─── FETCH ────────────────────────────────────────────────────────────────────
+const NEWS_CACHE_KEY = 'ddu_news_cache';
+const NEWS_CACHE_TTL = 3 * 60 * 1000; // 3분
+
+function processRawNews(raw) {
+  const NEWS_TITLE_KW = [
+    '금리','관세','환율','증시','코스피','코스닥','나스닥','주가','주식','채권','달러','원화',
+    '연준','fomc','fed','한은','ecb','boj','금융','경제','물가','인플레','침체','recession',
+    '무역','수출','수입관세','수입규제','tariff','전쟁','war','제재','sanction','gdp','cpi','실업','고용',
+    '급락','폭락','급등','폭등','주가하락','주가상승','금융위기','경제위기','파산','디폴트','긴축','기준금리',
+    '반도체','엔비디아','삼성','하이닉스','애플','테슬라','openai','spacex',
+    'ipo','상장','실적','earnings','s&p','nasdaq','dow',
+  ];
+  const BLACKLIST_KW = [
+    '결혼','이혼','열애','연애','임신','출산','육아','연예인','배우','가수','아이돌','드라마','예능',
+    '순간포착','동치미','아내의맛','살림남','편스토랑','미운우리새끼',
+    '맛집','레시피','요리','패션','뷰티','다이어트','운동','여행','숙소','호텔',
+    '롤','게임','스포츠','야구','축구','농구','골프','올림픽',
+    '영화','공연','콘서트','뮤지컬','전시','웹툰','소설',
+    '사망','부고','장례','추모','결별','열정페이','sns',
+  ];
+  const seen = new Set();
+  const unique = [];
+  for (const item of raw) {
+    const key = (item.title || '').substring(0, 60).toLowerCase().replace(/\s+/g,' ').trim();
+    if (!seen.has(key) && key.length > 10) { seen.add(key); unique.push(item); }
+  }
+  return unique
+    .map(scoreArticle)
+    .filter(a => {
+      const title = (a.title || '').toLowerCase();
+      const fullText = (title + ' ' + (a.description || '')).toLowerCase();
+      if (BLACKLIST_KW.some(k => fullText.includes(k))) return false;
+      return NEWS_TITLE_KW.some(k => title.includes(k)) || a.score >= 2;
+    })
+    .sort((a, b) => b.score - a.score || new Date(b.pubDate) - new Date(a.pubDate));
+}
+
+function applyNewsData(articles) {
+  allArticles = articles;
+  const locale = currentLang === 'en' ? 'en-US' : 'ko-KR';
+  const timeLabel = currentLang === 'en' ? 'Updated: ' : '업데이트: ';
+  document.getElementById('lastUpdated').textContent = timeLabel + new Date().toLocaleTimeString(locale);
+  updateStats();
+  filterAndRender();
+  updateCauses();
+  updateKeywords();
+}
+
 async function loadAllNews() {
   const btn = document.getElementById('refreshBtn');
   btn.disabled = true;
   btn.setAttribute('data-orig-text', btn.textContent);
   btn.textContent = '⟳';
-  document.getElementById('newsList').innerHTML = `<div class="ddu-state loading"><img src="/logo.png" alt="뚜"/><div class="ddu-msg">뚜가 뉴스를 수집하고 있어요</div><div class="ddu-dots"><span></span><span></span><span></span></div></div>`;
+
+  // 캐시된 뉴스 즉시 표시
+  try {
+    const cached = JSON.parse(localStorage.getItem(NEWS_CACHE_KEY) || 'null');
+    if (cached && Date.now() - cached.ts < NEWS_CACHE_TTL && cached.articles.length) {
+      applyNewsData(cached.articles);
+      renderSourceStatus();
+      btn.disabled = false;
+      btn.textContent = t('refresh');
+      btn.removeAttribute('data-orig-text');
+      return; // 캐시 유효 → 끝
+    }
+  } catch(e) {}
+
+  // 캐시 없거나 만료 → 로딩 표시 후 fetch
+  document.getElementById('newsList').innerHTML = `<div class="ddu-state loading"><img src="/logo.png" alt="뚜"/><div class="ddu-msg">${t('loading_news')}</div><div class="ddu-dots"><span></span><span></span><span></span></div></div>`;
 
   let raw = [];
   try {
@@ -1706,53 +1769,14 @@ async function loadAllNews() {
   }
   renderSourceStatus();
 
-  // Deduplicate by title similarity
-  const seen = new Set();
-  const unique = [];
-  for (const item of raw) {
-    const key = (item.title || '').substring(0, 60).toLowerCase().replace(/\s+/g,' ').trim();
-    if (!seen.has(key) && key.length > 10) { seen.add(key); unique.push(item); }
-  }
+  const articles = processRawNews(raw);
+  // 로컬 캐시 저장
+  try { localStorage.setItem(NEWS_CACHE_KEY, JSON.stringify({ ts: Date.now(), articles })); } catch(e) {}
 
-  const NEWS_TITLE_KW = [
-    '금리','관세','환율','증시','코스피','코스닥','나스닥','주가','주식','채권','달러','원화',
-    '연준','fomc','fed','한은','ecb','boj','금융','경제','물가','인플레','침체','recession',
-    '무역','수출','수입관세','수입규제','tariff','전쟁','war','제재','sanction','gdp','cpi','실업','고용',
-    '급락','폭락','급등','폭등','주가하락','주가상승','금융위기','경제위기','파산','디폴트','긴축','기준금리',
-    '반도체','엔비디아','삼성','하이닉스','애플','테슬라','openai','spacex',
-    'ipo','상장','실적','earnings','s&p','nasdaq','dow',
-  ];
-  // 연예/생활 블랙리스트 - 이 키워드 포함 시 제외
-  const BLACKLIST_KW = [
-    '결혼','이혼','열애','연애','임신','출산','육아','연예인','배우','가수','아이돌','드라마','예능',
-    '순간포착','동치미','아내의맛','살림남','편스토랑','미운우리새끼',
-    '맛집','레시피','요리','패션','뷰티','다이어트','운동','여행','숙소','호텔',
-    '롤','게임','스포츠','야구','축구','농구','골프','올림픽',
-    '영화','공연','콘서트','뮤지컬','전시','웹툰','소설',
-    '사망','부고','장례','추모','결별','열정페이','sns',
-  ];
-  allArticles = unique
-    .map(scoreArticle)
-    .filter(a => {
-      const title = (a.title || '').toLowerCase();
-      const fullText = (title + ' ' + (a.description || '')).toLowerCase();
-      // 블랙리스트 키워드 포함 시 제외
-      if (BLACKLIST_KW.some(k => fullText.includes(k))) return false;
-      // 금융 키워드 포함 또는 점수 2 이상
-      return NEWS_TITLE_KW.some(k => title.includes(k)) || a.score >= 2;
-    })
-    .sort((a, b) => b.score - a.score || new Date(b.pubDate) - new Date(a.pubDate));
-
-  const locale = currentLang === 'en' ? 'en-US' : 'ko-KR';
-  const timeLabel = currentLang === 'en' ? 'Updated: ' : '업데이트: ';
-  document.getElementById('lastUpdated').textContent = timeLabel + new Date().toLocaleTimeString(locale);
+  applyNewsData(articles);
   btn.disabled = false;
   btn.textContent = t('refresh');
-
-  updateStats();
-  filterAndRender();
-  updateCauses();
-  updateKeywords();
+  btn.removeAttribute('data-orig-text');
 }
 
 // ─── RENDER ───────────────────────────────────────────────────────────────────
