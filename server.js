@@ -185,6 +185,18 @@ app.get('/api/realestate', async (req, res) => {
   res.json(data);
 });
 
+// ── 디버그: Gemini 모델 목록
+app.get('/api/debug-models', async (req, res) => {
+  const apiKey = process.env.GEMINI;
+  if (!apiKey) return res.json({ error: 'key not set' });
+  try {
+    const r = await fetch(`https://generativelanguage.googleapis.com/v1/models?key=${apiKey}`, { signal: AbortSignal.timeout(10000) });
+    const data = await r.json();
+    const names = (data.models || []).map(m => m.name);
+    res.json({ names });
+  } catch(e) { res.json({ error: e.message }); }
+});
+
 // ── 디버그: Gemini 직접 테스트
 app.get('/api/debug-gemini', async (req, res) => {
   const apiKey = process.env.GEMINI;
