@@ -242,10 +242,11 @@
       .logo img { width: 44px !important; height: 44px !important; }
       .logo { font-size: 1rem; gap: 8px; }
       .last-updated { display: none; }
-      .katarina-btn { padding: 7px 10px; font-size: 0.75rem; }
+      .katarina-btn { padding: 6px 9px; font-size: 0.72rem; }
       .katarina-btn span { display: none; }
-      .lang-btn { padding: 6px 10px; font-size: 0.75rem; }
-      .refresh-btn { padding: 7px 12px; font-size: 1.1rem; }
+      .katarina-btn-text { display: none; }
+      .lang-btn { padding: 6px 9px; font-size: 0.72rem; }
+      .refresh-btn { padding: 6px 10px; font-size: 1rem; }
 
       /* 통계 2x2 그리드 */
       .stats-grid { grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
@@ -1023,7 +1024,7 @@
   <div class="header-right">
     <span class="last-updated" id="lastUpdated" data-i18n="updating">업데이트 중...</span>
     <button class="lang-btn" id="langBtn" onclick="toggleLang()">EN</button>
-    <button class="katarina-btn" onclick="kataOpen()">⚡ KATARINA <span style="font-size:0.7rem;font-weight:400;opacity:0.8;margin-left:2px" data-i18n="unified_search">통합검색</span></button>
+    <button class="katarina-btn" onclick="kataOpen()">⚡ <span class="katarina-btn-text">KATARINA </span><span style="font-size:0.7rem;font-weight:400;opacity:0.8;margin-left:2px" class="katarina-btn-text" data-i18n="unified_search">통합검색</span></button>
     <button class="refresh-btn" id="refreshBtn" onclick="loadAllNews()">↻</button>
   </div>
 </header>
