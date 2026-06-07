@@ -1634,28 +1634,29 @@ function getImpactSummary(article) {
   if (article.impact === 'low') return null;
   const mh = (article.matchedHigh || []).map(k => k.toLowerCase());
   const cats = article.cats || [];
+  const isEn = currentLang === 'en';
 
   if (mh.some(k => ['금리인상','rate hike','rate hikes','fed raises','hawkish','tightening','fomc'].includes(k)))
-    return { icon: '📈', text: '금리 인상 우려 → 채권 수익률↑, 성장주·주가 하락 압력' };
+    return { icon: '📈', text: isEn ? 'Rate hike fears → bond yields↑, pressure on growth stocks' : '금리 인상 우려 → 채권 수익률↑, 성장주·주가 하락 압력' };
   if (mh.some(k => ['전쟁','war','conflict','invasion'].includes(k)))
-    return { icon: '⚔️', text: '지정학 위기 → 안전자산(금·달러) 강세, 위험자산 전반 매도' };
+    return { icon: '⚔️', text: isEn ? 'Geopolitical crisis → safe-haven (gold/USD) strength, risk asset selloff' : '지정학 위기 → 안전자산(금·달러) 강세, 위험자산 전반 매도' };
   if (mh.some(k => ['관세','tariff','tariffs','trade war'].includes(k)))
-    return { icon: '🌐', text: '관세·무역 갈등 → 수출주·코스피 직접 타격, 물가 상승 우려' };
+    return { icon: '🌐', text: isEn ? 'Trade conflict → direct hit on exporters & KOSPI, inflation risk' : '관세·무역 갈등 → 수출주·코스피 직접 타격, 물가 상승 우려' };
   if (mh.some(k => ['폭락','급락','crash','plunge','plunges','collapse','selloff','sell-off','rout'].includes(k)))
-    return { icon: '🔻', text: '급락 신호 → 투자심리 위축, 변동성 확대 주의' };
+    return { icon: '🔻', text: isEn ? 'Crash signal → investor sentiment weakens, watch for volatility' : '급락 신호 → 투자심리 위축, 변동성 확대 주의' };
   if (mh.some(k => ['침체','recession','depression'].includes(k)))
-    return { icon: '📉', text: '경기침체 우려 → 경기민감주 하락, 방어주·국채 상대적 강세' };
+    return { icon: '📉', text: isEn ? 'Recession fears → cyclicals down, defensives & treasuries outperform' : '경기침체 우려 → 경기민감주 하락, 방어주·국채 상대적 강세' };
   if (mh.some(k => ['파산','디폴트','default','bankruptcy'].includes(k)))
-    return { icon: '⚠️', text: '부도·파산 위험 → 신용시장 경색, 광범위 자산 하락 가능' };
+    return { icon: '⚠️', text: isEn ? 'Default/bankruptcy risk → credit market tightening, broad asset decline' : '부도·파산 위험 → 신용시장 경색, 광범위 자산 하락 가능' };
   if (mh.some(k => ['위기','crisis','meltdown','liquidity crisis','credit crunch'].includes(k)))
-    return { icon: '🚨', text: '금융위기 신호 → 전 자산 리스크 오프, 달러·금 급등 가능' };
+    return { icon: '🚨', text: isEn ? 'Financial crisis signal → full risk-off, USD & gold may spike' : '금융위기 신호 → 전 자산 리스크 오프, 달러·금 급등 가능' };
   if (mh.some(k => ['제재','sanction'].includes(k)))
-    return { icon: '🚫', text: '경제 제재 → 공급망 차질, 관련 산업주 직접 타격' };
+    return { icon: '🚫', text: isEn ? 'Economic sanctions → supply chain disruption, direct hit on related sectors' : '경제 제재 → 공급망 차질, 관련 산업주 직접 타격' };
 
-  if (cats.includes('fed'))   return { icon: '🏦', text: '중앙은행 정책 → 금리·유동성 변화로 전 자산에 영향' };
-  if (cats.includes('trade')) return { icon: '🌐', text: '무역·관세 이슈 → 수출 기업 실적 및 코스피 영향' };
-  if (cats.includes('geo'))   return { icon: '🌍', text: '지정학 이슈 → 에너지 가격·안전자산 선호도 변화' };
-  if (cats.includes('macro')) return { icon: '📊', text: '거시경제 지표 → 경기 방향성에 따른 시장 전반 영향' };
+  if (cats.includes('fed'))   return { icon: '🏦', text: isEn ? 'Central bank policy → rate & liquidity shifts affect all assets' : '중앙은행 정책 → 금리·유동성 변화로 전 자산에 영향' };
+  if (cats.includes('trade')) return { icon: '🌐', text: isEn ? 'Trade/tariff issue → impact on export earnings & KOSPI' : '무역·관세 이슈 → 수출 기업 실적 및 코스피 영향' };
+  if (cats.includes('geo'))   return { icon: '🌍', text: isEn ? 'Geopolitical issue → energy prices & safe-haven demand shift' : '지정학 이슈 → 에너지 가격·안전자산 선호도 변화' };
+  if (cats.includes('macro')) return { icon: '📊', text: isEn ? 'Macro indicator → broad market impact based on economic direction' : '거시경제 지표 → 경기 방향성에 따른 시장 전반 영향' };
   return null;
 }
 
@@ -1768,8 +1769,8 @@ function renderNews(articles) {
   const cards = articles.slice(0, 50).map(a => {
     const cls = a.impact === 'high' ? 'high-impact' : a.impact === 'medium' ? 'medium-impact' : '';
     const tags = [];
-    if (a.impact === 'high') tags.push(`<span class="tag impact-high">🔴 고위험</span>`);
-    else if (a.impact === 'medium') tags.push(`<span class="tag impact-med">🟠 중위험</span>`);
+    if (a.impact === 'high') tags.push(`<span class="tag impact-high">${t('filter_high')}</span>`);
+    else if (a.impact === 'medium') tags.push(`<span class="tag impact-med">${t('filter_medium')}</span>`);
     const pt = getPointTag(a);
     if (pt) tags.push(`<span class="tag point">💡 ${pt}</span>`);
     a.cats.forEach(c => tags.push(`<span class="tag category">${catLabel(c)}</span>`));
@@ -1797,10 +1798,11 @@ function renderNews(articles) {
 function timeAgo(date) {
   if (isNaN(date)) return '';
   const diff = (Date.now() - date) / 1000;
-  if (diff < 60) return '방금';
-  if (diff < 3600) return Math.floor(diff/60) + '분 전';
-  if (diff < 86400) return Math.floor(diff/3600) + '시간 전';
-  return Math.floor(diff/86400) + '일 전';
+  const isEn = currentLang === 'en';
+  if (diff < 60)    return isEn ? 'just now'                             : '방금';
+  if (diff < 3600)  return isEn ? Math.floor(diff/60) + 'm ago'         : Math.floor(diff/60) + '분 전';
+  if (diff < 86400) return isEn ? Math.floor(diff/3600) + 'h ago'       : Math.floor(diff/3600) + '시간 전';
+  return isEn ? Math.floor(diff/86400) + 'd ago' : Math.floor(diff/86400) + '일 전';
 }
 
 // ─── STATS ────────────────────────────────────────────────────────────────────
@@ -1817,15 +1819,16 @@ function updateCauses() {
   const causeScore = {};
   const causeCounts = {};
 
+  const isEn = currentLang === 'en';
   const causeMap = {
-    '금리/통화정책': ['rate hike','rate hikes','fed raises','fomc','hawkish','tightening','금리인상','기준금리','연준'],
-    '무역전쟁/관세': ['tariff','tariffs','trade war','관세','무역전쟁','보복'],
-    '지정학적 위기': ['war','conflict','invasion','전쟁','분쟁','지정학'],
-    '경기침체 우려': ['recession','slowdown','contraction','침체','경기침체'],
-    '인플레이션': ['inflation','cpi','pce','물가','인플레이션'],
-    '신용/유동성 위기': ['default','bankruptcy','liquidity','credit crunch','파산','디폴트'],
-    '기업 실적 부진': ['miss','disappoints','earnings','profit warning','실적'],
-    '부채/재정 위기': ['debt','deficit','fiscal','부채','재정'],
+    [isEn ? 'Rate/Monetary Policy' : '금리/통화정책']: ['rate hike','rate hikes','fed raises','fomc','hawkish','tightening','금리인상','기준금리','연준'],
+    [isEn ? 'Trade War/Tariffs'    : '무역전쟁/관세']: ['tariff','tariffs','trade war','관세','무역전쟁','보복'],
+    [isEn ? 'Geopolitical Crisis'  : '지정학적 위기']: ['war','conflict','invasion','전쟁','분쟁','지정학'],
+    [isEn ? 'Recession Fears'      : '경기침체 우려']: ['recession','slowdown','contraction','침체','경기침체'],
+    [isEn ? 'Inflation'            : '인플레이션']:    ['inflation','cpi','pce','물가','인플레이션'],
+    [isEn ? 'Credit/Liquidity Risk': '신용/유동성 위기']: ['default','bankruptcy','liquidity','credit crunch','파산','디폴트'],
+    [isEn ? 'Earnings Miss'        : '기업 실적 부진']: ['miss','disappoints','earnings','profit warning','실적'],
+    [isEn ? 'Debt/Fiscal Crisis'   : '부채/재정 위기']: ['debt','deficit','fiscal','부채','재정'],
   };
 
   for (const a of allArticles) {
@@ -1850,7 +1853,7 @@ function updateCauses() {
           <div class="cause-rank ${i===0?'':(i===1?'orange':'gray')}">${i+1}</div>
           <div>
             <div class="cause-text">${cause}</div>
-            <div class="cause-count">${causeCounts[cause]}건 언급 · 위험지수 ${score}</div>
+            <div class="cause-count">${causeCounts[cause]}${isEn?' mentions · Risk ':' 건 언급 · 위험지수 '}${score}</div>
           </div>
         </div>`).join('')
     : '<div style="color:var(--muted);font-size:0.8rem">데이터 부족</div>';
@@ -2566,8 +2569,8 @@ function renderReNews(articles) {
   el.innerHTML = articles.slice(0, 50).map(a => {
     const cls = a.impact === 'high' ? 'high-impact' : a.impact === 'medium' ? 'medium-impact' : '';
     const tags = [];
-    if (a.impact === 'high') tags.push(`<span class="tag impact-high">🔴 급등락</span>`);
-    else if (a.impact === 'medium') tags.push(`<span class="tag impact-med">🟠 주목</span>`);
+    if (a.impact === 'high') tags.push(`<span class="tag impact-high">${currentLang==='en'?'🔴 Surge/Drop':t('filter_high')}</span>`);
+    else if (a.impact === 'medium') tags.push(`<span class="tag impact-med">${t('filter_medium')}</span>`);
     const pt = getRePointTag(a);
     if (pt) tags.push(`<span class="tag point">💡 ${pt}</span>`);
     a.cats.forEach(c => tags.push(`<span class="tag category">${getReCatLabel(c)}</span>`));
@@ -2590,14 +2593,15 @@ function renderReNews(articles) {
 function reUpdateSidebar() {
   // 동향 TOP 5
   const causeScore = {}, causeCounts = {};
+  const _isEn = currentLang === 'en';
   const causeMap = {
-    '아파트값 상승': ['급등','폭등','신고가','최고가','상승'],
-    '아파트값 하락': ['급락','폭락','신저가','하락','붕괴'],
-    '전세 불안': ['역전세','전세사기','깡통','전세난'],
-    '규제 변화': ['규제','완화','강화','LTV','DSR'],
-    '청약/공급': ['청약','분양','미분양','공급'],
-    '재건축/재개발': ['재건축','재개발','정비'],
-    '금리 영향': ['금리','대출','이자'],
+    [_isEn?'Apt Price Rising'  :'아파트값 상승']: ['급등','폭등','신고가','최고가','상승'],
+    [_isEn?'Apt Price Falling' :'아파트값 하락']: ['급락','폭락','신저가','하락','붕괴'],
+    [_isEn?'Lease Instability' :'전세 불안']:     ['역전세','전세사기','깡통','전세난'],
+    [_isEn?'Policy Change'     :'규제 변화']:     ['규제','완화','강화','LTV','DSR'],
+    [_isEn?'Pre-sale/Supply'   :'청약/공급']:     ['청약','분양','미분양','공급'],
+    [_isEn?'Redevelopment'     :'재건축/재개발']: ['재건축','재개발','정비'],
+    [_isEn?'Rate Impact'       :'금리 영향']:     ['금리','대출','이자'],
   };
   for (const a of reAllArticles) {
     const text = ((a.title||'')+(a.description||'')).toLowerCase();
@@ -2615,10 +2619,10 @@ function reUpdateSidebar() {
           <div class="cause-rank ${i===0?'':(i===1?'orange':'gray')}">${i+1}</div>
           <div>
             <div class="cause-text">${cause}</div>
-            <div class="cause-count">${causeCounts[cause]}건 언급</div>
+            <div class="cause-count">${causeCounts[cause]}${_isEn?' mentions':' 건 언급'}</div>
           </div>
         </div>`).join('')
-    : '<div style="color:var(--muted);font-size:0.8rem">데이터 부족</div>';
+    : `<div style="color:var(--muted);font-size:0.8rem">${_isEn?'Insufficient data':'데이터 부족'}</div>`;
 
   // 키워드 클라우드
   const kwCount = {};
@@ -2809,8 +2813,8 @@ function renderCoinNews(articles) {
   el.innerHTML = articles.slice(0, 60).map(a => {
     const cls = a.impact === 'high' ? 'high-impact' : a.impact === 'medium' ? 'medium-impact' : '';
     const tags = [];
-    if (a.impact === 'high') tags.push(`<span class="tag impact-high">🔴 주요</span>`);
-    else if (a.impact === 'medium') tags.push(`<span class="tag impact-med">🟠 주목</span>`);
+    if (a.impact === 'high') tags.push(`<span class="tag impact-high">${t('filter_high')}</span>`);
+    else if (a.impact === 'medium') tags.push(`<span class="tag impact-med">${t('filter_medium')}</span>`);
     const pt = getCoinPointTag(a);
     if (pt) tags.push(`<span class="tag point">💡 ${pt}</span>`);
     a.cats.forEach(c => tags.push(`<span class="tag category">${getCoinCatLabel(c)}</span>`));
@@ -2831,14 +2835,15 @@ function renderCoinNews(articles) {
 
 function coinUpdateSidebar() {
   const causeScore = {}, causeCounts = {};
+  const _isEn = currentLang === 'en';
   const causeMap = {
-    'BTC 강세': ['bitcoin surges','btc soars','비트코인 상승','bull'],
-    'BTC 약세': ['bitcoin falls','btc drops','비트코인 하락','crash','dump'],
-    '규제 이슈': ['regulation','sec','ban','규제','금지'],
-    'ETF/기관': ['etf','blackrock','fidelity','institutional','기관'],
-    '반감기 관련': ['halving','반감기'],
-    '알트코인': ['altcoin','solana','ethereum','알트','이더리움'],
-    'DeFi/NFT': ['defi','nft','staking','스테이킹'],
+    [_isEn?'BTC Bullish' :'BTC 강세']:    ['bitcoin surges','btc soars','비트코인 상승','bull'],
+    [_isEn?'BTC Bearish' :'BTC 약세']:    ['bitcoin falls','btc drops','비트코인 하락','crash','dump'],
+    [_isEn?'Regulation'  :'규제 이슈']:   ['regulation','sec','ban','규제','금지'],
+    [_isEn?'ETF/Inst.'   :'ETF/기관']:    ['etf','blackrock','fidelity','institutional','기관'],
+    [_isEn?'Halving'     :'반감기 관련']: ['halving','반감기'],
+    [_isEn?'Altcoins'    :'알트코인']:    ['altcoin','solana','ethereum','알트','이더리움'],
+    'DeFi/NFT':                           ['defi','nft','staking','스테이킹'],
   };
   for (const a of coinAllArticles) {
     const text = ((a.title||'')+(a.description||'')).toLowerCase();
@@ -2856,10 +2861,10 @@ function coinUpdateSidebar() {
           <div class="cause-rank ${i===0?'':(i===1?'orange':'gray')}">${i+1}</div>
           <div>
             <div class="cause-text">${cause}</div>
-            <div class="cause-count">${causeCounts[cause]}건 언급</div>
+            <div class="cause-count">${causeCounts[cause]}${_isEn?' mentions':' 건 언급'}</div>
           </div>
         </div>`).join('')
-    : '<div style="color:var(--muted);font-size:0.8rem">데이터 부족</div>';
+    : `<div style="color:var(--muted);font-size:0.8rem">${_isEn?'Insufficient data':'데이터 부족'}</div>`;
 
   const kwCount = {};
   for (const a of coinAllArticles) {
