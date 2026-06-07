@@ -1492,19 +1492,31 @@ function applyLang() {
 function toggleLang() {
   currentLang = currentLang === 'ko' ? 'en' : 'ko';
   localStorage.setItem('lang', currentLang);
+
+  // 1단계: UI 텍스트 즉시 반영 (빠름)
   applyLang();
-  renderEvents();
-  renderCoinEvents();
-  // EN 모드 → 해외 기사만, KO 모드 → 전체
-  const targetFilter = currentLang === 'en' ? 'en' : 'all';
-  currentFilter = targetFilter;
-  document.querySelectorAll('[data-filter]').forEach(b => {
-    b.classList.toggle('active', b.getAttribute('data-filter') === targetFilter);
+
+  // 2단계: 카드/사이드바 재렌더는 브라우저 다음 프레임에 처리 (딜레이 제거)
+  requestAnimationFrame(() => {
+    renderEvents();
+    renderCoinEvents();
+
+    // EN → 해외 기사만 / KO → 전체
+    const targetFilter = currentLang === 'en' ? 'en' : 'all';
+    currentFilter = targetFilter;
+    document.querySelectorAll('[data-filter]').forEach(b => {
+      b.classList.toggle('active', b.getAttribute('data-filter') === targetFilter);
+    });
+
+    filterAndRender();
+
+    // 사이드바는 한 프레임 더 뒤에 (뉴스 카드 먼저 보이게)
+    requestAnimationFrame(() => {
+      updateCauses();
+      updateKeywords();
+      updateKeyFactor('news');
+    });
   });
-  filterAndRender();
-  updateCauses();
-  updateKeywords();
-  updateKeyFactor('news');
 }
 
 // ─── CONFIG ───────────────────────────────────────────────────────────────────
@@ -1674,7 +1686,8 @@ function getImpactSummary(article) {
 async function loadAllNews() {
   const btn = document.getElementById('refreshBtn');
   btn.disabled = true;
-  btn.textContent = t('loading');
+  btn.setAttribute('data-orig-text', btn.textContent);
+  btn.textContent = '⟳';
   document.getElementById('newsList').innerHTML = `<div class="ddu-state loading"><img src="/logo.png" alt="뚜"/><div class="ddu-msg">뚜가 뉴스를 수집하고 있어요</div><div class="ddu-dots"><span></span><span></span><span></span></div></div>`;
 
   let raw = [];
@@ -1687,7 +1700,7 @@ async function loadAllNews() {
     }
   } catch (e) {
     document.getElementById('newsList').innerHTML = `<div class="ddu-state"><img src="/logo.png" alt="뚜" style="filter:grayscale(0.5)"/><div class="ddu-msg">뚜가 연결에 실패했어요 😿</div><div class="ddu-sub">잠시 후 새로고침을 눌러주세요</div></div>`;
-    btn.disabled = false; btn.textContent = t('refresh');
+    btn.disabled = false; btn.textContent = t('refresh'); btn.removeAttribute('data-orig-text');
     renderSourceStatus();
     return;
   }
