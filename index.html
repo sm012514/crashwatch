@@ -1421,7 +1421,7 @@ function applyLang() {
   document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
     el.placeholder = t(el.getAttribute('data-i18n-placeholder'));
   });
-  document.getElementById('langBtn').textContent = isEn ? '한' : 'EN';
+  document.getElementById('langBtn').textContent = isEn ? 'KOR' : 'EN';
   document.documentElement.lang = isEn ? 'en' : 'ko';
 
   // Legend box
