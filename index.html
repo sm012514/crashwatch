@@ -1315,20 +1315,8 @@
   margin-top: 40px;
   text-align: center;
 ">
-  <p style="font-size:0.78rem; color: var(--muted); line-height: 2; max-width: 700px; margin: 0 auto;">
-    ⚠️ <strong style="color:var(--text)">투자 유의사항</strong><br>
-    본 사이트는 공개된 뉴스 피드를 수집·분석하여 제공하는 정보 제공 서비스입니다.<br>
-    투자 권유 또는 종목 추천을 목적으로 하지 않으며, 제공되는 모든 정보는 참고용으로만 활용하시기 바랍니다.<br>
-    투자의 최종 판단과 책임은 투자자 본인에게 있습니다. 금융투자상품은 원금 손실이 발생할 수 있습니다.
-  </p>
-  <p style="font-size:0.72rem; color: #4a5568; margin-top: 12px;">
-    © 2025 DDU Market News &nbsp;·&nbsp;
-    <a href="/about.html" style="color:#4a5568; text-decoration:none;">서비스 소개</a>
-    &nbsp;·&nbsp;
-    <a href="/privacy.html" style="color:#4a5568; text-decoration:none;">개인정보처리방침</a>
-    &nbsp;·&nbsp;
-    광고·제휴 문의: <a href="mailto:sm012514@gmail.com" style="color:#4a5568; text-decoration:none;">sm012514@gmail.com</a>
-  </p>
+  <p id="footerDisclaimer" style="font-size:0.78rem; color: var(--muted); line-height: 2; max-width: 700px; margin: 0 auto;"></p>
+  <p id="footerLinks" style="font-size:0.72rem; color: #4a5568; margin-top: 12px;"></p>
 </footer>
 
 <script>
@@ -1374,6 +1362,8 @@ const TRANSLATIONS = {
     sidebar_quicklinks_finance: '📈 Yahoo Finance Markets',
     // news card tags
     tag_high: '🔴 주요', tag_med: '🟠 주목',
+    // footer
+    footer_about: '서비스 소개', footer_privacy: '개인정보처리방침', footer_ad: '광고·제휴 문의',
   },
   en: {
     updating: 'Updating...', refresh: 'Refresh', unified_search: 'Search All',
@@ -1413,6 +1403,8 @@ const TRANSLATIONS = {
     source_ok: 'Connected', source_fail: 'Failed',
     // news card tags
     tag_high: '🔴 High', tag_med: '🟠 Notable',
+    // footer
+    footer_about: 'About', footer_privacy: 'Privacy Policy', footer_ad: 'Advertising inquiry',
   }
 };
 
@@ -1475,6 +1467,26 @@ function applyLang() {
   // KATARINA empty state
   const ke = document.querySelector('.katarina-empty');
   if (ke) ke.textContent = t('kata_empty');
+
+  // Footer
+  const fd = document.getElementById('footerDisclaimer');
+  if (fd) fd.innerHTML = isEn
+    ? `⚠️ <strong style="color:var(--text)">Investment Disclaimer</strong><br>
+       This site is an information service that collects and analyzes publicly available news feeds.<br>
+       It is not intended as investment advice or stock recommendations. All information is for reference only.<br>
+       Investment decisions and responsibility rest solely with the investor. Principal loss may occur.`
+    : `⚠️ <strong style="color:var(--text)">투자 유의사항</strong><br>
+       본 사이트는 공개된 뉴스 피드를 수집·분석하여 제공하는 정보 제공 서비스입니다.<br>
+       투자 권유 또는 종목 추천을 목적으로 하지 않으며, 제공되는 모든 정보는 참고용으로만 활용하시기 바랍니다.<br>
+       투자의 최종 판단과 책임은 투자자 본인에게 있습니다. 금융투자상품은 원금 손실이 발생할 수 있습니다.`;
+
+  const fl = document.getElementById('footerLinks');
+  if (fl) fl.innerHTML = `© 2025 DDU Market News &nbsp;·&nbsp;
+    <a href="/about.html" style="color:#4a5568;text-decoration:none">${t('footer_about')}</a>
+    &nbsp;·&nbsp;
+    <a href="/privacy.html" style="color:#4a5568;text-decoration:none">${t('footer_privacy')}</a>
+    &nbsp;·&nbsp;
+    ${t('footer_ad')}: <a href="mailto:sm012514@gmail.com" style="color:#4a5568;text-decoration:none">sm012514@gmail.com</a>`;
 }
 
 function toggleLang() {
