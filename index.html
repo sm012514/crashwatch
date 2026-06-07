@@ -1495,6 +1495,16 @@ function toggleLang() {
   applyLang();
   renderEvents();
   renderCoinEvents();
+  // EN 모드 → 해외 기사만, KO 모드 → 전체
+  const targetFilter = currentLang === 'en' ? 'en' : 'all';
+  currentFilter = targetFilter;
+  document.querySelectorAll('[data-filter]').forEach(b => {
+    b.classList.toggle('active', b.getAttribute('data-filter') === targetFilter);
+  });
+  filterAndRender();
+  updateCauses();
+  updateKeywords();
+  updateKeyFactor('news');
 }
 
 // ─── CONFIG ───────────────────────────────────────────────────────────────────
@@ -1902,17 +1912,18 @@ function updateKeyFactor(tab) {
   if (!valEl || !subEl) return;
 
   if (tab === 'news') {
-    // 뉴스: causeMap TOP 1
+    const _isEn = currentLang === 'en';
     const causeMap = {
-      '금리/통화정책': ['rate hike','rate hikes','fed raises','fomc','hawkish','tightening','금리인상','기준금리','연준'],
-      '무역전쟁/관세': ['tariff','tariffs','trade war','관세','무역전쟁','보복'],
-      '지정학적 위기': ['war','conflict','invasion','전쟁','분쟁','지정학'],
-      '경기침체 우려': ['recession','slowdown','contraction','침체','경기침체'],
-      '인플레이션': ['inflation','cpi','pce','물가','인플레이션'],
-      '신용/유동성': ['default','bankruptcy','liquidity','파산','디폴트'],
+      [_isEn?'Rate/Monetary Policy':'금리/통화정책']: ['rate hike','rate hikes','fed raises','fomc','hawkish','tightening','금리인상','기준금리','연준'],
+      [_isEn?'Trade War/Tariffs'   :'무역전쟁/관세']: ['tariff','tariffs','trade war','관세','무역전쟁','보복'],
+      [_isEn?'Geopolitical Crisis' :'지정학적 위기']: ['war','conflict','invasion','전쟁','분쟁','지정학'],
+      [_isEn?'Recession Fears'     :'경기침체 우려']: ['recession','slowdown','contraction','침체','경기침체'],
+      [_isEn?'Inflation'           :'인플레이션']:    ['inflation','cpi','pce','물가','인플레이션'],
+      [_isEn?'Credit/Liquidity'    :'신용/유동성']:   ['default','bankruptcy','liquidity','파산','디폴트'],
     };
     const scores = {};
-    for (const a of allArticles) {
+    const articles = _isEn ? allArticles.filter(a => !KR_SOURCES.includes(a.sourceName)) : allArticles;
+    for (const a of articles) {
       const text = ((a.title||'')+(a.description||'')).toLowerCase();
       for (const [cause, kws] of Object.entries(causeMap)) {
         if (kws.some(k => text.includes(k))) scores[cause] = (scores[cause]||0) + a.score + 1;
@@ -1920,7 +1931,8 @@ function updateKeyFactor(tab) {
     }
     const top = Object.entries(scores).sort((a,b)=>b[1]-a[1])[0];
     valEl.textContent = top ? top[0] : '—';
-    subEl.textContent = top ? `뉴스 ${allArticles.filter(a => ((a.title||'')+(a.description||'')).toLowerCase().includes(Object.entries(causeMap).find(([k])=>k===top[0])?.[1]?.[0]||'')).length}건 언급` : '데이터 없음';
+    const mentionCount = top ? articles.filter(a => ((a.title||'')+(a.description||'')).toLowerCase().includes(Object.entries(causeMap).find(([k])=>k===top[0])?.[1]?.[0]||'')).length : 0;
+    subEl.textContent = top ? `${_isEn?'News':'뉴스'} ${mentionCount}${_isEn?' mentions':' 건 언급'}` : (_isEn?'No data':'데이터 없음');
 
   } else if (tab === 'realestate') {
     // 부동산: reCauseMap TOP 1
