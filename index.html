@@ -1118,6 +1118,9 @@
       <button class="filter-btn" data-filter="trade" onclick="setFilter(this,'trade')" data-i18n="filter_trade">🌐 무역/관세</button>
       <button class="filter-btn" data-filter="geo" onclick="setFilter(this,'geo')" data-i18n="filter_geo">⚔️ 지정학</button>
       <button class="filter-btn" data-filter="fed" onclick="setFilter(this,'fed')" data-i18n="filter_fed">🏦 중앙은행</button>
+      <button class="filter-btn" data-filter="ai_theme" onclick="setFilter(this,'ai_theme')" data-i18n="filter_ai">🤖 AI</button>
+      <button class="filter-btn" data-filter="semiconductor" onclick="setFilter(this,'semiconductor')" data-i18n="filter_semiconductor">🔩 반도체</button>
+      <button class="filter-btn" data-filter="aerospace" onclick="setFilter(this,'aerospace')" data-i18n="filter_aerospace">🛸 항공우주</button>
     </div>
 
     <!-- 📌 핵심 뉴스 -->
@@ -1378,6 +1381,7 @@ const TRANSLATIONS = {
     filter_all: '전체', filter_kr: '🇰🇷 국내', filter_en: '🌐 해외',
     filter_high: '🔴 고위험', filter_medium: '🟠 중위험', filter_macro: '📊 거시경제',
     filter_trade: '🌐 무역/관세', filter_geo: '⚔️ 지정학', filter_fed: '🏦 중앙은행',
+    filter_ai: '🤖 AI', filter_semiconductor: '🔩 반도체', filter_aerospace: '🛸 항공우주',
     event_ipo: '🚀 IPO/상장', event_policy: '🏛️ 정책', event_tech: '💻 테크',
     sidebar_causes: '🎯 추정 급락 원인 TOP 5', sidebar_keywords: '🔑 주요 키워드',
     sidebar_sources: '📡 뉴스 소스 상태',
@@ -1421,6 +1425,7 @@ const TRANSLATIONS = {
     filter_all: 'All', filter_kr: '🇰🇷 Korean', filter_en: '🌐 Global',
     filter_high: '🔴 High Risk', filter_medium: '🟠 Medium Risk', filter_macro: '📊 Macro',
     filter_trade: '🌐 Trade/Tariff', filter_geo: '⚔️ Geopolitics', filter_fed: '🏦 Central Bank',
+    filter_ai: '🤖 AI', filter_semiconductor: '🔩 Semiconductor', filter_aerospace: '🛸 Aerospace',
     event_ipo: '🚀 IPO/Listing', event_policy: '🏛️ Policy', event_tech: '💻 Tech',
     sidebar_causes: '🎯 Est. Market Drop Causes', sidebar_keywords: '🔑 Key Keywords',
     sidebar_sources: '📡 News Source Status',
@@ -1594,6 +1599,9 @@ const CATEGORIES = {
   trade: ['tariff','trade war','export','import','wto','관세','무역','수출','수입','보복'],
   geo: ['war','conflict','ukraine','russia','china sanctions','north korea','middle east','iran','전쟁','분쟁','지정학','북한','중국 제재','중국 관세','미중'],
   fed: ['fed','fomc','powell','rate hike','rate cut','ecb','boj','금리','연준','한은','중앙은행','기준금리'],
+  ai_theme: ['artificial intelligence','openai','chatgpt','large language model','generative ai','machine learning','deep learning','llm','anthropic','ai model','ai chip','인공지능','생성형 ai','챗gpt','오픈ai','딥러닝','머신러닝','거대언어모델'],
+  semiconductor: ['semiconductor','chipmaker','tsmc','sk hynix','micron technology','qualcomm','memory chip','dram','nand flash','wafer','chip shortage','chips act','hbm','반도체','sk하이닉스','마이크론','파운드리','d램','낸드','웨이퍼','삼성전자 반도체'],
+  aerospace: ['spacex','nasa','rocket launch','starship','falcon 9','aerospace','blue origin','lockheed martin','northrop grumman','space launch','lunar','artemis','rocket lab','스페이스x','나사','로켓 발사','스타십','항공우주','블루오리진','우주 발사'],
 };
 
 // ─── STATE ────────────────────────────────────────────────────────────────────
@@ -1628,8 +1636,8 @@ function scoreArticle(item) {
 function catLabel(cat) {
   const isEn = currentLang === 'en';
   const map = isEn
-    ? { macro:'Macro', trade:'Trade/Tariff', geo:'Geopolitics', fed:'Central Bank' }
-    : { macro:'거시경제', trade:'무역/관세', geo:'지정학', fed:'중앙은행' };
+    ? { macro:'Macro', trade:'Trade/Tariff', geo:'Geopolitics', fed:'Central Bank', ai_theme:'AI', semiconductor:'Semiconductor', aerospace:'Aerospace' }
+    : { macro:'거시경제', trade:'무역/관세', geo:'지정학', fed:'중앙은행', ai_theme:'AI', semiconductor:'반도체', aerospace:'항공우주' };
   return map[cat] || cat;
 }
 
@@ -1919,7 +1927,7 @@ function filterAndRender() {
   else if (currentFilter === 'en') articles = articles.filter(a => !KR_SOURCES.includes(a.sourceName));
   else if (currentFilter === 'high') articles = articles.filter(a => a.impact === 'high');
   else if (currentFilter === 'medium') articles = articles.filter(a => a.impact === 'medium');
-  else if (['macro','trade','geo','fed'].includes(currentFilter)) articles = articles.filter(a => a.cats.includes(currentFilter));
+  else if (['macro','trade','geo','fed','ai_theme','semiconductor','aerospace'].includes(currentFilter)) articles = articles.filter(a => a.cats.includes(currentFilter));
 
   if (q) articles = articles.filter(a => ((a.title||'')+(a.description||'')).toLowerCase().includes(q));
   if (activeKeyword) articles = articles.filter(a =>
