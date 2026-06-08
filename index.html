@@ -1821,6 +1821,9 @@ function renderPinned() {
 
   let html = '';
 
+  // 전체/한국/글로벌 외 필터는 핀고정 숨김
+  if (!['all','kr','en'].includes(currentFilter)) { section.style.display = 'none'; return; }
+
   if (currentFilter === 'kr') {
     // 국내 필터: 한국 TOP 5만
     const top = krArticles.slice(0, 5);
