@@ -1118,6 +1118,8 @@
       <button class="filter-btn" data-filter="trade" onclick="setFilter(this,'trade')" data-i18n="filter_trade">🌐 무역/관세</button>
       <button class="filter-btn" data-filter="geo" onclick="setFilter(this,'geo')" data-i18n="filter_geo">⚔️ 지정학</button>
       <button class="filter-btn" data-filter="fed" onclick="setFilter(this,'fed')" data-i18n="filter_fed">🏦 중앙은행</button>
+      <button class="filter-btn" data-filter="ai" onclick="setFilter(this,'ai')" data-i18n="filter_ai">🤖 AI</button>
+      <button class="filter-btn" data-filter="space" onclick="setFilter(this,'space')" data-i18n="filter_space">🚀 항공우주</button>
     </div>
 
     <!-- 📌 핵심 뉴스 -->
@@ -1377,7 +1379,7 @@ const TRANSLATIONS = {
     filter_label: '필터:', event_filter_label: '분류:',
     filter_all: '전체', filter_kr: '🇰🇷 국내', filter_en: '🌐 해외',
     filter_high: '🔴 고위험', filter_medium: '🟠 중위험', filter_macro: '📊 거시경제',
-    filter_trade: '🌐 무역/관세', filter_geo: '⚔️ 지정학', filter_fed: '🏦 중앙은행',
+    filter_trade: '🌐 무역/관세', filter_geo: '⚔️ 지정학', filter_fed: '🏦 중앙은행', filter_ai: '🤖 AI', filter_space: '🚀 항공우주',
     event_ipo: '🚀 IPO/상장', event_policy: '🏛️ 정책', event_tech: '💻 테크',
     sidebar_causes: '🎯 추정 급락 원인 TOP 5', sidebar_keywords: '🔑 주요 키워드',
     sidebar_sources: '📡 뉴스 소스 상태',
@@ -1420,7 +1422,7 @@ const TRANSLATIONS = {
     filter_label: 'Filter:', event_filter_label: 'Category:',
     filter_all: 'All', filter_kr: '🇰🇷 Korean', filter_en: '🌐 Global',
     filter_high: '🔴 High Risk', filter_medium: '🟠 Medium Risk', filter_macro: '📊 Macro',
-    filter_trade: '🌐 Trade/Tariff', filter_geo: '⚔️ Geopolitics', filter_fed: '🏦 Central Bank',
+    filter_trade: '🌐 Trade/Tariff', filter_geo: '⚔️ Geopolitics', filter_fed: '🏦 Central Bank', filter_ai: '🤖 AI', filter_space: '🚀 Space',
     event_ipo: '🚀 IPO/Listing', event_policy: '🏛️ Policy', event_tech: '💻 Tech',
     sidebar_causes: '🎯 Est. Market Drop Causes', sidebar_keywords: '🔑 Key Keywords',
     sidebar_sources: '📡 News Source Status',
@@ -1594,6 +1596,8 @@ const CATEGORIES = {
   trade: ['tariff','trade war','export','import','wto','관세','무역','수출','수입','보복'],
   geo: ['war','conflict','ukraine','russia','china sanctions','north korea','middle east','iran','전쟁','분쟁','지정학','북한','중국 제재','중국 관세','미중'],
   fed: ['fed','fomc','powell','rate hike','rate cut','ecb','boj','금리','연준','한은','중앙은행','기준금리'],
+  ai: ['openai','chatgpt','gemini','claude','anthropic','nvidia','엔비디아','artificial intelligence','machine learning','llm','gpt','ai chip','반도체 ai','생성형 ai','딥시크','deepseek','ai 투자','ai 규제'],
+  space: ['spacex','nasa','boeing','lockheed','raytheon','northrop','방산','defense','항공우주','우주','rocket','satellite','위성','발사','ipo spacex','스페이스x'],
 };
 
 // ─── STATE ────────────────────────────────────────────────────────────────────
@@ -1628,8 +1632,8 @@ function scoreArticle(item) {
 function catLabel(cat) {
   const isEn = currentLang === 'en';
   const map = isEn
-    ? { macro:'Macro', trade:'Trade/Tariff', geo:'Geopolitics', fed:'Central Bank' }
-    : { macro:'거시경제', trade:'무역/관세', geo:'지정학', fed:'중앙은행' };
+    ? { macro:'Macro', trade:'Trade/Tariff', geo:'Geopolitics', fed:'Central Bank', ai:'AI', space:'Space' }
+    : { macro:'거시경제', trade:'무역/관세', geo:'지정학', fed:'중앙은행', ai:'AI', space:'항공우주' };
   return map[cat] || cat;
 }
 
@@ -1919,7 +1923,7 @@ function filterAndRender() {
   else if (currentFilter === 'en') articles = articles.filter(a => !KR_SOURCES.includes(a.sourceName));
   else if (currentFilter === 'high') articles = articles.filter(a => a.impact === 'high');
   else if (currentFilter === 'medium') articles = articles.filter(a => a.impact === 'medium');
-  else if (['macro','trade','geo','fed'].includes(currentFilter)) articles = articles.filter(a => a.cats.includes(currentFilter));
+  else if (['macro','trade','geo','fed','ai','space'].includes(currentFilter)) articles = articles.filter(a => a.cats.includes(currentFilter));
 
   if (q) articles = articles.filter(a => ((a.title||'')+(a.description||'')).toLowerCase().includes(q));
   if (activeKeyword) articles = articles.filter(a =>
