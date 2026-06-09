@@ -1038,6 +1038,7 @@
     <span class="last-updated" id="lastUpdated" data-i18n="updating">업데이트 중...</span>
     <button class="lang-btn" id="langBtn" onclick="toggleLang()">EN</button>
     <button class="katarina-btn" onclick="kataOpen()">⚡ <span class="katarina-btn-text">KATARINA </span><span style="font-size:0.7rem;font-weight:400;opacity:0.8;margin-left:2px" class="katarina-btn-text" data-i18n="unified_search">통합검색</span></button>
+    <button class="refresh-btn" id="installBtn" onclick="triggerInstall()" title="앱 설치" style="display:none">📲</button>
     <button class="refresh-btn" id="refreshBtn" onclick="loadAllNews()">↻</button>
   </div>
 </header>
@@ -3302,6 +3303,25 @@ setInterval(loadMarketData, 60 * 1000);
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/service-worker.js');
+}
+
+// ── PWA 설치 버튼
+let _installPrompt = null;
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  _installPrompt = e;
+  const btn = document.getElementById('installBtn');
+  if (btn) btn.style.display = '';
+});
+window.addEventListener('appinstalled', () => {
+  const btn = document.getElementById('installBtn');
+  if (btn) btn.style.display = 'none';
+  _installPrompt = null;
+});
+function triggerInstall() {
+  if (!_installPrompt) return;
+  _installPrompt.prompt();
+  _installPrompt.userChoice.then(() => { _installPrompt = null; });
 }
 </script>
 </body>
