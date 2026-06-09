@@ -1034,7 +1034,7 @@
 <body>
 
 <header>
-  <div class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="cursor:pointer">
+  <div class="logo" onclick="goHome()" style="cursor:pointer">
     <img src="/logo.png" alt="DDU" style="width:68px;height:68px;border-radius:50%;object-fit:cover;" />
     <div><span>MARKET</span> NEWS</div>
   </div>
@@ -3307,6 +3307,15 @@ setInterval(loadMarketData, 60 * 1000);
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/service-worker.js');
+}
+
+// ── 로고 클릭 → 홈(뉴스 탭, 전체 필터, 맨 위)
+function goHome() {
+  const newsTabBtn = document.querySelector('.tab-btn[onclick*="news"]');
+  if (newsTabBtn) newsTabBtn.click();
+  const allFilterBtn = document.querySelector('[data-filter="all"]');
+  if (allFilterBtn) allFilterBtn.click();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // ── PWA 설치 버튼
