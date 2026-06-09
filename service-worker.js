@@ -1,5 +1,5 @@
-const CACHE = 'ddu-v6';
-const SHELL = ['/', '/index.html', '/about.html', '/privacy.html', '/logo.png', '/manifest.json'];
+﻿const CACHE = 'ddu-v7';
+const SHELL = ['/', '/index.html', '/about.html', '/privacy.html', '/logo.png', '/icon-192.png', '/icon-512.png', '/manifest.json'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)));
@@ -18,13 +18,13 @@ self.addEventListener('activate', e => {
 self.addEventListener('fetch', e => {
   const url = new URL(e.request.url);
 
-  // API는 항상 네트워크 우선 (실시간 뉴스)
+  // API????긽 ?ㅽ듃?뚰겕 ?곗꽑 (?ㅼ떆媛??댁뒪)
   if (url.pathname.startsWith('/api/')) {
     e.respondWith(fetch(e.request).catch(() => new Response('[]')));
     return;
   }
 
-  // 셸 파일은 캐시 우선, 실패 시 네트워크
+  // ???뚯씪? 罹먯떆 ?곗꽑, ?ㅽ뙣 ???ㅽ듃?뚰겕
   e.respondWith(
     caches.match(e.request).then(cached => cached || fetch(e.request))
   );
