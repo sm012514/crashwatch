@@ -99,9 +99,11 @@
       color: white;
       border: none;
       border-radius: 8px;
-      padding: 8px 14px;
+      padding: 0;
+      width: 36px;
+      height: 36px;
       cursor: pointer;
-      font-size: 1.25rem;
+      font-size: 1.1rem;
       font-weight: 900;
       line-height: 1;
       transform: rotate(180deg);
@@ -109,7 +111,9 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      flex-shrink: 0;
     }
+    #installBtn { transform: none; font-size: 1rem; }
     .refresh-btn.spinning {
       animation: spin 0.7s linear infinite;
     }
@@ -259,7 +263,7 @@
       .katarina-btn span { display: none; }
       .katarina-btn-text { display: none; }
       .lang-btn { padding: 6px 9px; font-size: 0.72rem; }
-      .refresh-btn { padding: 6px 10px; font-size: 1rem; }
+      .refresh-btn { width: 32px; height: 32px; font-size: 1rem; }
 
       /* 통계 2x2 그리드 */
       .stats-grid { grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
