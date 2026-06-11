@@ -1253,9 +1253,9 @@
         <span style="font-size:1.3rem">🚀</span>
         <div>
           <div style="font-weight:700;font-size:0.95rem;color:#e2e8f0" id="cdTitle">SpaceX IPO</div>
-          <div style="font-size:0.72rem;color:#94a3b8" id="cdSub">예상 시점 · 공식 날짜 미발표</div>
+          <div style="font-size:0.72rem;color:#94a3b8" id="cdSub">2026.06.12 (금) · 한국시간 오후 10:30</div>
         </div>
-        <span style="margin-left:auto;font-size:0.68rem;background:rgba(99,102,241,0.2);color:#a78bfa;padding:2px 8px;border-radius:20px;border:1px solid rgba(99,102,241,0.3)" id="cdBadge">예상</span>
+        <span style="margin-left:auto;font-size:0.68rem;background:rgba(99,102,241,0.2);color:#a78bfa;padding:2px 8px;border-radius:20px;border:1px solid rgba(99,102,241,0.3)" id="cdBadge">확정</span>
       </div>
       <div style="display:flex;gap:10px;justify-content:center" id="cdBoxes">
         <div style="text-align:center;background:rgba(99,102,241,0.15);border-radius:10px;padding:10px 14px;min-width:60px">
@@ -3341,7 +3341,7 @@ if ('serviceWorker' in navigator) {
 }
 
 // ── SpaceX IPO 카운트다운 (예상: 2026년 말 기준)
-const SPACEX_IPO_DATE = new Date('2026-12-31T09:30:00-05:00'); // 뉴욕 시간 기준
+const SPACEX_IPO_DATE = new Date('2026-06-12T09:30:00-04:00'); // 뉴욕 시간 09:30 (한국 22:30)
 function updateCountdown() {
   const now = new Date();
   const diff = SPACEX_IPO_DATE - now;
@@ -3364,8 +3364,8 @@ function updateCountdown() {
 
   const isEn = currentLang === 'en';
   document.getElementById('cdTitle').textContent = 'SpaceX IPO';
-  document.getElementById('cdSub').textContent = isEn ? 'Est. date · No official announcement yet' : '예상 시점 · 공식 날짜 미발표';
-  document.getElementById('cdBadge').textContent = isEn ? 'Est.' : '예상';
+  document.getElementById('cdSub').textContent = isEn ? '2026.06.12 (Fri) · KST 22:30' : '2026.06.12 (금) · 한국시간 오후 10:30';
+  document.getElementById('cdBadge').textContent = isEn ? 'Confirmed' : '확정';
   document.querySelectorAll('[data-i18n="cd_days"]').forEach(e => e.textContent = isEn ? 'Days' : '일');
   document.querySelectorAll('[data-i18n="cd_hours"]').forEach(e => e.textContent = isEn ? 'Hrs' : '시간');
   document.querySelectorAll('[data-i18n="cd_mins"]').forEach(e => e.textContent = isEn ? 'Min' : '분');
