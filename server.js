@@ -98,11 +98,23 @@ async function fetchQuote(sym) {
   return { price, chg, prev };
 }
 
+let _marketLastGood = null;
+
 app.get('/api/market', async (req, res) => {
   const results = await Promise.allSettled(
     MARKET_SYMBOLS.map(s => fetchQuote(s.sym).then(q => ({ ...s, ...q, ok: true })).catch(() => ({ ...s, ok: false })))
   );
-  res.json({ quotes: results.map(r => r.value) });
+  const quotes = results.map(r => r.value);
+
+  // 성공한 티커로 마지막 성공값 업데이트
+  if (!_marketLastGood) _marketLastGood = {};
+  for (const q of quotes) {
+    if (q.ok && q.price) _marketLastGood[q.id] = q;
+  }
+
+  // 실패한 티커는 마지막 성공값으로 대체
+  const merged = quotes.map(q => (!q.ok && _marketLastGood[q.id]) ? _marketLastGood[q.id] : q);
+  res.json({ quotes: merged });
 });
 
 // ── 서버 캐시 (3분)

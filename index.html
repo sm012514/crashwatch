@@ -2714,25 +2714,42 @@ function fmtPrice(id, price) {
   return price.toFixed(2);
 }
 
-async function loadMarketData() {
-  try {
-    const res = await fetch('/api/market');
-    const { quotes } = await res.json();
-    for (const q of quotes) {
-      if (!q.ok || !q.price) continue;
-      const valEl = document.getElementById(TICKER_IDS[q.id]);
-      const chgEl = document.getElementById(TICKER_CHG_IDS[q.id]);
-      if (valEl) valEl.textContent = fmtPrice(q.id, q.price);
-      if (chgEl) {
-        const sign = q.chg >= 0 ? '+' : '';
-        chgEl.textContent = `${sign}${q.chg.toFixed(2)}%`;
-        chgEl.className = 'ticker-chg ' + (q.chg >= 0 ? 'up' : 'down');
-      }
-      // Update duplicate ticker items too
-      const val2 = document.getElementById(TICKER_IDS[q.id] + '2');
-      if (val2) val2.textContent = fmtPrice(q.id, q.price);
+const _marketCache = {};
+
+function applyMarketQuotes(quotes) {
+  for (const q of quotes) {
+    if (!q.ok || !q.price) continue;
+    _marketCache[q.id] = q; // 마지막 성공값 저장
+  }
+  // 항상 캐시 기준으로 렌더 (실패한 티커도 이전 값 유지)
+  for (const q of Object.values(_marketCache)) {
+    const valEl = document.getElementById(TICKER_IDS[q.id]);
+    const chgEl = document.getElementById(TICKER_CHG_IDS[q.id]);
+    if (valEl) valEl.textContent = fmtPrice(q.id, q.price);
+    if (chgEl) {
+      const sign = q.chg >= 0 ? '+' : '';
+      chgEl.textContent = `${sign}${q.chg.toFixed(2)}%`;
+      chgEl.className = 'ticker-chg ' + (q.chg >= 0 ? 'up' : 'down');
     }
-  } catch(e) {}
+    const val2 = document.getElementById(TICKER_IDS[q.id] + '2');
+    if (val2) val2.textContent = fmtPrice(q.id, q.price);
+  }
+}
+
+async function loadMarketData() {
+  const attempt = async () => {
+    const res = await fetch('/api/market', { signal: AbortSignal.timeout(8000) });
+    const { quotes } = await res.json();
+    applyMarketQuotes(quotes);
+  };
+  try {
+    await attempt();
+  } catch(e) {
+    // 1회 실패 시 3초 후 재시도
+    setTimeout(async () => {
+      try { await attempt(); } catch(_) {}
+    }, 3000);
+  }
 }
 
 function renderBrokers() {
