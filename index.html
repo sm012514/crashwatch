@@ -3364,27 +3364,28 @@ if ('serviceWorker' in navigator) {
 // ── SpaceX IPO 카운트다운 (예상: 2026년 말 기준)
 const SPACEX_IPO_DATE = new Date('2026-06-12T09:30:00-04:00'); // 뉴욕 시간 09:30 (한국 22:30)
 function updateCountdown() {
+  const daysEl = document.getElementById('cdDays');
+  if (!daysEl) return; // DOM 없으면 스킵
   const now = new Date();
   const diff = SPACEX_IPO_DATE - now;
+  const isEn = currentLang === 'en';
+
   if (diff <= 0) {
-    document.getElementById('cdDays').textContent = '0';
-    document.getElementById('cdHours').textContent = '0';
-    document.getElementById('cdMins').textContent = '0';
-    document.getElementById('cdSecs').textContent = '0';
-    document.getElementById('cdSub').textContent = currentLang === 'en' ? 'IPO Day!' : 'D-Day!';
+    daysEl.textContent = '🎉';
+    document.getElementById('cdHours').textContent = 'IPO';
+    document.getElementById('cdMins').textContent = 'DAY';
+    document.getElementById('cdSecs').textContent = '!';
+    document.getElementById('cdSub').textContent = isEn ? 'IPO Day! Trading begins now' : 'IPO 당일! 거래 시작';
     return;
   }
   const d = Math.floor(diff / 86400000);
   const h = Math.floor((diff % 86400000) / 3600000);
   const m = Math.floor((diff % 3600000) / 60000);
   const s = Math.floor((diff % 60000) / 1000);
-  document.getElementById('cdDays').textContent = d;
+  daysEl.textContent = d;
   document.getElementById('cdHours').textContent = String(h).padStart(2,'0');
   document.getElementById('cdMins').textContent = String(m).padStart(2,'0');
   document.getElementById('cdSecs').textContent = String(s).padStart(2,'0');
-
-  const isEn = currentLang === 'en';
-  document.getElementById('cdTitle').textContent = 'SpaceX IPO';
   document.getElementById('cdSub').textContent = isEn ? '2026.06.12 (Fri) · KST 22:30  ·  IPO Price $135' : '2026.06.12 (금) · 한국시간 오후 10:30';
   document.getElementById('cdBadge').textContent = isEn ? 'Confirmed' : '확정';
   document.querySelectorAll('[data-i18n="cd_days"]').forEach(e => e.textContent = isEn ? 'Days' : '일');
@@ -3392,8 +3393,13 @@ function updateCountdown() {
   document.querySelectorAll('[data-i18n="cd_mins"]').forEach(e => e.textContent = isEn ? 'Min' : '분');
   document.querySelectorAll('[data-i18n="cd_secs"]').forEach(e => e.textContent = isEn ? 'Sec' : '초');
 }
+// 페이지 로드 즉시 + 1초마다 갱신
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', updateCountdown);
+} else {
+  updateCountdown();
+}
 setInterval(updateCountdown, 1000);
-updateCountdown();
 
 // ── 로고 클릭 → 홈(뉴스 탭, 전체 필터, 맨 위)
 function goHome() {
