@@ -3401,6 +3401,60 @@ if (document.readyState === 'loading') {
 }
 setInterval(updateCountdown, 1000);
 
+// ── Pull-to-refresh
+(function() {
+  let startY = 0, pulling = false, indicator = null;
+
+  function getIndicator() {
+    if (!indicator) {
+      indicator = document.createElement('div');
+      indicator.id = 'ptr-indicator';
+      indicator.style.cssText = `
+        position:fixed;top:0;left:0;right:0;z-index:9999;
+        display:flex;align-items:center;justify-content:center;
+        height:0;overflow:hidden;background:var(--accent);
+        transition:height 0.15s;font-size:1.2rem;color:white;
+        font-weight:700;letter-spacing:0.05em;
+      `;
+      document.body.appendChild(indicator);
+    }
+    return indicator;
+  }
+
+  document.addEventListener('touchstart', e => {
+    if (window.scrollY === 0) {
+      startY = e.touches[0].clientY;
+      pulling = true;
+    }
+  }, { passive: true });
+
+  document.addEventListener('touchmove', e => {
+    if (!pulling) return;
+    const dist = e.touches[0].clientY - startY;
+    if (dist < 0) { pulling = false; return; }
+    const el = getIndicator();
+    const h = Math.min(dist * 0.4, 56);
+    el.style.height = h + 'px';
+    el.textContent = dist > 80 ? '↓ 놓으면 새로고침' : '↓ 당겨서 새로고침';
+  }, { passive: true });
+
+  document.addEventListener('touchend', e => {
+    if (!pulling) return;
+    pulling = false;
+    const dist = e.changedTouches[0].clientY - startY;
+    const el = getIndicator();
+    if (dist > 80) {
+      el.style.height = '44px';
+      el.textContent = '🔄 새로고침 중...';
+      loadAllNews();
+      loadMarketData();
+      setTimeout(() => { el.style.height = '0'; }, 1200);
+    } else {
+      el.style.height = '0';
+    }
+  }, { passive: true });
+})();
+
 // ── 로고 클릭 → 홈(뉴스 탭, 전체 필터, 맨 위)
 function goHome() {
   const newsTabBtn = document.querySelector('.tab-btn[onclick*="news"]');
