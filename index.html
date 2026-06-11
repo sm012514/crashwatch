@@ -1256,6 +1256,10 @@
           <div style="font-size:0.72rem;color:#94a3b8" id="cdSub">2026.06.12 (금) · 한국시간 오후 10:30</div>
         </div>
         <span style="margin-left:auto;font-size:0.68rem;background:rgba(99,102,241,0.2);color:#a78bfa;padding:2px 8px;border-radius:20px;border:1px solid rgba(99,102,241,0.3)" id="cdBadge">확정</span>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;margin-left:4px">
+          <span style="font-size:0.8rem;font-weight:800;color:#38bdf8;letter-spacing:0.05em">$SPCX</span>
+          <span style="font-size:0.72rem;color:#94a3b8">공모가 <span style="color:#34d399;font-weight:700">$135</span></span>
+        </div>
       </div>
       <div style="display:flex;gap:10px;justify-content:center" id="cdBoxes">
         <div style="text-align:center;background:rgba(99,102,241,0.15);border-radius:10px;padding:10px 14px;min-width:60px">
@@ -3364,7 +3368,7 @@ function updateCountdown() {
 
   const isEn = currentLang === 'en';
   document.getElementById('cdTitle').textContent = 'SpaceX IPO';
-  document.getElementById('cdSub').textContent = isEn ? '2026.06.12 (Fri) · KST 22:30' : '2026.06.12 (금) · 한국시간 오후 10:30';
+  document.getElementById('cdSub').textContent = isEn ? '2026.06.12 (Fri) · KST 22:30  ·  IPO Price $135' : '2026.06.12 (금) · 한국시간 오후 10:30';
   document.getElementById('cdBadge').textContent = isEn ? 'Confirmed' : '확정';
   document.querySelectorAll('[data-i18n="cd_days"]').forEach(e => e.textContent = isEn ? 'Days' : '일');
   document.querySelectorAll('[data-i18n="cd_hours"]').forEach(e => e.textContent = isEn ? 'Hrs' : '시간');
