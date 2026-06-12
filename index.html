@@ -3370,12 +3370,26 @@ function updateCountdown() {
   const diff = SPACEX_IPO_DATE - now;
   const isEn = currentLang === 'en';
 
+  const MARKET_CLOSE = new Date('2026-06-13T04:00:00+09:00'); // 미장 마감 한국시간 오전 5시 (서머타임 4시)
   if (diff <= 0) {
-    daysEl.textContent = '🎉';
-    document.getElementById('cdHours').textContent = 'IPO';
-    document.getElementById('cdMins').textContent = 'DAY';
-    document.getElementById('cdSecs').textContent = '!';
-    document.getElementById('cdSub').textContent = isEn ? 'IPO Day! Trading begins now' : 'IPO 당일! 거래 시작';
+    if (now < MARKET_CLOSE) {
+      // 거래 중
+      const section = document.getElementById('spacexCountdown');
+      if (section) section.style.background = 'linear-gradient(135deg,rgba(15,23,17,0.95),rgba(20,40,25,0.95))';
+      daysEl.textContent = '📈';
+      document.getElementById('cdHours').textContent = isEn ? 'LIVE' : '거래';
+      document.getElementById('cdMins').textContent = isEn ? 'NOW' : '중';
+      document.getElementById('cdSecs').textContent = '!';
+      document.getElementById('cdSub').textContent = isEn ? 'SpaceX is trading now · NASDAQ' : '지금 NASDAQ에서 거래 중';
+      document.getElementById('cdBadge').style.background = 'rgba(52,211,153,0.2)';
+      document.getElementById('cdBadge').style.color = '#34d399';
+      document.getElementById('cdBadge').style.borderColor = 'rgba(52,211,153,0.4)';
+      document.getElementById('cdBadge').textContent = isEn ? 'LIVE' : '거래중';
+    } else {
+      // 마감 후 위젯 숨김
+      const section = document.getElementById('spacexCountdown');
+      if (section) section.style.display = 'none';
+    }
     return;
   }
   const d = Math.floor(diff / 86400000);
