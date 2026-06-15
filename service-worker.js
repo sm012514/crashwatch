@@ -1,4 +1,4 @@
-const CACHE = 'ddu-v6';
+const CACHE = 'ddu-v7';
 const SHELL = ['/', '/index.html', '/about.html', '/privacy.html', '/logo.png', '/manifest.json'];
 
 self.addEventListener('install', e => {
