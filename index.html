@@ -731,6 +731,9 @@
     .event-scale.high { background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.3); }
     .event-scale.medium { background: rgba(249,115,22,0.12); color: #fdba74; border: 1px solid rgba(249,115,22,0.3); }
     .event-scale.low { background: rgba(99,102,241,0.15); color: #a5b4fc; border: 1px solid rgba(99,102,241,0.3); }
+    .dday-badge { padding: 2px 7px; border-radius: 4px; font-size: 0.7rem; font-weight: 700; margin-left: 4px; }
+    .dday-badge.upcoming { background: rgba(99,102,241,0.2); color: #a5b4fc; border: 1px solid rgba(99,102,241,0.4); }
+    .dday-badge.today { background: rgba(239,68,68,0.25); color: #fca5a5; border: 1px solid rgba(239,68,68,0.5); animation: pulse 1.5s ease-in-out infinite; }
 
     .event-status {
       padding: 4px 10px;
@@ -2293,12 +2296,127 @@ function switchTab(name, btn) {
 // ─── EVENTS DATA ──────────────────────────────────────────────────────────────
 const MAJOR_EVENTS = [
   {
+    id: 'fed-meeting',
+    name: 'FOMC 금리 결정',
+    name_en: 'FOMC Rate Decision',
+    category: 'policy',
+    date: '2026년 7월 28~29일',
+    date_en: 'Jul 28–29, 2026',
+    targetDate: '2026-07-29',
+    status: 'upcoming',
+    statusLabel: '🟠 예정',
+    statusLabel_en: '🟠 Scheduled',
+    scale: 'mega',
+    scaleLabel: '초대형',
+    scaleLabel_en: 'Mega',
+    magnitude: 88,
+    desc: 'Fed의 금리 결정과 파월 의장의 기자회견은 매번 글로벌 자산시장 전체를 뒤흔드는 최대 이벤트 중 하나입니다. 특히 관세 인플레이션 환경에서 금리 동결/인하 시점이 불확실해 변동성이 더욱 크게 나타나고 있습니다.',
+    desc_en: "The Fed's rate decision and Powell's press conference are among the biggest market-moving events globally. Tariff-driven inflation makes the timing of cuts/holds especially uncertain, amplifying volatility.",
+    mechanisms: [
+      '금리 동결 장기화 → 성장주 밸류에이션 재조정 → 나스닥 하락',
+      '예상보다 매파적 발언(hawkish) → 달러 강세 → 신흥국·코스피 자금 유출',
+      '점도표(Dot plot) 상향 → 채권 수익률 급등 → 전 자산군 하락',
+      '금리인하 가능성 소멸 → 부동산·리츠(REIT) 동반 하락',
+    ],
+    mechanisms_en: [
+      'Extended hold → growth stock valuation reset → Nasdaq drops',
+      'Hawkish surprise → USD strengthens → capital outflows from EM & KOSPI',
+      'Dot plot revised higher → bond yields surge → all assets reprice',
+      'Rate-cut hopes fade → real estate & REITs fall together',
+    ],
+    impacts: [
+      { label: '나스닥', label_en: 'Nasdaq', type: 'neg' },
+      { label: '신흥국', label_en: 'Emerging markets', type: 'neg' },
+      { label: '달러', label_en: 'USD', type: 'pos' },
+      { label: '채권수익률', label_en: 'Bond yields', type: 'neg' },
+      { label: '금', label_en: 'Gold', type: 'neu' },
+    ],
+    relatedSearch: 'FOMC 금리 Powell',
+  },
+  {
+    id: 'japan-rate',
+    name: '일본은행(BOJ) 금리 결정',
+    name_en: 'Bank of Japan (BOJ) Rate Decision',
+    category: 'policy',
+    date: '2026년 7월 30~31일',
+    date_en: 'Jul 30–31, 2026',
+    targetDate: '2026-07-31',
+    status: 'upcoming',
+    statusLabel: '🟠 예정',
+    statusLabel_en: '🟠 Scheduled',
+    scale: 'high',
+    scaleLabel: '대형',
+    scaleLabel_en: 'Large',
+    magnitude: 80,
+    desc: '수십 년간 지속된 일본의 초저금리 정책이 종료되면서 엔 캐리 트레이드(저금리로 엔화 빌려 고수익 자산 투자) 청산이 글로벌 자산시장 폭락의 트리거가 되고 있습니다. 2024년 8월 5일 코스피 역대 최대 폭락의 직접 원인이었습니다.',
+    desc_en: "The end of Japan's decades-long ultra-low rate policy is triggering unwinding of yen carry trades. This was the direct cause of the record KOSPI crash on Aug 5, 2024.",
+    mechanisms: [
+      '엔화 강세 → 엔 캐리 트레이드 청산 → 전 세계 위험자산 동시 매도',
+      '일본 국채 수익률 상승 → 글로벌 채권 수익률 동반 상승',
+      '엔화 강세 → 한국·신흥국 통화 약세 → 외국인 자금 유출',
+      '일본 기관투자자 해외 투자 자금 회수 → 미국채·주식 매도',
+    ],
+    mechanisms_en: [
+      'JPY strengthens → yen carry trades unwind → global risk asset selloff',
+      'JGB yields rise → global bond yields rise in tandem',
+      'Stronger JPY → KRW & EM currencies weaken → foreign capital outflows',
+      'Japanese institutions repatriate overseas assets → sell US bonds & stocks',
+    ],
+    impacts: [
+      { label: '코스피', label_en: 'KOSPI', type: 'neg' },
+      { label: '나스닥', label_en: 'Nasdaq', type: 'neg' },
+      { label: '엔화', label_en: 'JPY', type: 'pos' },
+      { label: '달러/엔', label_en: 'USD/JPY', type: 'neg' },
+      { label: '일본주식', label_en: 'Japan stocks', type: 'neg' },
+    ],
+    relatedSearch: 'BOJ 일본 금리 엔 캐리',
+  },
+  {
+    id: 'nvidia-earnings',
+    name: '엔비디아 실적 발표 (Q2 FY2027)',
+    name_en: 'Nvidia Earnings (Q2 FY2027)',
+    category: 'tech',
+    date: '2026년 8월 27일 (예상)',
+    date_en: 'Aug 27, 2026 (est.)',
+    targetDate: '2026-08-27',
+    status: 'upcoming',
+    statusLabel: '🟠 예정',
+    statusLabel_en: '🟠 Scheduled',
+    scale: 'high',
+    scaleLabel: '대형',
+    scaleLabel_en: 'Large',
+    magnitude: 75,
+    desc: '시가총액 $3T를 넘나드는 엔비디아의 실적 발표는 AI 섹터 전체는 물론 반도체·테크 전반에 걸쳐 시장 전체를 움직이는 초대형 이벤트입니다. 한국 SK하이닉스·삼성전자와의 HBM 공급 연관성 때문에 코스피에도 직접 영향을 줍니다.',
+    desc_en: "Nvidia's earnings (~$3T market cap) move the entire AI, semiconductor, and tech sector. Due to HBM supply ties with SK Hynix and Samsung, it also directly impacts the Korean KOSPI.",
+    mechanisms: [
+      '예상치 하회 시 AI 버블 우려 → 테크 섹터 전반 동반 급락',
+      'HBM 공급업체 SK하이닉스·삼성전자 코스피 급등락',
+      '데이터센터 투자 감소 전망 시 관련주(전력·냉각·인프라) 연쇄 조정',
+      '옵션 만기와 겹칠 경우 변동성 지수(VIX) 급등',
+    ],
+    mechanisms_en: [
+      'Miss vs. expectations → AI bubble fears → broad tech selloff',
+      'HBM suppliers SK Hynix & Samsung surge or plunge on KOSPI',
+      'Weak data center outlook → cascade in power/cooling/infra stocks',
+      'Coincides with options expiry → VIX spike',
+    ],
+    impacts: [
+      { label: 'AI주', label_en: 'AI stocks', type: 'neg' },
+      { label: '반도체', label_en: 'Semiconductors', type: 'neg' },
+      { label: 'SK하이닉스', label_en: 'SK Hynix', type: 'neg' },
+      { label: '삼성전자', label_en: 'Samsung', type: 'neg' },
+      { label: 'HBM 공급사', label_en: 'HBM suppliers', type: 'pos' },
+    ],
+    relatedSearch: '엔비디아 실적 earnings',
+  },
+  {
     id: 'nps-rebalancing',
     name: '국민연금 포트폴리오 리밸런싱',
     name_en: 'NPS Portfolio Rebalancing',
     category: 'macro',
-    date: '2026년 하반기 예정',
-    date_en: 'H2 2026',
+    date: '2026년 9월 말 (예상)',
+    date_en: 'Late Sep 2026 (est.)',
+    targetDate: '2026-09-30',
     status: 'scheduled',
     statusLabel: '🟠 예정',
     statusLabel_en: '🟠 Scheduled',
@@ -2336,6 +2454,7 @@ const MAJOR_EVENTS = [
     category: 'policy',
     date: '2026년 진행 중',
     date_en: 'Ongoing 2026',
+    targetDate: null,
     status: 'ongoing',
     statusLabel: '🔴 진행 중',
     statusLabel_en: '🔴 Ongoing',
@@ -2370,86 +2489,13 @@ const MAJOR_EVENTS = [
     relatedSearch: '관세 무역전쟁',
   },
   {
-    id: 'nvidia-earnings',
-    name: '엔비디아 실적 발표 (분기별)',
-    name_en: 'Nvidia Earnings (Quarterly)',
-    category: 'tech',
-    date: '분기별 반복',
-    date_en: 'Quarterly',
-    status: 'watch',
-    statusLabel: '📡 모니터링',
-    statusLabel_en: '📡 Monitoring',
-    scale: 'high',
-    scaleLabel: '대형',
-    scaleLabel_en: 'Large',
-    magnitude: 75,
-    desc: '시가총액 $3T를 넘나드는 엔비디아의 실적 발표는 AI 섹터 전체는 물론 반도체·테크 전반에 걸쳐 시장 전체를 움직이는 초대형 이벤트입니다. 한국 SK하이닉스·삼성전자와의 HBM 공급 연관성 때문에 코스피에도 직접 영향을 줍니다.',
-    desc_en: "Nvidia's earnings (~$3T market cap) move the entire AI, semiconductor, and tech sector. Due to HBM supply ties with SK Hynix and Samsung, it also directly impacts the Korean KOSPI.",
-    mechanisms: [
-      '예상치 하회 시 AI 버블 우려 → 테크 섹터 전반 동반 급락',
-      'HBM 공급업체 SK하이닉스·삼성전자 코스피 급등락',
-      '데이터센터 투자 감소 전망 시 관련주(전력·냉각·인프라) 연쇄 조정',
-      '옵션 만기와 겹칠 경우 변동성 지수(VIX) 급등',
-    ],
-    mechanisms_en: [
-      'Miss vs. expectations → AI bubble fears → broad tech selloff',
-      'HBM suppliers SK Hynix & Samsung surge or plunge on KOSPI',
-      'Weak data center outlook → cascade in power/cooling/infra stocks',
-      'Coincides with options expiry → VIX spike',
-    ],
-    impacts: [
-      { label: 'AI주', label_en: 'AI stocks', type: 'neg' },
-      { label: '반도체', label_en: 'Semiconductors', type: 'neg' },
-      { label: 'SK하이닉스', label_en: 'SK Hynix', type: 'neg' },
-      { label: '삼성전자', label_en: 'Samsung', type: 'neg' },
-      { label: 'HBM 공급사', label_en: 'HBM suppliers', type: 'pos' },
-    ],
-    relatedSearch: '엔비디아 실적 earnings',
-  },
-  {
-    id: 'fed-meeting',
-    name: 'FOMC 금리 결정',
-    name_en: 'FOMC Rate Decision',
-    category: 'policy',
-    date: '2026년 7월·9월·11월·12월',
-    date_en: 'Jul · Sep · Nov · Dec 2026',
-    status: 'upcoming',
-    statusLabel: '🟠 예정',
-    statusLabel_en: '🟠 Scheduled',
-    scale: 'mega',
-    scaleLabel: '초대형',
-    scaleLabel_en: 'Mega',
-    magnitude: 88,
-    desc: 'Fed의 금리 결정과 파월 의장의 기자회견은 매번 글로벌 자산시장 전체를 뒤흔드는 최대 이벤트 중 하나입니다. 특히 관세 인플레이션 환경에서 금리 동결/인하 시점이 불확실해 변동성이 더욱 크게 나타나고 있습니다.',
-    desc_en: "The Fed's rate decision and Powell's press conference are among the biggest market-moving events globally. Tariff-driven inflation makes the timing of cuts/holds especially uncertain, amplifying volatility.",
-    mechanisms: [
-      '금리 동결 장기화 → 성장주 밸류에이션 재조정 → 나스닥 하락',
-      '예상보다 매파적 발언(hawkish) → 달러 강세 → 신흥국·코스피 자금 유출',
-      '점도표(Dot plot) 상향 → 채권 수익률 급등 → 전 자산군 하락',
-      '금리인하 가능성 소멸 → 부동산·리츠(REIT) 동반 하락',
-    ],
-    mechanisms_en: [
-      'Extended hold → growth stock valuation reset → Nasdaq drops',
-      'Hawkish surprise → USD strengthens → capital outflows from EM & KOSPI',
-      'Dot plot revised higher → bond yields surge → all assets reprice',
-      'Rate-cut hopes fade → real estate & REITs fall together',
-    ],
-    impacts: [
-      { label: '나스닥', label_en: 'Nasdaq', type: 'neg' },
-      { label: '신흥국', label_en: 'Emerging markets', type: 'neg' },
-      { label: '달러', label_en: 'USD', type: 'pos' },
-      { label: '채권수익률', label_en: 'Bond yields', type: 'neg' },
-      { label: '금', label_en: 'Gold', type: 'neu' },
-    ],
-    relatedSearch: 'FOMC 금리 Powell',
-  },
-  {
     id: 'us-debt-ceiling',
     name: '미국 국가부채 한도 협상',
     name_en: 'US Debt Ceiling Negotiation',
     category: 'macro',
     date: '2026년 진행 중',
     date_en: 'Ongoing 2026',
+    targetDate: null,
     status: 'ongoing',
     statusLabel: '🔴 진행 중',
     statusLabel_en: '🔴 Ongoing',
@@ -2487,6 +2533,7 @@ const MAJOR_EVENTS = [
     category: 'geo',
     date: '상시 모니터링',
     date_en: 'Ongoing watch',
+    targetDate: null,
     status: 'watch',
     statusLabel: '📡 모니터링',
     statusLabel_en: '📡 Monitoring',
@@ -2523,8 +2570,9 @@ const MAJOR_EVENTS = [
     name: 'OpenAI IPO / 대형 AI 상장',
     name_en: 'OpenAI IPO / Major AI Listing',
     category: 'ipo',
-    date: '2026~2027년 예상',
-    date_en: '2026–2027 expected',
+    date: '2027년 예상',
+    date_en: '2027 expected',
+    targetDate: '2027-01-01',
     status: 'watch',
     statusLabel: '📡 모니터링',
     statusLabel_en: '📡 Monitoring',
@@ -2553,49 +2601,13 @@ const MAJOR_EVENTS = [
     relatedSearch: 'OpenAI IPO',
   },
   {
-    id: 'japan-rate',
-    name: '일본은행(BOJ) 금리 인상',
-    name_en: 'Bank of Japan (BOJ) Rate Hike',
-    category: 'policy',
-    date: '2026년 진행 중',
-    date_en: 'Ongoing 2026',
-    status: 'ongoing',
-    statusLabel: '🔴 진행 중',
-    statusLabel_en: '🔴 Ongoing',
-    scale: 'high',
-    scaleLabel: '대형',
-    scaleLabel_en: 'Large',
-    magnitude: 80,
-    desc: '수십 년간 지속된 일본의 초저금리 정책이 종료되면서 엔 캐리 트레이드(저금리로 엔화 빌려 고수익 자산 투자) 청산이 글로벌 자산시장 폭락의 트리거가 되고 있습니다. 2024년 8월 5일 코스피 역대 최대 폭락의 직접 원인이었습니다.',
-    desc_en: "The end of Japan's decades-long ultra-low rate policy is triggering unwinding of yen carry trades (borrowing cheap yen to invest in high-yield assets). This was the direct cause of the record KOSPI crash on Aug 5, 2024.",
-    mechanisms: [
-      '엔화 강세 → 엔 캐리 트레이드 청산 → 전 세계 위험자산 동시 매도',
-      '일본 국채 수익률 상승 → 글로벌 채권 수익률 동반 상승',
-      '엔화 강세 → 한국·신흥국 통화 약세 → 외국인 자금 유출',
-      '일본 기관투자자 해외 투자 자금 회수 → 미국채·주식 매도',
-    ],
-    mechanisms_en: [
-      'JPY strengthens → yen carry trades unwind → global risk asset selloff',
-      'JGB yields rise → global bond yields rise in tandem',
-      'Stronger JPY → KRW & EM currencies weaken → foreign capital outflows',
-      'Japanese institutions repatriate overseas assets → sell US bonds & stocks',
-    ],
-    impacts: [
-      { label: '코스피', label_en: 'KOSPI', type: 'neg' },
-      { label: '나스닥', label_en: 'Nasdaq', type: 'neg' },
-      { label: '엔화', label_en: 'JPY', type: 'pos' },
-      { label: '달러/엔', label_en: 'USD/JPY', type: 'neg' },
-      { label: '일본주식', label_en: 'Japan stocks', type: 'neg' },
-    ],
-    relatedSearch: 'BOJ 일본 금리 엔 캐리',
-  },
-  {
     id: 'spacex-ipo',
     name: 'SpaceX ($SPCX) 나스닥 상장 완료',
     name_en: 'SpaceX ($SPCX) Listed on Nasdaq',
     category: 'ipo',
     date: '2026년 6월 12일 상장 완료 · 공모가 $135',
     date_en: 'Listed June 12, 2026 · IPO Price $135',
+    targetDate: '2026-06-12',
     status: 'completed',
     statusLabel: '🟢 상장 완료',
     statusLabel_en: '🟢 Listed',
@@ -2640,11 +2652,35 @@ function filterEvents(cat, btn) {
   renderEvents();
 }
 
+function calcDday(targetDate) {
+  if (!targetDate) return null;
+  const today = new Date(); today.setHours(0,0,0,0);
+  const target = new Date(targetDate); target.setHours(0,0,0,0);
+  return Math.round((target - today) / 86400000);
+}
+
 function renderEvents() {
   const isEn = currentLang === 'en';
-  const events = activeEventFilter === 'all'
+  let events = activeEventFilter === 'all'
     ? MAJOR_EVENTS
     : MAJOR_EVENTS.filter(e => e.category === activeEventFilter);
+
+  // Sort: future events by targetDate asc, then null-date ongoing, then completed (past)
+  events = [...events].sort((a, b) => {
+    const dA = a.targetDate ? calcDday(a.targetDate) : null;
+    const dB = b.targetDate ? calcDday(b.targetDate) : null;
+    const futureA = dA !== null && dA >= 0;
+    const futureB = dB !== null && dB >= 0;
+    const pastA = dA !== null && dA < 0;
+    const pastB = dB !== null && dB < 0;
+    if (futureA && futureB) return dA - dB;
+    if (futureA) return -1;
+    if (futureB) return 1;
+    if (!pastA && !pastB) return 0; // both ongoing/null
+    if (pastA) return 1;
+    if (pastB) return -1;
+    return dB - dA;
+  });
 
   document.getElementById('eventList').innerHTML = events.map(e => {
     const mechs = isEn ? (e.mechanisms_en || e.mechanisms) : e.mechanisms;
@@ -2660,13 +2696,19 @@ function renderEvents() {
     const mechTitle = isEn ? '⚡ Market Shock Mechanism' : '⚡ 시장 충격 메커니즘';
     const searchLabel = isEn ? '🔍 Related news →' : '🔍 관련 뉴스 검색 →';
     const shockLabel = isEn ? 'Shock Index' : '충격 지수';
+    const dd = e.targetDate ? calcDday(e.targetDate) : null;
+    let ddBadge = '';
+    if (dd !== null && e.status !== 'completed') {
+      if (dd === 0) ddBadge = `<span class="dday-badge today">${isEn ? 'D-Day' : 'D-Day'}</span>`;
+      else if (dd > 0) ddBadge = `<span class="dday-badge upcoming">D-${dd}</span>`;
+    }
     return `
     <div class="event-card ${e.scale}">
       <div class="event-header">
         <div class="event-title-row">
           <div class="event-name">${name}</div>
           <div class="event-meta">
-            <span class="event-date">📅 ${date}</span>
+            <span class="event-date">📅 ${date}</span>${ddBadge}
             <span class="event-scale ${e.scale}">${scaleLabel}</span>
           </div>
         </div>
