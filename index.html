@@ -2303,6 +2303,7 @@ const MAJOR_EVENTS = [
     date: '2026년 7월 28~29일',
     date_en: 'Jul 28–29, 2026',
     targetDate: '2026-07-29',
+    dateConfirmed: true,
     status: 'upcoming',
     statusLabel: '🟠 예정',
     statusLabel_en: '🟠 Scheduled',
@@ -2341,6 +2342,7 @@ const MAJOR_EVENTS = [
     date: '2026년 7월 30~31일',
     date_en: 'Jul 30–31, 2026',
     targetDate: '2026-07-31',
+    dateConfirmed: true,
     status: 'upcoming',
     statusLabel: '🟠 예정',
     statusLabel_en: '🟠 Scheduled',
@@ -2698,8 +2700,8 @@ function renderEvents() {
     const shockLabel = isEn ? 'Shock Index' : '충격 지수';
     const dd = e.targetDate ? calcDday(e.targetDate) : null;
     let ddBadge = '';
-    if (dd !== null && e.status !== 'completed') {
-      if (dd === 0) ddBadge = `<span class="dday-badge today">${isEn ? 'D-Day' : 'D-Day'}</span>`;
+    if (dd !== null && e.status !== 'completed' && e.dateConfirmed) {
+      if (dd === 0) ddBadge = `<span class="dday-badge today">D-Day</span>`;
       else if (dd > 0) ddBadge = `<span class="dday-badge upcoming">D-${dd}</span>`;
     }
     return `
