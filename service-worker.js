@@ -1,8 +1,9 @@
-﻿const CACHE = 'ddu-v9';
-const SHELL = ['/', '/index.html', '/about.html', '/privacy.html', '/logo.png', '/icon-192.png', '/icon-512.png', '/manifest.json'];
+const CACHE = 'ddu-static-v1';
+// HTML은 캐시 안 함 — 항상 서버에서 최신 버전 가져옴
+const STATIC = ['/logo.png', '/icon-192.png', '/icon-512.png', '/manifest.json'];
 
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)));
+  e.waitUntil(caches.open(CACHE).then(c => c.addAll(STATIC)));
   self.skipWaiting();
 });
 
@@ -18,13 +19,21 @@ self.addEventListener('activate', e => {
 self.addEventListener('fetch', e => {
   const url = new URL(e.request.url);
 
-  // API????긽 ?ㅽ듃?뚰겕 ?곗꽑 (?ㅼ떆媛??댁뒪)
+  // API: 항상 네트워크
   if (url.pathname.startsWith('/api/')) {
     e.respondWith(fetch(e.request).catch(() => new Response('[]')));
     return;
   }
 
-  // ???뚯씪? 罹먯떆 ?곗꽑, ?ㅽ뙣 ???ㅽ듃?뚰겕
+  // HTML: 항상 네트워크 우선 → 실패 시만 캐시
+  if (e.request.mode === 'navigate' || url.pathname.endsWith('.html') || url.pathname === '/') {
+    e.respondWith(
+      fetch(e.request).catch(() => caches.match(e.request))
+    );
+    return;
+  }
+
+  // 정적 파일(이미지 등): 캐시 우선
   e.respondWith(
     caches.match(e.request).then(cached => cached || fetch(e.request))
   );
