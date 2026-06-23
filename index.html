@@ -2667,21 +2667,13 @@ function renderEvents() {
     ? MAJOR_EVENTS
     : MAJOR_EVENTS.filter(e => e.category === activeEventFilter);
 
-  // Sort: future events by targetDate asc, then null-date ongoing, then completed (past)
+  // Sort: completed events last, rest by magnitude desc
   events = [...events].sort((a, b) => {
-    const dA = a.targetDate ? calcDday(a.targetDate) : null;
-    const dB = b.targetDate ? calcDday(b.targetDate) : null;
-    const futureA = dA !== null && dA >= 0;
-    const futureB = dB !== null && dB >= 0;
-    const pastA = dA !== null && dA < 0;
-    const pastB = dB !== null && dB < 0;
-    if (futureA && futureB) return dA - dB;
-    if (futureA) return -1;
-    if (futureB) return 1;
-    if (!pastA && !pastB) return 0; // both ongoing/null
-    if (pastA) return 1;
-    if (pastB) return -1;
-    return dB - dA;
+    const aCompleted = a.status === 'completed';
+    const bCompleted = b.status === 'completed';
+    if (aCompleted && !bCompleted) return 1;
+    if (!aCompleted && bCompleted) return -1;
+    return b.magnitude - a.magnitude;
   });
 
   document.getElementById('eventList').innerHTML = events.map(e => {
