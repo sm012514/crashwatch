@@ -814,10 +814,10 @@
       gap: 8px;
       margin-top: 12px;
     }
-    .magnitude-label { font-size: 0.72rem; color: var(--muted); }
+    .magnitude-label { font-size: 0.7rem; color: var(--muted); min-width: 38px; }
     .magnitude-bar {
       flex: 1;
-      height: 6px;
+      height: 5px;
       background: var(--border);
       border-radius: 3px;
       overflow: hidden;
@@ -828,7 +828,11 @@
       background: linear-gradient(90deg, #f97316, #ef4444);
       transition: width 0.5s ease;
     }
-    .magnitude-val { font-size: 0.72rem; color: var(--accent); font-weight: 700; }
+    .magnitude-fill.kr {
+      background: linear-gradient(90deg, #10b981, #06b6d4);
+    }
+    .magnitude-val { font-size: 0.7rem; color: var(--accent); font-weight: 700; min-width: 28px; text-align: right; }
+    .magnitude-val.kr { color: #34d399; }
 
     .event-filter-bar {
       display: flex;
@@ -2277,7 +2281,7 @@ function updateKeyFactor(tab) {
     // 이벤트: 충격지수 1위
     const top = [...MAJOR_EVENTS, ...COIN_EVENTS].sort((a,b) => b.magnitude - a.magnitude)[0];
     valEl.textContent = top ? top.name.replace(' (상장)','').replace(' IPO','') : '—';
-    subEl.textContent = top ? `충격지수 ${top.magnitude}/100` : '';
+    subEl.textContent = top ? `글로벌 ${top.magnitude} · 한국 ${top.magnitude_kr ?? top.magnitude}` : '';
   }
 }
 
@@ -2310,7 +2314,8 @@ const MAJOR_EVENTS = [
     scale: 'mega',
     scaleLabel: '초대형',
     scaleLabel_en: 'Mega',
-    magnitude: 88,
+    magnitude: 79,
+    magnitude_kr: 70,
     desc: 'Fed의 금리 결정과 파월 의장의 기자회견은 매번 글로벌 자산시장 전체를 뒤흔드는 최대 이벤트 중 하나입니다. 특히 관세 인플레이션 환경에서 금리 동결/인하 시점이 불확실해 변동성이 더욱 크게 나타나고 있습니다.',
     desc_en: "The Fed's rate decision and Powell's press conference are among the biggest market-moving events globally. Tariff-driven inflation makes the timing of cuts/holds especially uncertain, amplifying volatility.",
     mechanisms: [
@@ -2349,7 +2354,8 @@ const MAJOR_EVENTS = [
     scale: 'high',
     scaleLabel: '대형',
     scaleLabel_en: 'Large',
-    magnitude: 80,
+    magnitude: 81,
+    magnitude_kr: 76,
     desc: '수십 년간 지속된 일본의 초저금리 정책이 종료되면서 엔 캐리 트레이드(저금리로 엔화 빌려 고수익 자산 투자) 청산이 글로벌 자산시장 폭락의 트리거가 되고 있습니다. 2024년 8월 5일 코스피 역대 최대 폭락의 직접 원인이었습니다.',
     desc_en: "The end of Japan's decades-long ultra-low rate policy is triggering unwinding of yen carry trades. This was the direct cause of the record KOSPI crash on Aug 5, 2024.",
     mechanisms: [
@@ -2387,7 +2393,8 @@ const MAJOR_EVENTS = [
     scale: 'high',
     scaleLabel: '대형',
     scaleLabel_en: 'Large',
-    magnitude: 75,
+    magnitude: 54,
+    magnitude_kr: 64,
     desc: '시가총액 $3T를 넘나드는 엔비디아의 실적 발표는 AI 섹터 전체는 물론 반도체·테크 전반에 걸쳐 시장 전체를 움직이는 초대형 이벤트입니다. 한국 SK하이닉스·삼성전자와의 HBM 공급 연관성 때문에 코스피에도 직접 영향을 줍니다.',
     desc_en: "Nvidia's earnings (~$3T market cap) move the entire AI, semiconductor, and tech sector. Due to HBM supply ties with SK Hynix and Samsung, it also directly impacts the Korean KOSPI.",
     mechanisms: [
@@ -2425,7 +2432,8 @@ const MAJOR_EVENTS = [
     scale: 'high',
     scaleLabel: '대형',
     scaleLabel_en: 'Large',
-    magnitude: 78,
+    magnitude: 29,
+    magnitude_kr: 57,
     desc: '운용 자산 1,200조원 규모의 국민연금이 국내주식 비중 축소·해외자산 확대 방향으로 리밸런싱을 예고. 국민연금이 매도에 나설 경우 코스피 수급에 직접 충격을 줄 수 있으며, 외국인 투자자 심리에도 영향을 미칩니다.',
     desc_en: 'The National Pension Service (NPS), with ~$900B AUM, is signaling a rebalancing toward reducing domestic equity exposure and increasing overseas assets. Large-scale selling could directly pressure KOSPI supply-demand dynamics.',
     mechanisms: [
@@ -2463,7 +2471,8 @@ const MAJOR_EVENTS = [
     scale: 'mega',
     scaleLabel: '초대형',
     scaleLabel_en: 'Mega',
-    magnitude: 90,
+    magnitude: 87,
+    magnitude_kr: 83,
     desc: '트럼프 행정부의 전방위적 관세 부과(중국 145%, 기타국 10~25%)는 글로벌 공급망 재편과 인플레이션 재점화 우려를 동시에 발생시키고 있습니다. 협상 진행 상황에 따라 시장이 극단적 변동성을 보이고 있습니다.',
     desc_en: "Trump's broad tariffs (145% on China, 10–25% on others) are disrupting global supply chains and reigniting inflation fears. Markets are showing extreme volatility depending on negotiation progress.",
     mechanisms: [
@@ -2504,7 +2513,8 @@ const MAJOR_EVENTS = [
     scale: 'high',
     scaleLabel: '대형',
     scaleLabel_en: 'Large',
-    magnitude: 70,
+    magnitude: 78,
+    magnitude_kr: 63,
     desc: '미국 정부의 부채한도 협상 실패(디폴트 우려)는 글로벌 금융위기 트리거가 될 수 있습니다. 2023년에도 합의 직전까지 시장이 급락했으며, 신용등급 강등 이력이 있습니다.',
     desc_en: 'A failure to raise the debt ceiling (default risk) could trigger a global financial crisis. In 2023 markets fell sharply until a last-minute deal, and the US has a prior credit rating downgrade on record.',
     mechanisms: [
@@ -2542,7 +2552,8 @@ const MAJOR_EVENTS = [
     scale: 'mega',
     scaleLabel: '초대형',
     scaleLabel_en: 'Mega',
-    magnitude: 92,
+    magnitude: 94,
+    magnitude_kr: 85,
     desc: '대만은 전 세계 첨단 반도체(TSMC)의 핵심 생산지로, 중국의 군사적 행동 또는 봉쇄 시 글로벌 공급망에 즉각적인 충격을 줍니다. 역대 가장 큰 테일리스크 중 하나입니다.',
     desc_en: 'Taiwan produces the world\'s most advanced chips (TSMC). Any Chinese military action or blockade would instantly shock global supply chains — one of the biggest tail risks ever.',
     mechanisms: [
@@ -2581,7 +2592,8 @@ const MAJOR_EVENTS = [
     scale: 'high',
     scaleLabel: '대형',
     scaleLabel_en: 'Large',
-    magnitude: 72,
+    magnitude: 48,
+    magnitude_kr: 35,
     desc: 'OpenAI의 기업가치는 약 $300B(400조원)에 달하며, 상장 시 AI 섹터 전반의 밸류에이션을 재조정시킬 수 있습니다. 경쟁사(Google·Microsoft) 주가에 직접 영향을 주며 AI 거품 논란을 촉발할 수 있습니다.',
     desc_en: "OpenAI's valuation is ~$300B. An IPO could reset valuations across the AI sector, directly impact competitors (Google, Microsoft), and reignite the AI bubble debate.",
     mechanisms: [
@@ -2616,7 +2628,8 @@ const MAJOR_EVENTS = [
     scale: 'mega',
     scaleLabel: '초대형',
     scaleLabel_en: 'Mega',
-    magnitude: 97,
+    magnitude: 52,
+    magnitude_kr: 24,
     desc: 'SpaceX가 2026년 6월 12일 나스닥에 $SPCX 티커로 상장 완료. 공모가 $135, 기업가치 약 $350B(470조원)로 역대 최대 규모 IPO. 현재 락업(Lockup) 해제일 및 S&P500 편입 일정이 주요 관전 포인트.',
     desc_en: 'SpaceX listed on Nasdaq as $SPCX on June 12, 2026. IPO price $135, valuation ~$350B — largest IPO in history. Key watch points: lockup expiry date and potential S&P500 inclusion.',
     mechanisms: [
@@ -2715,9 +2728,14 @@ function renderEvents() {
       </div>
       <div class="impact-row">${impactChips}</div>
       <div class="event-magnitude">
-        <span class="magnitude-label">${shockLabel}</span>
+        <span class="magnitude-label">${isEn ? '🌐 Global' : '🌐 글로벌'}</span>
         <div class="magnitude-bar"><div class="magnitude-fill" style="width:${e.magnitude}%"></div></div>
-        <span class="magnitude-val">${e.magnitude}/100</span>
+        <span class="magnitude-val">${e.magnitude}</span>
+      </div>
+      <div class="event-magnitude" style="margin-top:5px">
+        <span class="magnitude-label">${isEn ? '🇰🇷 Korea' : '🇰🇷 한국'}</span>
+        <div class="magnitude-bar"><div class="magnitude-fill kr" style="width:${e.magnitude_kr ?? e.magnitude}%"></div></div>
+        <span class="magnitude-val kr">${e.magnitude_kr ?? e.magnitude}</span>
       </div>
       <div style="margin-top:10px;display:flex;align-items:center;gap:12px">
         <a href="https://www.google.com/search?q=${encodeURIComponent(e.relatedSearch)}&tbm=nws" target="_blank"
@@ -2743,7 +2761,7 @@ function renderEvents() {
       <div class="cause-rank ${i===0?'':(i===1?'orange':'gray')}">${i+1}</div>
       <div>
         <div class="cause-text" style="font-size:0.78rem">${name}</div>
-        <div class="cause-count">${shockLabel} ${e.magnitude} · ${statusLabel}</div>
+        <div class="cause-count">${isEn?'G':'글'} ${e.magnitude} · ${isEn?'KR':'한'} ${e.magnitude_kr ?? e.magnitude} · ${statusLabel}</div>
       </div>
     </div>`;
   }).join('');
@@ -3306,7 +3324,7 @@ function renderCoinEvents() {
     const name = isEn ? (ev.name_en || ev.name) : ev.name;
     const desc = isEn ? (ev.desc_en || ev.desc) : ev.desc;
     const mechs = isEn ? (ev.mechanisms_en || ev.mechanisms) : ev.mechanisms;
-    const shockLabel = isEn ? `Shock ${ev.magnitude}/100` : `충격 ${ev.magnitude}/100`;
+    const shockLabel = isEn ? `G ${ev.magnitude} · KR ${ev.magnitude_kr ?? ev.magnitude}` : `글로벌 ${ev.magnitude} · 한국 ${ev.magnitude_kr ?? ev.magnitude}`;
     return `<div class="event-mini-card">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
         <span style="font-weight:600;font-size:0.82rem">${name}</span>
@@ -3421,7 +3439,7 @@ function kataSearch() {
     html += eventHits.map(e =>
       `<div class="katarina-item" onclick="document.querySelector('[onclick*=\\'events\\']').click();kataClose()">
         <div class="katarina-item-title">${highlight(e.name, q)}</div>
-        <div class="katarina-item-meta"><span>${e.statusLabel}</span><span>충격지수 ${e.magnitude}/100</span></div>
+        <div class="katarina-item-meta"><span>${e.statusLabel}</span><span>글로벌 ${e.magnitude} · 한국 ${e.magnitude_kr ?? e.magnitude}</span></div>
       </div>`
     ).join('');
   }
