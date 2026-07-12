@@ -1852,6 +1852,7 @@ function makePinnedCards(articles) {
     else if (a.impact === 'medium') tags.push(`<span class="tag impact-med">${t('filter_medium')}</span>`);
     const pt = getPointTag(a);
     if (pt) tags.push(`<span class="tag point">💡 ${pt}</span>`);
+    const ps = getImpactSummary(a);
     return `<div class="news-card pinned-card" onclick="window.open('${safeLink}','_blank')">
       <div class="card-header">
         <span class="card-source">${a.sourceName}</span>
@@ -1859,6 +1860,7 @@ function makePinnedCards(articles) {
       </div>
       <a class="card-title" href="${safeLink}" target="_blank" onclick="event.stopPropagation()">${a.title || ''}</a>
       <div class="card-tags">${tags.join('')}</div>
+      ${ps ? `<div class="impact-summary"><span class="impact-icon">${ps.icon}</span>${ps.text}</div>` : ''}
     </div>`;
   }).join('');
 }
