@@ -1047,7 +1047,7 @@
   </div>
   <div class="header-right">
     <span class="last-updated" id="lastUpdated" data-i18n="updating">업데이트 중...</span>
-    <button class="lang-btn" id="langBtn" onclick="toggleLang()">EN</button>
+    <button class="lang-btn" id="langBtn" onclick="toggleLang()">ENG</button>
     <button class="katarina-btn" onclick="kataOpen()">⚡ <span class="katarina-btn-text">POKO </span><span style="font-size:0.7rem;font-weight:400;opacity:0.8;margin-left:2px" class="katarina-btn-text" data-i18n="unified_search">통합검색</span></button>
     <button class="refresh-btn" id="installBtn" onclick="triggerInstall()" title="앱 설치" style="display:none">📲</button>
     <button class="refresh-btn" id="refreshBtn" onclick="loadAllNews()">↻</button>
@@ -1523,7 +1523,7 @@ function applyLang() {
   document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
     el.placeholder = t(el.getAttribute('data-i18n-placeholder'));
   });
-  document.getElementById('langBtn').textContent = isEn ? 'KOR' : 'EN';
+  document.getElementById('langBtn').textContent = isEn ? 'KOR' : 'ENG';
   document.documentElement.lang = isEn ? 'en' : 'ko';
 
   // Legend box
