@@ -1803,7 +1803,7 @@ function processRawNews(raw) {
     '금리','관세','환율','증시','코스피','코스닥','나스닥','주가','주식','채권','달러','원화',
     '연준','fomc','fed','한은','ecb','boj','기준금리','긴축','통화정책',
     '물가','인플레','cpi','pce','침체','recession','gdp','실업률','고용지표',
-    '무역','관세전쟁','tariff','trade war','제재','sanction',
+    '무역','관세전쟁','tariff','trade war','sanction',
     '전쟁','war','지정학','conflict','invasion',
     '주가급락','주가폭락','주가급등','증시하락','증시상승','금융위기','경제위기','파산','디폴트',
     '반도체','엔비디아','삼성전자','하이닉스','애플','테슬라','openai','spacex',
@@ -1820,7 +1820,7 @@ function processRawNews(raw) {
     // 금융과 무관한 산업/생활 뉴스
     '서점','책방','도서','출판','음식점','카페','편의점','마트','백화점',
     '학교','입시','수능','대학','교육','학원',
-    '병원','의료','건강','다이어트','헬스','보험료',
+    '병원','의료','건강','다이어트','헬스','보험료','성형','피부과','치과','한의원','미용',
     '아이돌','팬덤','콘텐츠','웹소설','유튜브','틱톡',
   ];
   const seen = new Set();
@@ -1835,9 +1835,9 @@ function processRawNews(raw) {
       const title = (a.title || '').toLowerCase();
       const fullText = (title + ' ' + (a.description || '')).toLowerCase();
       if (BLACKLIST_KW.some(k => fullText.includes(k))) return false;
-      // 제목에 금융 키워드 있거나, 점수 3 이상 (점수만으론 부족 - 오탐 방지)
+      // 제목에 금융 키워드 있거나, 점수 5 이상 (키워드 2개 이상 - 오탐 방지)
       const titleMatch = NEWS_TITLE_KW.some(k => title.includes(k));
-      if (!titleMatch && a.score < 3) return false;
+      if (!titleMatch && a.score < 5) return false;
       return true;
     })
     .sort((a, b) => b.score - a.score || new Date(b.pubDate) - new Date(a.pubDate));
