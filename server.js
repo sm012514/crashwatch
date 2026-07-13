@@ -7,9 +7,10 @@ const path = require('path');
 
 const app = express();
 
-// ── HTTPS + www 강제 리다이렉트
+// ── HTTPS + www 강제 리다이렉트 (로컬 개발은 제외)
 app.use((req, res, next) => {
   const host = req.headers.host || '';
+  if (host.startsWith('localhost') || host.startsWith('127.0.0.1')) return next();
   const proto = req.headers['x-forwarded-proto'];
   const needWww = host && !host.startsWith('www.');
   const needHttps = proto && proto !== 'https';
