@@ -2706,12 +2706,14 @@ function renderEvents() {
     ? MAJOR_EVENTS
     : MAJOR_EVENTS.filter(e => e.category === activeEventFilter);
 
-  // Sort: completed events last, rest by magnitude desc
+  // 최신순: 진행 중 → 예정(날짜 임박순) → 모니터링 → 완료 (그룹 내 충격지수순)
+  const STATUS_ORDER = { ongoing: 0, upcoming: 1, watch: 2, completed: 3 };
   events = [...events].sort((a, b) => {
-    const aCompleted = a.status === 'completed';
-    const bCompleted = b.status === 'completed';
-    if (aCompleted && !bCompleted) return 1;
-    if (!aCompleted && bCompleted) return -1;
+    const so = (STATUS_ORDER[a.status] ?? 2) - (STATUS_ORDER[b.status] ?? 2);
+    if (so !== 0) return so;
+    if (a.status === 'upcoming' && a.targetDate && b.targetDate) {
+      return new Date(a.targetDate) - new Date(b.targetDate);
+    }
     return b.magnitude - a.magnitude;
   });
 
