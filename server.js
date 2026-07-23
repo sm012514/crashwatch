@@ -4,6 +4,10 @@ const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const path = require('path');
+const fs = require('fs');
+
+// ── 기준금리 (변경 시 여기 한 곳만 수정 — 사이트·앱 공통 반영)
+const BASE_RATES = { fed: '3.75%', bok: '2.75%' };
 
 const app = express();
 
@@ -115,7 +119,17 @@ app.get('/api/market', async (req, res) => {
 
   // 실패한 티커는 마지막 성공값으로 대체
   const merged = quotes.map(q => (!q.ok && _marketLastGood[q.id]) ? _marketLastGood[q.id] : q);
-  res.json({ quotes: merged });
+  res.json({ quotes: merged, rates: BASE_RATES });
+});
+
+// ── 대형 이벤트 (events.json 한 곳에서 관리 — 사이트·앱 공통)
+app.get('/api/events', (req, res) => {
+  try {
+    const events = JSON.parse(fs.readFileSync(path.join(__dirname, 'events.json'), 'utf8'));
+    res.json({ events, rates: BASE_RATES });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
 });
 
 // ── 서버 캐시 (3분)
@@ -126,13 +140,41 @@ function withCache(key, ttlMs, fn) {
   return fn().then(data => { cache[key] = { ts: now, data }; return data; });
 }
 
+// ── AI 배치 분류: 금융·시장과 무관한 기사 제목 걸러내기 (Gemini 1회 호출, 실패 시 그냥 통과)
+async function aiFilterIrrelevant(sources) {
+  const apiKey = process.env.GEMINI;
+  if (!apiKey) return sources;
+  const all = [];
+  for (const src of sources) for (const item of src.items) all.push(item);
+  if (!all.length) return sources;
+  try {
+    const titles = all.map((a, i) => `${i}. ${a.title}`).join('\n');
+    const prompt = `다음은 뉴스 제목 목록이다. 이 중 금융·경제·주식·시장과 명백히 무관한 항목(스포츠, 연예, 생활, 사건사고 등)의 번호만 JSON 배열로 답해라. 애매하면 포함하지 마라. 예: [3,7]\n\n${titles}`;
+    const r = await fetch(
+      `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
+      { method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }),
+        signal: AbortSignal.timeout(15000) }
+    );
+    const data = await r.json();
+    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    const json = text.match(/\[[\d,\s]*\]/)?.[0];
+    if (!json) return sources;
+    const off = new Set(JSON.parse(json));
+    all.forEach((a, i) => { if (off.has(i)) a.aiOff = true; });
+  } catch {}
+  return sources;
+}
+
 app.get('/api/news', async (req, res) => {
   const data = await withCache('news', 3 * 60 * 1000, async () => {
     const results = await Promise.allSettled(SOURCES.map(s =>
       fetchFeed(s).then(items => ({ name: s.name, items, ok: true }))
                  .catch(() => ({ name: s.name, items: [], ok: false }))
     ));
-    return { sources: results.map(r => r.value || { name: '?', items: [], ok: false }) };
+    const sources = results.map(r => r.value || { name: '?', items: [], ok: false });
+    await aiFilterIrrelevant(sources);
+    return { sources };
   });
   res.json(data);
 });
@@ -309,6 +351,115 @@ app.post('/api/factcheck', async (req, res) => {
   } catch (e) {
     res.status(500).json({ score: 50, verdict: '미확인', reason: '서버 오류' });
   }
+});
+
+// ── 데일리 브리핑 (SEO용 자체 콘텐츠: /brief, /brief/YYYY-MM-DD)
+const BRIEF_DIR = path.join(__dirname, 'briefs');
+if (!fs.existsSync(BRIEF_DIR)) fs.mkdirSync(BRIEF_DIR);
+
+const BRIEF_KW = ['금리','관세','환율','코스피','나스닥','반도체','엔비디아','삼성전자','하이닉스','비트코인','전쟁','침체','인플레','fomc','fed','tariff','rate','inflation','recession','war','nvidia','bitcoin'];
+
+function kstDate() {
+  return new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10);
+}
+
+async function buildBrief(date) {
+  // /api/news와 동일 캐시 사용
+  const data = await withCache('news', 3 * 60 * 1000, async () => {
+    const results = await Promise.allSettled(SOURCES.map(s =>
+      fetchFeed(s).then(items => ({ name: s.name, items, ok: true }))
+                 .catch(() => ({ name: s.name, items: [], ok: false }))
+    ));
+    const sources = results.map(r => r.value || { name: '?', items: [], ok: false });
+    await aiFilterIrrelevant(sources);
+    return { sources };
+  });
+  const all = [];
+  const seen = new Set();
+  for (const src of data.sources) for (const item of src.items) {
+    const key = (item.title || '').slice(0, 60).toLowerCase().trim();
+    if (item.aiOff || seen.has(key) || key.length < 10) continue;
+    seen.add(key);
+    const text = ((item.title || '') + ' ' + (item.description || '')).toLowerCase();
+    const score = BRIEF_KW.filter(k => text.includes(k)).length;
+    if (score > 0) all.push({ ...item, score });
+  }
+  all.sort((a, b) => b.score - a.score);
+  const top = all.slice(0, 12).map(a => ({ title: a.title, link: a.link, source: a.sourceName, description: (a.description || '').slice(0, 150) }));
+
+  let summary = '';
+  const apiKey = process.env.GEMINI;
+  if (apiKey && top.length) {
+    try {
+      const r = await fetch(
+        `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
+        { method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ contents: [{ parts: [{ text:
+            `다음 오늘의 주요 금융 뉴스 제목들을 보고 시장 상황을 3~4문장으로 요약해줘. 투자 권유 없이 사실 위주로. 제목들:\n${top.map(t => '- ' + t.title).join('\n')}` }] }] }),
+          signal: AbortSignal.timeout(15000) }
+      );
+      const d = await r.json();
+      summary = d?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || '';
+    } catch {}
+  }
+  const brief = { date, generatedAt: new Date().toISOString(), summary, top };
+  fs.writeFileSync(path.join(BRIEF_DIR, `${date}.json`), JSON.stringify(brief, null, 2));
+  return brief;
+}
+
+function renderBriefHtml(b) {
+  const esc = s => String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  const items = b.top.map(t =>
+    `<li><a href="${esc(t.link)}" target="_blank" rel="noopener">${esc(t.title)}</a><span class="src">${esc(t.source)}</span>${t.description ? `<p>${esc(t.description)}</p>` : ''}</li>`
+  ).join('\n');
+  return `<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${b.date} 시장 브리핑 — DDU Market News</title>
+<meta name="description" content="${esc((b.summary || '오늘의 주요 금융 뉴스 요약').slice(0, 150))}">
+<link rel="canonical" href="https://www.ddumarketnews.co.kr/brief/${b.date}">
+<link rel="icon" type="image/png" href="/logo.png">
+<style>
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#0f1117;color:#e2e8f0;max-width:760px;margin:0 auto;padding:24px 16px;line-height:1.6}
+a{color:#a5b4fc;text-decoration:none}a:hover{text-decoration:underline}
+h1{font-size:1.4rem}h1 span{color:#ef4444}
+.summary{background:#1a1d27;border:1px solid #2e3350;border-left:3px solid #ef4444;border-radius:10px;padding:14px 16px;margin:16px 0;font-size:.95rem}
+ul{list-style:none;padding:0}li{background:#1a1d27;border:1px solid #2e3350;border-radius:10px;padding:12px 14px;margin-bottom:10px}
+li a{color:#e2e8f0;font-weight:600}.src{display:inline-block;margin-left:8px;color:#ef4444;font-size:.75rem;font-weight:700}
+li p{color:#94a3b8;font-size:.85rem;margin:6px 0 0}
+.home{display:inline-block;margin-top:20px;color:#94a3b8;font-size:.85rem}
+</style></head><body>
+<h1>📰 <span>${b.date}</span> 시장 브리핑</h1>
+${b.summary ? `<div class="summary">${esc(b.summary)}</div>` : ''}
+<ul>${items}</ul>
+<a class="home" href="/">← DDU Market News 홈으로</a>
+</body></html>`;
+}
+
+app.get(['/brief', '/brief/:date'], async (req, res) => {
+  try {
+    const today = kstDate();
+    const date = req.params.date || today;
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return res.status(400).send('bad date');
+    const file = path.join(BRIEF_DIR, `${date}.json`);
+    let brief;
+    if (fs.existsSync(file)) brief = JSON.parse(fs.readFileSync(file, 'utf8'));
+    else if (date === today) brief = await buildBrief(date);
+    else return res.status(404).send('브리핑이 없습니다');
+    res.send(renderBriefHtml(brief));
+  } catch (e) { res.status(500).send('error: ' + e.message); }
+});
+
+// 브리핑 포함 동적 sitemap
+app.get('/sitemap.xml', (req, res) => {
+  const base = 'https://www.ddumarketnews.co.kr';
+  const dates = fs.existsSync(BRIEF_DIR)
+    ? fs.readdirSync(BRIEF_DIR).filter(f => f.endsWith('.json')).map(f => f.replace('.json', ''))
+    : [];
+  const urls = [`${base}/`, `${base}/about.html`, `${base}/privacy.html`, ...dates.map(d => `${base}/brief/${d}`)];
+  res.type('application/xml').send(
+    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
+    urls.map(u => `  <url><loc>${u}</loc></url>`).join('\n') + '\n</urlset>'
+  );
 });
 
 const PORT = process.env.PORT || 3333;

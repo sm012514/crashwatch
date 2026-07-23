@@ -1,4 +1,4 @@
-const CACHE = 'ddu-static-v1';
+const CACHE = 'ddu-static-v2';
 // HTML은 캐시 안 함 — 항상 서버에서 최신 버전 가져옴
 const STATIC = ['/logo.png', '/icon-192.png', '/icon-512.png', '/manifest.json'];
 
@@ -33,8 +33,14 @@ self.addEventListener('fetch', e => {
     return;
   }
 
-  // 정적 파일(이미지 등): 캐시 우선
+  // 정적 파일(이미지·아이콘 등): 캐시 우선 + 최초 로드 시 캐시에 저장
   e.respondWith(
-    caches.match(e.request).then(cached => cached || fetch(e.request))
+    caches.match(e.request).then(cached => cached || fetch(e.request).then(res => {
+      if (res.ok && e.request.method === 'GET' && new URL(e.request.url).origin === location.origin) {
+        const copy = res.clone();
+        caches.open(CACHE).then(c => c.put(e.request, copy));
+      }
+      return res;
+    }))
   );
 });

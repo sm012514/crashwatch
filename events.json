@@ -1,0 +1,547 @@
+[
+  {
+    "id": "fed-meeting",
+    "name": "FOMC 금리 결정",
+    "name_en": "FOMC Rate Decision",
+    "category": "policy",
+    "date": "2026년 7월 28~29일",
+    "date_en": "Jul 28–29, 2026",
+    "targetDate": "2026-07-29",
+    "dateConfirmed": true,
+    "status": "upcoming",
+    "statusLabel": "🟠 D-6",
+    "statusLabel_en": "🟠 D-6",
+    "scale": "mega",
+    "scaleLabel": "초대형",
+    "scaleLabel_en": "Mega",
+    "magnitude": 79,
+    "magnitude_kr": 70,
+    "desc": "현재 기준금리 3.50~3.75%. 워시 의장 \"물가가 너무 높다\" 발언 후 매파 기조 강화 — 인상 확률 2주새 18%→36% 급등(CME). 7월 29일 결정 발표, 점도표 없음.",
+    "desc_en": "Current rate: 3.50–3.75%. After Warsh's \"prices are too high\" remark, hike odds jumped 18%→36% in two weeks (CME). Decision July 29, no dot plot.",
+    "mechanisms": [
+      "금리 동결 장기화 → 성장주 밸류에이션 재조정 → 나스닥 하락",
+      "예상보다 매파적 발언(hawkish) → 달러 강세 → 신흥국·코스피 자금 유출",
+      "점도표(Dot plot) 상향 → 채권 수익률 급등 → 전 자산군 하락",
+      "금리인하 가능성 소멸 → 부동산·리츠(REIT) 동반 하락"
+    ],
+    "mechanisms_en": [
+      "Extended hold → growth stock valuation reset → Nasdaq drops",
+      "Hawkish surprise → USD strengthens → capital outflows from EM & KOSPI",
+      "Dot plot revised higher → bond yields surge → all assets reprice",
+      "Rate-cut hopes fade → real estate & REITs fall together"
+    ],
+    "impacts": [
+      {
+        "label": "나스닥",
+        "label_en": "Nasdaq",
+        "type": "neg"
+      },
+      {
+        "label": "신흥국",
+        "label_en": "Emerging markets",
+        "type": "neg"
+      },
+      {
+        "label": "달러",
+        "label_en": "USD",
+        "type": "pos"
+      },
+      {
+        "label": "채권수익률",
+        "label_en": "Bond yields",
+        "type": "neg"
+      },
+      {
+        "label": "금",
+        "label_en": "Gold",
+        "type": "neu"
+      }
+    ],
+    "relatedSearch": "FOMC 금리 Powell"
+  },
+  {
+    "id": "japan-rate",
+    "name": "일본은행(BOJ) 금리 결정",
+    "name_en": "Bank of Japan (BOJ) Rate Decision",
+    "category": "policy",
+    "date": "2026년 7월 30~31일",
+    "date_en": "Jul 30–31, 2026",
+    "targetDate": "2026-07-31",
+    "dateConfirmed": true,
+    "status": "upcoming",
+    "statusLabel": "🟠 D-8",
+    "statusLabel_en": "🟠 D-8",
+    "scale": "high",
+    "scaleLabel": "대형",
+    "scaleLabel_en": "Large",
+    "magnitude": 81,
+    "magnitude_kr": 76,
+    "desc": "6월 1.0% 인상(31년래 최고) 후 7/30~31은 동결 유력. 단, BOJ가 엔화 약세發 물가 리스크로 \"더 빠른 인상 가능\" 시사(7/22 보도) — 10월 인상 확률 60%+. 엔 캐리 청산 리스크 상존.",
+    "desc_en": "Hold expected Jul 30–31 after June hike to 1.0% (31-yr high). But BOJ signals openness to faster hikes on weak-yen inflation risk (Jul 22) — >60% odds of an October hike. Yen carry unwind risk persists.",
+    "mechanisms": [
+      "엔화 강세 → 엔 캐리 트레이드 청산 → 전 세계 위험자산 동시 매도",
+      "일본 국채 수익률 상승 → 글로벌 채권 수익률 동반 상승",
+      "엔화 강세 → 한국·신흥국 통화 약세 → 외국인 자금 유출",
+      "일본 기관투자자 해외 투자 자금 회수 → 미국채·주식 매도"
+    ],
+    "mechanisms_en": [
+      "JPY strengthens → yen carry trades unwind → global risk asset selloff",
+      "JGB yields rise → global bond yields rise in tandem",
+      "Stronger JPY → KRW & EM currencies weaken → foreign capital outflows",
+      "Japanese institutions repatriate overseas assets → sell US bonds & stocks"
+    ],
+    "impacts": [
+      {
+        "label": "코스피",
+        "label_en": "KOSPI",
+        "type": "neg"
+      },
+      {
+        "label": "나스닥",
+        "label_en": "Nasdaq",
+        "type": "neg"
+      },
+      {
+        "label": "엔화",
+        "label_en": "JPY",
+        "type": "pos"
+      },
+      {
+        "label": "달러/엔",
+        "label_en": "USD/JPY",
+        "type": "neg"
+      },
+      {
+        "label": "일본주식",
+        "label_en": "Japan stocks",
+        "type": "neg"
+      }
+    ],
+    "relatedSearch": "BOJ 일본 금리 엔 캐리"
+  },
+  {
+    "id": "nvidia-earnings",
+    "name": "엔비디아 실적 발표 (Q2 FY2027)",
+    "name_en": "Nvidia Earnings (Q2 FY2027)",
+    "category": "tech",
+    "date": "2026년 8월 26일",
+    "date_en": "Aug 26, 2026",
+    "targetDate": "2026-08-26",
+    "status": "upcoming",
+    "statusLabel": "🟠 예정",
+    "statusLabel_en": "🟠 Scheduled",
+    "scale": "high",
+    "scaleLabel": "대형",
+    "scaleLabel_en": "Large",
+    "magnitude": 54,
+    "magnitude_kr": 64,
+    "desc": "8월 26일 장 마감 후 발표 확정. 직전 분기 매출 $820억(+85%)·데이터센터 $750억(+92%)으로 고성장 지속 여부가 관건. SK하이닉스·삼성전자 HBM 연관으로 코스피 직접 영향.",
+    "desc_en": "Confirmed for Aug 26 after close. Last quarter: revenue $82B (+85%), data center $75B (+92%) — sustaining hypergrowth is the key question. Direct KOSPI impact via SK Hynix & Samsung HBM.",
+    "mechanisms": [
+      "예상치 하회 시 AI 버블 우려 → 테크 섹터 전반 동반 급락",
+      "HBM 공급업체 SK하이닉스·삼성전자 코스피 급등락",
+      "데이터센터 투자 감소 전망 시 관련주(전력·냉각·인프라) 연쇄 조정",
+      "옵션 만기와 겹칠 경우 변동성 지수(VIX) 급등"
+    ],
+    "mechanisms_en": [
+      "Miss vs. expectations → AI bubble fears → broad tech selloff",
+      "HBM suppliers SK Hynix & Samsung surge or plunge on KOSPI",
+      "Weak data center outlook → cascade in power/cooling/infra stocks",
+      "Coincides with options expiry → VIX spike"
+    ],
+    "impacts": [
+      {
+        "label": "AI주",
+        "label_en": "AI stocks",
+        "type": "neg"
+      },
+      {
+        "label": "반도체",
+        "label_en": "Semiconductors",
+        "type": "neg"
+      },
+      {
+        "label": "SK하이닉스",
+        "label_en": "SK Hynix",
+        "type": "neg"
+      },
+      {
+        "label": "삼성전자",
+        "label_en": "Samsung",
+        "type": "neg"
+      },
+      {
+        "label": "HBM 공급사",
+        "label_en": "HBM suppliers",
+        "type": "pos"
+      }
+    ],
+    "relatedSearch": "엔비디아 실적 earnings"
+  },
+  {
+    "id": "nps-rebalancing",
+    "name": "국민연금 포트폴리오 리밸런싱",
+    "name_en": "NPS Portfolio Rebalancing",
+    "category": "macro",
+    "date": "2026년 7월~ 진행 중",
+    "date_en": "Jul 2026~ Ongoing",
+    "targetDate": null,
+    "status": "ongoing",
+    "statusLabel": "🔴 진행 중",
+    "statusLabel_en": "🔴 Ongoing",
+    "scale": "high",
+    "scaleLabel": "대형",
+    "scaleLabel_en": "Large",
+    "magnitude": 29,
+    "magnitude_kr": 57,
+    "desc": "7/1 재개 첫날 코스피 -2.04%(8,303). 국내주식 비중 약 30%로 목표(20.8%)를 9%p 초과 — 매도 규모 14조~51조원 추정. 수개월 분할 매도로 충격 완화 중이나 수급 부담 지속.",
+    "desc_en": "KOSPI fell 2.04% (8,303) on Jul 1 resumption. Domestic equity ~30% vs 20.8% target (+9pp) — estimated ₩14–51T to sell. Split selling over months limits shock, but overhang persists.",
+    "mechanisms": [
+      "국내주식 비중 축소 → 코스피 대형주(삼성전자·SK하이닉스 등) 대량 매도 압력",
+      "해외주식·채권 비중 확대 → 환전 수요 증가 → 원/달러 환율 상승",
+      "외국인 투자자, 국민연금 매도 신호를 리스크로 해석 → 동반 이탈",
+      "수급 공백 → 코스피 지수 하방 압력 장기화"
+    ],
+    "mechanisms_en": [
+      "Reduced domestic equity allocation → selling pressure on KOSPI large-caps (Samsung, SK Hynix)",
+      "Increased overseas allocation → USD demand rises → KRW weakens",
+      "Foreign investors interpret NPS selling as risk signal → follow-on outflows",
+      "Supply-demand gap → sustained KOSPI downside pressure"
+    ],
+    "impacts": [
+      {
+        "label": "코스피",
+        "label_en": "KOSPI",
+        "type": "neg"
+      },
+      {
+        "label": "삼성전자",
+        "label_en": "Samsung",
+        "type": "neg"
+      },
+      {
+        "label": "SK하이닉스",
+        "label_en": "SK Hynix",
+        "type": "neg"
+      },
+      {
+        "label": "원/달러",
+        "label_en": "KRW/USD",
+        "type": "neg"
+      },
+      {
+        "label": "해외주식",
+        "label_en": "Global stocks",
+        "type": "pos"
+      }
+    ],
+    "relatedSearch": "국민연금 리밸런싱 코스피"
+  },
+  {
+    "id": "trump-tariff",
+    "name": "미국 관세 정책 (트럼프 2기)",
+    "name_en": "US Tariff Policy (Trump 2nd Term)",
+    "category": "policy",
+    "date": "2026년 진행 중",
+    "date_en": "Ongoing 2026",
+    "targetDate": null,
+    "status": "ongoing",
+    "statusLabel": "🔴 진행 중",
+    "statusLabel_en": "🔴 Ongoing",
+    "scale": "mega",
+    "scaleLabel": "초대형",
+    "scaleLabel_en": "Mega",
+    "magnitude": 87,
+    "magnitude_kr": 83,
+    "desc": "7/24 글로벌 10% 임시관세 만료 → USTR \"곧 추가 조치\" 예고. 브라질 25%(7/22 발효)·캐나다 차량/주류/유제품 50% 발동. 60개국 301조 최대 12.5% 관세 제안(교역 99% 커버), 독일 제약도 조사 개시.",
+    "desc_en": "Global 10% temporary tariff expires Jul 24 — USTR flags \"action soon\". Brazil 25% (eff. Jul 22), Canada 50% on autos/alcohol/dairy. Proposed Sec-301 tariffs up to 12.5% on 60 economies (~99% of trade); Germany pharma probe opened.",
+    "mechanisms": [
+      "수출 의존도 높은 한국·대만·일본 주식시장에 직접 타격",
+      "인플레이션 재점화 → Fed 금리인하 기대 소멸 → 채권 수익률 상승",
+      "글로벌 교역량 감소 예상 → 경기침체 우려로 안전자산 이동",
+      "보복 관세 발동 시 미국 기업 실적 악화 우려 → 나스닥 하락",
+      "불확실성 증가 → 리스크 오프(risk-off) 심화"
+    ],
+    "mechanisms_en": [
+      "Direct hit to export-heavy markets: Korea, Taiwan, Japan",
+      "Inflation rebound → Fed rate-cut expectations fade → bond yields rise",
+      "Global trade volume decline → recession fears → flight to safe assets",
+      "Retaliatory tariffs hurt US corporate earnings → Nasdaq falls",
+      "Rising uncertainty → intensified risk-off sentiment"
+    ],
+    "impacts": [
+      {
+        "label": "코스피",
+        "label_en": "KOSPI",
+        "type": "neg"
+      },
+      {
+        "label": "코스닥",
+        "label_en": "KOSDAQ",
+        "type": "neg"
+      },
+      {
+        "label": "수출주",
+        "label_en": "Exporters",
+        "type": "neg"
+      },
+      {
+        "label": "달러",
+        "label_en": "USD",
+        "type": "pos"
+      },
+      {
+        "label": "금",
+        "label_en": "Gold",
+        "type": "pos"
+      },
+      {
+        "label": "국채",
+        "label_en": "Treasuries",
+        "type": "pos"
+      }
+    ],
+    "relatedSearch": "관세 무역전쟁"
+  },
+  {
+    "id": "us-debt-ceiling",
+    "name": "미국 국가부채 한도 협상",
+    "name_en": "US Debt Ceiling Negotiation",
+    "category": "macro",
+    "date": "2026년 진행 중",
+    "date_en": "Ongoing 2026",
+    "targetDate": null,
+    "status": "ongoing",
+    "statusLabel": "🔴 진행 중",
+    "statusLabel_en": "🔴 Ongoing",
+    "scale": "high",
+    "scaleLabel": "대형",
+    "scaleLabel_en": "Large",
+    "magnitude": 78,
+    "magnitude_kr": 63,
+    "desc": "2025년 7월 \"One Big Beautiful Bill\"로 한도를 $41.1T로 상향 완료. 현재 즉각적 위기는 없으나 X-date는 2027년 초~중반 예상. 대규모 감세·지출 확대로 재정 악화 속도가 빨라져 다음 협상 충돌이 더 격화될 가능성.",
+    "desc_en": "Ceiling raised to $41.1T via \"One Big Beautiful Bill\" (Jul 2025). No immediate crisis — X-date expected early-to-mid 2027. Massive tax cuts and spending expansion are accelerating deficit growth, setting up a more severe next confrontation.",
+    "mechanisms": [
+      "협상 결렬 우려 → 미국 국채 수익률 급등 → 전 자산 리프라이싱",
+      "안전자산 역설 붕괴 → 달러·미국채 동시 매도",
+      "신용등급 강등 시 연기금·중앙은행 강제 매도 트리거",
+      "정부 지출 중단(셧다운) 시 경기 지표 악화 → 침체 우려 증폭"
+    ],
+    "mechanisms_en": [
+      "Deal failure fears → US Treasury yields spike → all assets reprice",
+      "Safe-haven paradox breaks → simultaneous selling of USD & Treasuries",
+      "Credit downgrade forces pension/central bank mandatory selling",
+      "Government shutdown → worsening economic data → recession fears grow"
+    ],
+    "impacts": [
+      {
+        "label": "미국채",
+        "label_en": "US Treasuries",
+        "type": "neg"
+      },
+      {
+        "label": "달러",
+        "label_en": "USD",
+        "type": "neg"
+      },
+      {
+        "label": "글로벌주식",
+        "label_en": "Global equities",
+        "type": "neg"
+      },
+      {
+        "label": "금",
+        "label_en": "Gold",
+        "type": "pos"
+      },
+      {
+        "label": "비트코인",
+        "label_en": "Bitcoin",
+        "type": "neu"
+      }
+    ],
+    "relatedSearch": "미국 부채한도 debt ceiling"
+  },
+  {
+    "id": "china-taiwan",
+    "name": "중국-대만 긴장 고조",
+    "name_en": "China-Taiwan Tensions",
+    "category": "geo",
+    "date": "상시 모니터링",
+    "date_en": "Ongoing watch",
+    "targetDate": null,
+    "status": "watch",
+    "statusLabel": "📡 모니터링",
+    "statusLabel_en": "📡 Monitoring",
+    "scale": "mega",
+    "scaleLabel": "초대형",
+    "scaleLabel_en": "Mega",
+    "magnitude": 94,
+    "magnitude_kr": 85,
+    "desc": "7월 초 SLBM 시험으로 핵 2차 타격 능력 과시. 군함 5~6척 대만 주변 상시 배치, 해안경비대 상선 검문·봉쇄 루트 정찰 보도(7/21). 미 상원 \"해상 안전 명분 경제 봉쇄\" 경고. 4차 대만해협 위기 진행 중.",
+    "desc_en": "Early-July SLBM test showcased second-strike capability. 5–6 PLA warships permanently around Taiwan; coast guard inspecting merchant ships, reportedly scouting blockade routes (Jul 21). US senator warns of economic blockade under \"maritime safety\" guise.",
+    "mechanisms": [
+      "TSMC 생산 차질 우려 → 애플·엔비디아·AMD 등 전 테크주 급락",
+      "삼성전자·SK하이닉스 반사이익 기대 vs. 지정학 공포 심리 충돌",
+      "해운·항공 루트 차단 → 글로벌 물류비 폭등 → 인플레이션 재점화",
+      "미국 군사 개입 시 리스크 오프 최고조 → 안전자산(금·달러·엔화) 급등"
+    ],
+    "mechanisms_en": [
+      "TSMC production fears → Apple, Nvidia, AMD and all tech stocks plunge",
+      "Samsung/SK Hynix potential beneficiaries vs. geopolitical panic",
+      "Shipping/air routes blocked → global logistics costs explode → inflation",
+      "US military intervention → peak risk-off → gold/USD/JPY surge"
+    ],
+    "impacts": [
+      {
+        "label": "테크주",
+        "label_en": "Tech stocks",
+        "type": "neg"
+      },
+      {
+        "label": "반도체",
+        "label_en": "Semiconductors",
+        "type": "neg"
+      },
+      {
+        "label": "코스피",
+        "label_en": "KOSPI",
+        "type": "neg"
+      },
+      {
+        "label": "금",
+        "label_en": "Gold",
+        "type": "pos"
+      },
+      {
+        "label": "엔화",
+        "label_en": "JPY",
+        "type": "pos"
+      },
+      {
+        "label": "방산주",
+        "label_en": "Defense stocks",
+        "type": "pos"
+      }
+    ],
+    "relatedSearch": "대만 중국 긴장"
+  },
+  {
+    "id": "openai-ipo",
+    "name": "OpenAI IPO / 대형 AI 상장",
+    "name_en": "OpenAI IPO / Major AI Listing",
+    "category": "ipo",
+    "date": "OpenAI 2027 · Anthropic 2026년 10월 목표",
+    "date_en": "OpenAI 2027 · Anthropic targets Oct 2026",
+    "targetDate": null,
+    "status": "watch",
+    "statusLabel": "📡 모니터링",
+    "statusLabel_en": "📡 Monitoring",
+    "scale": "high",
+    "scaleLabel": "대형",
+    "scaleLabel_en": "Large",
+    "magnitude": 48,
+    "magnitude_kr": 35,
+    "desc": "OpenAI는 알트만이 $1조 밸류에이션 고수하며 2027년 상장으로 기울어(6/26 보도). Anthropic은 $9,650억 밸류로 올해 10월 데뷔 목표 — 첫 대형 AI 상장 유력. OpenAI 2026년 적자 $140억 예상.",
+    "desc_en": "OpenAI leaning toward 2027 as Altman holds out for a $1T valuation (Jun 26). Anthropic ($965B) targets an October 2026 debut — likely first major AI listing. OpenAI expects a $14B loss in 2026.",
+    "mechanisms": [
+      "AI 섹터 밸류에이션 재조정 → 기존 AI주(MS·Google·Meta) 상대적 약세",
+      "IPO 청약 자금 이동 → 성장주 전반 단기 유동성 감소",
+      "상장 후 실망 매물 시 \"AI 버블\" 내러티브 강화 → 섹터 전반 하락"
+    ],
+    "mechanisms_en": [
+      "AI valuation reset → existing AI stocks (MS, Google, Meta) underperform",
+      "IPO subscription capital flows → short-term liquidity drain from growth stocks",
+      "Post-listing disappointment → \"AI bubble\" narrative strengthens → sector-wide decline"
+    ],
+    "impacts": [
+      {
+        "label": "AI주",
+        "label_en": "AI stocks",
+        "type": "neg"
+      },
+      {
+        "label": "MS·Google",
+        "label_en": "MS·Google",
+        "type": "neg"
+      },
+      {
+        "label": "OpenAI",
+        "label_en": "OpenAI",
+        "type": "pos"
+      },
+      {
+        "label": "AI 인프라",
+        "label_en": "AI infrastructure",
+        "type": "neu"
+      }
+    ],
+    "relatedSearch": "OpenAI IPO"
+  },
+  {
+    "id": "spacex-ipo",
+    "name": "SpaceX ($SPCX) 나스닥 상장 완료",
+    "name_en": "SpaceX ($SPCX) Listed on Nasdaq",
+    "category": "ipo",
+    "date": "2026년 6월 12일 상장 완료 · 공모가 $135",
+    "date_en": "Listed June 12, 2026 · IPO Price $135",
+    "targetDate": "2026-06-12",
+    "status": "completed",
+    "statusLabel": "🟢 상장 완료",
+    "statusLabel_en": "🟢 Listed",
+    "scale": "mega",
+    "scaleLabel": "초대형",
+    "scaleLabel_en": "Mega",
+    "magnitude": 52,
+    "magnitude_kr": 24,
+    "desc": "SpaceX가 2026년 6월 12일 나스닥에 $SPCX 티커로 상장 완료. 공모가 $135, 기업가치 약 $350B(470조원)로 역대 최대 규모 IPO. 현재 락업(Lockup) 해제일 및 S&P500 편입 일정이 주요 관전 포인트.",
+    "desc_en": "SpaceX listed on Nasdaq as $SPCX on June 12, 2026. IPO price $135, valuation ~$350B — largest IPO in history. Key watch points: lockup expiry date and potential S&P500 inclusion.",
+    "mechanisms": [
+      "IPO 청약 자금 마련을 위해 기존 보유 주식(특히 테크주·성장주) 대량 매도",
+      "기관 포트폴리오 비중 조정 → 시가총액 상위 종목(애플·MS·엔비디아 등) 동반 하락 압력",
+      "S&P500 편입 시 인덱스 펀드의 강제 편입 매수 → 편입 전 시장 변동성 극대화",
+      "한국 투자자들의 미국 주식 환전 수요 급증 → 원/달러 환율 상승 압력",
+      "락업(Lockup) 해제 후 내부자 대규모 매도 → 2차 조정"
+    ],
+    "mechanisms_en": [
+      "Investors sell existing holdings (tech/growth stocks) to fund IPO subscriptions",
+      "Institutional rebalancing → downward pressure on top-cap stocks (Apple, MS, NVDA)",
+      "S&P500 inclusion forces index fund buys → heightened volatility before inclusion",
+      "Korean investor USD demand surges → KRW/USD pressure",
+      "Post-lockup insider selling → secondary correction"
+    ],
+    "impacts": [
+      {
+        "label": "나스닥",
+        "label_en": "Nasdaq",
+        "type": "neg"
+      },
+      {
+        "label": "테크주",
+        "label_en": "Tech stocks",
+        "type": "neg"
+      },
+      {
+        "label": "성장주",
+        "label_en": "Growth stocks",
+        "type": "neg"
+      },
+      {
+        "label": "원/달러",
+        "label_en": "KRW/USD",
+        "type": "neg"
+      },
+      {
+        "label": "SpaceX",
+        "label_en": "SpaceX",
+        "type": "pos"
+      },
+      {
+        "label": "우주·방산주",
+        "label_en": "Space/Defense",
+        "type": "pos"
+      }
+    ],
+    "relatedSearch": "SpaceX IPO 상장"
+  }
+]
