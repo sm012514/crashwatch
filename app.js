@@ -1277,14 +1277,12 @@ function renderEvents() {
     ? MAJOR_EVENTS
     : MAJOR_EVENTS.filter(e => e.category === activeEventFilter);
 
-  // 최신순: 진행 중 → 예정(날짜 임박순) → 모니터링 → 완료 (그룹 내 충격지수순)
-  const STATUS_ORDER = { ongoing: 0, upcoming: 1, watch: 2, completed: 3 };
+  // 최신 소식(updated) 순 — 완료 이벤트는 맨 아래
   events = [...events].sort((a, b) => {
-    const so = (STATUS_ORDER[a.status] ?? 2) - (STATUS_ORDER[b.status] ?? 2);
-    if (so !== 0) return so;
-    if (a.status === 'upcoming' && a.targetDate && b.targetDate) {
-      return new Date(a.targetDate) - new Date(b.targetDate);
-    }
+    const ac = a.status === 'completed', bc = b.status === 'completed';
+    if (ac !== bc) return ac ? 1 : -1;
+    const ud = new Date(b.updated || 0) - new Date(a.updated || 0);
+    if (ud !== 0) return ud;
     return b.magnitude - a.magnitude;
   });
 

@@ -57,7 +57,8 @@
         "type": "neu"
       }
     ],
-    "relatedSearch": "FOMC 금리 Powell"
+    "relatedSearch": "FOMC 금리 Powell",
+    "updated": "2026-08-17"
   },
   {
     "id": "japan-rate",
@@ -117,7 +118,8 @@
         "type": "neg"
       }
     ],
-    "relatedSearch": "BOJ 일본 금리 엔 캐리"
+    "relatedSearch": "BOJ 일본 금리 엔 캐리",
+    "updated": "2026-08-01"
   },
   {
     "id": "nvidia-earnings",
@@ -176,7 +178,8 @@
         "type": "pos"
       }
     ],
-    "relatedSearch": "엔비디아 실적 earnings"
+    "relatedSearch": "엔비디아 실적 earnings",
+    "updated": "2026-08-17"
   },
   {
     "id": "nps-rebalancing",
@@ -235,7 +238,8 @@
         "type": "pos"
       }
     ],
-    "relatedSearch": "국민연금 리밸런싱 코스피"
+    "relatedSearch": "국민연금 리밸런싱 코스피",
+    "updated": "2026-08-01"
   },
   {
     "id": "trump-tariff",
@@ -301,7 +305,8 @@
         "type": "pos"
       }
     ],
-    "relatedSearch": "관세 무역전쟁"
+    "relatedSearch": "관세 무역전쟁",
+    "updated": "2026-08-01"
   },
   {
     "id": "us-debt-ceiling",
@@ -360,7 +365,8 @@
         "type": "neu"
       }
     ],
-    "relatedSearch": "미국 부채한도 debt ceiling"
+    "relatedSearch": "미국 부채한도 debt ceiling",
+    "updated": "2026-07-23"
   },
   {
     "id": "china-taiwan",
@@ -424,7 +430,8 @@
         "type": "pos"
       }
     ],
-    "relatedSearch": "대만 중국 긴장"
+    "relatedSearch": "대만 중국 긴장",
+    "updated": "2026-08-17"
   },
   {
     "id": "openai-ipo",
@@ -476,7 +483,8 @@
         "type": "neu"
       }
     ],
-    "relatedSearch": "OpenAI IPO"
+    "relatedSearch": "OpenAI IPO",
+    "updated": "2026-08-17"
   },
   {
     "id": "spacex-ipo",
@@ -542,6 +550,7 @@
         "type": "pos"
       }
     ],
-    "relatedSearch": "SpaceX IPO 상장"
+    "relatedSearch": "SpaceX IPO 상장",
+    "updated": "2026-06-12"
   }
 ]
