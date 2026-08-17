@@ -121,6 +121,13 @@
       border-left: 3px solid #f59e0b !important;
       background: rgba(245,158,11,0.05) !important;
     }
+    /* 사이드바 핵심뉴스: 컴팩트 카드 */
+    .pinned-compact { display: flex; flex-direction: column; gap: 8px; }
+    .pinned-compact .news-card { padding: 10px 12px; }
+    .pinned-compact .card-title { font-size: 0.82rem; margin-bottom: 4px; line-height: 1.35; }
+    .pinned-compact .card-header { margin-bottom: 4px; }
+    .pinned-compact .impact-summary { font-size: 0.7rem; padding: 4px 8px; margin-top: 6px; }
+    .pinned-compact .tag { font-size: 0.65rem; padding: 1px 6px; }
     .fc-btn {
       background: none; border: 1px solid var(--border); border-radius: 5px;
       color: var(--muted); cursor: pointer; font-size: 0.75rem; padding: 2px 6px;
@@ -1179,14 +1186,6 @@
       <button class="filter-btn" data-filter="space" onclick="setFilter(this,'space')" data-i18n="filter_space">항공우주</button>
     </div>
 
-    <!-- 📌 핵심 뉴스 -->
-    <div id="pinnedSection" style="margin-bottom:16px;display:none">
-      <div style="font-size:0.8rem;font-weight:700;color:#f59e0b;margin-bottom:8px;letter-spacing:0.05em">
-        <img src="/icons/pin.png" style="width:15px;height:15px;vertical-align:-2px"> <span data-i18n="pinned_label">핵심 뉴스</span>
-      </div>
-      <div id="pinnedList" class="news-list"></div>
-    </div>
-
     <div class="content-grid">
       <div>
         <div id="newsList" class="news-list">
@@ -1198,6 +1197,13 @@
         </div>
       </div>
       <div class="sidebar">
+        <!-- 📌 핵심 뉴스 (사이드바 최상단) -->
+        <div class="sidebar-card" id="pinnedSection" style="display:none">
+          <div class="sidebar-title">
+            <img src="/icons/pin.png" style="width:15px;height:15px;vertical-align:-2px"> <span data-i18n="pinned_label">핵심 뉴스</span>
+          </div>
+          <div id="pinnedList" class="news-list pinned-compact"></div>
+        </div>
         <div class="sidebar-card">
           <div class="sidebar-title" data-i18n="sidebar_causes">🎯 추정 급락 원인 TOP 5</div>
           <div id="causeList"><div style="color:var(--muted);font-size:0.8rem" data-i18n="analyzing">분석 중...</div></div>
