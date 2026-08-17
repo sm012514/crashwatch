@@ -419,7 +419,7 @@ function processRawNews(raw) {
       if (!titleMatch && a.score < 5) return false;
       return true;
     })
-    .sort((a, b) => b.score - a.score || new Date(b.pubDate) - new Date(a.pubDate));
+    .sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate) || b.score - a.score); // 최신순 우선
 }
 
 function makePinnedCards(articles) {
@@ -1565,7 +1565,7 @@ async function loadReNews() {
         const text = ((a.title||'') + ' ' + (a.description||'')).toLowerCase();
         return RE_CORE.some(k => text.includes(k)) && a.score >= 1;
       })
-      .sort((a, b) => b.score - a.score || new Date(b.pubDate) - new Date(a.pubDate));
+      .sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate) || b.score - a.score); // 최신순 우선
   } catch(e) {
     document.getElementById('reNewsList').innerHTML = `<div class="ddu-state"><img src="/logo.png" alt="뚜" style="filter:grayscale(0.5)"/><div class="ddu-msg">뚜가 연결에 실패했어요 😿</div></div>`;
     return;
@@ -1808,7 +1808,7 @@ async function loadCoinNews() {
     coinAllArticles = unique
       .map(scoreCoinArticle)
       .filter(a => a.score >= 1)
-      .sort((a, b) => b.score - a.score || new Date(b.pubDate) - new Date(a.pubDate));
+      .sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate) || b.score - a.score); // 최신순 우선
   } catch(e) {
     document.getElementById('coinNewsList').innerHTML = `<div class="ddu-state"><img src="/logo.png" alt="뚜" style="filter:grayscale(0.5)"/><div class="ddu-msg">뚜가 연결에 실패했어요 😿</div></div>`;
     return;
