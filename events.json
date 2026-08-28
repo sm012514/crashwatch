@@ -1,5 +1,73 @@
 [
   {
+    "id": "iran-war",
+    "name": "이란 전쟁 · 호르무즈 해협 봉쇄",
+    "name_en": "Iran War & Strait of Hormuz Closure",
+    "category": "geo",
+    "date": "2026년 3월 4일~ 진행 중",
+    "date_en": "Since Mar 4, 2026 — ongoing",
+    "targetDate": null,
+    "dateConfirmed": false,
+    "status": "ongoing",
+    "statusLabel": "🔴 진행 중",
+    "statusLabel_en": "🔴 Ongoing",
+    "scale": "mega",
+    "scaleLabel": "초대형",
+    "scaleLabel_en": "Mega",
+    "magnitude": 96,
+    "magnitude_kr": 91,
+    "desc": "3/4 호르무즈 해협 봉쇄 이후 IEA가 \"역사상 최대 공급 차질\"로 규정. 브렌트유 $120 돌파, 카타르에너지 LNG 수출 불가항력 선언. 5개월째 이란의 선박 공격과 미국 보복 타격 반복. 최근 외교 재개 기대로 유가 하락세지만 스태그플레이션 우려 지속.",
+    "desc_en": "Since the Mar 4 closure of Hormuz, the IEA calls it the largest supply disruption in oil market history. Brent topped $120; QatarEnergy declared force majeure on LNG. Five months of Iranian attacks on shipping and US retaliatory strikes. Oil has eased on renewed diplomacy, but stagflation risk persists.",
+    "mechanisms": [
+      "호르무즈 봉쇄 → 원유·LNG 공급 차질 → 유가 급등 → 전 세계 물가 재점화",
+      "에너지 수입 의존도 높은 한국·일본 무역수지 악화 → 원화 약세",
+      "항공·해운·석유화학 원가 급등 → 기업 실적 훼손",
+      "스태그플레이션 우려 → 중앙은행 금리 딜레마 → 채권·주식 동반 약세",
+      "정유·에너지주는 반사이익(엑슨 순이익 2배, 셰브론 +400%)"
+    ],
+    "mechanisms_en": [
+      "Hormuz closure → crude & LNG supply disruption → oil spike → global inflation reignites",
+      "Energy-importing Korea/Japan trade balances worsen → weaker KRW",
+      "Airlines, shipping, petrochemicals face cost shock → earnings damage",
+      "Stagflation fears → central bank dilemma → bonds and equities fall together",
+      "Energy majors benefit (Exxon profit doubled, Chevron +400%)"
+    ],
+    "impacts": [
+      {
+        "label": "유가",
+        "label_en": "Oil",
+        "type": "pos"
+      },
+      {
+        "label": "항공주",
+        "label_en": "Airlines",
+        "type": "neg"
+      },
+      {
+        "label": "코스피",
+        "label_en": "KOSPI",
+        "type": "neg"
+      },
+      {
+        "label": "정유주",
+        "label_en": "Energy stocks",
+        "type": "pos"
+      },
+      {
+        "label": "금",
+        "label_en": "Gold",
+        "type": "pos"
+      },
+      {
+        "label": "원/달러",
+        "label_en": "KRW/USD",
+        "type": "neg"
+      }
+    ],
+    "relatedSearch": "이란 전쟁 호르무즈 유가",
+    "updated": "2026-08-28"
+  },
+  {
     "id": "fed-meeting",
     "name": "FOMC 금리 결정",
     "name_en": "FOMC Rate Decision",
@@ -16,8 +84,8 @@
     "scaleLabel_en": "Mega",
     "magnitude": 79,
     "magnitude_kr": 70,
-    "desc": "9/15~16 회의가 진짜 승부처 — 인상 확률이 시장마다 25~56%로 크게 엇갈림(Kalshi 54%·선물 40%·베팅마켓 25%). 약한 고용지표 vs 63개월째 고물가가 충돌. 7월 9-3 분열 표결로 인상파 3명 확인된 상태.",
-    "desc_en": "Sep 15–16 is the real showdown — hike odds split wildly across markets (Kalshi 54%, futures 40%, betting 25%). Weak jobs data vs 63 straight months of elevated inflation. July's 9-3 vote confirmed three hawkish dissenters.",
+    "desc": "9월 인상 가능성 급락 — 실업률 3.8% 서프라이즈 후 동결 확률 93%까지 상승. 골드만삭스 \"9월 인상 매우 어려워\"(소매판매 둔화·고용 냉각·물가 진정). 7월 82%까지 갔던 인상 베팅이 한 달 만에 뒤집힘.",
+    "desc_en": "September hike odds collapsed — after the 3.8% unemployment surprise, hold probability hit 93%. Goldman: a hike is now \"very unlikely\" (softer retail, cooling labor, easing inflation). July's 82% hike bets flipped in a month.",
     "mechanisms": [
       "금리 동결 장기화 → 성장주 밸류에이션 재조정 → 나스닥 하락",
       "예상보다 매파적 발언(hawkish) → 달러 강세 → 신흥국·코스피 자금 유출",
@@ -58,7 +126,7 @@
       }
     ],
     "relatedSearch": "FOMC 금리 Powell",
-    "updated": "2026-08-17"
+    "updated": "2026-08-28"
   },
   {
     "id": "japan-rate",
@@ -126,27 +194,27 @@
     "name": "엔비디아 실적 발표 (Q2 FY2027)",
     "name_en": "Nvidia Earnings (Q2 FY2027)",
     "category": "tech",
-    "date": "2026년 8월 26일",
-    "date_en": "Aug 26, 2026",
+    "date": "2026년 8월 26일 발표 완료",
+    "date_en": "Reported Aug 26, 2026",
     "targetDate": "2026-08-26",
-    "status": "upcoming",
-    "statusLabel": "🟠 예정",
-    "statusLabel_en": "🟠 Scheduled",
+    "status": "completed",
+    "statusLabel": "🟢 어닝 서프라이즈",
+    "statusLabel_en": "🟢 Earnings beat",
     "scale": "high",
     "scaleLabel": "대형",
     "scaleLabel_en": "Large",
     "magnitude": 54,
     "magnitude_kr": 64,
-    "desc": "8/26 장 마감 후 발표. 컨센서스 매출 $918억~950억(+96%)·EPS $2.06 — 블랙웰 램프, 마진 유지, 3분기 가이던스(~$1,031억)가 관건. 실망 시 -8~15% 조정 전망도. SK하이닉스·삼성 HBM 연관 코스피 직접 영향.",
-    "desc_en": "Reports Aug 26 after close. Consensus: revenue $91.8–95B (+96%), EPS $2.06 — Blackwell ramp, margins and Q3 guide (~$103B) are key. A miss could mean an 8–15% drop. Direct KOSPI impact via SK Hynix & Samsung HBM.",
+    "desc": "컨센서스 완파 — 매출 $962억(+106%)·EPS $2.22·데이터센터 $890억(+117%). 3분기 가이던스 $1,080억(예상 $1,042억 상회), 이례적으로 FY2028 매출 +70% 전망까지 제시. 시간외 +5%. AI 수요 \"가속 중\"(젠슨 황).",
+    "desc_en": "Crushed consensus — revenue $96.2B (+106%), EPS $2.22, data center $89B (+117%). Q3 guide $108B (vs $104.2B est.) plus a rare FY2028 outlook of +70% growth. Up 5% after hours. Huang: demand is \"accelerating.\"",
     "mechanisms": [
-      "예상치 하회 시 AI 버블 우려 → 테크 섹터 전반 동반 급락",
-      "HBM 공급업체 SK하이닉스·삼성전자 코스피 급등락",
-      "데이터센터 투자 감소 전망 시 관련주(전력·냉각·인프라) 연쇄 조정",
-      "옵션 만기와 겹칠 경우 변동성 지수(VIX) 급등"
+      "어닝 서프라이즈 → AI 버블 우려 완화 → 테크 섹터 전반 반등",
+      "데이터센터 +117% → HBM 공급사 SK하이닉스·삼성전자 수혜 기대",
+      "FY2028 +70% 가이던스 → 전력·냉각·인프라 등 AI 밸류체인 전반 재평가",
+      "다음 관전 포인트: 블랙웰 공급 병목과 고객사 자본지출 지속 여부"
     ],
     "mechanisms_en": [
-      "Miss vs. expectations → AI bubble fears → broad tech selloff",
+      "Earnings beat → AI bubble fears ease → broad tech rebound",
       "HBM suppliers SK Hynix & Samsung surge or plunge on KOSPI",
       "Weak data center outlook → cascade in power/cooling/infra stocks",
       "Coincides with options expiry → VIX spike"
@@ -179,7 +247,7 @@
       }
     ],
     "relatedSearch": "엔비디아 실적 earnings",
-    "updated": "2026-08-17"
+    "updated": "2026-08-28"
   },
   {
     "id": "nps-rebalancing",
@@ -449,8 +517,8 @@
     "scaleLabel_en": "Mega",
     "magnitude": 62,
     "magnitude_kr": 45,
-    "desc": "Anthropic 10월 나스닥 상장 추진 — 투자자들은 $2조 밸류 기대(사상 최대, SpaceX $350B의 6배). 모건스탠리·골드만·JPM 주관, 7월부터 사전 투자자 미팅. ARR $470억(5월 공개). 성사 시 사상 최대 유동성 흡수 이벤트. OpenAI는 2027년 대기.",
-    "desc_en": "Anthropic pushes for an October Nasdaq debut — backers eye a $2T valuation (largest IPO ever, 6× SpaceX's $350B). Morgan Stanley/Goldman/JPM lead; pre-IPO investor meetings began in July. ARR $47B (May). If it lands, the biggest liquidity-absorption event on record. OpenAI waits for 2027.",
+    "desc": "Anthropic S-1 공개 제출이 8월말 임박 — 4분기 나스닥 상장 트랙. NYT \"$2조 밸류 가능, 사상 최대 IPO\". 공시엔 'AI 백래시'를 리스크 요인으로 명시 예정(CNBC 8/21). 모건스탠리·골드만·JPM 주관. 성사 시 사상 최대 유동성 흡수 이벤트.",
+    "desc_en": "Anthropic's public S-1 could land by end-August — Q4 Nasdaq track. NYT: a $2T valuation is possible, the largest IPO ever. Filing will list 'AI backlash' as a risk factor (CNBC 8/21). MS/Goldman/JPM lead. If it lands, the biggest liquidity-absorption event on record.",
     "mechanisms": [
       "AI 섹터 밸류에이션 재조정 → 기존 AI주(MS·Google·Meta) 상대적 약세",
       "IPO 청약 자금 이동 → 성장주 전반 단기 유동성 감소",
@@ -484,7 +552,7 @@
       }
     ],
     "relatedSearch": "OpenAI IPO",
-    "updated": "2026-08-17"
+    "updated": "2026-08-28"
   },
   {
     "id": "spacex-ipo",
