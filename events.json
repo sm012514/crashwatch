@@ -4,8 +4,8 @@
     "name": "이란 전쟁 · 호르무즈 해협 봉쇄",
     "name_en": "Iran War & Strait of Hormuz Closure",
     "category": "geo",
-    "date": "2026년 3월 4일~ 진행 중",
-    "date_en": "Since Mar 4, 2026 — ongoing",
+    "date": "휴전 결렬 · 교전 재개",
+    "date_en": "Ceasefire collapsed — fighting resumed",
     "targetDate": null,
     "dateConfirmed": false,
     "status": "ongoing",
@@ -16,8 +16,8 @@
     "scaleLabel_en": "Mega",
     "magnitude": 96,
     "magnitude_kr": 91,
-    "desc": "3/4 호르무즈 해협 봉쇄 이후 IEA가 \"역사상 최대 공급 차질\"로 규정. 브렌트유 $120 돌파, 카타르에너지 LNG 수출 불가항력 선언. 5개월째 이란의 선박 공격과 미국 보복 타격 반복. 최근 외교 재개 기대로 유가 하락세지만 스태그플레이션 우려 지속.",
-    "desc_en": "Since the Mar 4 closure of Hormuz, the IEA calls it the largest supply disruption in oil market history. Brent topped $120; QatarEnergy declared force majeure on LNG. Five months of Iranian attacks on shipping and US retaliatory strikes. Oil has eased on renewed diplomacy, but stagflation risk persists.",
+    "desc": "트럼프가 휴전 종료를 선언(\"이란과 협상은 시간 낭비\"). 이란의 상선 3척 공격에 미국이 보복 타격. 브렌트유는 8/21 $94.4 고점 후 $86~91 박스권. 호르무즈 통항은 주 107회로 전쟁 전(주 130회) 대비 여전히 위축. 재확전 시 유가 재급등 리스크.",
+    "desc_en": "Trump declared the ceasefire over (\"negotiating with Iran was a waste of time\"). The US struck Iran in retaliation for attacks on three commercial ships. Brent peaked at $94.4 on Aug 21 and now trades in an $86–91 range. Hormuz transits are 107/week vs ~130 pre-war. Re-escalation would spike oil again.",
     "mechanisms": [
       "호르무즈 봉쇄 → 원유·LNG 공급 차질 → 유가 급등 → 전 세계 물가 재점화",
       "에너지 수입 의존도 높은 한국·일본 무역수지 악화 → 원화 약세",
@@ -65,15 +65,15 @@
       }
     ],
     "relatedSearch": "이란 전쟁 호르무즈 유가",
-    "updated": "2026-08-28"
+    "updated": "2026-09-12"
   },
   {
     "id": "fed-meeting",
     "name": "FOMC 금리 결정",
     "name_en": "FOMC Rate Decision",
     "category": "policy",
-    "date": "다음 회의 2026년 9월 15~16일",
-    "date_en": "Next: Sep 15–16, 2026",
+    "date": "2026년 9월 15~16일 (16일 발표)",
+    "date_en": "Sep 15–16, 2026 (decision Sep 16)",
     "targetDate": "2026-09-16",
     "dateConfirmed": true,
     "status": "upcoming",
@@ -82,10 +82,10 @@
     "scale": "mega",
     "scaleLabel": "초대형",
     "scaleLabel_en": "Mega",
-    "magnitude": 79,
-    "magnitude_kr": 70,
-    "desc": "9월 인상 가능성 급락 — 실업률 3.8% 서프라이즈 후 동결 확률 93%까지 상승. 골드만삭스 \"9월 인상 매우 어려워\"(소매판매 둔화·고용 냉각·물가 진정). 7월 82%까지 갔던 인상 베팅이 한 달 만에 뒤집힘.",
-    "desc_en": "September hike odds collapsed — after the 3.8% unemployment surprise, hold probability hit 93%. Goldman: a hike is now \"very unlikely\" (softer retail, cooling labor, easing inflation). July's 82% hike bets flipped in a month.",
+    "magnitude": 85,
+    "magnitude_kr": 76,
+    "desc": "8/28 잭슨홀에서 워시 의장이 매파 연설, 8월 고용도 견조 → 인상(3.75~4.00%) 확률이 다시 우세로 역전(CME 58%). 다만 헤드라인 CPI가 2개월 연속 하락(7월 3.4%)해 동결 명분도 존재. JP모건은 25bp 인상 전망. 경제전망(SEP) 동반 공개.",
+    "desc_en": "After Warsh’s hawkish Jackson Hole speech (Aug 28) and solid August jobs, a hike to 3.75–4.00% is again more likely than not (CME 58%). But headline CPI has fallen two months running (3.4% in July), supporting patience. J.P. Morgan expects 25bp. Updated SEP projections accompany the decision.",
     "mechanisms": [
       "금리 동결 장기화 → 성장주 밸류에이션 재조정 → 나스닥 하락",
       "예상보다 매파적 발언(hawkish) → 달러 강세 → 신흥국·코스피 자금 유출",
@@ -126,27 +126,27 @@
       }
     ],
     "relatedSearch": "FOMC 금리 Powell",
-    "updated": "2026-08-28"
+    "updated": "2026-09-12"
   },
   {
     "id": "japan-rate",
     "name": "일본은행(BOJ) 금리 결정",
     "name_en": "Bank of Japan (BOJ) Rate Decision",
     "category": "policy",
-    "date": "다음 회의 2026년 9월 (매 회의 인상 가능성)",
-    "date_en": "Next: Sep 2026 (every meeting live)",
-    "targetDate": null,
-    "dateConfirmed": false,
-    "status": "watch",
-    "statusLabel": "📡 모니터링",
-    "statusLabel_en": "📡 Monitoring",
+    "date": "2026년 9월 18일",
+    "date_en": "Sep 18, 2026",
+    "targetDate": "2026-09-18",
+    "dateConfirmed": true,
+    "status": "upcoming",
+    "statusLabel": "🟠 예정",
+    "statusLabel_en": "🟠 Scheduled",
     "scale": "high",
     "scaleLabel": "대형",
     "scaleLabel_en": "Large",
-    "magnitude": 81,
-    "magnitude_kr": 76,
-    "desc": "7/31 동결(1.0%)이나 8-1 표결 — 다카타 위원 1.25% 인상 제안. 물가 2% 상회 경고로 매파 색채. 직전 엔/달러 162→157 급등에 당국 개입 추정(40년래 최저 엔). 이제 매 회의가 인상 라이브.",
-    "desc_en": "Held at 1.0% Jul 31, but 8-1 vote — Takata proposed 1.25%. BOJ warns inflation may overshoot 2%. Suspected FX intervention lifted yen 162→157 (40-yr low). Every meeting now live for a hike.",
+    "magnitude": 84,
+    "magnitude_kr": 80,
+    "desc": "9/18 인상 유력 — 우에다 총재 매파 발언으로 이달 인상 기대 확산. 엔/달러 155.28까지 2% 급등(한 달 최고), 7/31 미·일 공동 개입 이후 추가 개입 경계도 병존. 다카타 위원 \"2026년은 레짐 체인지\". 엔 캐리 청산 시 2024년 8/5 코스피 폭락 재현 우려.",
+    "desc_en": "A Sep 18 hike looks likely — Governor Ueda’s hawkish remarks lifted expectations. The yen surged 2% to 155.28 (one-month high) amid lingering intervention risk after the July 31 joint US–Japan action. Board member Takata calls 2026 a \"regime change.\" A yen-carry unwind risks a repeat of the Aug 5, 2024 KOSPI crash.",
     "mechanisms": [
       "엔화 강세 → 엔 캐리 트레이드 청산 → 전 세계 위험자산 동시 매도",
       "일본 국채 수익률 상승 → 글로벌 채권 수익률 동반 상승",
@@ -187,7 +187,7 @@
       }
     ],
     "relatedSearch": "BOJ 일본 금리 엔 캐리",
-    "updated": "2026-08-01"
+    "updated": "2026-09-12"
   },
   {
     "id": "nvidia-earnings",
@@ -325,8 +325,8 @@
     "scaleLabel_en": "Mega",
     "magnitude": 87,
     "magnitude_kr": 83,
-    "desc": "7/24 임시관세 만료 즉시 301조 관세 발동 — 60개국에 10~12.5%(미 수입의 99% 커버). 브라질 25%·캐나다 일부 50% 별도. 위헌 소송 등 법적 다툼 진행 중이나 관세 체제는 당분간 유지 전망.",
-    "desc_en": "Sec-301 tariffs kicked in Jul 24 as the temporary levy expired — 10–12.5% on 60 economies (~99% of US imports). Brazil 25%, Canada 50% on select goods. Court challenges underway, but the regime looks set to persist.",
+    "desc": "2/20 대법원이 IEEPA 관세를 위헌 판단 → 122조 임시관세 → 7/24부터 301조 관세로 대체된 상태. 한국은 일본·스위스와 함께 12.5% 대상이지만, 미국이 기존 한미 합의 \"15% 상한\"을 존중하겠다고 재확인. 60개국·미 수입 99% 적용으로 관세 체제 자체는 유지.",
+    "desc_en": "The Supreme Court struck down IEEPA tariffs on Feb 20 → Section 122 stopgap → replaced by Section 301 duties from Jul 24. Korea faces 12.5% alongside Japan and Switzerland, but Washington reaffirmed it will honor the existing 15% cap agreed with Seoul. Coverage spans 60 economies (~99% of US imports), so the tariff regime persists.",
     "mechanisms": [
       "수출 의존도 높은 한국·대만·일본 주식시장에 직접 타격",
       "인플레이션 재점화 → Fed 금리인하 기대 소멸 → 채권 수익률 상승",
@@ -374,7 +374,7 @@
       }
     ],
     "relatedSearch": "관세 무역전쟁",
-    "updated": "2026-08-01"
+    "updated": "2026-09-12"
   },
   {
     "id": "us-debt-ceiling",
@@ -452,8 +452,8 @@
     "scaleLabel_en": "Mega",
     "magnitude": 94,
     "magnitude_kr": 85,
-    "desc": "라이칭더 \"대만은 중국에 종속되지 않는다\" 발언 직후 중국이 해협 이틀 실사격 훈련(8월 초). 8/1 상륙작전 훈련 영상 공개(드론·무인장비 통합). 해협 중간선은 사실상 무력화. 대만 2026~33년 $250억 추가 국방예산 통과, 8월 민방위 훈련 실시.",
-    "desc_en": "After Lai's \"Taiwan is not subordinate to the PRC\" remark, China ran two-day live-fire drills in the Strait (early Aug). Aug 1 footage showed amphibious assault drills with integrated drones. The median line is effectively erased. Taiwan passed $25B extra defense spending (2026–33) and holds civil-defense drills in August.",
+    "desc": "중국 해경이 대만 태평양(동)해안 순찰을 확대 — 2025년 1월 이후 데이터상 첫 사례로, 6월부터 월 2척꼴 상시 전개. 미·일·필리핀 연결 생명선을 겨냥한 압박. 여기에 대만군 \"항복 영상\" 유포 등 정보전 병행. PLA 공중 침범은 라이 총통 취임 전 수준으로 복귀.",
+    "desc_en": "China’s coast guard has expanded patrols off Taiwan’s Pacific (east) coast — the first such activity in data back to Jan 2025 — averaging two cutters a month since June, targeting the lifeline to US allies. Beijing is pairing this with information warfare, including purported \"surrender videos\" of Taiwanese troops. PLA air incursions have reverted to pre-Lai levels.",
     "mechanisms": [
       "TSMC 생산 차질 우려 → 애플·엔비디아·AMD 등 전 테크주 급락",
       "삼성전자·SK하이닉스 반사이익 기대 vs. 지정학 공포 심리 충돌",
@@ -499,15 +499,15 @@
       }
     ],
     "relatedSearch": "대만 중국 긴장",
-    "updated": "2026-08-17"
+    "updated": "2026-09-12"
   },
   {
     "id": "openai-ipo",
     "name": "OpenAI IPO / 대형 AI 상장",
     "name_en": "OpenAI IPO / Major AI Listing",
     "category": "ipo",
-    "date": "Anthropic 2026년 9월말~10월 · OpenAI 2027",
-    "date_en": "Anthropic late Sep–Oct 2026 · OpenAI 2027",
+    "date": "Anthropic S-1 9월말 · 로드쇼 10월 중순",
+    "date_en": "Anthropic S-1 late Sep · roadshow mid-Oct",
     "targetDate": null,
     "status": "watch",
     "statusLabel": "📡 로드쇼 임박",
@@ -517,8 +517,8 @@
     "scaleLabel_en": "Mega",
     "magnitude": 62,
     "magnitude_kr": 45,
-    "desc": "Anthropic S-1 공개 제출이 8월말 임박 — 4분기 나스닥 상장 트랙. NYT \"$2조 밸류 가능, 사상 최대 IPO\". 공시엔 'AI 백래시'를 리스크 요인으로 명시 예정(CNBC 8/21). 모건스탠리·골드만·JPM 주관. 성사 시 사상 최대 유동성 흡수 이벤트.",
-    "desc_en": "Anthropic's public S-1 could land by end-August — Q4 Nasdaq track. NYT: a $2T valuation is possible, the largest IPO ever. Filing will list 'AI backlash' as a risk factor (CNBC 8/21). MS/Goldman/JPM lead. If it lands, the biggest liquidity-absorption event on record.",
+    "desc": "Anthropic 상장 일정이 뒤로 밀림 — 공개 S-1은 9월말, 기관 로드쇼는 10월 중순 이후 전망(9/5 보도). 당초 10월 첫 거래 목표에서 후퇴. 밸류에이션 $2조 관측은 유지되나 주식 수·가격·상장일 모두 미정. 성사 시 사상 최대 유동성 흡수 이벤트.",
+    "desc_en": "Anthropic’s listing has slipped — the public S-1 is now expected late September with the institutional roadshow unlikely before mid-October (reported Sep 5), pushing back the October first-trade target. The ~$2T valuation talk stands, but share count, price and listing date are all unset. Still the largest liquidity-absorption event on record if it lands.",
     "mechanisms": [
       "AI 섹터 밸류에이션 재조정 → 기존 AI주(MS·Google·Meta) 상대적 약세",
       "IPO 청약 자금 이동 → 성장주 전반 단기 유동성 감소",
@@ -552,7 +552,7 @@
       }
     ],
     "relatedSearch": "OpenAI IPO",
-    "updated": "2026-08-28"
+    "updated": "2026-09-12"
   },
   {
     "id": "spacex-ipo",
