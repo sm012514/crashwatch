@@ -1,0 +1,37 @@
+name: 대형 이벤트 주간 업데이트
+
+on:
+  schedule:
+    # 매주 월요일 08:00 KST (일요일 23:00 UTC) — 한국 장 열리기 전
+    - cron: '0 23 * * 0'
+  workflow_dispatch:        # GitHub에서 수동 실행도 가능
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 최신 뉴스로 이벤트 갱신
+        env:
+          GEMINI: ${{ secrets.GEMINI }}
+        run: node scripts/update-events.js
+
+      - name: 변경분 커밋 & 배포
+        run: |
+          if git diff --quiet events.json; then
+            echo "변경 사항 없음 — 커밋 생략"
+            exit 0
+          fi
+          git config user.name  "markechu-bot"
+          git config user.email "sm012514@gmail.com"
+          git add events.json
+          git commit -m "chore: 대형 이벤트 주간 자동 업데이트 ($(TZ=Asia/Seoul date +%Y-%m-%d))"
+          git push
