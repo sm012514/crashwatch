@@ -4,8 +4,8 @@
     "name": "이란 전쟁 · 호르무즈 해협 봉쇄",
     "name_en": "Iran War & Strait of Hormuz Closure",
     "category": "geo",
-    "date": "휴전 결렬 · 교전 재개",
-    "date_en": "Ceasefire collapsed — fighting resumed",
+    "date": "확전 후 단계적 합의 논의",
+    "date_en": "Escalation, then phased-deal talks",
     "targetDate": null,
     "dateConfirmed": false,
     "status": "ongoing",
@@ -16,8 +16,8 @@
     "scaleLabel_en": "Mega",
     "magnitude": 96,
     "magnitude_kr": 91,
-    "desc": "트럼프가 휴전 종료를 선언(\"이란과 협상은 시간 낭비\"). 이란의 상선 3척 공격에 미국이 보복 타격. 브렌트유는 8/21 $94.4 고점 후 $86~91 박스권. 호르무즈 통항은 주 107회로 전쟁 전(주 130회) 대비 여전히 위축. 재확전 시 유가 재급등 리스크.",
-    "desc_en": "Trump declared the ceasefire over (\"negotiating with Iran was a waste of time\"). The US struck Iran in retaliation for attacks on three commercial ships. Brent peaked at $94.4 on Aug 21 and now trades in an $86–91 range. Hormuz transits are 107/week vs ~130 pre-war. Re-escalation would spike oil again.",
+    "desc": "9/8 이란의 미 해군 함정 2차 공격설로 유가 $99 돌파, 9/23~24에는 이란 군 고위인사의 \"인도양으로 전선 확대\" 발언에 브렌트가 $106까지 급등. 이후 호르무즈 재개방과 미국의 이란 항구 봉쇄 해제를 맞바꾸는 단계적 합의설이 나오며 9/25 $92~93로 반락. 세계 원유 20% 이상이 지나는 길목이라 변동성 극심.",
+    "desc_en": "Oil topped $99 on Sep 8 after reports of a second Iranian attack on US Navy ships, then Brent spiked above $106 on Sep 23–24 when a senior Iranian commander threatened to widen the war to the Indian Ocean. Prices fell back to $92–93 by Sep 25 on reports of a phased deal trading Hormuz reopening for lifting the US blockade of Iranian ports. With over 20% of world oil transiting the strait, volatility is extreme.",
     "mechanisms": [
       "호르무즈 봉쇄 → 원유·LNG 공급 차질 → 유가 급등 → 전 세계 물가 재점화",
       "에너지 수입 의존도 높은 한국·일본 무역수지 악화 → 원화 약세",
@@ -65,16 +65,16 @@
       }
     ],
     "relatedSearch": "이란 전쟁 호르무즈 유가",
-    "updated": "2026-09-12"
+    "updated": "2026-09-27"
   },
   {
     "id": "fed-meeting",
     "name": "FOMC 금리 결정",
     "name_en": "FOMC Rate Decision",
     "category": "policy",
-    "date": "2026년 9월 15~16일 (16일 발표)",
-    "date_en": "Sep 15–16, 2026 (decision Sep 16)",
-    "targetDate": "2026-09-16",
+    "date": "2026년 10월 27~28일 (9/16 인상 완료)",
+    "date_en": "Next: Oct 27–28 (hiked Sep 16)",
+    "targetDate": "2026-10-28",
     "dateConfirmed": true,
     "status": "upcoming",
     "statusLabel": "🟠 예정",
@@ -82,10 +82,10 @@
     "scale": "mega",
     "scaleLabel": "초대형",
     "scaleLabel_en": "Mega",
-    "magnitude": 85,
-    "magnitude_kr": 76,
-    "desc": "8/28 잭슨홀에서 워시 의장이 매파 연설, 8월 고용도 견조 → 인상(3.75~4.00%) 확률이 다시 우세로 역전(CME 58%). 다만 헤드라인 CPI가 2개월 연속 하락(7월 3.4%)해 동결 명분도 존재. JP모건은 25bp 인상 전망. 경제전망(SEP) 동반 공개.",
-    "desc_en": "After Warsh’s hawkish Jackson Hole speech (Aug 28) and solid August jobs, a hike to 3.75–4.00% is again more likely than not (CME 58%). But headline CPI has fallen two months running (3.4% in July), supporting patience. J.P. Morgan expects 25bp. Updated SEP projections accompany the decision.",
+    "magnitude": 88,
+    "magnitude_kr": 79,
+    "desc": "9/16 만장일치(12-0) 25bp 인상 — 3.75~4.00%로 2023년 7월 이후 첫 인상. 워시 의장 \"인플레이션이 너무 오래, 너무 높았다\". 점도표상 18명 중 16명이 추가 인상, 그중 4명은 두 번 더를 전망해 긴축 사이클 진입이 확인됨. 10/27~28 회의가 다음 분수령.",
+    "desc_en": "A unanimous 12-0 vote on Sep 16 lifted rates 25bp to 3.75–4.00% — the first hike since July 2023. Warsh: inflation has been \"too high for too long.\" The dot plot shows 16 of 18 officials expecting another hike, four seeing two more, confirming a tightening cycle. Oct 27–28 is the next test.",
     "mechanisms": [
       "금리 동결 장기화 → 성장주 밸류에이션 재조정 → 나스닥 하락",
       "예상보다 매파적 발언(hawkish) → 달러 강세 → 신흥국·코스피 자금 유출",
@@ -126,27 +126,27 @@
       }
     ],
     "relatedSearch": "FOMC 금리 Powell",
-    "updated": "2026-09-12"
+    "updated": "2026-09-27"
   },
   {
     "id": "japan-rate",
     "name": "일본은행(BOJ) 금리 결정",
     "name_en": "Bank of Japan (BOJ) Rate Decision",
     "category": "policy",
-    "date": "2026년 9월 18일",
-    "date_en": "Sep 18, 2026",
-    "targetDate": "2026-09-18",
-    "dateConfirmed": true,
-    "status": "upcoming",
-    "statusLabel": "🟠 예정",
-    "statusLabel_en": "🟠 Scheduled",
+    "date": "9/18 인상 완료 · 다음 회의 10월 말",
+    "date_en": "Hiked Sep 18 · next meeting late Oct",
+    "targetDate": null,
+    "dateConfirmed": false,
+    "status": "watch",
+    "statusLabel": "📡 모니터링",
+    "statusLabel_en": "📡 Monitoring",
     "scale": "high",
     "scaleLabel": "대형",
     "scaleLabel_en": "Large",
     "magnitude": 84,
     "magnitude_kr": 80,
-    "desc": "9/18 인상 유력 — 우에다 총재 매파 발언으로 이달 인상 기대 확산. 엔/달러 155.28까지 2% 급등(한 달 최고), 7/31 미·일 공동 개입 이후 추가 개입 경계도 병존. 다카타 위원 \"2026년은 레짐 체인지\". 엔 캐리 청산 시 2024년 8/5 코스피 폭락 재현 우려.",
-    "desc_en": "A Sep 18 hike looks likely — Governor Ueda’s hawkish remarks lifted expectations. The yen surged 2% to 155.28 (one-month high) amid lingering intervention risk after the July 31 joint US–Japan action. Board member Takata calls 2026 a \"regime change.\" A yen-carry unwind risks a repeat of the Aug 5, 2024 KOSPI crash.",
+    "desc": "9/18 25bp 인상해 1.25% — 1995년 이후 최고, 직전 인상에서 3개월 만으로 1990년 이후 가장 빠른 속도. 다만 7-2 분열 표결(아사다·사토 반대)과 우에다 총재의 미온적 기자회견에 엔화는 오히려 156.64로 약세 전환(-0.45%). 인상에도 엔 약세가 이어지면 개입 재개 가능성.",
+    "desc_en": "The BOJ hiked 25bp to 1.25% on Sep 18 — the highest since 1995 and, coming just three months after the last move, the fastest pace since 1990. But a split 7-2 vote (Asada and Sato dissenting) and Ueda’s non-committal press conference left the yen weaker at 156.64 (-0.45%). Continued yen weakness despite hikes revives intervention risk.",
     "mechanisms": [
       "엔화 강세 → 엔 캐리 트레이드 청산 → 전 세계 위험자산 동시 매도",
       "일본 국채 수익률 상승 → 글로벌 채권 수익률 동반 상승",
@@ -187,7 +187,7 @@
       }
     ],
     "relatedSearch": "BOJ 일본 금리 엔 캐리",
-    "updated": "2026-09-12"
+    "updated": "2026-09-27"
   },
   {
     "id": "nvidia-earnings",
@@ -506,8 +506,8 @@
     "name": "OpenAI IPO / 대형 AI 상장",
     "name_en": "OpenAI IPO / Major AI Listing",
     "category": "ipo",
-    "date": "Anthropic S-1 9월말 · 로드쇼 10월 중순",
-    "date_en": "Anthropic S-1 late Sep · roadshow mid-Oct",
+    "date": "Anthropic 나스닥 10월 목표 · 공개 S-1 대기",
+    "date_en": "Anthropic targets Nasdaq in Oct · public S-1 pending",
     "targetDate": null,
     "status": "watch",
     "statusLabel": "📡 로드쇼 임박",
@@ -517,8 +517,8 @@
     "scaleLabel_en": "Mega",
     "magnitude": 62,
     "magnitude_kr": 45,
-    "desc": "Anthropic 상장 일정이 뒤로 밀림 — 공개 S-1은 9월말, 기관 로드쇼는 10월 중순 이후 전망(9/5 보도). 당초 10월 첫 거래 목표에서 후퇴. 밸류에이션 $2조 관측은 유지되나 주식 수·가격·상장일 모두 미정. 성사 시 사상 최대 유동성 흡수 이벤트.",
-    "desc_en": "Anthropic’s listing has slipped — the public S-1 is now expected late September with the institutional roadshow unlikely before mid-October (reported Sep 5), pushing back the October first-trade target. The ~$2T valuation talk stands, but share count, price and listing date are all unset. Still the largest liquidity-absorption event on record if it lands.",
+    "desc": "Anthropic이 10월 상장처로 나스닥을 선택(9월 보도). 다만 공개 S-1은 아직 EDGAR에 올라오지 않았고 티커·공모가·주식 수·상장일 모두 미공개 상태. 6/1 기밀 제출 이후 $9,650억 밸류(시리즈 H)에서 최대 $2조 관측까지 거론되나 확정된 목표치는 없음.",
+    "desc_en": "Anthropic has picked Nasdaq for a targeted October listing (reported in September), but no public S-1 has appeared on EDGAR and the ticker, price range, share count and date all remain unannounced. Since the June 1 confidential filing, talk has ranged from its $965B Series H valuation up to $2T, with no confirmed target.",
     "mechanisms": [
       "AI 섹터 밸류에이션 재조정 → 기존 AI주(MS·Google·Meta) 상대적 약세",
       "IPO 청약 자금 이동 → 성장주 전반 단기 유동성 감소",
@@ -552,7 +552,7 @@
       }
     ],
     "relatedSearch": "OpenAI IPO",
-    "updated": "2026-09-12"
+    "updated": "2026-09-27"
   },
   {
     "id": "spacex-ipo",
