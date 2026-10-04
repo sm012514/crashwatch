@@ -365,9 +365,18 @@ app.post('/api/event-refresh', async (req, res) => {
       }
     );
     const data = await r.json();
-    const text = data?.candidates?.[0]?.content?.parts?.map(p => p.text).join('') || '';
+    const cand = data?.candidates?.[0];
+    const text = (cand?.content?.parts || []).map(p => p.text).filter(Boolean).join('');
     const json = text.match(/\{[\s\S]*\}/)?.[0];
-    if (!json) return res.status(502).json({ error: 'parse failed' });
+    if (!json) {
+      return res.status(502).json({
+        error: 'parse failed',
+        httpStatus: r.status,
+        finishReason: cand?.finishReason || null,
+        apiError: data?.error?.message || null,
+        raw: text.slice(0, 300),
+      });
+    }
     res.json(JSON.parse(json));
   } catch (e) {
     res.status(500).json({ error: e.message });
