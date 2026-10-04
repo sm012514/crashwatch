@@ -4,8 +4,8 @@
     "name": "이란 전쟁 · 호르무즈 해협 봉쇄",
     "name_en": "Iran War & Strait of Hormuz Closure",
     "category": "geo",
-    "date": "호르무즈 교착 · 유가 고공권",
-    "date_en": "Hormuz deadlock · oil elevated",
+    "date": "호르무즈 교착 · 진행 중",
+    "date_en": "Hormuz deadlock · ongoing",
     "targetDate": null,
     "dateConfirmed": false,
     "status": "ongoing",
@@ -16,8 +16,8 @@
     "scaleLabel_en": "Mega",
     "magnitude": 96,
     "magnitude_kr": 91,
-    "desc": "브렌트유 10/2 기준 $102.7로 주간 2% 하락했으나 전쟁 전 대비 여전히 높은 수준. 중동 원유 수출량은 전쟁 전에 근접하게 회복됐지만 호르무즈 재개 협상이 교착되며 불확실성 지속. 로이터 폴의 2026년 브렌트 평균 전망은 한 달 새 $85→$89로 상향. OPEC+는 11월 생산 목표 동결, G7은 4개월간 최대 1억 배럴 비축유 방출에 합의.",
-    "desc_en": "Brent sat at $102.7 on Oct 2, down about 2% on the week but still far above pre-war levels. Middle East crude exports have recovered close to pre-war volumes, yet talks on reopening Hormuz remain deadlocked. A Reuters poll lifted its 2026 Brent average forecast from $85 to $89 in a month. OPEC+ left November output targets unchanged and the G7 agreed to release up to 100 million barrels of crude and diesel over four months.",
+    "desc": "이란은 10월 4일 미국의 7가지 조건을 충족해야 호르무즈 해협을 재개방할 것이며, 제안 수락 시 7일 이내 재개방이 가능하다고 밝혔다. OPEC+는 같은 날 회의에서 11월 생산 목표를 현 수준으로 동결하고 다음 회의를 11월 1일로 확정했다. 브렌트유는 10월 4일 배럴당 $102.25-$102.61을 기록했으며, G7은 4개월간 최대 1억 배럴의 비축유를 방출하되 초기 20일 동안 경유를 우선 공급하기로 합의했다.",
+    "desc_en": "Iran stated on October 4 that the Strait of Hormuz will not reopen until the US meets its seven conditions, adding that a reopening within seven days is possible if proposals are accepted. OPEC+ decided in its October 4 meeting to freeze November production targets at current levels, with the next meeting scheduled for November 1. Brent crude traded between $102.25 and $102.61 per barrel on October 4, and the G7 agreed to release up to 100 million barrels of strategic reserves over four months, prioritizing diesel during the first 20 days.",
     "mechanisms": [
       "호르무즈 봉쇄 → 원유·LNG 공급 차질 → 유가 급등 → 전 세계 물가 재점화",
       "에너지 수입 의존도 높은 한국·일본 무역수지 악화 → 원화 약세",
@@ -72,8 +72,8 @@
     "name": "FOMC 금리 결정",
     "name_en": "FOMC Rate Decision",
     "category": "policy",
-    "date": "2026년 10월 27~28일 (9/16 인상 완료)",
-    "date_en": "Next: Oct 27–28 (hiked Sep 16)",
+    "date": "2026년 10월 27~28일",
+    "date_en": "Oct 27–28, 2026 (decision Oct 28)",
     "targetDate": "2026-10-28",
     "dateConfirmed": true,
     "status": "upcoming",
@@ -84,8 +84,8 @@
     "scaleLabel_en": "Mega",
     "magnitude": 88,
     "magnitude_kr": 79,
-    "desc": "9/16 만장일치(12-0) 25bp 인상 — 3.75~4.00%로 2023년 7월 이후 첫 인상. 워시 의장 \"인플레이션이 너무 오래, 너무 높았다\". 점도표상 18명 중 16명이 추가 인상, 그중 4명은 두 번 더를 전망해 긴축 사이클 진입이 확인됨. 10/27~28 회의가 다음 분수령.",
-    "desc_en": "A unanimous 12-0 vote on Sep 16 lifted rates 25bp to 3.75–4.00% — the first hike since July 2023. Warsh: inflation has been \"too high for too long.\" The dot plot shows 16 of 18 officials expecting another hike, four seeing two more, confirming a tightening cycle. Oct 27–28 is the next test.",
+    "desc": "연방준비제도(Fed)는 9월 16일 만장일치(12-0)로 기준금리를 0.25%p 인상하여 3.75~4.00%로 조정했다. 하지만 9월 말 뉴욕 연은 총재 존 윌리엄스와 필립 제퍼슨 연준 부의장 등 고위 인사들이 10월 추가 금리 인상에 대한 신중론을 표명하며 \"서두를 필요가 없다\"고 언급함에 따라, 시장의 10월 금리 인상 확률은 70%대에서 17~28% 수준으로 급락했다.",
+    "desc_en": "The Federal Reserve unanimously (12-0) raised the benchmark interest rate by 0.25 percentage points to 3.75-4.00% on September 16. However, following cautious statements from high-ranking officials, including New York Fed President John Williams and Vice Chair Philip Jefferson, who indicated \"no need for urgency\" for an October hike, market probabilities for a rate increase in October plummeted from over 70% to 17-28%.",
     "mechanisms": [
       "금리 동결 장기화 → 성장주 밸류에이션 재조정 → 나스닥 하락",
       "예상보다 매파적 발언(hawkish) → 달러 강세 → 신흥국·코스피 자금 유출",
@@ -126,27 +126,27 @@
       }
     ],
     "relatedSearch": "FOMC 금리 Powell",
-    "updated": "2026-09-27"
+    "updated": "2026-10-04"
   },
   {
     "id": "japan-rate",
     "name": "일본은행(BOJ) 금리 결정",
     "name_en": "Bank of Japan (BOJ) Rate Decision",
     "category": "policy",
-    "date": "9/18 인상 완료 · 다음 회의 10월 말",
-    "date_en": "Hiked Sep 18 · next meeting late Oct",
-    "targetDate": null,
-    "dateConfirmed": false,
-    "status": "watch",
-    "statusLabel": "📡 모니터링",
-    "statusLabel_en": "📡 Monitoring",
+    "date": "다음 회의: 10월 29-30일",
+    "date_en": "Next meeting: October 29-30",
+    "targetDate": "2026-10-30",
+    "dateConfirmed": true,
+    "status": "upcoming",
+    "statusLabel": "🟠 예정",
+    "statusLabel_en": "🟠 Scheduled",
     "scale": "high",
     "scaleLabel": "대형",
     "scaleLabel_en": "Large",
     "magnitude": 84,
     "magnitude_kr": 80,
-    "desc": "9/18 25bp 인상해 1.25% — 1995년 이후 최고, 직전 인상에서 3개월 만으로 1990년 이후 가장 빠른 속도. 다만 7-2 분열 표결(아사다·사토 반대)과 우에다 총재의 미온적 기자회견에 엔화는 오히려 156.64로 약세 전환(-0.45%). 인상에도 엔 약세가 이어지면 개입 재개 가능성.",
-    "desc_en": "The BOJ hiked 25bp to 1.25% on Sep 18 — the highest since 1995 and, coming just three months after the last move, the fastest pace since 1990. But a split 7-2 vote (Asada and Sato dissenting) and Ueda’s non-committal press conference left the yen weaker at 156.64 (-0.45%). Continued yen weakness despite hikes revives intervention risk.",
+    "desc": "일본은행은 10월 29~30일 금융정책결정회의를 개최할 예정이다. 일부 전직 관계자와 시장에서는 9월 인상에 이어 10월에도 금리 인상이 단행될 가능성(20~30%)을 제기하고 있으나, 예측 시장에서는 동결 가능성을 78~79%로 보고 있다. 지난 9월 회의에서는 물가 상승에 대한 경계심이 표명되었으나, 금리 인상의 누적 효과에 대한 신중한 검토 의견도 있었다.",
+    "desc_en": "The Bank of Japan is scheduled to hold its Monetary Policy Meeting on October 29-30. While some former officials and market participants suggest a possibility (20-30%) of another rate hike following September's increase, prediction markets indicate a higher likelihood of no change (78-79%). During the September meeting, concerns about rising inflation were voiced, alongside calls for cautious consideration of the cumulative effects of rate hikes.",
     "mechanisms": [
       "엔화 강세 → 엔 캐리 트레이드 청산 → 전 세계 위험자산 동시 매도",
       "일본 국채 수익률 상승 → 글로벌 채권 수익률 동반 상승",
@@ -187,26 +187,26 @@
       }
     ],
     "relatedSearch": "BOJ 일본 금리 엔 캐리",
-    "updated": "2026-09-27"
+    "updated": "2026-10-04"
   },
   {
     "id": "nvidia-earnings",
-    "name": "엔비디아 실적 발표 (Q2 FY2027)",
-    "name_en": "Nvidia Earnings (Q2 FY2027)",
+    "name": "엔비디아 실적 발표 (Q3 FY2027)",
+    "name_en": "Nvidia Earnings (Q3 FY2027)",
     "category": "tech",
-    "date": "2026년 8월 26일 발표 완료",
-    "date_en": "Reported Aug 26, 2026",
-    "targetDate": "2026-08-26",
-    "status": "completed",
-    "statusLabel": "🟢 어닝 서프라이즈",
-    "statusLabel_en": "🟢 Earnings beat",
+    "date": "2026년 11월 25일 (예정)",
+    "date_en": "Nov 25, 2026 (expected)",
+    "targetDate": "2026-11-25",
+    "status": "upcoming",
+    "statusLabel": "🟠 예정",
+    "statusLabel_en": "🟠 Scheduled",
     "scale": "high",
     "scaleLabel": "대형",
     "scaleLabel_en": "Large",
     "magnitude": 54,
     "magnitude_kr": 64,
-    "desc": "컨센서스 완파 — 매출 $962억(+106%)·EPS $2.22·데이터센터 $890억(+117%). 3분기 가이던스 $1,080억(예상 $1,042억 상회), 이례적으로 FY2028 매출 +70% 전망까지 제시. 시간외 +5%. AI 수요 \"가속 중\"(젠슨 황).",
-    "desc_en": "Crushed consensus — revenue $96.2B (+106%), EPS $2.22, data center $89B (+117%). Q3 guide $108B (vs $104.2B est.) plus a rare FY2028 outlook of +70% growth. Up 5% after hours. Huang: demand is \"accelerating.\"",
+    "desc": "엔비디아는 2026년 8월 26일 2분기 FY2027 실적을 발표하며 매출 962억 달러(+106%)와 EPS 2.22달러를 기록하여 컨센서스를 상회했습니다. 젠슨 황 CEO는 AI 수요가 가속 중이라고 밝혔으며, 3분기 가이던스로 1,080억 달러의 매출을 제시했습니다. 또한, 9월 28일 이사회는 1,500억 달러의 추가 자사주 매입을 승인하여 총 2,350억 달러 규모의 자사주 매입을 FY2028까지 실행할 예정입니다. 다음 실적 발표는 2026년 11월 25일로 예상됩니다.",
+    "desc_en": "NVIDIA announced its Q2 FY2027 earnings on August 26, 2026, exceeding consensus with revenue of $96.2 billion (+106%) and EPS of $2.22. CEO Jensen Huang stated that AI demand is accelerating, and the company provided Q3 guidance of $108.0 billion in revenue. Additionally, on September 28, the board approved an extra $150 billion for share repurchases, bringing the total authorization to $235 billion to be executed through FY2028. The next earnings announcement is expected on November 25, 2026.",
     "mechanisms": [
       "어닝 서프라이즈 → AI 버블 우려 완화 → 테크 섹터 전반 반등",
       "데이터센터 +117% → HBM 공급사 SK하이닉스·삼성전자 수혜 기대",
@@ -247,15 +247,16 @@
       }
     ],
     "relatedSearch": "엔비디아 실적 earnings",
-    "updated": "2026-08-28"
+    "updated": "2026-10-04",
+    "dateConfirmed": true
   },
   {
     "id": "nps-rebalancing",
     "name": "국민연금 포트폴리오 리밸런싱",
     "name_en": "NPS Portfolio Rebalancing",
     "category": "macro",
-    "date": "리밸런싱 압력 완화 · 외국인 매도가 변수",
-    "date_en": "Rebalancing pressure eased · foreign selling now the driver",
+    "date": "2026년 7월~ 진행 중",
+    "date_en": "Since Jul 2026 · ongoing",
     "targetDate": null,
     "status": "ongoing",
     "statusLabel": "🔴 진행 중",
@@ -265,8 +266,8 @@
     "scaleLabel_en": "Large",
     "magnitude": 29,
     "magnitude_kr": 57,
-    "desc": "코스피 조정으로 국민연금 리밸런싱 압력은 완화됐고, 수급 주도권은 외국인으로 넘어간 상태 — 올해 외국인 누적 순매도가 130조원을 넘어섰다. 10/2에도 미 국채금리 부담·원화 약세에 외국인이 1,504억원 순매도하며 코스피 하락. 국민연금 해외주식은 6월 말 661.1조원(기금의 35.4%)으로 확대.",
-    "desc_en": "The KOSPI pullback has eased NPS rebalancing pressure, and foreign investors now drive flows — cumulative foreign net selling has passed ₩130T this year. On Oct 2 foreigners sold a net ₩150.4B as US yields and a weak won weighed on the index. NPS overseas equity holdings reached ₩661.1T at end-June, 35.4% of the fund.",
+    "desc": "국민연금 기금 적립금은 2026년 6월 말 1,865.6조 원에서 7월 말 1,684.2조 원으로 181.4조 원 감소했으며, 국내 주식 평가액이 124.6조 원 급감했습니다. 이에 국민연금은 7월부터 리밸런싱을 재개하여 9월 18일 기준 국내 주식 비중이 24.4%로 축소되었으나 여전히 20.8%의 목표 비중을 초과하고 있습니다. 한편 외국인은 9월 한 달간 코스피 시장에서 20.3조 원을 순매도했으나, 10월 2일 순매도 규모는 1,900억 원으로 매도세가 다소 완화되었습니다.",
+    "desc_en": "The National Pension Service fund reserve decreased by 181.4 trillion won from 1,865.6 trillion won at the end of June 2026 to 1,684.2 trillion won at the end of July, with domestic stock valuation plummeting by 124.6 trillion won. Consequently, the NPS resumed rebalancing from July, reducing the domestic stock proportion to an estimated 24.4% by September 18, though it still exceeds the target of 20.8%. Meanwhile, foreign investors net sold 20.3 trillion won in the KOSPI market during September, but their net selling on October 2 was 190 billion won, indicating a somewhat weakened selling pressure.",
     "mechanisms": [
       "국내주식 비중 축소 → 코스피 대형주(삼성전자·SK하이닉스 등) 대량 매도 압력",
       "해외주식·채권 비중 확대 → 환전 수요 증가 → 원/달러 환율 상승",
@@ -307,15 +308,16 @@
       }
     ],
     "relatedSearch": "국민연금 리밸런싱 코스피",
-    "updated": "2026-10-04"
+    "updated": "2026-10-04",
+    "dateConfirmed": false
   },
   {
     "id": "trump-tariff",
     "name": "미국 관세 정책 (트럼프 2기)",
     "name_en": "US Tariff Policy (Trump 2nd Term)",
     "category": "policy",
-    "date": "2026년 진행 중",
-    "date_en": "Ongoing 2026",
+    "date": "301조 관세 적용 중",
+    "date_en": "Section 301 tariffs in force",
     "targetDate": null,
     "status": "ongoing",
     "statusLabel": "🔴 진행 중",
@@ -325,8 +327,8 @@
     "scaleLabel_en": "Mega",
     "magnitude": 87,
     "magnitude_kr": 83,
-    "desc": "2/20 대법원이 IEEPA 관세를 위헌 판단 → 122조 임시관세 → 7/24부터 301조 관세로 대체된 상태. 한국은 일본·스위스와 함께 12.5% 대상이지만, 미국이 기존 한미 합의 \"15% 상한\"을 존중하겠다고 재확인. 60개국·미 수입 99% 적용으로 관세 체제 자체는 유지.",
-    "desc_en": "The Supreme Court struck down IEEPA tariffs on Feb 20 → Section 122 stopgap → replaced by Section 301 duties from Jul 24. Korea faces 12.5% alongside Japan and Switzerland, but Washington reaffirmed it will honor the existing 15% cap agreed with Seoul. Coverage spans 60 economies (~99% of US imports), so the tariff regime persists.",
+    "desc": "2026년 7월 24일부로 60개국에 무역법 301조 '강제노동' 관세가 발효되어 한국에는 기존 관세와 합산하여 총 12.5%의 관세율이 적용되고 있다. 한편, 10월 1일 미국 무역대표부(USTR)는 한국이 포함된 '구조적 과잉생산'에 대한 301조 조사가 수주 내 마무리될 것이라고 밝혔으며, 10월 3일 트럼프 대통령은 미국 내 공장 미건설 시 최대 300% 관세 부과를 위협하고 알래스카 LNG 사업 투자와 연계하여 한국에 대한 관세 인상 가능성을 시사했다.",
+    "desc_en": "Effective July 24, 2026, Section 301 'forced labor' tariffs were imposed on 60 countries, with South Korea facing a combined 12.5% tariff. On October 1, the USTR announced that its Section 301 investigation into 'structural overproduction' (including South Korea) is nearing conclusion within weeks. On October 3, President Trump threatened tariffs of up to 300% for not building factories in the US and hinted at increased tariffs on South Korea related to Alaska LNG investment.",
     "mechanisms": [
       "수출 의존도 높은 한국·대만·일본 주식시장에 직접 타격",
       "인플레이션 재점화 → Fed 금리인하 기대 소멸 → 채권 수익률 상승",
@@ -374,15 +376,16 @@
       }
     ],
     "relatedSearch": "관세 무역전쟁",
-    "updated": "2026-09-12"
+    "updated": "2026-10-04",
+    "dateConfirmed": false
   },
   {
     "id": "us-debt-ceiling",
     "name": "미국 국가부채 한도 협상",
     "name_en": "US Debt Ceiling Negotiation",
     "category": "macro",
-    "date": "X-date 2027년 겨울~한여름 예상",
-    "date_en": "X-date expected winter to mid-summer 2027",
+    "date": "X-date 2027년 늦겨울~한여름 예상",
+    "date_en": "X-date late winter to mid-summer 2027",
     "targetDate": null,
     "status": "ongoing",
     "statusLabel": "🔴 진행 중",
@@ -392,8 +395,8 @@
     "scaleLabel_en": "Large",
     "magnitude": 78,
     "magnitude_kr": 63,
-    "desc": "10/1 2027 회계연도 개시 직후 부채한도에 도달할 전망이나, 재무부의 비상조치(extraordinary measures)로 실제 디폴트 시점(X-date)은 2027년 겨울~한여름으로 이연될 것으로 추정(초당적정책센터). 당장의 위기는 아니지만 FY2026에도 두 차례 셧다운이 있었던 만큼 예산 협상 때마다 변동성 요인.",
-    "desc_en": "The debt limit is projected to be hit shortly after fiscal 2027 began on Oct 1, but Treasury’s extraordinary measures should push the actual X-date to somewhere between winter and mid-summer 2027 (Bipartisan Policy Center). No immediate crisis, though with two shutdowns already during fiscal 2026, each budget fight remains a volatility trigger.",
+    "desc": "미국 국가부채는 2026년 9월 3일 기준 40.10조 달러를 기록했으며, 현 추세로 볼 때 2027년 1월 16일경 41조 달러에 도달하여 부채 한도에 근접할 것으로 전망된다. 초당적정책센터(BPC)는 재무부의 비상조치 이후 실제 디폴트 시점인 X-date가 2027년 늦겨울에서 한여름 사이가 될 것으로 보고 있으나, 최근 차입 속도 증가로 이 시기가 예상보다 빨라질 수 있다고 밝혔다.",
+    "desc_en": "As of September 3, 2026, the U.S. national debt stood at $40.10 trillion, and at the current rate, it is projected to reach $41 trillion around January 16, 2027, nearing the debt limit. The Bipartisan Policy Center (BPC) estimates the actual X-date, after Treasury's extraordinary measures, to be between late winter and mid-summer of 2027, but recently indicated that increased borrowing could push this date earlier than previously anticipated.",
     "mechanisms": [
       "협상 결렬 우려 → 미국 국채 수익률 급등 → 전 자산 리프라이싱",
       "안전자산 역설 붕괴 → 달러·미국채 동시 매도",
@@ -434,7 +437,8 @@
       }
     ],
     "relatedSearch": "미국 부채한도 debt ceiling",
-    "updated": "2026-10-04"
+    "updated": "2026-10-04",
+    "dateConfirmed": false
   },
   {
     "id": "china-taiwan",
@@ -452,8 +456,8 @@
     "scaleLabel_en": "Mega",
     "magnitude": 94,
     "magnitude_kr": 85,
-    "desc": "9/24 백악관 미중 정상회담에서 시진핑이 대만 문제로 \"충돌, 나아가 분쟁\" 가능성을 경고하고 \"대만 독립 반대\" 입장 전환을 요구. 미국 측 발표문에는 대만 언급이 없어 온도차. 1월 의회가 승인한 $140억 대만 무기 패키지가 트럼프 서명 대기 중이며, 중국은 승인 시 회담 취소까지 위협했던 사안이라 최대 뇌관. 무역·펜타닐 성과에도 반도체 수출통제로 휴전은 취약.",
-    "desc_en": "At the Sep 24 White House summit, Xi warned of \"clashes and even conflicts\" over Taiwan and pressed Washington to shift to opposing Taiwanese independence; the US readout did not mention Taiwan at all. A $14B Taiwan arms package authorized by Congress in January still awaits Trump’s signature — Beijing had threatened to cancel the summit over it, making it the key flashpoint. Despite trade and fentanyl deliverables, the truce stays fragile over semiconductor export controls.",
+    "desc": "9월 24일 미중 정상회담에서 시진핑 주석은 '대만 독립 반대' 입장을 명확히 했으며, 9월 30일 국경절 연설에서도 재확인하며 국가 통일 진전을 촉구했습니다. 의회가 승인한 140억 달러 규모의 대만 무기 패키지는 여전히 트럼프 대통령의 서명을 기다리고 있으며, 21명의 미 민주당 상원의원이 신속한 인도를 촉구했습니다. 한편, 대만은 신형 F-16V 블록 70 전투기의 첫 인도를 받았으며, 미군 관계자들은 중국의 대만 침공이 2028년 이전에는 어려울 것으로 평가했습니다.",
+    "desc_en": "At the September 24 US-China summit, President Xi Jinping explicitly stated his opposition to 'Taiwan independence,' a stance he reiterated in his National Day speech on September 30, urging progress toward national reunification. The $14 billion Taiwan arms package approved by Congress is still awaiting President Trump's signature, though 21 Democratic US senators urged its swift delivery. Meanwhile, Taiwan received its first new F-16V Block 70 fighter jets, and US officials now assess a Chinese invasion of Taiwan is unlikely before 2028.",
     "mechanisms": [
       "TSMC 생산 차질 우려 → 애플·엔비디아·AMD 등 전 테크주 급락",
       "삼성전자·SK하이닉스 반사이익 기대 vs. 지정학 공포 심리 충돌",
@@ -499,26 +503,27 @@
       }
     ],
     "relatedSearch": "대만 중국 긴장",
-    "updated": "2026-10-04"
+    "updated": "2026-10-04",
+    "dateConfirmed": false
   },
   {
     "id": "openai-ipo",
     "name": "OpenAI IPO / 대형 AI 상장",
     "name_en": "OpenAI IPO / Major AI Listing",
     "category": "ipo",
-    "date": "Anthropic 11월 상장 목표 · 로드쇼 10월 중순",
-    "date_en": "Anthropic targets November · roadshow mid-Oct",
-    "targetDate": null,
-    "status": "watch",
-    "statusLabel": "📡 로드쇼 임박",
-    "statusLabel_en": "📡 Roadshow near",
+    "date": "10월 중순 로드쇼 시작, 11월 추수감사절 이전 상장 목표",
+    "date_en": "Mid-October roadshow begins, pre-Thanksgiving November listing target",
+    "targetDate": "2026-11-25",
+    "status": "upcoming",
+    "statusLabel": "🟠 예정",
+    "statusLabel_en": "🟠 Scheduled",
     "scale": "mega",
     "scaleLabel": "초대형",
     "scaleLabel_en": "Mega",
     "magnitude": 62,
     "magnitude_kr": 45,
-    "desc": "Anthropic 상장이 10월에서 11월로 연기(WSJ 9/18) — 3분기 실적을 먼저 공개하려는 목적. 로드쇼는 10월 중순 시작, 가격 결정은 11월 중간선거 직전 목표. 공개 S-1은 로드쇼 15일 전 의무라 10월 초중순 예상. 조달 목표 최대 $1,000억·밸류 약 $2조로 역대 최대급. 주관사 모건스탠리·골드만삭스·JP모건·씨티.",
-    "desc_en": "Anthropic pushed its listing from October to November (WSJ, Sep 18) so it can report third-quarter results first. The roadshow is expected to start mid-October with pricing targeted just before the November midterms; since the prospectus must be public 15 days before a roadshow, the S-1 should surface in early-to-mid October. Reported targets: up to $100B raised at roughly a $2T valuation, led by Morgan Stanley, Goldman Sachs, JPMorgan and Citigroup.",
+    "desc": "Anthropic은 10월 중순 로드쇼를 시작하고, 11월 추수감사절 이전에 상장 가격을 결정할 예정이며, 목표 기업 가치는 1.8조 달러에서 2조 달러에 이를 것으로 예상된다. 이는 역대 최대 규모의 IPO가 될 수 있다. 한편, OpenAI는 AI 안전성 문제로 인해 IPO를 2027년으로 연기했으며, 현재 1.4조 달러 가치로 300억 달러 이상의 비공개 자금 조달을 추진 중이다.",
+    "desc_en": "Anthropic is set to commence its roadshow in mid-October, targeting IPO pricing before Thanksgiving in November, with a projected valuation ranging from $1.8 trillion to $2 trillion, potentially making it the largest IPO in history. Meanwhile, OpenAI has postponed its IPO to 2027 due to AI safety concerns, pursuing a private pre-IPO funding round of over $30 billion at a $1.4 trillion valuation.",
     "mechanisms": [
       "AI 섹터 밸류에이션 재조정 → 기존 AI주(MS·Google·Meta) 상대적 약세",
       "IPO 청약 자금 이동 → 성장주 전반 단기 유동성 감소",
@@ -552,15 +557,16 @@
       }
     ],
     "relatedSearch": "OpenAI IPO",
-    "updated": "2026-10-04"
+    "updated": "2026-10-04",
+    "dateConfirmed": true
   },
   {
     "id": "spacex-ipo",
     "name": "SpaceX ($SPCX) 나스닥 상장 완료",
     "name_en": "SpaceX ($SPCX) Listed on Nasdaq",
     "category": "ipo",
-    "date": "2026년 6월 12일 상장 완료 · 공모가 $135",
-    "date_en": "Listed June 12, 2026 · IPO Price $135",
+    "date": "2026년 6월 12일 상장 · 공모가 $135",
+    "date_en": "Listed Jun 12, 2026 · IPO price $135",
     "targetDate": "2026-06-12",
     "status": "completed",
     "statusLabel": "🟢 상장 완료",
@@ -570,8 +576,8 @@
     "scaleLabel_en": "Mega",
     "magnitude": 52,
     "magnitude_kr": 24,
-    "desc": "SpaceX가 2026년 6월 12일 나스닥에 $SPCX 티커로 상장 완료. 공모가 $135, 기업가치 약 $350B(470조원)로 역대 최대 규모 IPO. 현재 락업(Lockup) 해제일 및 S&P500 편입 일정이 주요 관전 포인트.",
-    "desc_en": "SpaceX listed on Nasdaq as $SPCX on June 12, 2026. IPO price $135, valuation ~$350B — largest IPO in history. Key watch points: lockup expiry date and potential S&P500 inclusion.",
+    "desc": "SpaceX는 2026년 6월 12일 나스닥에 공모가 주당 135달러로 상장 완료되었으며, 기업가치는 약 1.77조 달러로 평가되어 역대 최대 규모 IPO를 기록했습니다. 주식 락업은 2026년 8월부터 단계적으로 해제되기 시작했으며, 일론 머스크의 지분 락업은 2027년 6월부터 해제될 예정입니다. S&P500 조기 편입은 거부되어 상장 후 최소 1년이 지나야 검토될 수 있습니다.",
+    "desc_en": "SpaceX completed its Nasdaq IPO on June 12, 2026, at an offering price of $135 per share, with its valuation estimated at approximately $1.77 trillion, marking it as the largest IPO in history. Share lock-ups began to be released in stages from August 2026, with Elon Musk's shares scheduled for release starting June 2027. Early inclusion in the S&P 500 was rejected, meaning it can only be considered at least one year after its listing.",
     "mechanisms": [
       "IPO 청약 자금 마련을 위해 기존 보유 주식(특히 테크주·성장주) 대량 매도",
       "기관 포트폴리오 비중 조정 → 시가총액 상위 종목(애플·MS·엔비디아 등) 동반 하락 압력",
@@ -619,6 +625,7 @@
       }
     ],
     "relatedSearch": "SpaceX IPO 상장",
-    "updated": "2026-06-12"
+    "updated": "2026-10-04",
+    "dateConfirmed": false
   }
 ]

@@ -49,6 +49,8 @@ function reject(u, event) {
   if (typeof u.desc !== 'string' || u.desc.trim().length < 20 || u.desc.length > 600) return 'desc 길이 이상';
   if (typeof u.desc_en !== 'string' || u.desc_en.trim().length < 20 || u.desc_en.length > 900) return 'desc_en 길이 이상';
   if (typeof u.date !== 'string' || !u.date.trim() || u.date.length > 80) return 'date 이상';
+  // 날짜 라벨은 사람이 읽는 문구여야 한다 (예: "2026년 10월 27~28일"). 날것의 ISO 날짜는 거부.
+  if (/^\d{4}-\d{2}-\d{2}$/.test(u.date.trim())) return 'date가 ISO 날짜 그대로';
   if (!VALID_STATUS.includes(u.status)) return `status 값 이상(${u.status})`;
   if (u.targetDate != null && !/^\d{4}-\d{2}-\d{2}$/.test(u.targetDate)) return 'targetDate 형식 이상';
   // 예정 상태인데 목표일이 과거면 신뢰 불가
