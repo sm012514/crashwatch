@@ -4,8 +4,8 @@
     "name": "이란 전쟁 · 호르무즈 해협 봉쇄",
     "name_en": "Iran War & Strait of Hormuz Closure",
     "category": "geo",
-    "date": "확전 후 단계적 합의 논의",
-    "date_en": "Escalation, then phased-deal talks",
+    "date": "호르무즈 교착 · 유가 고공권",
+    "date_en": "Hormuz deadlock · oil elevated",
     "targetDate": null,
     "dateConfirmed": false,
     "status": "ongoing",
@@ -16,8 +16,8 @@
     "scaleLabel_en": "Mega",
     "magnitude": 96,
     "magnitude_kr": 91,
-    "desc": "9/8 이란의 미 해군 함정 2차 공격설로 유가 $99 돌파, 9/23~24에는 이란 군 고위인사의 \"인도양으로 전선 확대\" 발언에 브렌트가 $106까지 급등. 이후 호르무즈 재개방과 미국의 이란 항구 봉쇄 해제를 맞바꾸는 단계적 합의설이 나오며 9/25 $92~93로 반락. 세계 원유 20% 이상이 지나는 길목이라 변동성 극심.",
-    "desc_en": "Oil topped $99 on Sep 8 after reports of a second Iranian attack on US Navy ships, then Brent spiked above $106 on Sep 23–24 when a senior Iranian commander threatened to widen the war to the Indian Ocean. Prices fell back to $92–93 by Sep 25 on reports of a phased deal trading Hormuz reopening for lifting the US blockade of Iranian ports. With over 20% of world oil transiting the strait, volatility is extreme.",
+    "desc": "브렌트유 10/2 기준 $102.7로 주간 2% 하락했으나 전쟁 전 대비 여전히 높은 수준. 중동 원유 수출량은 전쟁 전에 근접하게 회복됐지만 호르무즈 재개 협상이 교착되며 불확실성 지속. 로이터 폴의 2026년 브렌트 평균 전망은 한 달 새 $85→$89로 상향. OPEC+는 11월 생산 목표 동결, G7은 4개월간 최대 1억 배럴 비축유 방출에 합의.",
+    "desc_en": "Brent sat at $102.7 on Oct 2, down about 2% on the week but still far above pre-war levels. Middle East crude exports have recovered close to pre-war volumes, yet talks on reopening Hormuz remain deadlocked. A Reuters poll lifted its 2026 Brent average forecast from $85 to $89 in a month. OPEC+ left November output targets unchanged and the G7 agreed to release up to 100 million barrels of crude and diesel over four months.",
     "mechanisms": [
       "호르무즈 봉쇄 → 원유·LNG 공급 차질 → 유가 급등 → 전 세계 물가 재점화",
       "에너지 수입 의존도 높은 한국·일본 무역수지 악화 → 원화 약세",
@@ -65,7 +65,7 @@
       }
     ],
     "relatedSearch": "이란 전쟁 호르무즈 유가",
-    "updated": "2026-09-27"
+    "updated": "2026-10-04"
   },
   {
     "id": "fed-meeting",
@@ -254,8 +254,8 @@
     "name": "국민연금 포트폴리오 리밸런싱",
     "name_en": "NPS Portfolio Rebalancing",
     "category": "macro",
-    "date": "2026년 7월~ 진행 중",
-    "date_en": "Jul 2026~ Ongoing",
+    "date": "리밸런싱 압력 완화 · 외국인 매도가 변수",
+    "date_en": "Rebalancing pressure eased · foreign selling now the driver",
     "targetDate": null,
     "status": "ongoing",
     "statusLabel": "🔴 진행 중",
@@ -265,8 +265,8 @@
     "scaleLabel_en": "Large",
     "magnitude": 29,
     "magnitude_kr": 57,
-    "desc": "코스피 조정으로 매도 압력 완화 — 우려했던 '매물폭탄'은 빗나가고 실제 매도는 제한적. 일일 한도 축소 + 이동평균 방식으로 장기 분산 매도 중. 단, 코스피 반등 시 리밸런싱 물량이 다시 커지는 구조.",
-    "desc_en": "KOSPI's pullback eased selling pressure — the feared 'sell bomb' missed; actual selling has been limited. Daily caps + moving-average method spread sales over time. But a KOSPI rebound re-inflates the rebalancing overhang.",
+    "desc": "코스피 조정으로 국민연금 리밸런싱 압력은 완화됐고, 수급 주도권은 외국인으로 넘어간 상태 — 올해 외국인 누적 순매도가 130조원을 넘어섰다. 10/2에도 미 국채금리 부담·원화 약세에 외국인이 1,504억원 순매도하며 코스피 하락. 국민연금 해외주식은 6월 말 661.1조원(기금의 35.4%)으로 확대.",
+    "desc_en": "The KOSPI pullback has eased NPS rebalancing pressure, and foreign investors now drive flows — cumulative foreign net selling has passed ₩130T this year. On Oct 2 foreigners sold a net ₩150.4B as US yields and a weak won weighed on the index. NPS overseas equity holdings reached ₩661.1T at end-June, 35.4% of the fund.",
     "mechanisms": [
       "국내주식 비중 축소 → 코스피 대형주(삼성전자·SK하이닉스 등) 대량 매도 압력",
       "해외주식·채권 비중 확대 → 환전 수요 증가 → 원/달러 환율 상승",
@@ -307,7 +307,7 @@
       }
     ],
     "relatedSearch": "국민연금 리밸런싱 코스피",
-    "updated": "2026-08-01"
+    "updated": "2026-10-04"
   },
   {
     "id": "trump-tariff",
@@ -381,8 +381,8 @@
     "name": "미국 국가부채 한도 협상",
     "name_en": "US Debt Ceiling Negotiation",
     "category": "macro",
-    "date": "2026년 진행 중",
-    "date_en": "Ongoing 2026",
+    "date": "X-date 2027년 겨울~한여름 예상",
+    "date_en": "X-date expected winter to mid-summer 2027",
     "targetDate": null,
     "status": "ongoing",
     "statusLabel": "🔴 진행 중",
@@ -392,8 +392,8 @@
     "scaleLabel_en": "Large",
     "magnitude": 78,
     "magnitude_kr": 63,
-    "desc": "2025년 7월 \"One Big Beautiful Bill\"로 한도를 $41.1T로 상향 완료. 현재 즉각적 위기는 없으나 X-date는 2027년 초~중반 예상. 대규모 감세·지출 확대로 재정 악화 속도가 빨라져 다음 협상 충돌이 더 격화될 가능성.",
-    "desc_en": "Ceiling raised to $41.1T via \"One Big Beautiful Bill\" (Jul 2025). No immediate crisis — X-date expected early-to-mid 2027. Massive tax cuts and spending expansion are accelerating deficit growth, setting up a more severe next confrontation.",
+    "desc": "10/1 2027 회계연도 개시 직후 부채한도에 도달할 전망이나, 재무부의 비상조치(extraordinary measures)로 실제 디폴트 시점(X-date)은 2027년 겨울~한여름으로 이연될 것으로 추정(초당적정책센터). 당장의 위기는 아니지만 FY2026에도 두 차례 셧다운이 있었던 만큼 예산 협상 때마다 변동성 요인.",
+    "desc_en": "The debt limit is projected to be hit shortly after fiscal 2027 began on Oct 1, but Treasury’s extraordinary measures should push the actual X-date to somewhere between winter and mid-summer 2027 (Bipartisan Policy Center). No immediate crisis, though with two shutdowns already during fiscal 2026, each budget fight remains a volatility trigger.",
     "mechanisms": [
       "협상 결렬 우려 → 미국 국채 수익률 급등 → 전 자산 리프라이싱",
       "안전자산 역설 붕괴 → 달러·미국채 동시 매도",
@@ -434,15 +434,15 @@
       }
     ],
     "relatedSearch": "미국 부채한도 debt ceiling",
-    "updated": "2026-07-23"
+    "updated": "2026-10-04"
   },
   {
     "id": "china-taiwan",
     "name": "중국-대만 긴장 고조",
     "name_en": "China-Taiwan Tensions",
     "category": "geo",
-    "date": "상시 모니터링",
-    "date_en": "Ongoing watch",
+    "date": "9/24 미중 정상회담 이후 · 상시 모니터링",
+    "date_en": "Post Sep 24 Trump–Xi summit · ongoing watch",
     "targetDate": null,
     "status": "watch",
     "statusLabel": "📡 모니터링",
@@ -452,8 +452,8 @@
     "scaleLabel_en": "Mega",
     "magnitude": 94,
     "magnitude_kr": 85,
-    "desc": "중국 해경이 대만 태평양(동)해안 순찰을 확대 — 2025년 1월 이후 데이터상 첫 사례로, 6월부터 월 2척꼴 상시 전개. 미·일·필리핀 연결 생명선을 겨냥한 압박. 여기에 대만군 \"항복 영상\" 유포 등 정보전 병행. PLA 공중 침범은 라이 총통 취임 전 수준으로 복귀.",
-    "desc_en": "China’s coast guard has expanded patrols off Taiwan’s Pacific (east) coast — the first such activity in data back to Jan 2025 — averaging two cutters a month since June, targeting the lifeline to US allies. Beijing is pairing this with information warfare, including purported \"surrender videos\" of Taiwanese troops. PLA air incursions have reverted to pre-Lai levels.",
+    "desc": "9/24 백악관 미중 정상회담에서 시진핑이 대만 문제로 \"충돌, 나아가 분쟁\" 가능성을 경고하고 \"대만 독립 반대\" 입장 전환을 요구. 미국 측 발표문에는 대만 언급이 없어 온도차. 1월 의회가 승인한 $140억 대만 무기 패키지가 트럼프 서명 대기 중이며, 중국은 승인 시 회담 취소까지 위협했던 사안이라 최대 뇌관. 무역·펜타닐 성과에도 반도체 수출통제로 휴전은 취약.",
+    "desc_en": "At the Sep 24 White House summit, Xi warned of \"clashes and even conflicts\" over Taiwan and pressed Washington to shift to opposing Taiwanese independence; the US readout did not mention Taiwan at all. A $14B Taiwan arms package authorized by Congress in January still awaits Trump’s signature — Beijing had threatened to cancel the summit over it, making it the key flashpoint. Despite trade and fentanyl deliverables, the truce stays fragile over semiconductor export controls.",
     "mechanisms": [
       "TSMC 생산 차질 우려 → 애플·엔비디아·AMD 등 전 테크주 급락",
       "삼성전자·SK하이닉스 반사이익 기대 vs. 지정학 공포 심리 충돌",
@@ -499,15 +499,15 @@
       }
     ],
     "relatedSearch": "대만 중국 긴장",
-    "updated": "2026-09-12"
+    "updated": "2026-10-04"
   },
   {
     "id": "openai-ipo",
     "name": "OpenAI IPO / 대형 AI 상장",
     "name_en": "OpenAI IPO / Major AI Listing",
     "category": "ipo",
-    "date": "Anthropic 나스닥 10월 목표 · 공개 S-1 대기",
-    "date_en": "Anthropic targets Nasdaq in Oct · public S-1 pending",
+    "date": "Anthropic 11월 상장 목표 · 로드쇼 10월 중순",
+    "date_en": "Anthropic targets November · roadshow mid-Oct",
     "targetDate": null,
     "status": "watch",
     "statusLabel": "📡 로드쇼 임박",
@@ -517,8 +517,8 @@
     "scaleLabel_en": "Mega",
     "magnitude": 62,
     "magnitude_kr": 45,
-    "desc": "Anthropic이 10월 상장처로 나스닥을 선택(9월 보도). 다만 공개 S-1은 아직 EDGAR에 올라오지 않았고 티커·공모가·주식 수·상장일 모두 미공개 상태. 6/1 기밀 제출 이후 $9,650억 밸류(시리즈 H)에서 최대 $2조 관측까지 거론되나 확정된 목표치는 없음.",
-    "desc_en": "Anthropic has picked Nasdaq for a targeted October listing (reported in September), but no public S-1 has appeared on EDGAR and the ticker, price range, share count and date all remain unannounced. Since the June 1 confidential filing, talk has ranged from its $965B Series H valuation up to $2T, with no confirmed target.",
+    "desc": "Anthropic 상장이 10월에서 11월로 연기(WSJ 9/18) — 3분기 실적을 먼저 공개하려는 목적. 로드쇼는 10월 중순 시작, 가격 결정은 11월 중간선거 직전 목표. 공개 S-1은 로드쇼 15일 전 의무라 10월 초중순 예상. 조달 목표 최대 $1,000억·밸류 약 $2조로 역대 최대급. 주관사 모건스탠리·골드만삭스·JP모건·씨티.",
+    "desc_en": "Anthropic pushed its listing from October to November (WSJ, Sep 18) so it can report third-quarter results first. The roadshow is expected to start mid-October with pricing targeted just before the November midterms; since the prospectus must be public 15 days before a roadshow, the S-1 should surface in early-to-mid October. Reported targets: up to $100B raised at roughly a $2T valuation, led by Morgan Stanley, Goldman Sachs, JPMorgan and Citigroup.",
     "mechanisms": [
       "AI 섹터 밸류에이션 재조정 → 기존 AI주(MS·Google·Meta) 상대적 약세",
       "IPO 청약 자금 이동 → 성장주 전반 단기 유동성 감소",
@@ -552,7 +552,7 @@
       }
     ],
     "relatedSearch": "OpenAI IPO",
-    "updated": "2026-09-27"
+    "updated": "2026-10-04"
   },
   {
     "id": "spacex-ipo",
