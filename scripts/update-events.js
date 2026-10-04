@@ -1,20 +1,20 @@
 #!/usr/bin/env node
 /**
  * 대형 이벤트 주간 자동 업데이트
- * Gemini(구글 검색 그라운딩)로 각 이벤트의 최신 상황을 조사해 events.json을 갱신한다.
+ * 사이트 서버의 /api/event-refresh를 호출해 각 이벤트의 최신 상황을 받아 events.json을 갱신한다.
+ * Gemini 키는 서버(Railway)에만 있으면 되고, 이 스크립트에는 키가 필요 없다.
  *
  * 봇이 바꿀 수 있는 것: desc, desc_en, date, date_en, status, statusLabel, targetDate, updated
  * 봇이 못 바꾸는 것: id, name, category, scale, magnitude(충격지수), mechanisms, impacts
  *   → 편집 판단(충격지수·메커니즘)은 사람 몫으로 남긴다.
  *
- * 실행: GEMINI=<key> node scripts/update-events.js
+ * 실행: node scripts/update-events.js
  */
 const fs = require('fs');
 const path = require('path');
 
 const EVENTS_PATH = path.join(__dirname, '..', 'events.json');
-const API_KEY = process.env.GEMINI;
-const MODEL = 'gemini-2.5-flash';
+const API_BASE = process.env.API_BASE || 'https://www.ddumarketnews.co.kr';
 
 // 봇이 수정 가능한 필드
 const MUTABLE = ['desc', 'desc_en', 'date', 'date_en', 'status', 'targetDate'];
@@ -30,53 +30,17 @@ const todayKST = () => new Date(Date.now() + 9 * 3600 * 1000).toISOString().slic
 
 function log(...a) { console.log('[update-events]', ...a); }
 
-async function askGemini(event) {
-  const today = todayKST();
-  const prompt = `오늘은 ${today}이다. 구글 검색으로 아래 금융 이벤트의 최신 상황을 조사하고 JSON으로만 답하라.
-
-이벤트: ${event.name}
-분류: ${event.category}
-현재 표기 날짜: ${event.date}
-현재 상태: ${event.status}
-현재 설명: ${event.desc}
-
-규칙:
-- 현재 설명 이후에 실제로 새로운 사실(결정 결과, 발표 수치, 일정 변경, 상황 전개)이 확인될 때만 changed=true.
-- 단순 재서술, 추측, 의견은 changed=false로 하라.
-- desc는 한국어 2~3문장. 반드시 검색으로 확인된 구체적 수치·날짜·발언만 쓰고, 확인 안 된 내용은 절대 쓰지 마라.
-- 회의·발표가 이미 끝났으면 결과를 쓰고, 다음 일정이 있으면 date와 targetDate를 다음 일정으로 갱신하라.
-- status: ongoing(현재 진행 중) | upcoming(확정된 예정일 있음) | watch(상시 감시) | completed(종료).
-- targetDate는 확정된 예정일이 있을 때만 YYYY-MM-DD, 없으면 null.
-
-응답 형식 (JSON만, 마크다운 코드블록 없이):
-{
-  "changed": true 또는 false,
-  "desc": "한국어 설명 2~3문장",
-  "desc_en": "English description, 2-3 sentences",
-  "date": "날짜 표기 (예: 2026년 10월 28~29일 / 진행 중)",
-  "date_en": "date label in English",
-  "status": "ongoing|upcoming|watch|completed",
-  "targetDate": "YYYY-MM-DD 또는 null"
-}`;
-
-  const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1/models/${MODEL}:generateContent?key=${API_KEY}`,
-    {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
-        tools: [{ google_search: {} }],
-      }),
-      signal: AbortSignal.timeout(60000),
-    }
-  );
+async function askServer(event) {
+  const res = await fetch(`${API_BASE}/api/event-refresh`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id: event.id }),
+    signal: AbortSignal.timeout(90000),
+  });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   const data = await res.json();
-  const text = data?.candidates?.[0]?.content?.parts?.map(p => p.text).join('') || '';
-  const json = text.match(/\{[\s\S]*\}/)?.[0];
-  if (!json) throw new Error('JSON 파싱 실패');
-  return JSON.parse(json);
+  if (data.error) throw new Error(data.error);
+  return data;
 }
 
 /** 응답이 안전하게 반영 가능한지 검사. 문제가 있으면 사유 문자열 반환, 없으면 null */
@@ -95,8 +59,6 @@ function reject(u, event) {
 }
 
 async function main() {
-  if (!API_KEY) { console.error('GEMINI 환경변수가 없습니다.'); process.exit(1); }
-
   const original = fs.readFileSync(EVENTS_PATH, 'utf8');
   const events = JSON.parse(original);
   const beforeCount = events.length;
@@ -105,7 +67,7 @@ async function main() {
 
   for (const event of events) {
     try {
-      const u = await askGemini(event);
+      const u = await askServer(event);
       const why = reject(u, event);
       if (why) { log(`- ${event.id}: 유지 (${why})`); continue; }
 
@@ -122,7 +84,7 @@ async function main() {
       failed++;
       log(`! ${event.id}: 실패 — ${e.message} (원본 유지)`);
     }
-    await new Promise(r => setTimeout(r, 1500)); // API 부하 방지
+    await new Promise(r => setTimeout(r, 2500)); // 서버 rate limit(분당 30회) 여유
   }
 
   // ── 최종 안전 검사: 하나라도 어긋나면 통째로 취소

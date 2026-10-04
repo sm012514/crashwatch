@@ -19,9 +19,8 @@ jobs:
         with:
           node-version: '20'
 
+      # Gemini 키는 사이트 서버(Railway)에만 있으면 된다 — 여기엔 비밀값이 필요 없음
       - name: 최신 뉴스로 이벤트 갱신
-        env:
-          GEMINI: ${{ secrets.GEMINI }}
         run: node scripts/update-events.js
 
       - name: 변경분 커밋 & 배포

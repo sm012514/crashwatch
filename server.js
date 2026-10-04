@@ -37,6 +37,7 @@ const apiLimiter = rateLimit({
 app.use('/api/', apiLimiter);
 
 app.use(cors());
+app.use(express.json());   // ← 모든 POST 라우트보다 먼저 등록돼야 req.body가 채워진다
 app.use(express.static(path.join(__dirname)));
 
 const SOURCES = [
@@ -313,8 +314,67 @@ app.post('/api/event-update', async (req, res) => {
   }
 });
 
+// ── 주간 자동 업데이트용: 등록된 이벤트의 최신 상황을 구조화해서 반환
+//    Gemini 키는 서버에만 두고, GitHub 봇은 이 API만 호출한다(봇 쪽 키 불필요).
+//    events.json에 있는 id만 허용해 범용 AI 프록시로 악용되는 것을 막는다.
+app.post('/api/event-refresh', async (req, res) => {
+  const { id } = req.body || {};
+  const apiKey = process.env.GEMINI;
+  if (!apiKey) return res.status(503).json({ error: 'Gemini API key not set' });
+
+  let event;
+  try {
+    const list = JSON.parse(fs.readFileSync(path.join(__dirname, 'events.json'), 'utf8'));
+    event = list.find(e => e.id === id);
+  } catch (e) {
+    return res.status(500).json({ error: e.message });
+  }
+  if (!event) return res.status(404).json({ error: 'unknown event id' });
+
+  const today = new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10);
+  const prompt = `오늘은 ${today}이다. 구글 검색으로 아래 금융 이벤트의 최신 상황을 조사하고 JSON으로만 답하라.
+
+이벤트: ${event.name}
+분류: ${event.category}
+현재 표기 날짜: ${event.date}
+현재 상태: ${event.status}
+현재 설명: ${event.desc}
+
+규칙:
+- 현재 설명 이후에 실제로 새로운 사실(결정 결과, 발표 수치, 일정 변경, 상황 전개)이 확인될 때만 changed=true.
+- 단순 재서술, 추측, 의견은 changed=false로 하라.
+- desc는 한국어 2~3문장. 반드시 검색으로 확인된 구체적 수치·날짜·발언만 쓰고, 확인 안 된 내용은 절대 쓰지 마라.
+- 회의·발표가 이미 끝났으면 결과를 쓰고, 다음 일정이 있으면 date와 targetDate를 다음 일정으로 갱신하라.
+- status: ongoing(진행 중) | upcoming(확정된 예정일 있음) | watch(상시 감시) | completed(종료).
+- targetDate는 확정된 예정일이 있을 때만 YYYY-MM-DD, 없으면 null.
+
+응답 형식 (JSON만, 마크다운 없이):
+{"changed":true,"desc":"한국어 2~3문장","desc_en":"English 2-3 sentences","date":"날짜 표기","date_en":"date label","status":"ongoing|upcoming|watch|completed","targetDate":"YYYY-MM-DD 또는 null"}`;
+
+  try {
+    const r = await fetch(
+      `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }],
+          tools: [{ google_search: {} }],
+        }),
+        signal: AbortSignal.timeout(60000),
+      }
+    );
+    const data = await r.json();
+    const text = data?.candidates?.[0]?.content?.parts?.map(p => p.text).join('') || '';
+    const json = text.match(/\{[\s\S]*\}/)?.[0];
+    if (!json) return res.status(502).json({ error: 'parse failed' });
+    res.json(JSON.parse(json));
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 // ── GEMINI 팩트체크 API
-app.use(express.json());
 app.post('/api/factcheck', async (req, res) => {
   const { title, description } = req.body || {};
   if (!title) return res.status(400).json({ error: 'title required' });
