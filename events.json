@@ -73,7 +73,7 @@
     "name_en": "FOMC Rate Decision",
     "category": "policy",
     "date": "2026년 10월 27~28일",
-    "date_en": "Oct 27–28, 2026 (decision Oct 28)",
+    "date_en": "October 27-28, 2026",
     "targetDate": "2026-10-28",
     "dateConfirmed": true,
     "status": "upcoming",
@@ -84,8 +84,8 @@
     "scaleLabel_en": "Mega",
     "magnitude": 88,
     "magnitude_kr": 79,
-    "desc": "연방준비제도(Fed)는 9월 16일 만장일치(12-0)로 기준금리를 0.25%p 인상하여 3.75~4.00%로 조정했다. 하지만 9월 말 뉴욕 연은 총재 존 윌리엄스와 필립 제퍼슨 연준 부의장 등 고위 인사들이 10월 추가 금리 인상에 대한 신중론을 표명하며 \"서두를 필요가 없다\"고 언급함에 따라, 시장의 10월 금리 인상 확률은 70%대에서 17~28% 수준으로 급락했다.",
-    "desc_en": "The Federal Reserve unanimously (12-0) raised the benchmark interest rate by 0.25 percentage points to 3.75-4.00% on September 16. However, following cautious statements from high-ranking officials, including New York Fed President John Williams and Vice Chair Philip Jefferson, who indicated \"no need for urgency\" for an October hike, market probabilities for a rate increase in October plummeted from over 70% to 17-28%.",
+    "desc": "연방준비제도(Fed)는 9월 15-16일 FOMC 회의에서 만장일치로 기준금리를 0.25%p 인상하여 3.75~4.00%로 조정했다. 10월 7일 공개된 의사록에 따르면 대부분의 연준 위원들은 연말까지 추가 금리 인상이 필요할 것으로 보았으나, 9월 고용 지표 약화 등으로 10월 금리 인상 확률은 16~22% 수준으로 급락했다.",
+    "desc_en": "The Federal Reserve (Fed) unanimously voted on September 15-16 to raise the benchmark interest rate by 0.25 percentage points to 3.75-4.00%. While minutes released on October 7 indicated most officials anticipate another rate hike by year-end, the probability of an October rate increase has dropped significantly to 16-22% due to weaker September payrolls and other economic data.",
     "mechanisms": [
       "금리 동결 장기화 → 성장주 밸류에이션 재조정 → 나스닥 하락",
       "예상보다 매파적 발언(hawkish) → 달러 강세 → 신흥국·코스피 자금 유출",
@@ -126,15 +126,15 @@
       }
     ],
     "relatedSearch": "FOMC 금리 Powell",
-    "updated": "2026-10-04"
+    "updated": "2026-10-12"
   },
   {
     "id": "japan-rate",
     "name": "일본은행(BOJ) 금리 결정",
     "name_en": "Bank of Japan (BOJ) Rate Decision",
     "category": "policy",
-    "date": "다음 회의: 10월 29-30일",
-    "date_en": "Next meeting: October 29-30",
+    "date": "2026년 10월",
+    "date_en": "October 2026",
     "targetDate": "2026-10-30",
     "dateConfirmed": true,
     "status": "upcoming",
@@ -145,8 +145,8 @@
     "scaleLabel_en": "Large",
     "magnitude": 84,
     "magnitude_kr": 80,
-    "desc": "일본은행은 10월 29~30일 금융정책결정회의를 개최할 예정이다. 일부 전직 관계자와 시장에서는 9월 인상에 이어 10월에도 금리 인상이 단행될 가능성(20~30%)을 제기하고 있으나, 예측 시장에서는 동결 가능성을 78~79%로 보고 있다. 지난 9월 회의에서는 물가 상승에 대한 경계심이 표명되었으나, 금리 인상의 누적 효과에 대한 신중한 검토 의견도 있었다.",
-    "desc_en": "The Bank of Japan is scheduled to hold its Monetary Policy Meeting on October 29-30. While some former officials and market participants suggest a possibility (20-30%) of another rate hike following September's increase, prediction markets indicate a higher likelihood of no change (78-79%). During the September meeting, concerns about rising inflation were voiced, alongside calls for cautious consideration of the cumulative effects of rate hikes.",
+    "desc": "일본은행은 지난 9월 18일 금융정책결정회의에서 기준금리를 0.25%p 인상하여 현재 정책금리는 1.25%이다. 다음 회의는 10월 29~30일이며, 시장은 10월 금리 동결 가능성을 81.5~91%로 보고 있다. 일본은행은 10월 30일 분기별 전망 보고서에서 기저 인플레이션이 2% 목표에 도달했다고 판단할 가능성을 검토 중이다.",
+    "desc_en": "The Bank of Japan raised its policy rate by 0.25 percentage points to 1.25% at its Monetary Policy Meeting on September 18. The next meeting is scheduled for October 29-30, with market participants widely expecting a hold, pricing the probability at 81.5% to 91%. The BOJ is reportedly considering declaring that underlying inflation has reached its 2% target in the quarterly Outlook Report due on October 30.",
     "mechanisms": [
       "엔화 강세 → 엔 캐리 트레이드 청산 → 전 세계 위험자산 동시 매도",
       "일본 국채 수익률 상승 → 글로벌 채권 수익률 동반 상승",
@@ -187,16 +187,16 @@
       }
     ],
     "relatedSearch": "BOJ 일본 금리 엔 캐리",
-    "updated": "2026-10-04"
+    "updated": "2026-10-12"
   },
   {
     "id": "nvidia-earnings",
     "name": "엔비디아 실적 발표 (Q3 FY2027)",
     "name_en": "Nvidia Earnings (Q3 FY2027)",
     "category": "tech",
-    "date": "2026년 11월 25일 (예정)",
-    "date_en": "Nov 25, 2026 (expected)",
-    "targetDate": "2026-11-25",
+    "date": "2026년 11월 17일",
+    "date_en": "November 17, 2026",
+    "targetDate": "2026-11-17",
     "status": "upcoming",
     "statusLabel": "🟠 예정",
     "statusLabel_en": "🟠 Scheduled",
@@ -205,8 +205,8 @@
     "scaleLabel_en": "Large",
     "magnitude": 54,
     "magnitude_kr": 64,
-    "desc": "엔비디아는 2026년 8월 26일 2분기 FY2027 실적을 발표하며 매출 962억 달러(+106%)와 EPS 2.22달러를 기록하여 컨센서스를 상회했습니다. 젠슨 황 CEO는 AI 수요가 가속 중이라고 밝혔으며, 3분기 가이던스로 1,080억 달러의 매출을 제시했습니다. 또한, 9월 28일 이사회는 1,500억 달러의 추가 자사주 매입을 승인하여 총 2,350억 달러 규모의 자사주 매입을 FY2028까지 실행할 예정입니다. 다음 실적 발표는 2026년 11월 25일로 예상됩니다.",
-    "desc_en": "NVIDIA announced its Q2 FY2027 earnings on August 26, 2026, exceeding consensus with revenue of $96.2 billion (+106%) and EPS of $2.22. CEO Jensen Huang stated that AI demand is accelerating, and the company provided Q3 guidance of $108.0 billion in revenue. Additionally, on September 28, the board approved an extra $150 billion for share repurchases, bringing the total authorization to $235 billion to be executed through FY2028. The next earnings announcement is expected on November 25, 2026.",
+    "desc": "엔비디아의 3분기 FY2027 실적 발표일이 2026년 11월 17일 화요일 시장 마감 후로 확정되었습니다. 회사는 2분기 FY2027 실적 발표에서 3분기 매출 가이던스로 1,080억 달러(±2%)를 제시했으며, 매출 총이익률은 74%로 예상했습니다.",
+    "desc_en": "NVIDIA's Q3 FY2027 earnings announcement date has been confirmed for Tuesday, November 17, 2026, after market close. The company previously provided a Q3 revenue guidance of $108.0 billion (plus or minus 2%) and an expected gross margin of 74% during its Q2 FY2027 earnings release.",
     "mechanisms": [
       "어닝 서프라이즈 → AI 버블 우려 완화 → 테크 섹터 전반 반등",
       "데이터센터 +117% → HBM 공급사 SK하이닉스·삼성전자 수혜 기대",
@@ -247,7 +247,7 @@
       }
     ],
     "relatedSearch": "엔비디아 실적 earnings",
-    "updated": "2026-10-04",
+    "updated": "2026-10-12",
     "dateConfirmed": true
   },
   {
@@ -445,8 +445,8 @@
     "name": "중국-대만 긴장 고조",
     "name_en": "China-Taiwan Tensions",
     "category": "geo",
-    "date": "9/24 미중 정상회담 이후 · 상시 모니터링",
-    "date_en": "Post Sep 24 Trump–Xi summit · ongoing watch",
+    "date": "2026년 10월 12일 · 상시 모니터링",
+    "date_en": "October 12, 2026 · Ongoing Monitoring",
     "targetDate": null,
     "status": "watch",
     "statusLabel": "📡 모니터링",
@@ -456,8 +456,8 @@
     "scaleLabel_en": "Mega",
     "magnitude": 94,
     "magnitude_kr": 85,
-    "desc": "9월 24일 미중 정상회담에서 시진핑 주석은 '대만 독립 반대' 입장을 명확히 했으며, 9월 30일 국경절 연설에서도 재확인하며 국가 통일 진전을 촉구했습니다. 의회가 승인한 140억 달러 규모의 대만 무기 패키지는 여전히 트럼프 대통령의 서명을 기다리고 있으며, 21명의 미 민주당 상원의원이 신속한 인도를 촉구했습니다. 한편, 대만은 신형 F-16V 블록 70 전투기의 첫 인도를 받았으며, 미군 관계자들은 중국의 대만 침공이 2028년 이전에는 어려울 것으로 평가했습니다.",
-    "desc_en": "At the September 24 US-China summit, President Xi Jinping explicitly stated his opposition to 'Taiwan independence,' a stance he reiterated in his National Day speech on September 30, urging progress toward national reunification. The $14 billion Taiwan arms package approved by Congress is still awaiting President Trump's signature, though 21 Democratic US senators urged its swift delivery. Meanwhile, Taiwan received its first new F-16V Block 70 fighter jets, and US officials now assess a Chinese invasion of Taiwan is unlikely before 2028.",
+    "desc": "10월 2일, 대만은 미국에서 승인된 F-16V 블록 70 전투기 66대 중 첫 2대를 인도받으며 29년 만에 신형 전투기를 도입했습니다. 한편, 미 당국자들은 중국군 내부의 반부패 숙청과 2028년 대만 총통 선거를 주요 변수로 들어 중국의 대만 침공 가능성이 2028년 이전에는 낮다고 평가했습니다. 또한 10월 5일 FBI는 미국에 거주 중인 대만 총통의 아들을 감시한 혐의로 중국 스파이를 체포하는 등 양안 갈등은 지속되고 있습니다.",
+    "desc_en": "On October 2, Taiwan received the first two F-16V Block 70 fighter jets out of 66 approved by the U.S., marking its first new fighter jet delivery in 29 years. Meanwhile, U.S. officials assess that a Chinese invasion of Taiwan is less likely before 2028, citing an anti-corruption purge within the PLA and the upcoming 2028 Taiwan presidential election as key factors. Tensions persist, as evidenced by the FBI's arrest on October 5 of a Chinese spy suspected of monitoring the Taiwan President's son in the U.S.",
     "mechanisms": [
       "TSMC 생산 차질 우려 → 애플·엔비디아·AMD 등 전 테크주 급락",
       "삼성전자·SK하이닉스 반사이익 기대 vs. 지정학 공포 심리 충돌",
@@ -503,7 +503,7 @@
       }
     ],
     "relatedSearch": "대만 중국 긴장",
-    "updated": "2026-10-04",
+    "updated": "2026-10-12",
     "dateConfirmed": false
   },
   {
