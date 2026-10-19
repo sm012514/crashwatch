@@ -72,8 +72,8 @@
     "name": "FOMC 금리 결정",
     "name_en": "FOMC Rate Decision",
     "category": "policy",
-    "date": "2026년 10월 27~28일",
-    "date_en": "October 27-28, 2026",
+    "date": "2026년 10월 28일",
+    "date_en": "October 28, 2026",
     "targetDate": "2026-10-28",
     "dateConfirmed": true,
     "status": "upcoming",
@@ -84,8 +84,8 @@
     "scaleLabel_en": "Mega",
     "magnitude": 88,
     "magnitude_kr": 79,
-    "desc": "연방준비제도(Fed)는 9월 15-16일 FOMC 회의에서 만장일치로 기준금리를 0.25%p 인상하여 3.75~4.00%로 조정했다. 10월 7일 공개된 의사록에 따르면 대부분의 연준 위원들은 연말까지 추가 금리 인상이 필요할 것으로 보았으나, 9월 고용 지표 약화 등으로 10월 금리 인상 확률은 16~22% 수준으로 급락했다.",
-    "desc_en": "The Federal Reserve (Fed) unanimously voted on September 15-16 to raise the benchmark interest rate by 0.25 percentage points to 3.75-4.00%. While minutes released on October 7 indicated most officials anticipate another rate hike by year-end, the probability of an October rate increase has dropped significantly to 16-22% due to weaker September payrolls and other economic data.",
+    "desc": "연방준비제도(Fed)는 2026년 9월 15-16일 FOMC 회의에서 기준금리를 0.25%p 인상하여 3.75~4.00%로 조정했다. 10월 7일 공개된 의사록에 따르면 대부분의 연준 위원들은 연말까지 추가 금리 인상이 필요할 것으로 보았으나, 9월 소비자물가지수(CPI) 발표 후 10월 금리 인상 확률은 일시적으로 40%까지 상승했으나, 이후 연준 의장의 발언으로 14-17% 수준으로 다시 하락했다. 다음 FOMC 회의는 10월 27-28일에 예정되어 있으며, 금리 결정은 10월 28일에 발표될 예정이다.",
+    "desc_en": "The Federal Reserve (Fed) raised the benchmark interest rate by 0.25%p to 3.75-4.00% at the FOMC meeting on September 15-16, 2026. According to the minutes released on October 7, most Fed officials viewed further rate increases as likely appropriate by year-end, but after the September CPI report, the probability of an October rate hike temporarily rose to 40%, then fell back to 14-17% following comments from the Fed Chair. The next FOMC meeting is scheduled for October 27-28, with the rate decision to be announced on October 28.",
     "mechanisms": [
       "금리 동결 장기화 → 성장주 밸류에이션 재조정 → 나스닥 하락",
       "예상보다 매파적 발언(hawkish) → 달러 강세 → 신흥국·코스피 자금 유출",
@@ -126,15 +126,15 @@
       }
     ],
     "relatedSearch": "FOMC 금리 Powell",
-    "updated": "2026-10-12"
+    "updated": "2026-10-19"
   },
   {
     "id": "japan-rate",
     "name": "일본은행(BOJ) 금리 결정",
     "name_en": "Bank of Japan (BOJ) Rate Decision",
     "category": "policy",
-    "date": "2026년 10월",
-    "date_en": "October 2026",
+    "date": "2026년 10월 29-30일 (금융정책결정회의)",
+    "date_en": "October 29-30, 2026 (Monetary Policy Meeting)",
     "targetDate": "2026-10-30",
     "dateConfirmed": true,
     "status": "upcoming",
@@ -145,8 +145,8 @@
     "scaleLabel_en": "Large",
     "magnitude": 84,
     "magnitude_kr": 80,
-    "desc": "일본은행은 지난 9월 18일 금융정책결정회의에서 기준금리를 0.25%p 인상하여 현재 정책금리는 1.25%이다. 다음 회의는 10월 29~30일이며, 시장은 10월 금리 동결 가능성을 81.5~91%로 보고 있다. 일본은행은 10월 30일 분기별 전망 보고서에서 기저 인플레이션이 2% 목표에 도달했다고 판단할 가능성을 검토 중이다.",
-    "desc_en": "The Bank of Japan raised its policy rate by 0.25 percentage points to 1.25% at its Monetary Policy Meeting on September 18. The next meeting is scheduled for October 29-30, with market participants widely expecting a hold, pricing the probability at 81.5% to 91%. The BOJ is reportedly considering declaring that underlying inflation has reached its 2% target in the quarterly Outlook Report due on October 30.",
+    "desc": "일본은행 관계자들은 10월 연이은 금리 인상에는 소극적이나, 이르면 12월 추가 인상 가능성을 염두에 두고 있다. 고에다 준코 심의위원은 금리 인상에 과도하게 신중할 필요는 없다고 언급했으며, 우에다 가즈오 총재는 기조 인플레이션이 2% 목표에 상당히 근접했다고 밝혔다. 일본은행은 10월 30일 분기별 전망 보고서에서 기저 인플레이션이 2% 목표에 도달했다고 선언할 것으로 예상된다.",
+    "desc_en": "Bank of Japan officials are leaning against a back-to-back rate hike in October but are eyeing a possible further increase as early as December. BOJ board member Junko Koeda stated that the central bank should not be overly cautious about raising interest rates, and Governor Kazuo Ueda noted that underlying inflation is quite close to the 2% target. The BOJ is poised to declare that underlying inflation has reached its 2% target in its quarterly outlook report on October 30.",
     "mechanisms": [
       "엔화 강세 → 엔 캐리 트레이드 청산 → 전 세계 위험자산 동시 매도",
       "일본 국채 수익률 상승 → 글로벌 채권 수익률 동반 상승",
@@ -187,16 +187,16 @@
       }
     ],
     "relatedSearch": "BOJ 일본 금리 엔 캐리",
-    "updated": "2026-10-12"
+    "updated": "2026-10-19"
   },
   {
     "id": "nvidia-earnings",
     "name": "엔비디아 실적 발표 (Q3 FY2027)",
     "name_en": "Nvidia Earnings (Q3 FY2027)",
     "category": "tech",
-    "date": "2026년 11월 17일",
-    "date_en": "November 17, 2026",
-    "targetDate": "2026-11-17",
+    "date": "2026년 11월 18일",
+    "date_en": "November 18, 2026",
+    "targetDate": "2026-11-18",
     "status": "upcoming",
     "statusLabel": "🟠 예정",
     "statusLabel_en": "🟠 Scheduled",
@@ -205,8 +205,8 @@
     "scaleLabel_en": "Large",
     "magnitude": 54,
     "magnitude_kr": 64,
-    "desc": "엔비디아의 3분기 FY2027 실적 발표일이 2026년 11월 17일 화요일 시장 마감 후로 확정되었습니다. 회사는 2분기 FY2027 실적 발표에서 3분기 매출 가이던스로 1,080억 달러(±2%)를 제시했으며, 매출 총이익률은 74%로 예상했습니다.",
-    "desc_en": "NVIDIA's Q3 FY2027 earnings announcement date has been confirmed for Tuesday, November 17, 2026, after market close. The company previously provided a Q3 revenue guidance of $108.0 billion (plus or minus 2%) and an expected gross margin of 74% during its Q2 FY2027 earnings release.",
+    "desc": "NVIDIA는 2026년 8월 26일에 발표된 2분기 FY2027 실적 발표에서 3분기 FY2027 매출 가이던스로 1,080억 달러(±2%)를 제시했으며, 매출 총이익률은 74%로 예상했습니다. 현재 엔비디아의 3분기 FY2027 실적 발표일은 2026년 11월 18일로 예상됩니다.",
+    "desc_en": "NVIDIA provided Q3 FY2027 revenue guidance of $108.0 billion (±2%) and gross margin guidance of 74% during its Q2 FY2027 earnings announcement on August 26, 2026. The company's Q3 FY2027 earnings report is currently expected to be announced on November 18, 2026.",
     "mechanisms": [
       "어닝 서프라이즈 → AI 버블 우려 완화 → 테크 섹터 전반 반등",
       "데이터센터 +117% → HBM 공급사 SK하이닉스·삼성전자 수혜 기대",
@@ -247,7 +247,7 @@
       }
     ],
     "relatedSearch": "엔비디아 실적 earnings",
-    "updated": "2026-10-12",
+    "updated": "2026-10-19",
     "dateConfirmed": true
   },
   {
@@ -255,8 +255,8 @@
     "name": "국민연금 포트폴리오 리밸런싱",
     "name_en": "NPS Portfolio Rebalancing",
     "category": "macro",
-    "date": "2026년 7월~ 진행 중",
-    "date_en": "Since Jul 2026 · ongoing",
+    "date": "2026년 10월 18일",
+    "date_en": "October 18, 2026",
     "targetDate": null,
     "status": "ongoing",
     "statusLabel": "🔴 진행 중",
@@ -266,8 +266,8 @@
     "scaleLabel_en": "Large",
     "magnitude": 29,
     "magnitude_kr": 57,
-    "desc": "국민연금 기금 적립금은 2026년 6월 말 1,865.6조 원에서 7월 말 1,684.2조 원으로 181.4조 원 감소했으며, 국내 주식 평가액이 124.6조 원 급감했습니다. 이에 국민연금은 7월부터 리밸런싱을 재개하여 9월 18일 기준 국내 주식 비중이 24.4%로 축소되었으나 여전히 20.8%의 목표 비중을 초과하고 있습니다. 한편 외국인은 9월 한 달간 코스피 시장에서 20.3조 원을 순매도했으나, 10월 2일 순매도 규모는 1,900억 원으로 매도세가 다소 완화되었습니다.",
-    "desc_en": "The National Pension Service fund reserve decreased by 181.4 trillion won from 1,865.6 trillion won at the end of June 2026 to 1,684.2 trillion won at the end of July, with domestic stock valuation plummeting by 124.6 trillion won. Consequently, the NPS resumed rebalancing from July, reducing the domestic stock proportion to an estimated 24.4% by September 18, though it still exceeds the target of 20.8%. Meanwhile, foreign investors net sold 20.3 trillion won in the KOSPI market during September, but their net selling on October 2 was 190 billion won, indicating a somewhat weakened selling pressure.",
+    "desc": "국민연금의 국내 주식 평가액은 2026년 6월 말 대비 10월 15일 기준 약 182조 원 감소하여 333.5조 원으로 집계되었습니다. 이는 7월 말 기준 국내 주식 비중 24.9%가 목표 비중 20.8%를 상회하는 상황에서 발생했으며, 특히 삼성전자와 SK하이닉스 등 반도체 종목의 급락이 주요 원인으로 지목됩니다. 한편, 10월 14일 국회 국정감사에서는 리밸런싱 유예 및 국내 주식 목표 비중 확대 결정의 적절성을 두고 여야 간 공방이 이어졌습니다.",
+    "desc_en": "The National Pension Service's domestic stock valuation decreased by approximately 182 trillion won from the end of June 2026 to October 15, reaching 333.5 trillion won. This occurred while the domestic stock allocation stood at 24.9% as of the end of July, exceeding the target of 20.8%, with a sharp decline in semiconductor stocks being a major cause. Meanwhile, during the National Assembly audit on October 14, a debate ensued between the ruling and opposition parties regarding the appropriateness of delaying rebalancing and increasing the domestic stock allocation.",
     "mechanisms": [
       "국내주식 비중 축소 → 코스피 대형주(삼성전자·SK하이닉스 등) 대량 매도 압력",
       "해외주식·채권 비중 확대 → 환전 수요 증가 → 원/달러 환율 상승",
@@ -308,7 +308,7 @@
       }
     ],
     "relatedSearch": "국민연금 리밸런싱 코스피",
-    "updated": "2026-10-04",
+    "updated": "2026-10-19",
     "dateConfirmed": false
   },
   {
@@ -445,8 +445,8 @@
     "name": "중국-대만 긴장 고조",
     "name_en": "China-Taiwan Tensions",
     "category": "geo",
-    "date": "2026년 10월 12일 · 상시 모니터링",
-    "date_en": "October 12, 2026 · Ongoing Monitoring",
+    "date": "2026년 10월 18일",
+    "date_en": "October 18, 2026",
     "targetDate": null,
     "status": "watch",
     "statusLabel": "📡 모니터링",
@@ -456,8 +456,8 @@
     "scaleLabel_en": "Mega",
     "magnitude": 94,
     "magnitude_kr": 85,
-    "desc": "10월 2일, 대만은 미국에서 승인된 F-16V 블록 70 전투기 66대 중 첫 2대를 인도받으며 29년 만에 신형 전투기를 도입했습니다. 한편, 미 당국자들은 중국군 내부의 반부패 숙청과 2028년 대만 총통 선거를 주요 변수로 들어 중국의 대만 침공 가능성이 2028년 이전에는 낮다고 평가했습니다. 또한 10월 5일 FBI는 미국에 거주 중인 대만 총통의 아들을 감시한 혐의로 중국 스파이를 체포하는 등 양안 갈등은 지속되고 있습니다.",
-    "desc_en": "On October 2, Taiwan received the first two F-16V Block 70 fighter jets out of 66 approved by the U.S., marking its first new fighter jet delivery in 29 years. Meanwhile, U.S. officials assess that a Chinese invasion of Taiwan is less likely before 2028, citing an anti-corruption purge within the PLA and the upcoming 2028 Taiwan presidential election as key factors. Tensions persist, as evidenced by the FBI's arrest on October 5 of a Chinese spy suspected of monitoring the Taiwan President's son in the U.S.",
+    "desc": "10월 12일, 중국은 대만 독립 운동을 지지한다는 이유로 파라과이와 벨리즈 관리들에게 제재를 부과했습니다. 10월 18일, 미 육군은 중국의 위협에 대응하고 대만을 지원하기 위한 인도-태평양 새 전략을 공개했습니다. 또한, 중국은 대만 국경절 연설 이후 10월 17일까지 대만 인근에서 실사격 훈련을 포함한 군사 활동을 강화했습니다.",
+    "desc_en": "On October 12, China imposed sanctions on Paraguayan and Belizean officials, accusing them of supporting Taiwan's independence movement. On October 18, the US Army unveiled a new Indo-Pacific strategy to counter China's military threat and support Taiwan. China also intensified military activities, including live-fire drills until October 17, following Taiwan's National Day speech.",
     "mechanisms": [
       "TSMC 생산 차질 우려 → 애플·엔비디아·AMD 등 전 테크주 급락",
       "삼성전자·SK하이닉스 반사이익 기대 vs. 지정학 공포 심리 충돌",
@@ -503,7 +503,7 @@
       }
     ],
     "relatedSearch": "대만 중국 긴장",
-    "updated": "2026-10-12",
+    "updated": "2026-10-19",
     "dateConfirmed": false
   },
   {
@@ -565,19 +565,19 @@
     "name": "SpaceX ($SPCX) 나스닥 상장 완료",
     "name_en": "SpaceX ($SPCX) Listed on Nasdaq",
     "category": "ipo",
-    "date": "2026년 6월 12일 상장 · 공모가 $135",
-    "date_en": "Listed Jun 12, 2026 · IPO price $135",
-    "targetDate": "2026-06-12",
-    "status": "completed",
-    "statusLabel": "🟢 상장 완료",
-    "statusLabel_en": "🟢 Listed",
+    "date": "2026년 10월 19일",
+    "date_en": "October 19, 2026",
+    "targetDate": "2026-12-08",
+    "status": "ongoing",
+    "statusLabel": "🔴 진행 중",
+    "statusLabel_en": "🔴 Ongoing",
     "scale": "mega",
     "scaleLabel": "초대형",
     "scaleLabel_en": "Mega",
     "magnitude": 52,
     "magnitude_kr": 24,
-    "desc": "SpaceX는 2026년 6월 12일 나스닥에 공모가 주당 135달러로 상장 완료되었으며, 기업가치는 약 1.77조 달러로 평가되어 역대 최대 규모 IPO를 기록했습니다. 주식 락업은 2026년 8월부터 단계적으로 해제되기 시작했으며, 일론 머스크의 지분 락업은 2027년 6월부터 해제될 예정입니다. S&P500 조기 편입은 거부되어 상장 후 최소 1년이 지나야 검토될 수 있습니다.",
-    "desc_en": "SpaceX completed its Nasdaq IPO on June 12, 2026, at an offering price of $135 per share, with its valuation estimated at approximately $1.77 trillion, marking it as the largest IPO in history. Share lock-ups began to be released in stages from August 2026, with Elon Musk's shares scheduled for release starting June 2027. Early inclusion in the S&P 500 was rejected, meaning it can only be considered at least one year after its listing.",
+    "desc": "SpaceX는 2026년 6월 12일 나스닥에 공모가 주당 135달러로 상장되었으며, 첫 거래일에 주당 161달러로 마감하며 시가총액 약 2.1조 달러를 기록했습니다. 락업 해제는 2026년 8월 6일 9.115억 주를 시작으로 단계적으로 진행 중이며, 180일 락업은 2026년 12월 8일에 완전히 해제될 예정입니다. S&P500 조기 편입은 2026년 6월 4일에 거부되어 최소 2027년 중반까지는 편입이 불가능합니다.",
+    "desc_en": "SpaceX was listed on Nasdaq on June 12, 2026, at an IPO price of $135 per share, closing its first trading day at $161 per share with a market capitalization of approximately $2.1 trillion. Staggered lock-up releases began on August 6, 2026, with 911.5 million shares, and the full 180-day lock-up is set to expire on December 8, 2026. Early inclusion in the S&P 500 was rejected on June 4, 2026, making it ineligible until at least mid-2027.",
     "mechanisms": [
       "IPO 청약 자금 마련을 위해 기존 보유 주식(특히 테크주·성장주) 대량 매도",
       "기관 포트폴리오 비중 조정 → 시가총액 상위 종목(애플·MS·엔비디아 등) 동반 하락 압력",
@@ -625,7 +625,7 @@
       }
     ],
     "relatedSearch": "SpaceX IPO 상장",
-    "updated": "2026-10-04",
-    "dateConfirmed": false
+    "updated": "2026-10-19",
+    "dateConfirmed": true
   }
 ]
