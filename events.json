@@ -74,18 +74,18 @@
     "category": "policy",
     "date": "2026년 10월 28일",
     "date_en": "October 28, 2026",
-    "targetDate": "2026-10-28",
-    "dateConfirmed": true,
-    "status": "upcoming",
-    "statusLabel": "🟠 예정",
-    "statusLabel_en": "🟠 Scheduled",
+    "targetDate": null,
+    "dateConfirmed": false,
+    "status": "completed",
+    "statusLabel": "🟢 완료",
+    "statusLabel_en": "🟢 Completed",
     "scale": "mega",
     "scaleLabel": "초대형",
     "scaleLabel_en": "Mega",
     "magnitude": 88,
     "magnitude_kr": 79,
-    "desc": "연방준비제도(Fed)는 2026년 9월 15-16일 FOMC 회의에서 기준금리를 0.25%p 인상하여 3.75~4.00%로 조정했다. 10월 7일 공개된 의사록에 따르면 대부분의 연준 위원들은 연말까지 추가 금리 인상이 필요할 것으로 보았으나, 9월 소비자물가지수(CPI) 발표 후 10월 금리 인상 확률은 일시적으로 40%까지 상승했으나, 이후 연준 의장의 발언으로 14-17% 수준으로 다시 하락했다. 다음 FOMC 회의는 10월 27-28일에 예정되어 있으며, 금리 결정은 10월 28일에 발표될 예정이다.",
-    "desc_en": "The Federal Reserve (Fed) raised the benchmark interest rate by 0.25%p to 3.75-4.00% at the FOMC meeting on September 15-16, 2026. According to the minutes released on October 7, most Fed officials viewed further rate increases as likely appropriate by year-end, but after the September CPI report, the probability of an October rate hike temporarily rose to 40%, then fell back to 14-17% following comments from the Fed Chair. The next FOMC meeting is scheduled for October 27-28, with the rate decision to be announced on October 28.",
+    "desc": "연방준비제도(Fed)는 2026년 10월 27-28일 FOMC 회의에서 기준금리를 연 3.75~4.00%로 동결하기로 결정했다. 이 결정은 10대 2의 표결로 이루어졌으며, 두 명의 위원은 0.25%p 인상을 주장하며 반대했다.",
+    "desc_en": "The Federal Reserve (Fed) decided to keep the benchmark interest rate unchanged at 3.75% to 4.00% during the FOMC meeting on October 27-28, 2026. The decision was made with a 10-2 vote, with two members dissenting in favor of a 0.25 percentage point increase.",
     "mechanisms": [
       "금리 동결 장기화 → 성장주 밸류에이션 재조정 → 나스닥 하락",
       "예상보다 매파적 발언(hawkish) → 달러 강세 → 신흥국·코스피 자금 유출",
@@ -126,27 +126,27 @@
       }
     ],
     "relatedSearch": "FOMC 금리 Powell",
-    "updated": "2026-10-19"
+    "updated": "2026-11-02"
   },
   {
     "id": "japan-rate",
     "name": "일본은행(BOJ) 금리 결정",
     "name_en": "Bank of Japan (BOJ) Rate Decision",
     "category": "policy",
-    "date": "2026년 10월 29-30일 (금융정책결정회의)",
-    "date_en": "October 29-30, 2026 (Monetary Policy Meeting)",
-    "targetDate": "2026-10-30",
+    "date": "2026년 10월 30일 (금융정책결정회의 결과 발표)",
+    "date_en": "October 30, 2026 (Monetary Policy Meeting outcome announcement)",
+    "targetDate": "2026-12-18",
     "dateConfirmed": true,
-    "status": "upcoming",
-    "statusLabel": "🟠 예정",
-    "statusLabel_en": "🟠 Scheduled",
+    "status": "completed",
+    "statusLabel": "🟢 완료",
+    "statusLabel_en": "🟢 Completed",
     "scale": "high",
     "scaleLabel": "대형",
     "scaleLabel_en": "Large",
     "magnitude": 84,
     "magnitude_kr": 80,
-    "desc": "일본은행 관계자들은 10월 연이은 금리 인상에는 소극적이나, 이르면 12월 추가 인상 가능성을 염두에 두고 있다. 고에다 준코 심의위원은 금리 인상에 과도하게 신중할 필요는 없다고 언급했으며, 우에다 가즈오 총재는 기조 인플레이션이 2% 목표에 상당히 근접했다고 밝혔다. 일본은행은 10월 30일 분기별 전망 보고서에서 기저 인플레이션이 2% 목표에 도달했다고 선언할 것으로 예상된다.",
-    "desc_en": "Bank of Japan officials are leaning against a back-to-back rate hike in October but are eyeing a possible further increase as early as December. BOJ board member Junko Koeda stated that the central bank should not be overly cautious about raising interest rates, and Governor Kazuo Ueda noted that underlying inflation is quite close to the 2% target. The BOJ is poised to declare that underlying inflation has reached its 2% target in its quarterly outlook report on October 30.",
+    "desc": "일본은행은 10월 금융정책결정회의에서 정책금리를 1.25%로 동결했다. 하지만 기조적인 물가 상승률이 2% 물가 목표에 대체로 부합한다고 공식 선언하며 사실상 디플레이션의 종료를 알렸다. 또한, 분기별 전망 보고서에서 2027 회계연도 핵심 소비자물가상승률 전망치를 2.6%로 상향 조정하고, 2027년 1월부터 ETF 매각 속도를 연간 3300억 엔에서 8600억 엔으로 대폭 확대하기로 결정했다. 시장은 12월 17-18일 회의에서 추가 금리 인상 가능성을 높게 보고 있다.",
+    "desc_en": "The Bank of Japan (BOJ) kept its policy rate unchanged at 1.25% at its October Monetary Policy Meeting. However, it officially declared that underlying inflation is generally consistent with its 2% price stability target, effectively signaling the end of deflation. In its quarterly Outlook Report, the BOJ raised its core CPI forecast for fiscal 2027 to 2.6% and decided to significantly increase the pace of ETF sales from 330 billion yen to 860 billion yen annually starting January 2027. Markets are now anticipating a potential rate hike at the December 17-18 meeting.",
     "mechanisms": [
       "엔화 강세 → 엔 캐리 트레이드 청산 → 전 세계 위험자산 동시 매도",
       "일본 국채 수익률 상승 → 글로벌 채권 수익률 동반 상승",
@@ -187,7 +187,7 @@
       }
     ],
     "relatedSearch": "BOJ 일본 금리 엔 캐리",
-    "updated": "2026-10-19"
+    "updated": "2026-11-02"
   },
   {
     "id": "nvidia-earnings",
@@ -205,8 +205,8 @@
     "scaleLabel_en": "Large",
     "magnitude": 54,
     "magnitude_kr": 64,
-    "desc": "NVIDIA는 2026년 8월 26일에 발표된 2분기 FY2027 실적 발표에서 3분기 FY2027 매출 가이던스로 1,080억 달러(±2%)를 제시했으며, 매출 총이익률은 74%로 예상했습니다. 현재 엔비디아의 3분기 FY2027 실적 발표일은 2026년 11월 18일로 예상됩니다.",
-    "desc_en": "NVIDIA provided Q3 FY2027 revenue guidance of $108.0 billion (±2%) and gross margin guidance of 74% during its Q2 FY2027 earnings announcement on August 26, 2026. The company's Q3 FY2027 earnings report is currently expected to be announced on November 18, 2026.",
+    "desc": "NVIDIA는 2026년 10월 25일에 마감된 2027 회계연도 3분기 실적 발표를 위한 콘퍼런스콜을 2026년 11월 17일 오후 2시 PT (오후 5시 ET)에 개최한다고 밝혔습니다. 이는 한국 시간으로 2026년 11월 18일 오전 7시에 해당하며, Colette Kress CFO의 서면 실적 해설은 콘퍼런스콜 당일 오전 1시 20분 PT (한국 시간 오후 4시 20분)에 게시될 예정입니다. 회사는 3분기 매출 가이던스로 1,080억 달러(±2%)를 제시했으며, 시장 분석가들은 주당 2.47달러의 순이익과 1,088억 달러의 매출을 예상하고 있습니다.",
+    "desc_en": "NVIDIA announced it will host a conference call on November 17, 2026, at 2 p.m. PT (5 p.m. ET) to discuss its third-quarter fiscal year 2027 financial results, which ended October 25, 2026. This corresponds to 7 a.m. KST on November 18, 2026. The company previously guided Q3 revenue of $108.0 billion (±2%), and analysts expect earnings per share of $2.47 on revenue of $108.8 billion.",
     "mechanisms": [
       "어닝 서프라이즈 → AI 버블 우려 완화 → 테크 섹터 전반 반등",
       "데이터센터 +117% → HBM 공급사 SK하이닉스·삼성전자 수혜 기대",
@@ -247,7 +247,7 @@
       }
     ],
     "relatedSearch": "엔비디아 실적 earnings",
-    "updated": "2026-10-19",
+    "updated": "2026-11-02",
     "dateConfirmed": true
   },
   {
@@ -384,8 +384,8 @@
     "name": "미국 국가부채 한도 협상",
     "name_en": "US Debt Ceiling Negotiation",
     "category": "macro",
-    "date": "X-date 2027년 늦겨울~한여름 예상",
-    "date_en": "X-date late winter to mid-summer 2027",
+    "date": "2026년 11월 1일 발표",
+    "date_en": "Announced November 1, 2026",
     "targetDate": null,
     "status": "ongoing",
     "statusLabel": "🔴 진행 중",
@@ -395,8 +395,8 @@
     "scaleLabel_en": "Large",
     "magnitude": 78,
     "magnitude_kr": 63,
-    "desc": "미국 국가부채는 2026년 9월 3일 기준 40.10조 달러를 기록했으며, 현 추세로 볼 때 2027년 1월 16일경 41조 달러에 도달하여 부채 한도에 근접할 것으로 전망된다. 초당적정책센터(BPC)는 재무부의 비상조치 이후 실제 디폴트 시점인 X-date가 2027년 늦겨울에서 한여름 사이가 될 것으로 보고 있으나, 최근 차입 속도 증가로 이 시기가 예상보다 빨라질 수 있다고 밝혔다.",
-    "desc_en": "As of September 3, 2026, the U.S. national debt stood at $40.10 trillion, and at the current rate, it is projected to reach $41 trillion around January 16, 2027, nearing the debt limit. The Bipartisan Policy Center (BPC) estimates the actual X-date, after Treasury's extraordinary measures, to be between late winter and mid-summer of 2027, but recently indicated that increased borrowing could push this date earlier than previously anticipated.",
+    "desc": "2026회계연도(9월 30일 종료) 기준 미국 연방정부 부채는 32.2조 달러로 GDP 대비 100.03%를 기록했으며, 이는 1946년 이후 처음입니다. 또한 2026회계연도 재정적자는 1조 9,920억 달러로 확정되었고, 이자 비용만 연 1조 1천억 달러에 달하며 메디케어와 국방비 지출을 넘어섰습니다. 초당적정책센터(BPC)는 미국이 2027년 늦겨울에서 한여름 사이에 부채 한도에 도달할 것으로 전망하며, 실제 채무불이행 시점인 X-date는 2027년 말경으로 예상됩니다.",
+    "desc_en": "As of the end of fiscal year 2026 (September 30), the US federal government debt reached $32.2 trillion, amounting to 100.03% of GDP, the first time since 1946. The fiscal year 2026 deficit was confirmed at $1.992 trillion, with annual interest costs on the national debt reaching $1.1 trillion, surpassing both Medicare and defense spending. The Bipartisan Policy Center (BPC) projects the US will reach its debt limit between late winter and mid-summer of 2027, with the actual X-date (default) anticipated around late 2027.",
     "mechanisms": [
       "협상 결렬 우려 → 미국 국채 수익률 급등 → 전 자산 리프라이싱",
       "안전자산 역설 붕괴 → 달러·미국채 동시 매도",
@@ -437,7 +437,7 @@
       }
     ],
     "relatedSearch": "미국 부채한도 debt ceiling",
-    "updated": "2026-10-04",
+    "updated": "2026-11-02",
     "dateConfirmed": false
   },
   {
