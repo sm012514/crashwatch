@@ -1,11 +1,72 @@
 [
   {
+    "id": "us-midterms",
+    "name": "미국 중간선거 — 민주당 양원 장악",
+    "name_en": "US Midterms — Democrats Sweep Both Chambers",
+    "category": "policy",
+    "date": "11/3 선거 완료 · 분점정부 영향 관찰",
+    "date_en": "Held Nov 3 · divided-government effects in focus",
+    "targetDate": null,
+    "dateConfirmed": false,
+    "status": "watch",
+    "statusLabel": "📡 모니터링",
+    "statusLabel_en": "📡 Monitoring",
+    "scale": "mega",
+    "scaleLabel": "초대형",
+    "scaleLabel_en": "Mega",
+    "magnitude": 76,
+    "magnitude_kr": 68,
+    "desc": "11월 3일 중간선거에서 민주당이 상·하원을 모두 장악(상원 54-44 추정). 11월 4일 트럼프 대통령이 결과를 수용하자 불복 우려가 해소되며 다우가 약 1,500포인트(2025년 4월 이후 최대폭) 급등했고 국채 금리와 유가는 하락. 다만 초반에는 규제 강화·데이터센터 증설 둔화 우려로 AI·반도체주가 가장 크게 밀렸다. 남은 2년은 분점정부 교착이 기본 시나리오.",
+    "desc_en": "Democrats took both chambers in the Nov 3 midterms (Senate roughly 54-44). After Trump accepted the result on Nov 4, removing fears of a contested outcome, the Dow jumped about 1,500 points — its best day since April 2025 — while Treasury yields and oil fell. AI and semiconductor names led the initial decline on worries about tighter regulation and slower data-center buildout. Gridlock under divided government is now the base case for the next two years.",
+    "mechanisms": [
+      "분점정부 교착 → 대규모 재정 확대·감세 입법 난항 → 국채 발행 압력 완화",
+      "의회 견제 강화 → 행정부가 관세 등 단독 집행 수단에 더 의존할 가능성",
+      "AI·데이터센터 규제 강화 우려 → 관련주 밸류에이션 재조정",
+      "정치 불확실성 해소 → 단기 위험자산 선호 회복"
+    ],
+    "mechanisms_en": [
+      "Gridlock stalls big fiscal and tax legislation → eases Treasury issuance pressure",
+      "A check from Congress may push the administration toward unilateral tools such as tariffs",
+      "Tighter AI and data-center regulation fears → valuation reset in related names",
+      "Political uncertainty clears → short-term risk appetite returns"
+    ],
+    "impacts": [
+      {
+        "label": "나스닥",
+        "label_en": "Nasdaq",
+        "type": "neu"
+      },
+      {
+        "label": "AI·반도체",
+        "label_en": "AI & chips",
+        "type": "neg"
+      },
+      {
+        "label": "미국채",
+        "label_en": "US Treasuries",
+        "type": "pos"
+      },
+      {
+        "label": "코스피",
+        "label_en": "KOSPI",
+        "type": "neu"
+      },
+      {
+        "label": "달러",
+        "label_en": "USD",
+        "type": "neg"
+      }
+    ],
+    "relatedSearch": "미국 중간선거 증시",
+    "updated": "2026-11-10"
+  },
+  {
     "id": "iran-war",
     "name": "이란 전쟁 · 호르무즈 해협 봉쇄",
     "name_en": "Iran War & Strait of Hormuz Closure",
     "category": "geo",
-    "date": "호르무즈 봉쇄 장기화 · 유가 급등",
-    "date_en": "Prolonged Hormuz closure · oil surging",
+    "date": "유가 고점 대비 22% 급락 · 긴장 완화 기대",
+    "date_en": "Oil down 22% from peak · de-escalation hopes",
     "targetDate": null,
     "dateConfirmed": false,
     "status": "ongoing",
@@ -16,8 +77,8 @@
     "scaleLabel_en": "Mega",
     "magnitude": 96,
     "magnitude_kr": 91,
-    "desc": "브렌트유가 10/22 $113.17로 4% 급등해 5월 4일 이후 최고가로 마감, 10/23에는 장중 $114~116까지 올랐다. 10/4 $102 수준에서 2주 만에 10% 넘게 뛴 것으로, 호르무즈 통항량이 전쟁 전 대비 70% 감소한 상태가 길어진 영향. 트럼프 대통령이 해협 재개방을 조건으로 한 이란의 제안(해군 봉쇄 해제·원유 수출 제재 완화·동결자산 반환)을 거부했고, 현재 협상은 파키스탄·카타르를 통한 간접 접촉에 머물고 있다.",
-    "desc_en": "Brent settled at $113.17 on Oct 22, up 4% and the highest close since May 4, then traded $114–116 intraday on Oct 23 — more than 10% above the $102 level of Oct 4. Hormuz transits remain about 70% below pre-war volumes. Trump rejected Iran’s proposal to reopen the strait in exchange for lifting the naval blockade, easing oil export sanctions and returning frozen assets; contacts continue only indirectly through Pakistan and Qatar.",
+    "desc": "브렌트유가 10월 30일 $118(6개월 최고) 고점을 찍은 뒤 11월 10일 $90~94까지 약 22% 급락, 8월 이후 처음으로 $90선을 밑돌기도 했다. 트럼프 대통령이 9개월째 이어진 이란과의 충돌이 사실상 끝나간다는 취지로 발언한 영향. 호르무즈 원유 통항은 대부분 회복됐고 LNG 통항은 전쟁 발발 이후 최대치. 다만 미국의 해상 봉쇄는 유지 중이고, 이란이 요구를 완화했다는 보도는 카타르 측이 부인해 확정된 합의는 없다.",
+    "desc_en": "Brent peaked at $118 on Oct 30 — a six-month high — then fell about 22% to $90–94 by Nov 10, briefly dropping below $90 for the first time since August, after Trump suggested the nine-month conflict with Iran was effectively winding down. Crude flows through Hormuz have largely recovered and LNG transits hit their highest since the war began. But the US naval blockade remains, and a report that Iran softened its demands was denied by Qatari officials, so no deal is confirmed.",
     "mechanisms": [
       "호르무즈 봉쇄 → 원유·LNG 공급 차질 → 유가 급등 → 전 세계 물가 재점화",
       "에너지 수입 의존도 높은 한국·일본 무역수지 악화 → 원화 약세",
@@ -65,15 +126,15 @@
       }
     ],
     "relatedSearch": "이란 전쟁 호르무즈 유가",
-    "updated": "2026-10-24"
+    "updated": "2026-11-10"
   },
   {
     "id": "fed-meeting",
     "name": "FOMC 금리 결정",
     "name_en": "FOMC Rate Decision",
     "category": "policy",
-    "date": "2026년 10월 29일",
-    "date_en": "October 29, 2026",
+    "date": "2026년 12월 8~9일",
+    "date_en": "Dec 8–9, 2026",
     "targetDate": "2026-12-10",
     "dateConfirmed": true,
     "status": "upcoming",
@@ -133,8 +194,8 @@
     "name": "일본은행(BOJ) 금리 결정",
     "name_en": "Bank of Japan (BOJ) Rate Decision",
     "category": "policy",
-    "date": "2026년 11월 6일",
-    "date_en": "November 6, 2026",
+    "date": "다음 회의 2026년 12월 중순",
+    "date_en": "Next meeting mid-December 2026",
     "targetDate": "2026-12-17",
     "dateConfirmed": true,
     "status": "upcoming",
@@ -316,8 +377,8 @@
     "name": "미국 관세 정책 (트럼프 2기)",
     "name_en": "US Tariff Policy (Trump 2nd Term)",
     "category": "policy",
-    "date": "301조 관세 적용 중",
-    "date_en": "Section 301 tariffs in force",
+    "date": "301조 관세 적용 중 · 과잉생산 판정 지연",
+    "date_en": "Section 301 in force · overcapacity ruling delayed",
     "targetDate": null,
     "status": "ongoing",
     "statusLabel": "🔴 진행 중",
@@ -327,8 +388,8 @@
     "scaleLabel_en": "Mega",
     "magnitude": 87,
     "magnitude_kr": 83,
-    "desc": "2026년 7월 24일부로 60개국에 무역법 301조 '강제노동' 관세가 발효되어 한국에는 기존 관세와 합산하여 총 12.5%의 관세율이 적용되고 있다. 한편, 10월 1일 미국 무역대표부(USTR)는 한국이 포함된 '구조적 과잉생산'에 대한 301조 조사가 수주 내 마무리될 것이라고 밝혔으며, 10월 3일 트럼프 대통령은 미국 내 공장 미건설 시 최대 300% 관세 부과를 위협하고 알래스카 LNG 사업 투자와 연계하여 한국에 대한 관세 인상 가능성을 시사했다.",
-    "desc_en": "Effective July 24, 2026, Section 301 'forced labor' tariffs were imposed on 60 countries, with South Korea facing a combined 12.5% tariff. On October 1, the USTR announced that its Section 301 investigation into 'structural overproduction' (including South Korea) is nearing conclusion within weeks. On October 3, President Trump threatened tariffs of up to 300% for not building factories in the US and hinted at increased tariffs on South Korea related to Alaska LNG investment.",
+    "desc": "한국은 강제노동 301조 관세로 기존 관세 포함 12.5%가 적용 중이며, 3월 착수한 '구조적 과잉생산' 301조 조사(한국 등 16개국 대상) 결정은 11월 9일 현재까지 미뤄진 상태다. 정부는 기존 한미 합의대로 15% 상한 유지를 요구하고 있으나, 쟁점은 과잉생산 관세가 기존 세율 위에 추가로 얹히는지 여부. 중간선거 패배 후 행정부가 관세 카드에 더 기댈 수 있다는 관측도 나온다.",
+    "desc_en": "Korea currently faces 12.5% including existing duties under the forced-labor Section 301 measures, while the decision in the structural-overcapacity probe launched in March (covering 16 economies including Korea) was still pending as of Nov 9. Seoul is pressing to hold the 15% cap from the bilateral deal; the key question is whether overcapacity duties would stack on top of existing rates. Some analysts expect the administration to lean harder on tariffs after losing the midterms.",
     "mechanisms": [
       "수출 의존도 높은 한국·대만·일본 주식시장에 직접 타격",
       "인플레이션 재점화 → Fed 금리인하 기대 소멸 → 채권 수익률 상승",
@@ -376,7 +437,7 @@
       }
     ],
     "relatedSearch": "관세 무역전쟁",
-    "updated": "2026-10-04",
+    "updated": "2026-11-10",
     "dateConfirmed": false
   },
   {
@@ -384,8 +445,8 @@
     "name": "미국 국가부채 한도 협상",
     "name_en": "US Debt Ceiling Negotiation",
     "category": "macro",
-    "date": "2026년 11월 1일 발표",
-    "date_en": "Announced November 1, 2026",
+    "date": "X-date 2027년 늦겨울~한여름 예상",
+    "date_en": "X-date expected late winter to mid-summer 2027",
     "targetDate": null,
     "status": "ongoing",
     "statusLabel": "🔴 진행 중",
@@ -395,8 +456,8 @@
     "scaleLabel_en": "Large",
     "magnitude": 78,
     "magnitude_kr": 63,
-    "desc": "2026회계연도(9월 30일 종료) 기준 미국 연방정부 부채는 32.2조 달러로 GDP 대비 100.03%를 기록했으며, 이는 1946년 이후 처음입니다. 또한 2026회계연도 재정적자는 1조 9,920억 달러로 확정되었고, 이자 비용만 연 1조 1천억 달러에 달하며 메디케어와 국방비 지출을 넘어섰습니다. 초당적정책센터(BPC)는 미국이 2027년 늦겨울에서 한여름 사이에 부채 한도에 도달할 것으로 전망하며, 실제 채무불이행 시점인 X-date는 2027년 말경으로 예상됩니다.",
-    "desc_en": "As of the end of fiscal year 2026 (September 30), the US federal government debt reached $32.2 trillion, amounting to 100.03% of GDP, the first time since 1946. The fiscal year 2026 deficit was confirmed at $1.992 trillion, with annual interest costs on the national debt reaching $1.1 trillion, surpassing both Medicare and defense spending. The Bipartisan Policy Center (BPC) projects the US will reach its debt limit between late winter and mid-summer of 2027, with the actual X-date (default) anticipated around late 2027.",
+    "desc": "2026회계연도(9월 30일 종료) 미국 연방부채는 GDP 대비 100.03%로 1946년 이후 처음 100%를 넘어섰다. 회계연도 재정적자는 1조 9,920억 달러로 확정됐고, 이자 비용만 연 1조 1천억 달러에 달해 메디케어·국방비 지출을 앞질렀다. 초당적정책센터(BPC)는 재무부 비상조치 소진 후 실제 디폴트 시점(X-date)을 2027년 늦겨울~한여름으로 본다.",
+    "desc_en": "US federal debt ended fiscal 2026 (closed Sep 30) at 100.03% of GDP, crossing 100% for the first time since 1946. The fiscal-year deficit came in at $1.992T, and interest costs alone reached $1.1T a year — more than Medicare or defense spending. The Bipartisan Policy Center puts the X-date, once Treasury exhausts extraordinary measures, between late winter and mid-summer 2027.",
     "mechanisms": [
       "협상 결렬 우려 → 미국 국채 수익률 급등 → 전 자산 리프라이싱",
       "안전자산 역설 붕괴 → 달러·미국채 동시 매도",

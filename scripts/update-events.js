@@ -52,6 +52,14 @@ function reject(u, event) {
   // 날짜 라벨은 사람이 읽는 문구여야 한다 (예: "2026년 10월 27~28일"). 날것의 ISO 날짜는 거부.
   if (/^\d{4}-\d{2}-\d{2}$/.test(u.date.trim())) return 'date가 ISO 날짜 그대로';
   // 진행 중/감시 이벤트의 라벨에 '갱신 당일' 날짜가 박히는 사례 방지
+  // 예정 이벤트의 라벨에 이미 지난 날짜가 박히는 것 방지 (내용은 최신인데 라벨만 굳는 사례)
+  if (u.status === 'upcoming') {
+    const m = u.date.match(/(\d{4})년\s*(\d{1,2})월\s*(\d{1,2})일/);
+    if (m) {
+      const labelDate = `${m[1]}-${String(m[2]).padStart(2,'0')}-${String(m[3]).padStart(2,'0')}`;
+      if (labelDate < todayKST()) return '예정인데 라벨 날짜가 과거';
+    }
+  }
   if ((u.status === 'ongoing' || u.status === 'watch') &&
       /^\d{4}년\s*\d{1,2}월\s*\d{1,2}일$/.test(u.date.trim())) return '기간형 이벤트에 특정일 라벨';
   if (!VALID_STATUS.includes(u.status)) return `status 값 이상(${u.status})`;
